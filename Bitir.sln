@@ -9,7 +9,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "global", "global", "{EF9B53
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Bitir.Dal", "Bitir.Dal\Bitir.Dal.csproj", "{9A275958-8590-438A-97CF-1813173D5151}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core", "..\..\Core\Core\Core.csproj", "{75060E68-1D3E-4B46-B49E-A47F3187197B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core", "Core\Core.csproj", "{75060E68-1D3E-4B46-B49E-A47F3187197B}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Bitir.Business", "Bitir.Business\Bitir.Business.csproj", "{3666CD28-FCB0-4ED8-8821-2C1C3A1F00F1}"
 EndProject

@@ -1,7 +1,0 @@
-﻿redux 
-react-redux 
-redux-thunk 
-react-router-dom 
-alertifyjs 
-axios 
-redux-devtools-extension
