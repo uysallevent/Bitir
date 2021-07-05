@@ -13,6 +13,10 @@ namespace AuthModule
             base.ConfigureServices(services);
             services.AddSingleton<ITokenHelper, JwtHelper>();
             services.AddScoped(typeof(AuthBusinessBase));
+            services.AddCors(options => options.AddPolicy("ApiCorsPolicy", builder =>
+            {
+                builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader();
+            }));
         }
 
 
