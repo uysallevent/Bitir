@@ -57,10 +57,18 @@ namespace BaseModule
             var serviceProvider = services.BuildServiceProvider();
             var logger = serviceProvider.GetService<ILogger<LoggerBase>>();
             services.AddSingleton(typeof(ILogger), logger);
+            services.AddCors(options =>
+            {
+                options.AddPolicy("AllowSpecificOrigin", builder => builder
+                    .AllowAnyOrigin()
+                    .AllowAnyHeader()
+                    .AllowAnyMethod());
+            });
         }
 
         public virtual void Configure(IApplicationBuilder app, IHostEnvironment env)
         {
+            app.UseCors("AllowSpecificOrigin");
             if (env.IsDevelopment())
             {
                 app.UseSwagger();
@@ -69,6 +77,7 @@ namespace BaseModule
                     c.SwaggerEndpoint("/swagger/v1/swagger.json", "Bitir V1");
                 });
             }
+
         }
     }
 }

@@ -1,7 +1,9 @@
-using AuthModule.Business;
 using AuthModule.Dal;
 using AuthModule.Interfaces;
+using BaseModule.Dal;
+using BaseModule.Interfaces;
 using Bitir.Dal.TestDal.Context;
+using Bitir.Entity.TestDb.Product;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -48,9 +50,9 @@ namespace Bitir.Api
                     {
                         if (context.Exception.GetType() == typeof(SecurityTokenExpiredException))
                         {
-                            var serviceProvider = services.BuildServiceProvider();
-                            var service = serviceProvider.GetService<AuthBusinessBase>();
-                            var test2 = service.RefreshTokenLogin(1, "zvyZ8g8oa4beUzeJFRhJXKasw4WgZzFENWSiL1XohyA=");
+                            //var serviceProvider = services.BuildServiceProvider();
+                            //var service = serviceProvider.GetService<AuthBusinessBase>();
+                            //_ = service.RefreshTokenLogin(1, "zvyZ8g8oa4beUzeJFRhJXKasw4WgZzFENWSiL1XohyA=");
                         }
                         return Task.CompletedTask;
                     }
@@ -58,6 +60,7 @@ namespace Bitir.Api
             });
             services.AddAuthorization();
             services.AddScoped<IUserAccountDal, UserAccountDal<TestContext>>();
+            services.AddScoped<IUserTokenDal, UserTokenDal<TestContext>>();
             services.AddScoped<IUserTokenDal, UserTokenDal<TestContext>>();
         }
 
