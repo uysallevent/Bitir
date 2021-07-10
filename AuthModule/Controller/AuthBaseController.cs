@@ -33,8 +33,8 @@ namespace AuthModule.Controllers
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "While login operation, error occurred");
-                return BadRequest("While login operation, error occurred");
+                _logger.LogError(ex, ex.Message ?? "While login operation, error occurred");
+                return BadRequest(ex.Message ?? "While login operation, error occurred");
             }
         }
 
@@ -44,7 +44,7 @@ namespace AuthModule.Controllers
         {
             try
             {
-                var result =  _businessBase.RefreshTokenLogin(1,"");
+                var result = _businessBase.RefreshTokenLogin(1, "");
                 return Ok(result);
             }
             catch (Exception ex)

@@ -2,7 +2,11 @@ using AuthModule.Dal;
 using AuthModule.Interfaces;
 using BaseModule.Dal;
 using BaseModule.Interfaces;
+using Bitir.Business;
+using Bitir.Business.Interfaces;
+using Bitir.Dal.TestDal;
 using Bitir.Dal.TestDal.Context;
+using Bitir.Dal.TestDal.Interfaces;
 using Bitir.Entity.TestDb.Product;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
@@ -59,9 +63,11 @@ namespace Bitir.Api
                 };
             });
             services.AddAuthorization();
+
             services.AddScoped<IUserAccountDal, UserAccountDal<TestContext>>();
             services.AddScoped<IUserTokenDal, UserTokenDal<TestContext>>();
-            services.AddScoped<IUserTokenDal, UserTokenDal<TestContext>>();
+            services.AddSingleton<ICategoryDal, CategoryDal>();
+            services.AddScoped<ICategoryBusiness, CategoryBusiness>();
         }
 
         public override void Configure(IApplicationBuilder app, IHostEnvironment env)

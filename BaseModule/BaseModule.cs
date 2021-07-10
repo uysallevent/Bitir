@@ -1,6 +1,7 @@
 ﻿using Core.CrossCuttingConcerns.Caching;
 using Core.CrossCuttingConcerns.Caching.Microsoft;
 using Core.CrossCuttingConcerns.Log;
+using Core.Extensions;
 using Core.Utilities.IoC;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
@@ -77,6 +78,7 @@ namespace BaseModule
                     c.SwaggerEndpoint("/swagger/v1/swagger.json", "Bitir V1");
                 });
             }
+            app.UseMiddleware<ExceptionMiddleware>();
 
         }
     }

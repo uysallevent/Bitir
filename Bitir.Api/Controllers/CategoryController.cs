@@ -1,5 +1,6 @@
 ﻿using AuthModule.Controllers;
 using BaseModule.Interfaces;
+using Bitir.Business.Interfaces;
 using Bitir.Entity.TestDb.Product;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -14,8 +15,8 @@ namespace Bitir.Api.Controllers
     public class CategoryController : ActionBaseController<Category>
     {
         private readonly ILogger _logger;
-        private readonly IBusinessBase<Category> _categoryBusinessBase;
-        public CategoryController(IBusinessBase<Category> categoryBusinessBase, ILogger logger) : base(categoryBusinessBase, logger)
+        private readonly ICategoryBusiness _categoryBusinessBase;
+        public CategoryController(ICategoryBusiness categoryBusinessBase, ILogger logger) : base(categoryBusinessBase, logger)
         {
             _logger = logger;
             _categoryBusinessBase = categoryBusinessBase;

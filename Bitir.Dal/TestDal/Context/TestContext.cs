@@ -38,7 +38,7 @@ namespace Bitir.Dal.TestDal.Context
                 entity.HasKey(x => x.Id);
             });
 
-            modelBuilder.Entity<Product>(entity =>
+            modelBuilder.Entity<Category>(entity =>
             {
                 entity.ToTable("Category", "Product");
                 entity.HasKey(x => x.Id);
