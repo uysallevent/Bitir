@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Bitir.Api.Controllers
 {
-    [Authorize]
+    [AllowAnonymous]
     [Route("api/[controller]")]
     [ApiController]
     public class CategoryController : ActionBaseController<Category>
