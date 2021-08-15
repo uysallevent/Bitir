@@ -5,6 +5,7 @@ using Bitir.Entity.TestDb.Product;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using System;
 using System.Threading.Tasks;
 
 namespace Bitir.Api.Controllers
@@ -20,6 +21,21 @@ namespace Bitir.Api.Controllers
         {
             _logger = logger;
             _categoryBusinessBase = categoryBusinessBase;
+        }
+
+        [HttpPost("AllCategoriesWithSub")]
+        public virtual  IActionResult GetCategoriesWithSub()
+        {
+            try
+            {
+                var result =  _categoryBusinessBase.GetCategoriesWithSubItems();
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error occurred while getting categories");
+                return BadRequest("Error occurred while getting categories");
+            }
         }
     }
 }

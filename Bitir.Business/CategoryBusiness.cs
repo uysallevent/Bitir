@@ -1,12 +1,10 @@
 ﻿using BaseModule.Business;
-using BaseModule.Dal;
-using BaseModule.Interfaces;
 using Bitir.Business.Interfaces;
 using Bitir.Dal.TestDal.Interfaces;
 using Bitir.Entity.TestDb.Product;
-using System;
+using Core.Utilities.Results;
 using System.Collections.Generic;
-using System.Text;
+using System.Linq;
 
 namespace Bitir.Business
 {
@@ -16,7 +14,12 @@ namespace Bitir.Business
         public CategoryBusiness(ICategoryDal dalBase) : base(dalBase)
         {
             _dalBase = dalBase;
+        }
 
+        public IDataResult<List<Category>> GetCategoriesWithSubItems()
+        {
+            var allCategories = _dalBase.CategoriesWithSub().ToList();
+            return new SuccessDataResult<List<Category>>(allCategories);
         }
     }
 }

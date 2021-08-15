@@ -8,5 +8,6 @@ namespace Bitir.Dal.TestDal.Interfaces
 {
     public interface ICategoryDal: IDalBase<Category>
     {
+        List<Category> CategoriesWithSub();
     }
 }
