@@ -1,5 +1,5 @@
 ﻿using AuthModule.Dtos;
-using AuthModule.Models;
+using AuthModule.Entities;
 using AuthModule.Security.Encryption;
 using Core.Extensions;
 using Microsoft.Extensions.Configuration;

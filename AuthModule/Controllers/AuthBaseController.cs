@@ -1,6 +1,7 @@
 ﻿using AuthModule.Business;
 using AuthModule.Dto;
-using AuthModule.Models;
+using AuthModule.Entities;
+using AuthModule.Interfaces;
 using BaseModule.Controllers;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -10,16 +11,15 @@ using System.Threading.Tasks;
 
 namespace AuthModule.Controllers
 {
-    [Authorize]
     [ApiController]
     public class AuthBaseController : ActionBaseController<UserAccount>
     {
-        private readonly AuthBusinessBase _businessBase;
-        private readonly ILogger _logger;
+        private readonly IAuthBusinessBase<UserAccount> _authBusinessBase;
+        private readonly ILogger<AuthBaseController> _logger;
 
-        public AuthBaseController(AuthBusinessBase businessBase, ILogger logger) : base(businessBase, logger)
+        public AuthBaseController(IAuthBusinessBase<UserAccount> authBusinessBase, ILogger<AuthBaseController> logger) : base(authBusinessBase, logger)
         {
-            _businessBase = businessBase;
+            _authBusinessBase = authBusinessBase;
             _logger = logger;
         }
 
@@ -29,7 +29,7 @@ namespace AuthModule.Controllers
         {
             try
             {
-                var result = await _businessBase.Login(loginDto);
+                var result = await _authBusinessBase.Login(loginDto);
                 return Ok(result);
             }
             catch (Exception ex)
@@ -39,21 +39,6 @@ namespace AuthModule.Controllers
             }
         }
 
-        [AllowAnonymous]
-        [HttpPost("RefreshTokenLogin")]
-        public async Task<IActionResult> RefreshTokenLogin([FromBody] string refreshToken)
-        {
-            try
-            {
-                var result = _businessBase.RefreshTokenLogin(1, "");
-                return Ok(result);
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError(ex, "While login operation, error occurred");
-                return BadRequest("While login operation, error occurred");
-            }
-        }
 
         [NonAction]
         public override Task<IActionResult> Update([FromBody] UserAccount entity)

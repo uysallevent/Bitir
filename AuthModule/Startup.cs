@@ -1,4 +1,9 @@
+using AuthModule.Business;
+using AuthModule.Entities;
+using AuthModule.Interfaces;
 using AuthModule.Security.JWT;
+using BaseModule.Business;
+using BaseModule.Interfaces;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -11,7 +16,7 @@ using System.Text;
 using System.Threading.Tasks;
 using IStartUp = Bitir.Api.Module.Shared.IStartup;
 
-namespace ModulerApi.AuthModule
+namespace AuthModule
 {
     public class Startup : IStartUp
     {
@@ -49,6 +54,9 @@ namespace ModulerApi.AuthModule
             });
             services.AddAuthorization();
             services.AddSingleton<ITokenHelper, JwtHelper>();
+            //services.AddScoped<IBusinessBase<UserAccount>, BusinessBase<UserAccount>>();  
+            //services.AddScoped<IBusinessBase<UserToken>, BusinessBase<UserToken>>();  
+            services.AddScoped<IAuthBusinessBase<UserAccount>, AuthBusinessBase>();  
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

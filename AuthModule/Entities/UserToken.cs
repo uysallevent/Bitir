@@ -2,7 +2,7 @@
 using System;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace AuthModule.Models
+namespace AuthModule.Entities
 {
     public class UserToken : IEntity
     {
@@ -11,7 +11,6 @@ namespace AuthModule.Models
         public string RefreshToken { get; set; }
         public DateTime RefreshTokenExpirationDate { get; set; }
         public int Status { get; set; }
-
         [ForeignKey("UserId")]
         public UserAccount UserAccount { get; set; }
     }

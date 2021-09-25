@@ -16,6 +16,7 @@
     <ProjectReference Include="..\AuthModule\AuthModule.csproj" />
     <ProjectReference Include="..\BaseModule\BaseModule.csproj" />
     <ProjectReference Include="..\Bitir.Api.Module.Shared\Bitir.Api.Module.Shared.csproj" />
+    <ProjectReference Include="..\Bitir.Data\Bitir.Data.csproj" />
   </ItemGroup>
 
 

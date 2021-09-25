@@ -12722,15 +12722,6 @@ namespace Bitir.Mobile.Droid
 			// aapt resource value: 0x7F050031
 			public const int checkbox_themeable_attribute_color = 2131034161;
 			
-			// aapt resource value: 0x7F050032
-			public const int colorAccent = 2131034162;
-			
-			// aapt resource value: 0x7F050033
-			public const int colorPrimary = 2131034163;
-			
-			// aapt resource value: 0x7F050034
-			public const int colorPrimaryDark = 2131034164;
-			
 			// aapt resource value: 0x7F050035
 			public const int control_checkable_material = 2131034165;
 			
@@ -12877,9 +12868,6 @@ namespace Bitir.Mobile.Droid
 			
 			// aapt resource value: 0x7F050065
 			public const int highlighted_text_material_light = 2131034213;
-			
-			// aapt resource value: 0x7F050066
-			public const int launcher_background = 2131034214;
 			
 			// aapt resource value: 0x7F050067
 			public const int material_blue_grey_800 = 2131034215;
@@ -14464,12 +14452,6 @@ namespace Bitir.Mobile.Droid
 			// aapt resource value: 0x7F07008B
 			public const int dropdownbuttonimage = 2131165323;
 			
-			// aapt resource value: 0x7F070090
-			public const int icon_about = 2131165328;
-			
-			// aapt resource value: 0x7F070091
-			public const int icon_feed = 2131165329;
-			
 			// aapt resource value: 0x7F07008C
 			public const int ic_mtrl_checked_circle = 2131165324;
 			
@@ -14616,9 +14598,6 @@ namespace Bitir.Mobile.Droid
 			
 			// aapt resource value: 0x7F0700BE
 			public const int tooltip_frame_light = 2131165374;
-			
-			// aapt resource value: 0x7F0700BF
-			public const int xamarin_logo = 2131165375;
 			
 			static Drawable()
 			{

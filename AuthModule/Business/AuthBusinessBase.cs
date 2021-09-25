@@ -1,12 +1,15 @@
 ﻿using AuthModule.Dto;
 using AuthModule.Dtos;
+using AuthModule.Entities;
 using AuthModule.Interfaces;
-using AuthModule.Models;
 using AuthModule.Security.Hashing;
 using AuthModule.Security.JWT;
 using AuthModule.Validations;
 using BaseModule.Business;
+using Bitir.Data.Model.Dtos;
 using Core.Aspects.Autofac.Validation;
+using Core.DataAccess;
+using Core.DataAccess.EntityFramework.Interfaces;
 using Core.Utilities.Results;
 using Microsoft.Extensions.Configuration;
 using System;
@@ -15,21 +18,24 @@ using System.Threading.Tasks;
 
 namespace AuthModule.Business
 {
-    public class AuthBusinessBase : BusinessBase<UserAccount>, IAuthBusinessBase
+    public class AuthBusinessBase : BusinessBase<UserAccount>, IAuthBusinessBase<UserAccount>
     {
-        private readonly IUserAccountDal _userAccountDal;
-        private readonly IUserTokenDal _userTokenDal;
+        private IRepository<UserAccount> _userAccountRepository;
+        private IRepository<UserToken> _userTokenRepository;
+        private IUnitOfWork _uow;
         private readonly ITokenHelper _tokenHelper;
         private readonly IConfiguration _configuration;
 
         public AuthBusinessBase(
-            IUserAccountDal userAccountDal,
-            IUserTokenDal userTokenDal,
+            IRepository<UserAccount> userAccountRepository,
+            IRepository<UserToken> userTokenRepository,
+            IUnitOfWork uow,
             ITokenHelper tokenHelper,
-            IConfiguration configuration) : base(userAccountDal)
+            IConfiguration configuration) : base(userAccountRepository, uow)
         {
-            _userAccountDal = userAccountDal;
-            _userTokenDal = userTokenDal;
+            _userAccountRepository = userAccountRepository;
+            _userTokenRepository = userTokenRepository;
+            _uow = uow;
             _tokenHelper = tokenHelper;
             _configuration = configuration;
         }
@@ -41,9 +47,9 @@ namespace AuthModule.Business
         }
 
         [ValidationAspect(typeof(UserAccountValidationRules))]
-        public override async Task<IDataResult<UserAccount>> InsertAsync(UserAccount entity)
+        public override async Task<ResponseWrapper<UserAccount>> InsertAsync(UserAccount entity)
         {
-            var userCheck = await _userAccountDal.GetAsync(x => x.Username == entity.Username);
+            var userCheck = await _userAccountRepository.GetAsync(x => x.Username == entity.Username);
             if (userCheck != null)
             {
                 throw new Exception("This username already exists in the system");
@@ -52,13 +58,15 @@ namespace AuthModule.Business
             HashingHelper.CreatePasswordHash(entity.Password, out passwordHash, out passwordSalt);
             entity.PasswordHash = passwordHash;
             entity.PasswordSalt = passwordSalt;
-            var result = await _userAccountDal.AddAsync(entity);
-            return new SuccessDataResult<UserAccount>(result);
+            await _userAccountRepository.AddAsync(entity);
+            var result = await _uow.SaveChangesAsync();
+
+            return new ResponseWrapper<UserAccount>(entity);
         }
 
-        public async Task<IDataResult<AccessToken>> Login(LoginDto loginDto)
+        public async Task<ResponseWrapper<AccessToken>> Login(LoginDto loginDto)
         {
-            var user = await _userAccountDal.GetAsync(x => x.Username == loginDto.Username);
+            var user = await _userAccountRepository.GetAsync(x => x.Username == loginDto.Username);
             if (user == null)
             {
                 throw new Exception("Username could not be found");
@@ -70,10 +78,13 @@ namespace AuthModule.Business
             }
 
             var accessToken = CreateAccessToken(user, new List<OperationClaim> { new OperationClaim { Id = user.Id, Name = user.Username } });
-            _ = _userTokenDal.DisableActiveRecord(user.Id);
-            var sqlServerDatetime = _userTokenDal.GetSqlServerUtcNow();
+            var sqlServerDatetime = DateTime.Now;
             int.TryParse(_configuration.GetSection("TokenOptions.RefreshTokenExpiration").Value, out int expirationDate);
-            _ = await _userTokenDal.AddAsync(
+
+            var userToken = await _userTokenRepository.GetAsync(x => x.Id == user.Id && x.Status != 1);
+            if (userToken != null)
+            {
+                await _userTokenRepository.AddAsync(
                 new UserToken
                 {
                     UserId = user.Id,
@@ -81,8 +92,10 @@ namespace AuthModule.Business
                     RefreshToken = accessToken.RefreshToken,
                     Status = 1
                 });
+                await _uow.SaveChangesAsync();
+            }
 
-            return new SuccessDataResult<AccessToken>(
+            return new ResponseWrapper<AccessToken>(
                 new AccessToken
                 {
                     Token = accessToken.Token,
@@ -92,21 +105,21 @@ namespace AuthModule.Business
                 );
         }
 
-        public IDataResult<AccessToken> RefreshTokenLogin(int userId, string refreshToken)
+        public async Task<ResponseWrapper<AccessToken>> RefreshTokenLogin(int userId, string refreshToken)
         {
             AccessToken accessToken;
-            var userToken = _userTokenDal.GetUserAndRefreshToken(userId, refreshToken);
-            var sqlServerDatetime = _userTokenDal.GetSqlServerUtcNow();
+            var userToken = await _userTokenRepository.GetAsync(x => x.Id == userId && x.RefreshToken == refreshToken);
+            var sqlServerDatetime = DateTime.Now;
             if (userToken != null && userToken.RefreshTokenExpirationDate < sqlServerDatetime)
             {
                 accessToken = CreateAccessToken(userToken.UserAccount, new List<OperationClaim> { new OperationClaim { Id = userToken.UserAccount.Id, Name = userToken.UserAccount.Username } });
             }
             else
             {
-                return new ErrorDataResult<AccessToken>("Refresh token has expired");
+                return new ResponseWrapper<AccessToken>(null);
             }
 
-            return new SuccessDataResult<AccessToken>(accessToken);
+            return new ResponseWrapper<AccessToken>(accessToken);
         }
     }
 }
