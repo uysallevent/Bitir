@@ -1,4 +1,5 @@
-﻿using Core.DataAccess.EntityFramework;
+﻿using BaseModule.Interfaces;
+using Core.DataAccess.EntityFramework;
 using Core.Entities;
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
@@ -10,7 +11,7 @@ namespace BaseModule.Dal
         where TEntity : class, IEntity, new()
         where TContext : DbContext, new()
     {
-        public DateTime GetSqlServerUtcNow()
+        public virtual DateTime GetSqlServerUtcNow()
         {
             using (var context = new TContext())
             using (var connection = new SqlConnection(context.Database.GetDbConnection().ConnectionString))
@@ -21,6 +22,5 @@ namespace BaseModule.Dal
                 return (DateTime)command.ExecuteScalar();
             }
         }
-
     }
 }

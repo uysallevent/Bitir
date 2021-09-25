@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace AuthModule.Models
 {
-    public class UserToken:IEntity
+    public class UserToken : IEntity
     {
         public int Id { get; set; }
         public int UserId { get; set; }
@@ -14,6 +14,5 @@ namespace AuthModule.Models
 
         [ForeignKey("UserId")]
         public UserAccount UserAccount { get; set; }
-
     }
 }

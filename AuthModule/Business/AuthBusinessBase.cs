@@ -1,12 +1,11 @@
-﻿using AuthModule.Dtos;
+﻿using AuthModule.Dto;
+using AuthModule.Dtos;
 using AuthModule.Interfaces;
 using AuthModule.Models;
 using AuthModule.Security.Hashing;
 using AuthModule.Security.JWT;
 using AuthModule.Validations;
 using BaseModule.Business;
-using BaseModule.Dal;
-using BaseModule.Dto;
 using Core.Aspects.Autofac.Validation;
 using Core.Utilities.Results;
 using Microsoft.Extensions.Configuration;
@@ -108,8 +107,6 @@ namespace AuthModule.Business
             }
 
             return new SuccessDataResult<AccessToken>(accessToken);
-
         }
-
     }
 }

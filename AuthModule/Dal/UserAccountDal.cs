@@ -8,6 +8,5 @@ namespace AuthModule.Dal
     public class UserAccountDal<TContext> : DalBase<UserAccount, TContext>, IUserAccountDal
         where TContext : DbContext, new()
     {
-
     }
 }

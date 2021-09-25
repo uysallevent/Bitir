@@ -20,12 +20,12 @@ namespace AuthModule.Dal
                              where ut.Status == 1 && ut.UserId == userId && ut.RefreshToken == refreshToken
                              select new UserToken()
                              {
-                                 Id=ut.Id,
-                                 RefreshToken=refreshToken,
-                                 RefreshTokenExpirationDate=ut.RefreshTokenExpirationDate,
-                                 Status=ut.Status,
-                                 UserId=ut.UserId,
-                                 UserAccount=ua
+                                 Id = ut.Id,
+                                 RefreshToken = refreshToken,
+                                 RefreshTokenExpirationDate = ut.RefreshTokenExpirationDate,
+                                 Status = ut.Status,
+                                 UserId = ut.UserId,
+                                 UserAccount = ua
                              };
                 return result.FirstOrDefault();
             }

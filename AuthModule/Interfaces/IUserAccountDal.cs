@@ -1,12 +1,9 @@
 ﻿using AuthModule.Models;
-using BaseModule.Dal;
-using System;
-using System.Collections.Generic;
-using System.Text;
+using BaseModule.Interfaces;
 
 namespace AuthModule.Interfaces
 {
-    public interface IUserAccountDal: IDalBase<UserAccount>
+    public interface IUserAccountDal : IDalBase<UserAccount>
     {
     }
 }

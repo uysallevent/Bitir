@@ -1,21 +1,21 @@
-﻿using Bitir.Mobile.ViewModels;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Xamarin.Forms;
+﻿using Xamarin.Forms.Internals;
 using Xamarin.Forms.Xaml;
 
 namespace Bitir.Mobile.Views
 {
+    /// <summary>
+    /// Page to login with user name and password
+    /// </summary>
+    [Preserve(AllMembers = true)]
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class LoginPage : ContentPage
+    public partial class LoginPage
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="LoginPage" /> class.
+        /// </summary>
         public LoginPage()
         {
-            InitializeComponent();
-            this.BindingContext = new LoginViewModel();
+            this.InitializeComponent();
         }
     }
 }

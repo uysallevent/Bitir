@@ -1,17 +1,15 @@
 ﻿using BaseModule.Interfaces;
 using Core.Entities;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace AuthModule.Controllers
+namespace BaseModule.Controllers
 {
-    [Route("api/[controller]")]
-    [ApiController]
-    public class ActionBaseController<T> : ControllerBase
+    [Route("[module]/[controller]")]
+    public class ActionBaseController<T> : Controller
     where T : class, IEntity, new()
     {
         private readonly IBusinessBase<T> _businessBase;
@@ -157,6 +155,5 @@ namespace AuthModule.Controllers
                 return BadRequest("While removing records by models, error occurred");
             }
         }
-
     }
 }
