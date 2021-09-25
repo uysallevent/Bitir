@@ -21,5 +21,7 @@ namespace Bitir.Business
             var allCategories = _dalBase.CategoriesWithSub().ToList();
             return new SuccessDataResult<List<Category>>(allCategories);
         }
+
+
     }
 }

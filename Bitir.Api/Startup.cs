@@ -1,13 +1,10 @@
 using AuthModule.Dal;
 using AuthModule.Interfaces;
-using BaseModule.Dal;
-using BaseModule.Interfaces;
 using Bitir.Business;
 using Bitir.Business.Interfaces;
 using Bitir.Dal.TestDal;
 using Bitir.Dal.TestDal.Context;
 using Bitir.Dal.TestDal.Interfaces;
-using Bitir.Entity.TestDb.Product;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;

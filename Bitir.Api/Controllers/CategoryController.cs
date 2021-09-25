@@ -1,12 +1,10 @@
 ﻿using AuthModule.Controllers;
-using BaseModule.Interfaces;
 using Bitir.Business.Interfaces;
 using Bitir.Entity.TestDb.Product;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
-using System.Threading.Tasks;
 
 namespace Bitir.Api.Controllers
 {
