@@ -1,5 +1,6 @@
 ﻿using Bitir.Mobile.Validators;
 using Bitir.Mobile.Validators.Rules;
+using Bitir.Mobile.Views;
 using Xamarin.Forms;
 using Xamarin.Forms.Internals;
 
@@ -30,6 +31,7 @@ namespace Bitir.Mobile.ViewModels
             this.AddValidationRules();
             this.LoginCommand = new Command(this.LoginClicked);
             this.SignUpCommand = new Command(this.SignUpClicked);
+            this.BackButtonCommand = new Command(this.BackButtonClicked);
         }
         #endregion
 
@@ -89,6 +91,8 @@ namespace Bitir.Mobile.ViewModels
         /// Gets or sets the command that is executed when the Sign Up button is clicked.
         /// </summary>
         public Command SignUpCommand { get; set; }
+
+        public Command BackButtonCommand { get; set; }
         #endregion
 
         #region Methods
@@ -119,18 +123,18 @@ namespace Bitir.Mobile.ViewModels
         /// </summary>
         private void AddValidationRules()
         {
-            this.Name.Validations.Add(new IsNotNullOrEmptyRule<string> { ValidationMessage = "Name Required" });
-            this.Password.Item1.Validations.Add(new IsNotNullOrEmptyRule<string> { ValidationMessage = "Password Required" });
-            this.Password.Item2.Validations.Add(new IsNotNullOrEmptyRule<string> { ValidationMessage = "Re-enter Password" });
+            this.Name.Validations.Add(new IsNotNullOrEmptyRule<string> { ValidationMessage = "Ad Soyad Zorunludur!" });
+            this.Password.Item1.Validations.Add(new IsNotNullOrEmptyRule<string> { ValidationMessage = "Şifre Zorunludur!" });
+            this.Password.Item2.Validations.Add(new IsNotNullOrEmptyRule<string> { ValidationMessage = "Şifre Tekrarı Zorunludur!" });
         }
 
         /// <summary>
         /// Invoked when the Log in button is clicked.
         /// </summary>
         /// <param name="obj">The Object</param>
-        private void LoginClicked(object obj)
+        private async void LoginClicked(object obj)
         {
-            // Do something
+            await Application.Current.MainPage.Navigation.PushModalAsync(new LoginPage(), true);
         }
 
         /// <summary>
@@ -143,6 +147,11 @@ namespace Bitir.Mobile.ViewModels
             {
                 // Do something
             }
+        }
+
+        private async void BackButtonClicked(object obj)
+        {
+            await Application.Current.MainPage.Navigation.PopModalAsync(true);
         }
 
         #endregion

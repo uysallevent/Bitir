@@ -17,6 +17,8 @@ namespace Bitir.Mobile
 
         public App()
         {
+            Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense("NTA1NzQ5QDMxMzkyZTMyMmUzMFBtdldHWFdrWS90K3o1azl6V3hpRmdSTnlIVFpHYzRsSkZjMEZDNXB2REE9");
+            
             InitializeComponent();
 
             DependencyService.Register<MockDataStore>();

@@ -58,32 +58,32 @@ namespace Bitir.Mobile.ViewModels
             {
                 new HealthCare()
                 {
-                    Category = "HEART RATE",
-                    CategoryValue = "87 bmp",
+                    Category = "Bekleyen",
+                    CategoryValue = "4",
                     ChartData = this.heartRateData,
                     BackgroundGradientStart = "#f59083",
                     BackgroundGradientEnd = "#fae188",
                 },
                 new HealthCare()
                 {
-                    Category = "CALORIES BURNED",
-                    CategoryValue = "948 cal",
+                    Category = " Bugün Gönderilen",
+                    CategoryValue = "6",
                     ChartData = this.caloriesBurnedData,
                     BackgroundGradientStart = "#ff7272",
                     BackgroundGradientEnd = "#f650c5",
                 },
                 new HealthCare()
                 {
-                    Category = "SLEEP TIME",
-                    CategoryValue = "7.3 hrs",
+                    Category = "Aylık Toplam",
+                    CategoryValue = "51",
                     ChartData = this.sleepTimeData,
                     BackgroundGradientStart = "#5e7cea",
                     BackgroundGradientEnd = "#1dcce3",
                 },
                 new HealthCare()
                 {
-                    Category = "WATER CONSUMED",
-                    CategoryValue = "38.6 ltr",
+                    Category = "Yıllık Toplam",
+                    CategoryValue = "125",
                     ChartData = this.waterConsumedData,
                     BackgroundGradientStart = "#255ea6",
                     BackgroundGradientEnd = "#b350d1",
@@ -94,23 +94,23 @@ namespace Bitir.Mobile.ViewModels
             {
                 new HealthCare()
                 {
-                    Category = "Blood Pressure",
-                    CategoryValue = "141/90 mmgh",
-                    CategoryPercentage = "30%",
+                    Category = "Günlük Sipariş Durumu",
+                    CategoryValue = "6/4",
+                    CategoryPercentage = "66%",
                     BackgroundGradientStart = "#cf86ff",
                 },
                 new HealthCare()
                 {
-                    Category = "Body Weight",
-                    CategoryValue = "176 lbs",
-                    CategoryPercentage = "50%",
+                    Category = "Aylık Sipariş Durumu",
+                    CategoryValue = "51",
+                    CategoryPercentage = "92%",
                     BackgroundGradientStart = "#8691ff",
                 },
                 new HealthCare()
                 {
-                    Category = "Steps",
-                    CategoryValue = "3463",
-                    CategoryPercentage = "60%",
+                    Category = "Tamamlanmayan",
+                    CategoryValue = "5",
+                    CategoryPercentage = "4%",
                     BackgroundGradientStart = "#ff9686",
                 },
             };
