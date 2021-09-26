@@ -49,7 +49,7 @@ namespace AuthModule.Business
         [ValidationAspect(typeof(UserAccountValidationRules))]
         public override async Task<ResponseWrapper<UserAccount>> InsertAsync(UserAccount entity)
         {
-            var userCheck = await _userAccountRepository.GetAsync(x => x.Username == entity.Username);
+            var userCheck = await _userAccountRepository.GetAsync(x => (x.Username == entity.Username) || (x.Email == entity.Email));
             if (userCheck != null)
             {
                 throw new Exception("This username already exists in the system");
@@ -58,6 +58,8 @@ namespace AuthModule.Business
             HashingHelper.CreatePasswordHash(entity.Password, out passwordHash, out passwordSalt);
             entity.PasswordHash = passwordHash;
             entity.PasswordSalt = passwordSalt;
+            entity.InsertDate = DateTime.Now;
+            entity.UpdateDate = DateTime.Now;
             await _userAccountRepository.AddAsync(entity);
             var result = await _uow.SaveChangesAsync();
 
@@ -66,7 +68,7 @@ namespace AuthModule.Business
 
         public async Task<ResponseWrapper<AccessToken>> Login(LoginDto loginDto)
         {
-            var user = await _userAccountRepository.GetAsync(x => x.Username == loginDto.Username);
+            var user = await _userAccountRepository.GetAsync(x => (x.Username == loginDto.Username) || (x.Email == loginDto.Username));
             if (user == null)
             {
                 throw new Exception("Username could not be found");

@@ -1,15 +1,17 @@
+﻿using Bitir.Mobile.Models.Auth;
 using Bitir.Mobile.Services;
 using Bitir.Mobile.Services.Interfaces;
+using Bitir.Mobile.ViewModels;
 using Bitir.Mobile.Views;
 using System;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-[assembly: ExportFont("Montserrat-Bold.ttf",Alias="Montserrat-Bold")]
-     [assembly: ExportFont("Montserrat-Medium.ttf", Alias = "Montserrat-Medium")]
-     [assembly: ExportFont("Montserrat-Regular.ttf", Alias = "Montserrat-Regular")]
-     [assembly: ExportFont("Montserrat-SemiBold.ttf", Alias = "Montserrat-SemiBold")]
-     [assembly: ExportFont("UIFontIcons.ttf", Alias = "FontIcons")]
+[assembly: ExportFont("Montserrat-Bold.ttf", Alias = "Montserrat-Bold")]
+[assembly: ExportFont("Montserrat-Medium.ttf", Alias = "Montserrat-Medium")]
+[assembly: ExportFont("Montserrat-Regular.ttf", Alias = "Montserrat-Regular")]
+[assembly: ExportFont("Montserrat-SemiBold.ttf", Alias = "Montserrat-SemiBold")]
+[assembly: ExportFont("UIFontIcons.ttf", Alias = "FontIcons")]
 namespace Bitir.Mobile
 {
     public partial class App : Application
@@ -19,14 +21,20 @@ namespace Bitir.Mobile
         public App()
         {
             Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense("NTA1NzQ5QDMxMzkyZTMyMmUzMFBtdldHWFdrWS90K3o1azl6V3hpRmdSTnlIVFpHYzRsSkZjMEZDNXB2REE9");
-            
             InitializeComponent();
             DependencyService.Register<MockDataStore>();
-            DependencyService.Register<IAuthService,AuthService>();
+            DependencyService.Register<AuthService>();
+
+
+            MessagingCenter.Subscribe<BaseViewModel, string>(this, "infomessage", (s,e) =>
+           {
+               App.Current.MainPage.DisplayAlert("Bilgi", e, "Tamam");
+           });
+
             MainPage = new LoginPage();
         }
 
-        public static string Token;
+        public static AuthResponse authResponse;
 
         protected override void OnStart()
         {

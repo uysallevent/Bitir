@@ -12,6 +12,7 @@ namespace Bitir.Mobile.ViewModels
     public class BaseViewModel : INotifyPropertyChanged
     {
         public IDataStore<Item> DataStore => DependencyService.Get<IDataStore<Item>>();
+        public IAuthService authService => DependencyService.Get<IAuthService>();
 
         bool isBusy = false;
         public bool IsBusy
@@ -38,6 +39,11 @@ namespace Bitir.Mobile.ViewModels
             onChanged?.Invoke();
             OnPropertyChanged(propertyName);
             return true;
+        }
+
+        protected void SendNotification(string message)
+        {
+            MessagingCenter.Send(this, "infomessage", message);
         }
 
         #region INotifyPropertyChanged

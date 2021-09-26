@@ -7,10 +7,10 @@ using Xamarin.Essentials;
 
 namespace Bitir.Mobile.Services
 {
-    public abstract class BaseService
+    public abstract class BaseService : HttpClient, IDisposable
     {
-        private const string rootUrl = "http://localhost";
-        private const int port = 5000;
+        private const string rootUrl = "http://192.168.1.73";
+        private const int port = 45455;
         public readonly string apiUrl = $"{rootUrl}:{port}";
 
         protected HttpClient Client;
@@ -24,7 +24,7 @@ namespace Bitir.Mobile.Services
             var current = Plugin.Connectivity.CrossConnectivity.Current;
             if (current.IsConnected)
             {
-                var IsServiceOn = await current.IsRemoteReachable(rootUrl, port);
+                var IsServiceOn = await current.IsRemoteReachable(apiUrl);
                 if (!IsServiceOn)
                     throw new Exception("Servise erişilemiyor");
             }
@@ -35,13 +35,19 @@ namespace Bitir.Mobile.Services
                 {
                     Client = new HttpClient();
                     Client.BaseAddress = new Uri(apiUrl);
-                    if (App.Token != null)
-                        Client.DefaultRequestHeaders.Add("Authorization", "Bearer " + App.Token);
+                    if (App.authResponse != null)
+                        Client.DefaultRequestHeaders.Add("Authorization", "Bearer " + App.authResponse.Token);
                     Client.DefaultRequestHeaders.Add("accept", "Applciation/json");
                 }
             }
 
             return await Task.FromResult(Client);
+        }
+
+        public void Dispose()
+        {
+            GC.SuppressFinalize(this);
+            base.Dispose();
         }
     }
 }

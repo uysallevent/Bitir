@@ -1,4 +1,5 @@
-﻿using Bitir.Mobile.Helper;
+﻿using Bitir.Mobile.Exeptions;
+using Bitir.Mobile.Helper;
 using Bitir.Mobile.Validators;
 using Bitir.Mobile.Validators.Rules;
 using Bitir.Mobile.Views;
@@ -134,11 +135,34 @@ namespace Bitir.Mobile.ViewModels
         private async void LoginClicked(object obj)
         {
 
-            await Application.Current.MainPage.Navigation.PushModalAsync(new DashboardPage(), true);
 
             if (this.AreFieldsValid())
             {
-                // Do Something
+                IsBusy = true;
+                try
+                {
+                    var result = await authService.LoginCheck(new Models.Auth.AuthRequest
+                    {
+                        Username = Email.Value,
+                        Password = password.Value
+                    });
+
+                    if (result != null)
+                    {
+                        App.authResponse = result.Result;
+                        await Application.Current.MainPage.Navigation.PushModalAsync(new DashboardPage(), true);
+                    }
+                }
+                catch (ServiceException ex)
+                {
+                    SendNotification("Giriş başarısız !!");
+                }
+                finally
+                {
+                    IsBusy = false;
+                }
+
+
             }
         }
 
