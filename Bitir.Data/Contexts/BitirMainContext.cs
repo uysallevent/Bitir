@@ -1,11 +1,13 @@
 ﻿using AuthModule.Entities;
+using Bitir.Data.EntityConfigurations;
 using Microsoft.EntityFrameworkCore;
+using ProductModule.Entities;
 
 namespace Bitir.Data.Contexts
 {
-    public class BitirMainContext:DbContext
+    public class BitirMainContext : DbContext
     {
-        public BitirMainContext(DbContextOptions<BitirMainContext> dbContextOptions):base(dbContextOptions)
+        public BitirMainContext(DbContextOptions<BitirMainContext> dbContextOptions) : base(dbContextOptions)
         {
 
         }
@@ -15,8 +17,12 @@ namespace Bitir.Data.Contexts
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<UserAccount>().ToTable("UserAccount","auth").HasKey(x => x.Id);
-            modelBuilder.Entity<UserToken>().ToTable("UserToken", "auth").HasKey(x => x.Id);
+            new UserAccountConfiguration().Configure(modelBuilder.Entity<UserAccount>());
+            new UserTokenConfiguration().Configure(modelBuilder.Entity<UserToken>());
+            new ProductConfiguration().Configure(modelBuilder.Entity<Product>());
+            new ProductPriceConfiguration().Configure(modelBuilder.Entity<ProductPrice>());
+            new ProductStockConfiguraiton().Configure(modelBuilder.Entity<ProductStock>());
+            new CategoryConfiguration().Configure(modelBuilder.Entity<Category>());
         }
     }
 }

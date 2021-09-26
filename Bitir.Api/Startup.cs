@@ -47,6 +47,7 @@ namespace ModulerApi
             services.AddTransient<IPostConfigureOptions<MvcOptions>, ModuleRoutingMvcOptionsPostConfigure>();
             services.AddModule<BaseModule.Startup>("BaseModule");
             services.AddModule<AuthModule.Startup>("AuthModule");
+            services.AddModule<ProductModule.Startup>("ProductModule");
             services.AddDataServices(Configuration);
         }
 

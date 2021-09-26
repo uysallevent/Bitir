@@ -9,6 +9,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Serilog" Version="2.10.0" />
+    <PackageReference Include="Serilog.Sinks.Console" Version="4.0.0" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.1.4" />
   </ItemGroup>
 
@@ -17,6 +19,7 @@
     <ProjectReference Include="..\BaseModule\BaseModule.csproj" />
     <ProjectReference Include="..\Bitir.Api.Module.Shared\Bitir.Api.Module.Shared.csproj" />
     <ProjectReference Include="..\Bitir.Data\Bitir.Data.csproj" />
+    <ProjectReference Include="..\ProductModule\ProductModule.csproj" />
   </ItemGroup>
 
 
