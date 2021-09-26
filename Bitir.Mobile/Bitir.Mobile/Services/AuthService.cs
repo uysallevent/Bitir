@@ -1,11 +1,10 @@
-﻿using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
+﻿using Bitir.Mobile.Services.Interfaces;
+using Newtonsoft.Json;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Bitir.Mobile.Services.Interfaces
+namespace Bitir.Mobile.Services
 {
     public class AuthService : BaseService, IAuthService
     {

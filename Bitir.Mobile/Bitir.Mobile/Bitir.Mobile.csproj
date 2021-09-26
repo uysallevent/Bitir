@@ -22,6 +22,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="DotNetHelper-Connectivity" Version="2018.6.18.18" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
     <PackageReference Include="Syncfusion.Xamarin.Buttons" Version="19.2.0.62" />
     <PackageReference Include="Syncfusion.Xamarin.Core" Version="19.2.0.62" />

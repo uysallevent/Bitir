@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Essentials;
 
-namespace Bitir.Mobile.Services.Interfaces
+namespace Bitir.Mobile.Services
 {
     public abstract class BaseService
     {
