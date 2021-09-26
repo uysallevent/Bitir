@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Bitir.Api.Module.Shared
+namespace Module.Shared
 {
     public interface IStartup
     {

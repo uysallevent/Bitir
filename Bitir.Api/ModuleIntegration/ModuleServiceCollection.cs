@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc.ApplicationParts;
 using Microsoft.Extensions.DependencyInjection;
-using Bitir.Api.Module.Shared;
+using Module.Shared;
 
 namespace ModulerApi.ModuleIntegration
 {

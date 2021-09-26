@@ -1,4 +1,4 @@
-using Bitir.Api.Module.Shared;
+using Module.Shared;
 using System.Reflection;
 
 namespace ModulerApi.ModuleIntegration

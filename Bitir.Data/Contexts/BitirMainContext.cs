@@ -23,6 +23,7 @@ namespace Bitir.Data.Contexts
             new ProductPriceConfiguration().Configure(modelBuilder.Entity<ProductPrice>());
             new ProductStockConfiguraiton().Configure(modelBuilder.Entity<ProductStock>());
             new CategoryConfiguration().Configure(modelBuilder.Entity<Category>());
+            new UnitConfiguration().Configure(modelBuilder.Entity<Unit>());
         }
     }
 }

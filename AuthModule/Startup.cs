@@ -9,14 +9,15 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
+using Module.Shared;
 using System;
 using System.Text;
 using System.Threading.Tasks;
-using IStartUp = Bitir.Api.Module.Shared.IStartup;
+
 
 namespace AuthModule
 {
-    public class Startup : IStartUp
+    public class Startup : Module.Shared.IStartup
     {
         public IConfiguration Configuration { get; }
 

@@ -13,7 +13,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Modules", "Modules", "{4A73
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BaseModule", "BaseModule\BaseModule.csproj", "{33108383-D91A-4839-98DE-3B047E3C15ED}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Module.Shared", "Bitir.Api.Module.Shared\Module.Shared.csproj", "{0DF0AB82-3328-4885-9BC2-A7BFF56358A2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Module.Shared", "Module.Shared\Module.Shared.csproj", "{0DF0AB82-3328-4885-9BC2-A7BFF56358A2}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AuthModule", "AuthModule\AuthModule.csproj", "{691B39E6-1BE1-47FB-9B34-D462EBC85743}"
 EndProject

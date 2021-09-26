@@ -19,6 +19,7 @@
     <ProjectReference Include="..\BaseModule\BaseModule.csproj" />
     <ProjectReference Include="..\Bitir.Api.Module.Shared\Module.Shared.csproj" />
     <ProjectReference Include="..\Bitir.Data\Bitir.Data.csproj" />
+    <ProjectReference Include="..\Module.Shared\Module.Shared.csproj" />
     <ProjectReference Include="..\ProductModule\ProductModule.csproj" />
   </ItemGroup>
 

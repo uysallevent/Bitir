@@ -1718,3 +1718,867 @@ ORDER BY [MigrationId];
 2021-09-26 04:01:15.371 +03:00 [DBG] Request did not match any endpoints
 2021-09-26 04:01:15.434 +03:00 [DBG] Connection id "0HMC0H4HQS2D0" completed keep alive response.
 2021-09-26 04:01:15.435 +03:00 [INF] Request finished in 65.9552ms 200 application/json;charset=utf-8
+2021-09-26 04:14:11.782 +03:00 [INF] Starting web host
+2021-09-26 04:14:12.526 +03:00 [DBG] Hosting starting
+2021-09-26 04:14:12.576 +03:00 [INF] User profile is available. Using 'C:\Users\leven\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2021-09-26 04:14:12.591 +03:00 [DBG] Reading data from file 'C:\Users\leven\AppData\Local\ASP.NET\DataProtection-Keys\key-14642b65-a18c-49a2-99af-52420015a828.xml'.
+2021-09-26 04:14:12.624 +03:00 [DBG] Reading data from file 'C:\Users\leven\AppData\Local\ASP.NET\DataProtection-Keys\key-3aa2ae8c-81de-4273-8d4a-f52cc391033f.xml'.
+2021-09-26 04:14:12.625 +03:00 [DBG] Reading data from file 'C:\Users\leven\AppData\Local\ASP.NET\DataProtection-Keys\key-4d95ab8d-4041-43bb-8736-c55e7eebfed6.xml'.
+2021-09-26 04:14:12.630 +03:00 [DBG] Found key {14642b65-a18c-49a2-99af-52420015a828}.
+2021-09-26 04:14:12.634 +03:00 [DBG] Found key {3aa2ae8c-81de-4273-8d4a-f52cc391033f}.
+2021-09-26 04:14:12.634 +03:00 [DBG] Found key {4d95ab8d-4041-43bb-8736-c55e7eebfed6}.
+2021-09-26 04:14:12.640 +03:00 [DBG] Considering key {3aa2ae8c-81de-4273-8d4a-f52cc391033f} with expiration date 2021-10-31 07:22:50Z as default key.
+2021-09-26 04:14:12.648 +03:00 [DBG] Forwarded activator type request from Microsoft.AspNetCore.DataProtection.XmlEncryption.DpapiXmlDecryptor, Microsoft.AspNetCore.DataProtection, Version=3.1.16.0, Culture=neutral, PublicKeyToken=adb9793829ddae60 to Microsoft.AspNetCore.DataProtection.XmlEncryption.DpapiXmlDecryptor, Microsoft.AspNetCore.DataProtection, Culture=neutral, PublicKeyToken=adb9793829ddae60
+2021-09-26 04:14:12.650 +03:00 [DBG] Decrypting secret element using Windows DPAPI.
+2021-09-26 04:14:12.651 +03:00 [DBG] Forwarded activator type request from Microsoft.AspNetCore.DataProtection.AuthenticatedEncryption.ConfigurationModel.AuthenticatedEncryptorDescriptorDeserializer, Microsoft.AspNetCore.DataProtection, Version=3.1.16.0, Culture=neutral, PublicKeyToken=adb9793829ddae60 to Microsoft.AspNetCore.DataProtection.AuthenticatedEncryption.ConfigurationModel.AuthenticatedEncryptorDescriptorDeserializer, Microsoft.AspNetCore.DataProtection, Culture=neutral, PublicKeyToken=adb9793829ddae60
+2021-09-26 04:14:12.655 +03:00 [DBG] Opening CNG algorithm 'AES' from provider 'null' with chaining mode CBC.
+2021-09-26 04:14:12.658 +03:00 [DBG] Opening CNG algorithm 'SHA256' from provider 'null' with HMAC.
+2021-09-26 04:14:12.661 +03:00 [DBG] Using key {3aa2ae8c-81de-4273-8d4a-f52cc391033f} as the default key.
+2021-09-26 04:14:12.662 +03:00 [DBG] Key ring with default key {3aa2ae8c-81de-4273-8d4a-f52cc391033f} was loaded during application startup.
+2021-09-26 04:14:12.929 +03:00 [DBG] An 'IServiceProvider' was created for internal use by Entity Framework.
+2021-09-26 04:14:13.290 +03:00 [DBG] The property 'UnitId' on entity type 'Unit' was created in shadow state because there are no eligible CLR members with a matching name.
+2021-09-26 04:14:13.309 +03:00 [WRN] No type was specified for the decimal column 'Price' on entity type 'ProductPrice'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values using 'HasColumnType()'.
+2021-09-26 04:14:13.311 +03:00 [WRN] No type was specified for the decimal column 'Quantity' on entity type 'ProductStock'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values using 'HasColumnType()'.
+2021-09-26 04:14:13.335 +03:00 [INF] Entity Framework Core 3.1.14 initialized 'BitirMainContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: None
+2021-09-26 04:14:13.365 +03:00 [DBG] Opening connection to database 'BitirDb' on server '.'.
+2021-09-26 04:14:23.620 +03:00 [DBG] An error occurred using the connection to database 'BitirDb' on server '.'.
+2021-09-26 04:14:23.640 +03:00 [DBG] Opening connection to database 'master' on server '.'.
+2021-09-26 04:14:23.660 +03:00 [DBG] Opened connection to database 'master' on server '.'.
+2021-09-26 04:14:23.664 +03:00 [DBG] Creating DbCommand for 'ExecuteNonQuery'.
+2021-09-26 04:14:23.668 +03:00 [DBG] Created DbCommand for 'ExecuteNonQuery' (2ms).
+2021-09-26 04:14:23.674 +03:00 [DBG] Executing DbCommand [Parameters=[], CommandType='"Text"', CommandTimeout='60']
+CREATE DATABASE [BitirDb];
+2021-09-26 04:14:24.088 +03:00 [INF] Executed DbCommand (414ms) [Parameters=[], CommandType='"Text"', CommandTimeout='60']
+CREATE DATABASE [BitirDb];
+2021-09-26 04:14:24.093 +03:00 [DBG] Creating DbCommand for 'ExecuteNonQuery'.
+2021-09-26 04:14:24.093 +03:00 [DBG] Created DbCommand for 'ExecuteNonQuery' (0ms).
+2021-09-26 04:14:24.094 +03:00 [DBG] Executing DbCommand [Parameters=[], CommandType='"Text"', CommandTimeout='60']
+IF SERVERPROPERTY('EngineEdition') <> 5
+BEGIN
+    ALTER DATABASE [BitirDb] SET READ_COMMITTED_SNAPSHOT ON;
+END;
+2021-09-26 04:14:24.317 +03:00 [INF] Executed DbCommand (222ms) [Parameters=[], CommandType='"Text"', CommandTimeout='60']
+IF SERVERPROPERTY('EngineEdition') <> 5
+BEGIN
+    ALTER DATABASE [BitirDb] SET READ_COMMITTED_SNAPSHOT ON;
+END;
+2021-09-26 04:14:24.323 +03:00 [DBG] Closing connection to database 'master' on server '.'.
+2021-09-26 04:14:24.327 +03:00 [DBG] Closed connection to database 'master' on server '.'.
+2021-09-26 04:14:24.329 +03:00 [DBG] Opening connection to database 'BitirDb' on server '.'.
+2021-09-26 04:14:24.339 +03:00 [DBG] Opened connection to database 'BitirDb' on server '.'.
+2021-09-26 04:14:24.340 +03:00 [DBG] Creating DbCommand for 'ExecuteNonQuery'.
+2021-09-26 04:14:24.341 +03:00 [DBG] Created DbCommand for 'ExecuteNonQuery' (0ms).
+2021-09-26 04:14:24.344 +03:00 [DBG] Executing DbCommand [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT 1
+2021-09-26 04:14:24.352 +03:00 [INF] Executed DbCommand (7ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT 1
+2021-09-26 04:14:24.353 +03:00 [DBG] Closing connection to database 'BitirDb' on server '.'.
+2021-09-26 04:14:24.354 +03:00 [DBG] Closed connection to database 'BitirDb' on server '.'.
+2021-09-26 04:14:24.407 +03:00 [DBG] DetectChanges starting for 'BitirMainContext'.
+2021-09-26 04:14:24.411 +03:00 [DBG] DetectChanges completed for 'BitirMainContext'.
+2021-09-26 04:14:24.423 +03:00 [DBG] Opening connection to database 'BitirDb' on server '.'.
+2021-09-26 04:14:24.426 +03:00 [DBG] Opened connection to database 'BitirDb' on server '.'.
+2021-09-26 04:14:24.429 +03:00 [DBG] Beginning transaction with isolation level 'Unspecified'.
+2021-09-26 04:14:24.434 +03:00 [DBG] Began transaction with isolation level 'ReadCommitted'.
+2021-09-26 04:14:24.435 +03:00 [DBG] Creating DbCommand for 'ExecuteNonQuery'.
+2021-09-26 04:14:24.436 +03:00 [DBG] Created DbCommand for 'ExecuteNonQuery' (0ms).
+2021-09-26 04:14:24.438 +03:00 [DBG] Executing DbCommand [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+IF SCHEMA_ID(N'auth') IS NULL EXEC(N'CREATE SCHEMA [auth];');
+2021-09-26 04:14:24.443 +03:00 [INF] Executed DbCommand (6ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+IF SCHEMA_ID(N'auth') IS NULL EXEC(N'CREATE SCHEMA [auth];');
+2021-09-26 04:14:24.445 +03:00 [DBG] Creating DbCommand for 'ExecuteNonQuery'.
+2021-09-26 04:14:24.445 +03:00 [DBG] Created DbCommand for 'ExecuteNonQuery' (0ms).
+2021-09-26 04:14:24.446 +03:00 [DBG] Executing DbCommand [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+IF SCHEMA_ID(N'product') IS NULL EXEC(N'CREATE SCHEMA [product];');
+2021-09-26 04:14:24.449 +03:00 [INF] Executed DbCommand (3ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+IF SCHEMA_ID(N'product') IS NULL EXEC(N'CREATE SCHEMA [product];');
+2021-09-26 04:14:24.450 +03:00 [DBG] Creating DbCommand for 'ExecuteNonQuery'.
+2021-09-26 04:14:24.451 +03:00 [DBG] Created DbCommand for 'ExecuteNonQuery' (0ms).
+2021-09-26 04:14:24.452 +03:00 [DBG] Executing DbCommand [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE [Unit] (
+    [Id] int NOT NULL IDENTITY,
+    [InsertDate] datetime2 NOT NULL,
+    [UpdateDate] datetime2 NOT NULL,
+    [Status] int NOT NULL,
+    [Name] nvarchar(max) NULL,
+    [Abbreviation] nvarchar(max) NULL,
+    [UnitId] int NULL,
+    CONSTRAINT [PK_Unit] PRIMARY KEY ([Id]),
+    CONSTRAINT [FK_Unit_Unit_UnitId] FOREIGN KEY ([UnitId]) REFERENCES [Unit] ([Id]) ON DELETE NO ACTION
+);
+2021-09-26 04:14:24.459 +03:00 [INF] Executed DbCommand (7ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE [Unit] (
+    [Id] int NOT NULL IDENTITY,
+    [InsertDate] datetime2 NOT NULL,
+    [UpdateDate] datetime2 NOT NULL,
+    [Status] int NOT NULL,
+    [Name] nvarchar(max) NULL,
+    [Abbreviation] nvarchar(max) NULL,
+    [UnitId] int NULL,
+    CONSTRAINT [PK_Unit] PRIMARY KEY ([Id]),
+    CONSTRAINT [FK_Unit_Unit_UnitId] FOREIGN KEY ([UnitId]) REFERENCES [Unit] ([Id]) ON DELETE NO ACTION
+);
+2021-09-26 04:14:24.461 +03:00 [DBG] Creating DbCommand for 'ExecuteNonQuery'.
+2021-09-26 04:14:24.462 +03:00 [DBG] Created DbCommand for 'ExecuteNonQuery' (0ms).
+2021-09-26 04:14:24.463 +03:00 [DBG] Executing DbCommand [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE [auth].[UserAccount] (
+    [Id] int NOT NULL IDENTITY,
+    [InsertDate] datetime NOT NULL DEFAULT (getdate()),
+    [UpdateDate] datetime NOT NULL,
+    [Status] int NOT NULL,
+    [Username] nvarchar(max) NOT NULL,
+    [Password] nvarchar(max) NOT NULL,
+    [PasswordHash] varbinary(max) NOT NULL,
+    [PasswordSalt] varbinary(max) NOT NULL,
+    [Name] nvarchar(max) NULL,
+    [Surname] nvarchar(max) NULL,
+    [Phone] nvarchar(max) NULL,
+    [Email] nvarchar(max) NULL,
+    CONSTRAINT [PK_UserAccount] PRIMARY KEY ([Id])
+);
+2021-09-26 04:14:24.468 +03:00 [INF] Executed DbCommand (5ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE [auth].[UserAccount] (
+    [Id] int NOT NULL IDENTITY,
+    [InsertDate] datetime NOT NULL DEFAULT (getdate()),
+    [UpdateDate] datetime NOT NULL,
+    [Status] int NOT NULL,
+    [Username] nvarchar(max) NOT NULL,
+    [Password] nvarchar(max) NOT NULL,
+    [PasswordHash] varbinary(max) NOT NULL,
+    [PasswordSalt] varbinary(max) NOT NULL,
+    [Name] nvarchar(max) NULL,
+    [Surname] nvarchar(max) NULL,
+    [Phone] nvarchar(max) NULL,
+    [Email] nvarchar(max) NULL,
+    CONSTRAINT [PK_UserAccount] PRIMARY KEY ([Id])
+);
+2021-09-26 04:14:24.471 +03:00 [DBG] Creating DbCommand for 'ExecuteNonQuery'.
+2021-09-26 04:14:24.473 +03:00 [DBG] Created DbCommand for 'ExecuteNonQuery' (2ms).
+2021-09-26 04:14:24.476 +03:00 [DBG] Executing DbCommand [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE [product].[Category] (
+    [Id] int NOT NULL IDENTITY,
+    [InsertDate] datetime NOT NULL DEFAULT (getdate()),
+    [UpdateDate] datetime NOT NULL,
+    [Status] int NOT NULL,
+    [Name] nvarchar(max) NOT NULL,
+    [SubCategoryId] int NOT NULL,
+    CONSTRAINT [PK_Category] PRIMARY KEY ([Id])
+);
+2021-09-26 04:14:24.480 +03:00 [INF] Executed DbCommand (4ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE [product].[Category] (
+    [Id] int NOT NULL IDENTITY,
+    [InsertDate] datetime NOT NULL DEFAULT (getdate()),
+    [UpdateDate] datetime NOT NULL,
+    [Status] int NOT NULL,
+    [Name] nvarchar(max) NOT NULL,
+    [SubCategoryId] int NOT NULL,
+    CONSTRAINT [PK_Category] PRIMARY KEY ([Id])
+);
+2021-09-26 04:14:24.482 +03:00 [DBG] Creating DbCommand for 'ExecuteNonQuery'.
+2021-09-26 04:14:24.483 +03:00 [DBG] Created DbCommand for 'ExecuteNonQuery' (0ms).
+2021-09-26 04:14:24.484 +03:00 [DBG] Executing DbCommand [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE [auth].[UserToken] (
+    [Id] int NOT NULL IDENTITY,
+    [InsertDate] datetime NOT NULL DEFAULT (getdate()),
+    [UpdateDate] datetime NOT NULL,
+    [Status] int NOT NULL,
+    [UserId] int NOT NULL,
+    [RefreshToken] nvarchar(max) NOT NULL,
+    [RefreshTokenExpirationDate] datetime2 NOT NULL,
+    CONSTRAINT [PK_UserToken] PRIMARY KEY ([Id]),
+    CONSTRAINT [FK_UserToken_UserAccount_UserId] FOREIGN KEY ([UserId]) REFERENCES [auth].[UserAccount] ([Id]) ON DELETE CASCADE
+);
+2021-09-26 04:14:24.491 +03:00 [INF] Executed DbCommand (7ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE [auth].[UserToken] (
+    [Id] int NOT NULL IDENTITY,
+    [InsertDate] datetime NOT NULL DEFAULT (getdate()),
+    [UpdateDate] datetime NOT NULL,
+    [Status] int NOT NULL,
+    [UserId] int NOT NULL,
+    [RefreshToken] nvarchar(max) NOT NULL,
+    [RefreshTokenExpirationDate] datetime2 NOT NULL,
+    CONSTRAINT [PK_UserToken] PRIMARY KEY ([Id]),
+    CONSTRAINT [FK_UserToken_UserAccount_UserId] FOREIGN KEY ([UserId]) REFERENCES [auth].[UserAccount] ([Id]) ON DELETE CASCADE
+);
+2021-09-26 04:14:24.494 +03:00 [DBG] Creating DbCommand for 'ExecuteNonQuery'.
+2021-09-26 04:14:24.495 +03:00 [DBG] Created DbCommand for 'ExecuteNonQuery' (0ms).
+2021-09-26 04:14:24.496 +03:00 [DBG] Executing DbCommand [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE [product].[Product] (
+    [Id] int NOT NULL IDENTITY,
+    [InsertDate] datetime NOT NULL DEFAULT (getdate()),
+    [UpdateDate] datetime NOT NULL,
+    [Status] int NOT NULL,
+    [Name] nvarchar(max) NOT NULL,
+    [Description] nvarchar(max) NULL,
+    [Image] nvarchar(max) NULL,
+    [CategoryId] int NOT NULL,
+    [UnitId] int NOT NULL,
+    CONSTRAINT [PK_Product] PRIMARY KEY ([Id]),
+    CONSTRAINT [FK_Product_Category_CategoryId] FOREIGN KEY ([CategoryId]) REFERENCES [product].[Category] ([Id]) ON DELETE CASCADE,
+    CONSTRAINT [FK_Product_Unit_UnitId] FOREIGN KEY ([UnitId]) REFERENCES [Unit] ([Id]) ON DELETE CASCADE
+);
+2021-09-26 04:14:24.501 +03:00 [INF] Executed DbCommand (5ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE [product].[Product] (
+    [Id] int NOT NULL IDENTITY,
+    [InsertDate] datetime NOT NULL DEFAULT (getdate()),
+    [UpdateDate] datetime NOT NULL,
+    [Status] int NOT NULL,
+    [Name] nvarchar(max) NOT NULL,
+    [Description] nvarchar(max) NULL,
+    [Image] nvarchar(max) NULL,
+    [CategoryId] int NOT NULL,
+    [UnitId] int NOT NULL,
+    CONSTRAINT [PK_Product] PRIMARY KEY ([Id]),
+    CONSTRAINT [FK_Product_Category_CategoryId] FOREIGN KEY ([CategoryId]) REFERENCES [product].[Category] ([Id]) ON DELETE CASCADE,
+    CONSTRAINT [FK_Product_Unit_UnitId] FOREIGN KEY ([UnitId]) REFERENCES [Unit] ([Id]) ON DELETE CASCADE
+);
+2021-09-26 04:14:24.505 +03:00 [DBG] Creating DbCommand for 'ExecuteNonQuery'.
+2021-09-26 04:14:24.506 +03:00 [DBG] Created DbCommand for 'ExecuteNonQuery' (0ms).
+2021-09-26 04:14:24.507 +03:00 [DBG] Executing DbCommand [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE [product].[ProductPrice] (
+    [Id] int NOT NULL IDENTITY,
+    [InsertDate] datetime NOT NULL DEFAULT (getdate()),
+    [UpdateDate] datetime NOT NULL,
+    [Status] int NOT NULL,
+    [ProductId] int NOT NULL,
+    [VendorId] int NOT NULL,
+    [Price] decimal(18,2) NOT NULL,
+    CONSTRAINT [PK_ProductPrice] PRIMARY KEY ([Id]),
+    CONSTRAINT [FK_ProductPrice_Product_ProductId] FOREIGN KEY ([ProductId]) REFERENCES [product].[Product] ([Id]) ON DELETE CASCADE
+);
+2021-09-26 04:14:24.512 +03:00 [INF] Executed DbCommand (5ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE [product].[ProductPrice] (
+    [Id] int NOT NULL IDENTITY,
+    [InsertDate] datetime NOT NULL DEFAULT (getdate()),
+    [UpdateDate] datetime NOT NULL,
+    [Status] int NOT NULL,
+    [ProductId] int NOT NULL,
+    [VendorId] int NOT NULL,
+    [Price] decimal(18,2) NOT NULL,
+    CONSTRAINT [PK_ProductPrice] PRIMARY KEY ([Id]),
+    CONSTRAINT [FK_ProductPrice_Product_ProductId] FOREIGN KEY ([ProductId]) REFERENCES [product].[Product] ([Id]) ON DELETE CASCADE
+);
+2021-09-26 04:14:24.514 +03:00 [DBG] Creating DbCommand for 'ExecuteNonQuery'.
+2021-09-26 04:14:24.515 +03:00 [DBG] Created DbCommand for 'ExecuteNonQuery' (0ms).
+2021-09-26 04:14:24.516 +03:00 [DBG] Executing DbCommand [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE [product].[ProductStock] (
+    [Id] int NOT NULL IDENTITY,
+    [InsertDate] datetime NOT NULL DEFAULT (getdate()),
+    [UpdateDate] datetime NOT NULL,
+    [Status] int NOT NULL,
+    [ProductId] int NOT NULL,
+    [MerchantId] int NOT NULL,
+    [Quantity] decimal(18,2) NOT NULL,
+    CONSTRAINT [PK_ProductStock] PRIMARY KEY ([Id]),
+    CONSTRAINT [FK_ProductStock_Product_ProductId] FOREIGN KEY ([ProductId]) REFERENCES [product].[Product] ([Id]) ON DELETE CASCADE
+);
+2021-09-26 04:14:24.523 +03:00 [INF] Executed DbCommand (6ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE [product].[ProductStock] (
+    [Id] int NOT NULL IDENTITY,
+    [InsertDate] datetime NOT NULL DEFAULT (getdate()),
+    [UpdateDate] datetime NOT NULL,
+    [Status] int NOT NULL,
+    [ProductId] int NOT NULL,
+    [MerchantId] int NOT NULL,
+    [Quantity] decimal(18,2) NOT NULL,
+    CONSTRAINT [PK_ProductStock] PRIMARY KEY ([Id]),
+    CONSTRAINT [FK_ProductStock_Product_ProductId] FOREIGN KEY ([ProductId]) REFERENCES [product].[Product] ([Id]) ON DELETE CASCADE
+);
+2021-09-26 04:14:24.525 +03:00 [DBG] Creating DbCommand for 'ExecuteNonQuery'.
+2021-09-26 04:14:24.526 +03:00 [DBG] Created DbCommand for 'ExecuteNonQuery' (0ms).
+2021-09-26 04:14:24.527 +03:00 [DBG] Executing DbCommand [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE INDEX [IX_Unit_UnitId] ON [Unit] ([UnitId]);
+2021-09-26 04:14:24.529 +03:00 [INF] Executed DbCommand (3ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE INDEX [IX_Unit_UnitId] ON [Unit] ([UnitId]);
+2021-09-26 04:14:24.531 +03:00 [DBG] Creating DbCommand for 'ExecuteNonQuery'.
+2021-09-26 04:14:24.534 +03:00 [DBG] Created DbCommand for 'ExecuteNonQuery' (2ms).
+2021-09-26 04:14:24.535 +03:00 [DBG] Executing DbCommand [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE INDEX [IX_UserToken_UserId] ON [auth].[UserToken] ([UserId]);
+2021-09-26 04:14:24.538 +03:00 [INF] Executed DbCommand (3ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE INDEX [IX_UserToken_UserId] ON [auth].[UserToken] ([UserId]);
+2021-09-26 04:14:24.539 +03:00 [DBG] Creating DbCommand for 'ExecuteNonQuery'.
+2021-09-26 04:14:24.540 +03:00 [DBG] Created DbCommand for 'ExecuteNonQuery' (1ms).
+2021-09-26 04:14:24.541 +03:00 [DBG] Executing DbCommand [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE INDEX [IX_Product_CategoryId] ON [product].[Product] ([CategoryId]);
+2021-09-26 04:14:24.545 +03:00 [INF] Executed DbCommand (3ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE INDEX [IX_Product_CategoryId] ON [product].[Product] ([CategoryId]);
+2021-09-26 04:14:24.546 +03:00 [DBG] Creating DbCommand for 'ExecuteNonQuery'.
+2021-09-26 04:14:24.549 +03:00 [DBG] Created DbCommand for 'ExecuteNonQuery' (2ms).
+2021-09-26 04:14:24.550 +03:00 [DBG] Executing DbCommand [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE INDEX [IX_Product_UnitId] ON [product].[Product] ([UnitId]);
+2021-09-26 04:14:24.553 +03:00 [INF] Executed DbCommand (3ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE INDEX [IX_Product_UnitId] ON [product].[Product] ([UnitId]);
+2021-09-26 04:14:24.554 +03:00 [DBG] Creating DbCommand for 'ExecuteNonQuery'.
+2021-09-26 04:14:24.555 +03:00 [DBG] Created DbCommand for 'ExecuteNonQuery' (0ms).
+2021-09-26 04:14:24.556 +03:00 [DBG] Executing DbCommand [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE INDEX [IX_ProductPrice_ProductId] ON [product].[ProductPrice] ([ProductId]);
+2021-09-26 04:14:24.559 +03:00 [INF] Executed DbCommand (3ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE INDEX [IX_ProductPrice_ProductId] ON [product].[ProductPrice] ([ProductId]);
+2021-09-26 04:14:24.560 +03:00 [DBG] Creating DbCommand for 'ExecuteNonQuery'.
+2021-09-26 04:14:24.561 +03:00 [DBG] Created DbCommand for 'ExecuteNonQuery' (0ms).
+2021-09-26 04:14:24.562 +03:00 [DBG] Executing DbCommand [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE INDEX [IX_ProductStock_ProductId] ON [product].[ProductStock] ([ProductId]);
+2021-09-26 04:14:24.567 +03:00 [INF] Executed DbCommand (5ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE INDEX [IX_ProductStock_ProductId] ON [product].[ProductStock] ([ProductId]);
+2021-09-26 04:14:24.569 +03:00 [DBG] Committing transaction.
+2021-09-26 04:14:24.579 +03:00 [DBG] Committing transaction.
+2021-09-26 04:14:24.580 +03:00 [DBG] Disposing transaction.
+2021-09-26 04:14:24.580 +03:00 [DBG] Closing connection to database 'BitirDb' on server '.'.
+2021-09-26 04:14:24.581 +03:00 [DBG] Closed connection to database 'BitirDb' on server '.'.
+2021-09-26 04:14:24.585 +03:00 [DBG] Migrating using database 'BitirDb' on server '.'.
+2021-09-26 04:14:24.585 +03:00 [DBG] Opening connection to database 'BitirDb' on server '.'.
+2021-09-26 04:14:24.586 +03:00 [DBG] Opened connection to database 'BitirDb' on server '.'.
+2021-09-26 04:14:24.587 +03:00 [DBG] Creating DbCommand for 'ExecuteNonQuery'.
+2021-09-26 04:14:24.588 +03:00 [DBG] Created DbCommand for 'ExecuteNonQuery' (0ms).
+2021-09-26 04:14:24.589 +03:00 [DBG] Executing DbCommand [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT 1
+2021-09-26 04:14:24.592 +03:00 [INF] Executed DbCommand (3ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT 1
+2021-09-26 04:14:24.595 +03:00 [DBG] Closing connection to database 'BitirDb' on server '.'.
+2021-09-26 04:14:24.596 +03:00 [DBG] Closed connection to database 'BitirDb' on server '.'.
+2021-09-26 04:14:24.597 +03:00 [DBG] Creating DbCommand for 'ExecuteScalar'.
+2021-09-26 04:14:24.598 +03:00 [DBG] Created DbCommand for 'ExecuteScalar' (0ms).
+2021-09-26 04:14:24.599 +03:00 [DBG] Opening connection to database 'BitirDb' on server '.'.
+2021-09-26 04:14:24.600 +03:00 [DBG] Opened connection to database 'BitirDb' on server '.'.
+2021-09-26 04:14:24.601 +03:00 [DBG] Executing DbCommand [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT OBJECT_ID(N'[__EFMigrationsHistory]');
+2021-09-26 04:14:24.612 +03:00 [INF] Executed DbCommand (12ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT OBJECT_ID(N'[__EFMigrationsHistory]');
+2021-09-26 04:14:24.614 +03:00 [DBG] Closing connection to database 'BitirDb' on server '.'.
+2021-09-26 04:14:24.616 +03:00 [DBG] Closed connection to database 'BitirDb' on server '.'.
+2021-09-26 04:14:24.616 +03:00 [DBG] Opening connection to database 'BitirDb' on server '.'.
+2021-09-26 04:14:24.617 +03:00 [DBG] Opened connection to database 'BitirDb' on server '.'.
+2021-09-26 04:14:24.618 +03:00 [DBG] Creating DbCommand for 'ExecuteNonQuery'.
+2021-09-26 04:14:24.619 +03:00 [DBG] Created DbCommand for 'ExecuteNonQuery' (0ms).
+2021-09-26 04:14:24.620 +03:00 [DBG] Executing DbCommand [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT 1
+2021-09-26 04:14:24.623 +03:00 [INF] Executed DbCommand (3ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT 1
+2021-09-26 04:14:24.627 +03:00 [DBG] Closing connection to database 'BitirDb' on server '.'.
+2021-09-26 04:14:24.628 +03:00 [DBG] Closed connection to database 'BitirDb' on server '.'.
+2021-09-26 04:14:24.635 +03:00 [DBG] DetectChanges starting for 'BitirMainContext'.
+2021-09-26 04:14:24.636 +03:00 [DBG] DetectChanges completed for 'BitirMainContext'.
+2021-09-26 04:14:24.637 +03:00 [DBG] Creating DbCommand for 'ExecuteNonQuery'.
+2021-09-26 04:14:24.638 +03:00 [DBG] Created DbCommand for 'ExecuteNonQuery' (0ms).
+2021-09-26 04:14:24.638 +03:00 [DBG] Opening connection to database 'BitirDb' on server '.'.
+2021-09-26 04:14:24.641 +03:00 [DBG] Opened connection to database 'BitirDb' on server '.'.
+2021-09-26 04:14:24.641 +03:00 [DBG] Executing DbCommand [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE [__EFMigrationsHistory] (
+    [MigrationId] nvarchar(150) NOT NULL,
+    [ProductVersion] nvarchar(32) NOT NULL,
+    CONSTRAINT [PK___EFMigrationsHistory] PRIMARY KEY ([MigrationId])
+);
+2021-09-26 04:14:24.652 +03:00 [INF] Executed DbCommand (10ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE [__EFMigrationsHistory] (
+    [MigrationId] nvarchar(150) NOT NULL,
+    [ProductVersion] nvarchar(32) NOT NULL,
+    CONSTRAINT [PK___EFMigrationsHistory] PRIMARY KEY ([MigrationId])
+);
+2021-09-26 04:14:24.654 +03:00 [DBG] Closing connection to database 'BitirDb' on server '.'.
+2021-09-26 04:14:24.656 +03:00 [DBG] Closed connection to database 'BitirDb' on server '.'.
+2021-09-26 04:14:24.658 +03:00 [DBG] Opening connection to database 'BitirDb' on server '.'.
+2021-09-26 04:14:24.659 +03:00 [DBG] Opened connection to database 'BitirDb' on server '.'.
+2021-09-26 04:14:24.659 +03:00 [DBG] Creating DbCommand for 'ExecuteNonQuery'.
+2021-09-26 04:14:24.660 +03:00 [DBG] Created DbCommand for 'ExecuteNonQuery' (0ms).
+2021-09-26 04:14:24.661 +03:00 [DBG] Executing DbCommand [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT 1
+2021-09-26 04:14:24.664 +03:00 [INF] Executed DbCommand (3ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT 1
+2021-09-26 04:14:24.665 +03:00 [DBG] Closing connection to database 'BitirDb' on server '.'.
+2021-09-26 04:14:24.666 +03:00 [DBG] Closed connection to database 'BitirDb' on server '.'.
+2021-09-26 04:14:24.667 +03:00 [DBG] Creating DbCommand for 'ExecuteScalar'.
+2021-09-26 04:14:24.668 +03:00 [DBG] Created DbCommand for 'ExecuteScalar' (0ms).
+2021-09-26 04:14:24.669 +03:00 [DBG] Opening connection to database 'BitirDb' on server '.'.
+2021-09-26 04:14:24.671 +03:00 [DBG] Opened connection to database 'BitirDb' on server '.'.
+2021-09-26 04:14:24.672 +03:00 [DBG] Executing DbCommand [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT OBJECT_ID(N'[__EFMigrationsHistory]');
+2021-09-26 04:14:24.675 +03:00 [INF] Executed DbCommand (3ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT OBJECT_ID(N'[__EFMigrationsHistory]');
+2021-09-26 04:14:24.677 +03:00 [DBG] Closing connection to database 'BitirDb' on server '.'.
+2021-09-26 04:14:24.678 +03:00 [DBG] Closed connection to database 'BitirDb' on server '.'.
+2021-09-26 04:14:24.679 +03:00 [DBG] Creating DbCommand for 'ExecuteReader'.
+2021-09-26 04:14:24.680 +03:00 [DBG] Created DbCommand for 'ExecuteReader' (0ms).
+2021-09-26 04:14:24.681 +03:00 [DBG] Opening connection to database 'BitirDb' on server '.'.
+2021-09-26 04:14:24.682 +03:00 [DBG] Opened connection to database 'BitirDb' on server '.'.
+2021-09-26 04:14:24.683 +03:00 [DBG] Executing DbCommand [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [MigrationId], [ProductVersion]
+FROM [__EFMigrationsHistory]
+ORDER BY [MigrationId];
+2021-09-26 04:14:24.687 +03:00 [INF] Executed DbCommand (4ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [MigrationId], [ProductVersion]
+FROM [__EFMigrationsHistory]
+ORDER BY [MigrationId];
+2021-09-26 04:14:24.690 +03:00 [DBG] A data reader was disposed.
+2021-09-26 04:14:24.690 +03:00 [DBG] Closing connection to database 'BitirDb' on server '.'.
+2021-09-26 04:14:24.691 +03:00 [DBG] Closed connection to database 'BitirDb' on server '.'.
+2021-09-26 04:14:24.698 +03:00 [DBG] No migrations were found in assembly 'Bitir.Data'.
+2021-09-26 04:14:24.702 +03:00 [INF] No migrations were applied. The database is already up to date.
+2021-09-26 04:14:24.703 +03:00 [DBG] 'BitirMainContext' disposed.
+2021-09-26 04:14:24.733 +03:00 [DBG] Failed to locate the development https certificate at 'null'.
+2021-09-26 04:14:24.755 +03:00 [INF] Now listening on: http://localhost:5000
+2021-09-26 04:14:24.755 +03:00 [DBG] Loaded hosting startup assembly Bitir.Api
+2021-09-26 04:14:24.757 +03:00 [INF] Application started. Press Ctrl+C to shut down.
+2021-09-26 04:14:24.757 +03:00 [INF] Hosting environment: Development
+2021-09-26 04:14:24.758 +03:00 [INF] Content root path: C:\Users\leven\source\repos\Bitir\API\Bitir.Api
+2021-09-26 04:14:24.759 +03:00 [DBG] Hosting started
+2021-09-26 04:14:24.996 +03:00 [DBG] Connection id "0HMC0HBTBJ3MN" accepted.
+2021-09-26 04:14:24.999 +03:00 [DBG] Connection id "0HMC0HBTBJ3MN" started.
+2021-09-26 04:14:25.023 +03:00 [DBG] Connection id "0HMC0HBTBJ3MN" received FIN.
+2021-09-26 04:14:25.028 +03:00 [DBG] Connection id "0HMC0HBTBJ3MN" sending FIN because: "The client closed the connection."
+2021-09-26 04:14:25.031 +03:00 [DBG] Connection id "0HMC0HBTBJ3MN" disconnecting.
+2021-09-26 04:14:25.033 +03:00 [DBG] Connection id "0HMC0HBTBJ3MN" stopped.
+2021-09-26 04:14:25.129 +03:00 [DBG] Connection id "0HMC0HBTBJ3MO" accepted.
+2021-09-26 04:14:25.130 +03:00 [DBG] Connection id "0HMC0HBTBJ3MO" started.
+2021-09-26 04:14:25.158 +03:00 [INF] Request starting HTTP/1.1 HEAD http://localhost:5000/  
+2021-09-26 04:14:25.161 +03:00 [DBG] Wildcard detected, all requests with hosts will be allowed.
+2021-09-26 04:14:25.182 +03:00 [DBG] No candidates found for the request path '/'
+2021-09-26 04:14:25.182 +03:00 [DBG] Request did not match any endpoints
+2021-09-26 04:14:25.194 +03:00 [DBG] The request path  does not match the path filter
+2021-09-26 04:14:25.201 +03:00 [DBG] Connection id "0HMC0HBTBJ3MO" completed keep alive response.
+2021-09-26 04:14:25.203 +03:00 [INF] Request finished in 47.8937ms 404 
+2021-09-26 04:14:25.326 +03:00 [DBG] Connection id "0HMC0HBTBJ3MP" accepted.
+2021-09-26 04:14:25.328 +03:00 [DBG] Connection id "0HMC0HBTBJ3MP" started.
+2021-09-26 04:14:25.328 +03:00 [DBG] Connection id "0HMC0HBTBJ3MQ" accepted.
+2021-09-26 04:14:25.336 +03:00 [DBG] Connection id "0HMC0HBTBJ3MQ" started.
+2021-09-26 04:14:25.347 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5000/swagger/index.html  
+2021-09-26 04:14:25.351 +03:00 [DBG] No candidates found for the request path '/swagger/index.html'
+2021-09-26 04:14:25.352 +03:00 [DBG] Request did not match any endpoints
+2021-09-26 04:14:25.375 +03:00 [DBG] Connection id "0HMC0HBTBJ3MP" completed keep alive response.
+2021-09-26 04:14:25.379 +03:00 [INF] Request finished in 31.3918ms 200 text/html;charset=utf-8
+2021-09-26 04:14:25.581 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5000/swagger/v1/swagger.json  
+2021-09-26 04:14:25.583 +03:00 [DBG] No candidates found for the request path '/swagger/v1/swagger.json'
+2021-09-26 04:14:25.584 +03:00 [DBG] Request did not match any endpoints
+2021-09-26 04:14:25.650 +03:00 [DBG] Connection id "0HMC0HBTBJ3MP" completed keep alive response.
+2021-09-26 04:14:25.653 +03:00 [INF] Request finished in 71.2714ms 200 application/json;charset=utf-8
+2021-09-26 04:15:23.709 +03:00 [INF] Starting web host
+2021-09-26 04:15:24.358 +03:00 [DBG] Hosting starting
+2021-09-26 04:15:24.397 +03:00 [INF] User profile is available. Using 'C:\Users\leven\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2021-09-26 04:15:24.412 +03:00 [DBG] Reading data from file 'C:\Users\leven\AppData\Local\ASP.NET\DataProtection-Keys\key-14642b65-a18c-49a2-99af-52420015a828.xml'.
+2021-09-26 04:15:24.426 +03:00 [DBG] Reading data from file 'C:\Users\leven\AppData\Local\ASP.NET\DataProtection-Keys\key-3aa2ae8c-81de-4273-8d4a-f52cc391033f.xml'.
+2021-09-26 04:15:24.427 +03:00 [DBG] Reading data from file 'C:\Users\leven\AppData\Local\ASP.NET\DataProtection-Keys\key-4d95ab8d-4041-43bb-8736-c55e7eebfed6.xml'.
+2021-09-26 04:15:24.432 +03:00 [DBG] Found key {14642b65-a18c-49a2-99af-52420015a828}.
+2021-09-26 04:15:24.436 +03:00 [DBG] Found key {3aa2ae8c-81de-4273-8d4a-f52cc391033f}.
+2021-09-26 04:15:24.436 +03:00 [DBG] Found key {4d95ab8d-4041-43bb-8736-c55e7eebfed6}.
+2021-09-26 04:15:24.442 +03:00 [DBG] Considering key {3aa2ae8c-81de-4273-8d4a-f52cc391033f} with expiration date 2021-10-31 07:22:50Z as default key.
+2021-09-26 04:15:24.449 +03:00 [DBG] Forwarded activator type request from Microsoft.AspNetCore.DataProtection.XmlEncryption.DpapiXmlDecryptor, Microsoft.AspNetCore.DataProtection, Version=3.1.16.0, Culture=neutral, PublicKeyToken=adb9793829ddae60 to Microsoft.AspNetCore.DataProtection.XmlEncryption.DpapiXmlDecryptor, Microsoft.AspNetCore.DataProtection, Culture=neutral, PublicKeyToken=adb9793829ddae60
+2021-09-26 04:15:24.452 +03:00 [DBG] Decrypting secret element using Windows DPAPI.
+2021-09-26 04:15:24.453 +03:00 [DBG] Forwarded activator type request from Microsoft.AspNetCore.DataProtection.AuthenticatedEncryption.ConfigurationModel.AuthenticatedEncryptorDescriptorDeserializer, Microsoft.AspNetCore.DataProtection, Version=3.1.16.0, Culture=neutral, PublicKeyToken=adb9793829ddae60 to Microsoft.AspNetCore.DataProtection.AuthenticatedEncryption.ConfigurationModel.AuthenticatedEncryptorDescriptorDeserializer, Microsoft.AspNetCore.DataProtection, Culture=neutral, PublicKeyToken=adb9793829ddae60
+2021-09-26 04:15:24.457 +03:00 [DBG] Opening CNG algorithm 'AES' from provider 'null' with chaining mode CBC.
+2021-09-26 04:15:24.460 +03:00 [DBG] Opening CNG algorithm 'SHA256' from provider 'null' with HMAC.
+2021-09-26 04:15:24.462 +03:00 [DBG] Using key {3aa2ae8c-81de-4273-8d4a-f52cc391033f} as the default key.
+2021-09-26 04:15:24.464 +03:00 [DBG] Key ring with default key {3aa2ae8c-81de-4273-8d4a-f52cc391033f} was loaded during application startup.
+2021-09-26 04:15:24.666 +03:00 [DBG] An 'IServiceProvider' was created for internal use by Entity Framework.
+2021-09-26 04:15:25.062 +03:00 [DBG] The property 'UnitId' on entity type 'Unit' was created in shadow state because there are no eligible CLR members with a matching name.
+2021-09-26 04:15:25.082 +03:00 [WRN] No type was specified for the decimal column 'Price' on entity type 'ProductPrice'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values using 'HasColumnType()'.
+2021-09-26 04:15:25.085 +03:00 [WRN] No type was specified for the decimal column 'Quantity' on entity type 'ProductStock'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values using 'HasColumnType()'.
+2021-09-26 04:15:25.111 +03:00 [INF] Entity Framework Core 3.1.14 initialized 'BitirMainContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: None
+2021-09-26 04:15:25.137 +03:00 [DBG] Opening connection to database 'BitirDb' on server '.'.
+2021-09-26 04:15:35.328 +03:00 [DBG] An error occurred using the connection to database 'BitirDb' on server '.'.
+2021-09-26 04:15:35.348 +03:00 [DBG] Opening connection to database 'master' on server '.'.
+2021-09-26 04:15:35.366 +03:00 [DBG] Opened connection to database 'master' on server '.'.
+2021-09-26 04:15:35.370 +03:00 [DBG] Creating DbCommand for 'ExecuteNonQuery'.
+2021-09-26 04:15:35.375 +03:00 [DBG] Created DbCommand for 'ExecuteNonQuery' (2ms).
+2021-09-26 04:15:35.382 +03:00 [DBG] Executing DbCommand [Parameters=[], CommandType='"Text"', CommandTimeout='60']
+CREATE DATABASE [BitirDb];
+2021-09-26 04:15:35.787 +03:00 [INF] Executed DbCommand (406ms) [Parameters=[], CommandType='"Text"', CommandTimeout='60']
+CREATE DATABASE [BitirDb];
+2021-09-26 04:15:35.790 +03:00 [DBG] Creating DbCommand for 'ExecuteNonQuery'.
+2021-09-26 04:15:35.792 +03:00 [DBG] Created DbCommand for 'ExecuteNonQuery' (1ms).
+2021-09-26 04:15:35.793 +03:00 [DBG] Executing DbCommand [Parameters=[], CommandType='"Text"', CommandTimeout='60']
+IF SERVERPROPERTY('EngineEdition') <> 5
+BEGIN
+    ALTER DATABASE [BitirDb] SET READ_COMMITTED_SNAPSHOT ON;
+END;
+2021-09-26 04:15:36.019 +03:00 [INF] Executed DbCommand (226ms) [Parameters=[], CommandType='"Text"', CommandTimeout='60']
+IF SERVERPROPERTY('EngineEdition') <> 5
+BEGIN
+    ALTER DATABASE [BitirDb] SET READ_COMMITTED_SNAPSHOT ON;
+END;
+2021-09-26 04:15:36.024 +03:00 [DBG] Closing connection to database 'master' on server '.'.
+2021-09-26 04:15:36.027 +03:00 [DBG] Closed connection to database 'master' on server '.'.
+2021-09-26 04:15:36.030 +03:00 [DBG] Opening connection to database 'BitirDb' on server '.'.
+2021-09-26 04:15:36.039 +03:00 [DBG] Opened connection to database 'BitirDb' on server '.'.
+2021-09-26 04:15:36.040 +03:00 [DBG] Creating DbCommand for 'ExecuteNonQuery'.
+2021-09-26 04:15:36.041 +03:00 [DBG] Created DbCommand for 'ExecuteNonQuery' (0ms).
+2021-09-26 04:15:36.042 +03:00 [DBG] Executing DbCommand [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT 1
+2021-09-26 04:15:36.049 +03:00 [INF] Executed DbCommand (7ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT 1
+2021-09-26 04:15:36.051 +03:00 [DBG] Closing connection to database 'BitirDb' on server '.'.
+2021-09-26 04:15:36.052 +03:00 [DBG] Closed connection to database 'BitirDb' on server '.'.
+2021-09-26 04:15:36.105 +03:00 [DBG] DetectChanges starting for 'BitirMainContext'.
+2021-09-26 04:15:36.108 +03:00 [DBG] DetectChanges completed for 'BitirMainContext'.
+2021-09-26 04:15:36.122 +03:00 [DBG] Opening connection to database 'BitirDb' on server '.'.
+2021-09-26 04:15:36.124 +03:00 [DBG] Opened connection to database 'BitirDb' on server '.'.
+2021-09-26 04:15:36.126 +03:00 [DBG] Beginning transaction with isolation level 'Unspecified'.
+2021-09-26 04:15:36.133 +03:00 [DBG] Began transaction with isolation level 'ReadCommitted'.
+2021-09-26 04:15:36.135 +03:00 [DBG] Creating DbCommand for 'ExecuteNonQuery'.
+2021-09-26 04:15:36.135 +03:00 [DBG] Created DbCommand for 'ExecuteNonQuery' (0ms).
+2021-09-26 04:15:36.136 +03:00 [DBG] Executing DbCommand [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+IF SCHEMA_ID(N'auth') IS NULL EXEC(N'CREATE SCHEMA [auth];');
+2021-09-26 04:15:36.142 +03:00 [INF] Executed DbCommand (5ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+IF SCHEMA_ID(N'auth') IS NULL EXEC(N'CREATE SCHEMA [auth];');
+2021-09-26 04:15:36.143 +03:00 [DBG] Creating DbCommand for 'ExecuteNonQuery'.
+2021-09-26 04:15:36.144 +03:00 [DBG] Created DbCommand for 'ExecuteNonQuery' (1ms).
+2021-09-26 04:15:36.145 +03:00 [DBG] Executing DbCommand [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+IF SCHEMA_ID(N'product') IS NULL EXEC(N'CREATE SCHEMA [product];');
+2021-09-26 04:15:36.148 +03:00 [INF] Executed DbCommand (3ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+IF SCHEMA_ID(N'product') IS NULL EXEC(N'CREATE SCHEMA [product];');
+2021-09-26 04:15:36.150 +03:00 [DBG] Creating DbCommand for 'ExecuteNonQuery'.
+2021-09-26 04:15:36.151 +03:00 [DBG] Created DbCommand for 'ExecuteNonQuery' (0ms).
+2021-09-26 04:15:36.152 +03:00 [DBG] Executing DbCommand [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE [auth].[UserAccount] (
+    [Id] int NOT NULL IDENTITY,
+    [InsertDate] datetime NOT NULL DEFAULT (getdate()),
+    [UpdateDate] datetime NOT NULL,
+    [Status] int NOT NULL,
+    [Username] nvarchar(max) NOT NULL,
+    [Password] nvarchar(max) NOT NULL,
+    [PasswordHash] varbinary(max) NOT NULL,
+    [PasswordSalt] varbinary(max) NOT NULL,
+    [Name] nvarchar(max) NULL,
+    [Surname] nvarchar(max) NULL,
+    [Phone] nvarchar(max) NULL,
+    [Email] nvarchar(max) NULL,
+    CONSTRAINT [PK_UserAccount] PRIMARY KEY ([Id])
+);
+2021-09-26 04:15:36.160 +03:00 [INF] Executed DbCommand (8ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE [auth].[UserAccount] (
+    [Id] int NOT NULL IDENTITY,
+    [InsertDate] datetime NOT NULL DEFAULT (getdate()),
+    [UpdateDate] datetime NOT NULL,
+    [Status] int NOT NULL,
+    [Username] nvarchar(max) NOT NULL,
+    [Password] nvarchar(max) NOT NULL,
+    [PasswordHash] varbinary(max) NOT NULL,
+    [PasswordSalt] varbinary(max) NOT NULL,
+    [Name] nvarchar(max) NULL,
+    [Surname] nvarchar(max) NULL,
+    [Phone] nvarchar(max) NULL,
+    [Email] nvarchar(max) NULL,
+    CONSTRAINT [PK_UserAccount] PRIMARY KEY ([Id])
+);
+2021-09-26 04:15:36.162 +03:00 [DBG] Creating DbCommand for 'ExecuteNonQuery'.
+2021-09-26 04:15:36.165 +03:00 [DBG] Created DbCommand for 'ExecuteNonQuery' (2ms).
+2021-09-26 04:15:36.166 +03:00 [DBG] Executing DbCommand [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE [product].[Category] (
+    [Id] int NOT NULL IDENTITY,
+    [InsertDate] datetime NOT NULL DEFAULT (getdate()),
+    [UpdateDate] datetime NOT NULL,
+    [Status] int NOT NULL,
+    [Name] nvarchar(max) NOT NULL,
+    [SubCategoryId] int NOT NULL,
+    CONSTRAINT [PK_Category] PRIMARY KEY ([Id])
+);
+2021-09-26 04:15:36.170 +03:00 [INF] Executed DbCommand (4ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE [product].[Category] (
+    [Id] int NOT NULL IDENTITY,
+    [InsertDate] datetime NOT NULL DEFAULT (getdate()),
+    [UpdateDate] datetime NOT NULL,
+    [Status] int NOT NULL,
+    [Name] nvarchar(max) NOT NULL,
+    [SubCategoryId] int NOT NULL,
+    CONSTRAINT [PK_Category] PRIMARY KEY ([Id])
+);
+2021-09-26 04:15:36.172 +03:00 [DBG] Creating DbCommand for 'ExecuteNonQuery'.
+2021-09-26 04:15:36.173 +03:00 [DBG] Created DbCommand for 'ExecuteNonQuery' (1ms).
+2021-09-26 04:15:36.174 +03:00 [DBG] Executing DbCommand [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE [product].[Unit] (
+    [Id] int NOT NULL IDENTITY,
+    [InsertDate] datetime NOT NULL DEFAULT (getdate()),
+    [UpdateDate] datetime NOT NULL,
+    [Status] int NOT NULL,
+    [Name] nvarchar(max) NOT NULL,
+    [Abbreviation] nvarchar(max) NULL,
+    [UnitId] int NULL,
+    CONSTRAINT [PK_Unit] PRIMARY KEY ([Id]),
+    CONSTRAINT [FK_Unit_Unit_UnitId] FOREIGN KEY ([UnitId]) REFERENCES [product].[Unit] ([Id]) ON DELETE NO ACTION
+);
+2021-09-26 04:15:36.179 +03:00 [INF] Executed DbCommand (5ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE [product].[Unit] (
+    [Id] int NOT NULL IDENTITY,
+    [InsertDate] datetime NOT NULL DEFAULT (getdate()),
+    [UpdateDate] datetime NOT NULL,
+    [Status] int NOT NULL,
+    [Name] nvarchar(max) NOT NULL,
+    [Abbreviation] nvarchar(max) NULL,
+    [UnitId] int NULL,
+    CONSTRAINT [PK_Unit] PRIMARY KEY ([Id]),
+    CONSTRAINT [FK_Unit_Unit_UnitId] FOREIGN KEY ([UnitId]) REFERENCES [product].[Unit] ([Id]) ON DELETE NO ACTION
+);
+2021-09-26 04:15:36.182 +03:00 [DBG] Creating DbCommand for 'ExecuteNonQuery'.
+2021-09-26 04:15:36.182 +03:00 [DBG] Created DbCommand for 'ExecuteNonQuery' (0ms).
+2021-09-26 04:15:36.183 +03:00 [DBG] Executing DbCommand [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE [auth].[UserToken] (
+    [Id] int NOT NULL IDENTITY,
+    [InsertDate] datetime NOT NULL DEFAULT (getdate()),
+    [UpdateDate] datetime NOT NULL,
+    [Status] int NOT NULL,
+    [UserId] int NOT NULL,
+    [RefreshToken] nvarchar(max) NOT NULL,
+    [RefreshTokenExpirationDate] datetime2 NOT NULL,
+    CONSTRAINT [PK_UserToken] PRIMARY KEY ([Id]),
+    CONSTRAINT [FK_UserToken_UserAccount_UserId] FOREIGN KEY ([UserId]) REFERENCES [auth].[UserAccount] ([Id]) ON DELETE CASCADE
+);
+2021-09-26 04:15:36.188 +03:00 [INF] Executed DbCommand (4ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE [auth].[UserToken] (
+    [Id] int NOT NULL IDENTITY,
+    [InsertDate] datetime NOT NULL DEFAULT (getdate()),
+    [UpdateDate] datetime NOT NULL,
+    [Status] int NOT NULL,
+    [UserId] int NOT NULL,
+    [RefreshToken] nvarchar(max) NOT NULL,
+    [RefreshTokenExpirationDate] datetime2 NOT NULL,
+    CONSTRAINT [PK_UserToken] PRIMARY KEY ([Id]),
+    CONSTRAINT [FK_UserToken_UserAccount_UserId] FOREIGN KEY ([UserId]) REFERENCES [auth].[UserAccount] ([Id]) ON DELETE CASCADE
+);
+2021-09-26 04:15:36.190 +03:00 [DBG] Creating DbCommand for 'ExecuteNonQuery'.
+2021-09-26 04:15:36.191 +03:00 [DBG] Created DbCommand for 'ExecuteNonQuery' (0ms).
+2021-09-26 04:15:36.192 +03:00 [DBG] Executing DbCommand [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE [product].[Product] (
+    [Id] int NOT NULL IDENTITY,
+    [InsertDate] datetime NOT NULL DEFAULT (getdate()),
+    [UpdateDate] datetime NOT NULL,
+    [Status] int NOT NULL,
+    [Name] nvarchar(max) NOT NULL,
+    [Description] nvarchar(max) NULL,
+    [Image] nvarchar(max) NULL,
+    [CategoryId] int NOT NULL,
+    [UnitId] int NOT NULL,
+    CONSTRAINT [PK_Product] PRIMARY KEY ([Id]),
+    CONSTRAINT [FK_Product_Category_CategoryId] FOREIGN KEY ([CategoryId]) REFERENCES [product].[Category] ([Id]) ON DELETE CASCADE,
+    CONSTRAINT [FK_Product_Unit_UnitId] FOREIGN KEY ([UnitId]) REFERENCES [product].[Unit] ([Id]) ON DELETE CASCADE
+);
+2021-09-26 04:15:36.199 +03:00 [INF] Executed DbCommand (7ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE [product].[Product] (
+    [Id] int NOT NULL IDENTITY,
+    [InsertDate] datetime NOT NULL DEFAULT (getdate()),
+    [UpdateDate] datetime NOT NULL,
+    [Status] int NOT NULL,
+    [Name] nvarchar(max) NOT NULL,
+    [Description] nvarchar(max) NULL,
+    [Image] nvarchar(max) NULL,
+    [CategoryId] int NOT NULL,
+    [UnitId] int NOT NULL,
+    CONSTRAINT [PK_Product] PRIMARY KEY ([Id]),
+    CONSTRAINT [FK_Product_Category_CategoryId] FOREIGN KEY ([CategoryId]) REFERENCES [product].[Category] ([Id]) ON DELETE CASCADE,
+    CONSTRAINT [FK_Product_Unit_UnitId] FOREIGN KEY ([UnitId]) REFERENCES [product].[Unit] ([Id]) ON DELETE CASCADE
+);
+2021-09-26 04:15:36.201 +03:00 [DBG] Creating DbCommand for 'ExecuteNonQuery'.
+2021-09-26 04:15:36.202 +03:00 [DBG] Created DbCommand for 'ExecuteNonQuery' (0ms).
+2021-09-26 04:15:36.203 +03:00 [DBG] Executing DbCommand [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE [product].[ProductPrice] (
+    [Id] int NOT NULL IDENTITY,
+    [InsertDate] datetime NOT NULL DEFAULT (getdate()),
+    [UpdateDate] datetime NOT NULL,
+    [Status] int NOT NULL,
+    [ProductId] int NOT NULL,
+    [VendorId] int NOT NULL,
+    [Price] decimal(18,2) NOT NULL,
+    CONSTRAINT [PK_ProductPrice] PRIMARY KEY ([Id]),
+    CONSTRAINT [FK_ProductPrice_Product_ProductId] FOREIGN KEY ([ProductId]) REFERENCES [product].[Product] ([Id]) ON DELETE CASCADE
+);
+2021-09-26 04:15:36.208 +03:00 [INF] Executed DbCommand (5ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE [product].[ProductPrice] (
+    [Id] int NOT NULL IDENTITY,
+    [InsertDate] datetime NOT NULL DEFAULT (getdate()),
+    [UpdateDate] datetime NOT NULL,
+    [Status] int NOT NULL,
+    [ProductId] int NOT NULL,
+    [VendorId] int NOT NULL,
+    [Price] decimal(18,2) NOT NULL,
+    CONSTRAINT [PK_ProductPrice] PRIMARY KEY ([Id]),
+    CONSTRAINT [FK_ProductPrice_Product_ProductId] FOREIGN KEY ([ProductId]) REFERENCES [product].[Product] ([Id]) ON DELETE CASCADE
+);
+2021-09-26 04:15:36.212 +03:00 [DBG] Creating DbCommand for 'ExecuteNonQuery'.
+2021-09-26 04:15:36.213 +03:00 [DBG] Created DbCommand for 'ExecuteNonQuery' (0ms).
+2021-09-26 04:15:36.214 +03:00 [DBG] Executing DbCommand [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE [product].[ProductStock] (
+    [Id] int NOT NULL IDENTITY,
+    [InsertDate] datetime NOT NULL DEFAULT (getdate()),
+    [UpdateDate] datetime NOT NULL,
+    [Status] int NOT NULL,
+    [ProductId] int NOT NULL,
+    [MerchantId] int NOT NULL,
+    [Quantity] decimal(18,2) NOT NULL,
+    CONSTRAINT [PK_ProductStock] PRIMARY KEY ([Id]),
+    CONSTRAINT [FK_ProductStock_Product_ProductId] FOREIGN KEY ([ProductId]) REFERENCES [product].[Product] ([Id]) ON DELETE CASCADE
+);
+2021-09-26 04:15:36.218 +03:00 [INF] Executed DbCommand (4ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE [product].[ProductStock] (
+    [Id] int NOT NULL IDENTITY,
+    [InsertDate] datetime NOT NULL DEFAULT (getdate()),
+    [UpdateDate] datetime NOT NULL,
+    [Status] int NOT NULL,
+    [ProductId] int NOT NULL,
+    [MerchantId] int NOT NULL,
+    [Quantity] decimal(18,2) NOT NULL,
+    CONSTRAINT [PK_ProductStock] PRIMARY KEY ([Id]),
+    CONSTRAINT [FK_ProductStock_Product_ProductId] FOREIGN KEY ([ProductId]) REFERENCES [product].[Product] ([Id]) ON DELETE CASCADE
+);
+2021-09-26 04:15:36.220 +03:00 [DBG] Creating DbCommand for 'ExecuteNonQuery'.
+2021-09-26 04:15:36.221 +03:00 [DBG] Created DbCommand for 'ExecuteNonQuery' (0ms).
+2021-09-26 04:15:36.222 +03:00 [DBG] Executing DbCommand [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE INDEX [IX_UserToken_UserId] ON [auth].[UserToken] ([UserId]);
+2021-09-26 04:15:36.225 +03:00 [INF] Executed DbCommand (3ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE INDEX [IX_UserToken_UserId] ON [auth].[UserToken] ([UserId]);
+2021-09-26 04:15:36.227 +03:00 [DBG] Creating DbCommand for 'ExecuteNonQuery'.
+2021-09-26 04:15:36.228 +03:00 [DBG] Created DbCommand for 'ExecuteNonQuery' (0ms).
+2021-09-26 04:15:36.229 +03:00 [DBG] Executing DbCommand [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE INDEX [IX_Product_CategoryId] ON [product].[Product] ([CategoryId]);
+2021-09-26 04:15:36.232 +03:00 [INF] Executed DbCommand (3ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE INDEX [IX_Product_CategoryId] ON [product].[Product] ([CategoryId]);
+2021-09-26 04:15:36.233 +03:00 [DBG] Creating DbCommand for 'ExecuteNonQuery'.
+2021-09-26 04:15:36.234 +03:00 [DBG] Created DbCommand for 'ExecuteNonQuery' (0ms).
+2021-09-26 04:15:36.235 +03:00 [DBG] Executing DbCommand [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE INDEX [IX_Product_UnitId] ON [product].[Product] ([UnitId]);
+2021-09-26 04:15:36.238 +03:00 [INF] Executed DbCommand (3ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE INDEX [IX_Product_UnitId] ON [product].[Product] ([UnitId]);
+2021-09-26 04:15:36.240 +03:00 [DBG] Creating DbCommand for 'ExecuteNonQuery'.
+2021-09-26 04:15:36.246 +03:00 [DBG] Created DbCommand for 'ExecuteNonQuery' (5ms).
+2021-09-26 04:15:36.247 +03:00 [DBG] Executing DbCommand [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE INDEX [IX_ProductPrice_ProductId] ON [product].[ProductPrice] ([ProductId]);
+2021-09-26 04:15:36.250 +03:00 [INF] Executed DbCommand (3ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE INDEX [IX_ProductPrice_ProductId] ON [product].[ProductPrice] ([ProductId]);
+2021-09-26 04:15:36.251 +03:00 [DBG] Creating DbCommand for 'ExecuteNonQuery'.
+2021-09-26 04:15:36.252 +03:00 [DBG] Created DbCommand for 'ExecuteNonQuery' (0ms).
+2021-09-26 04:15:36.253 +03:00 [DBG] Executing DbCommand [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE INDEX [IX_ProductStock_ProductId] ON [product].[ProductStock] ([ProductId]);
+2021-09-26 04:15:36.257 +03:00 [INF] Executed DbCommand (4ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE INDEX [IX_ProductStock_ProductId] ON [product].[ProductStock] ([ProductId]);
+2021-09-26 04:15:36.259 +03:00 [DBG] Creating DbCommand for 'ExecuteNonQuery'.
+2021-09-26 04:15:36.259 +03:00 [DBG] Created DbCommand for 'ExecuteNonQuery' (0ms).
+2021-09-26 04:15:36.260 +03:00 [DBG] Executing DbCommand [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE INDEX [IX_Unit_UnitId] ON [product].[Unit] ([UnitId]);
+2021-09-26 04:15:36.263 +03:00 [INF] Executed DbCommand (3ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE INDEX [IX_Unit_UnitId] ON [product].[Unit] ([UnitId]);
+2021-09-26 04:15:36.265 +03:00 [DBG] Committing transaction.
+2021-09-26 04:15:36.274 +03:00 [DBG] Committing transaction.
+2021-09-26 04:15:36.276 +03:00 [DBG] Disposing transaction.
+2021-09-26 04:15:36.278 +03:00 [DBG] Closing connection to database 'BitirDb' on server '.'.
+2021-09-26 04:15:36.279 +03:00 [DBG] Closed connection to database 'BitirDb' on server '.'.
+2021-09-26 04:15:36.282 +03:00 [DBG] Migrating using database 'BitirDb' on server '.'.
+2021-09-26 04:15:36.283 +03:00 [DBG] Opening connection to database 'BitirDb' on server '.'.
+2021-09-26 04:15:36.283 +03:00 [DBG] Opened connection to database 'BitirDb' on server '.'.
+2021-09-26 04:15:36.284 +03:00 [DBG] Creating DbCommand for 'ExecuteNonQuery'.
+2021-09-26 04:15:36.285 +03:00 [DBG] Created DbCommand for 'ExecuteNonQuery' (0ms).
+2021-09-26 04:15:36.287 +03:00 [DBG] Executing DbCommand [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT 1
+2021-09-26 04:15:36.290 +03:00 [INF] Executed DbCommand (3ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT 1
+2021-09-26 04:15:36.291 +03:00 [DBG] Closing connection to database 'BitirDb' on server '.'.
+2021-09-26 04:15:36.292 +03:00 [DBG] Closed connection to database 'BitirDb' on server '.'.
+2021-09-26 04:15:36.294 +03:00 [DBG] Creating DbCommand for 'ExecuteScalar'.
+2021-09-26 04:15:36.295 +03:00 [DBG] Created DbCommand for 'ExecuteScalar' (0ms).
+2021-09-26 04:15:36.296 +03:00 [DBG] Opening connection to database 'BitirDb' on server '.'.
+2021-09-26 04:15:36.296 +03:00 [DBG] Opened connection to database 'BitirDb' on server '.'.
+2021-09-26 04:15:36.298 +03:00 [DBG] Executing DbCommand [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT OBJECT_ID(N'[__EFMigrationsHistory]');
+2021-09-26 04:15:36.310 +03:00 [INF] Executed DbCommand (13ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT OBJECT_ID(N'[__EFMigrationsHistory]');
+2021-09-26 04:15:36.312 +03:00 [DBG] Closing connection to database 'BitirDb' on server '.'.
+2021-09-26 04:15:36.315 +03:00 [DBG] Closed connection to database 'BitirDb' on server '.'.
+2021-09-26 04:15:36.316 +03:00 [DBG] Opening connection to database 'BitirDb' on server '.'.
+2021-09-26 04:15:36.317 +03:00 [DBG] Opened connection to database 'BitirDb' on server '.'.
+2021-09-26 04:15:36.319 +03:00 [DBG] Creating DbCommand for 'ExecuteNonQuery'.
+2021-09-26 04:15:36.320 +03:00 [DBG] Created DbCommand for 'ExecuteNonQuery' (0ms).
+2021-09-26 04:15:36.320 +03:00 [DBG] Executing DbCommand [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT 1
+2021-09-26 04:15:36.325 +03:00 [INF] Executed DbCommand (4ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT 1
+2021-09-26 04:15:36.326 +03:00 [DBG] Closing connection to database 'BitirDb' on server '.'.
+2021-09-26 04:15:36.327 +03:00 [DBG] Closed connection to database 'BitirDb' on server '.'.
+2021-09-26 04:15:36.335 +03:00 [DBG] DetectChanges starting for 'BitirMainContext'.
+2021-09-26 04:15:36.336 +03:00 [DBG] DetectChanges completed for 'BitirMainContext'.
+2021-09-26 04:15:36.337 +03:00 [DBG] Creating DbCommand for 'ExecuteNonQuery'.
+2021-09-26 04:15:36.337 +03:00 [DBG] Created DbCommand for 'ExecuteNonQuery' (0ms).
+2021-09-26 04:15:36.339 +03:00 [DBG] Opening connection to database 'BitirDb' on server '.'.
+2021-09-26 04:15:36.340 +03:00 [DBG] Opened connection to database 'BitirDb' on server '.'.
+2021-09-26 04:15:36.341 +03:00 [DBG] Executing DbCommand [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE [__EFMigrationsHistory] (
+    [MigrationId] nvarchar(150) NOT NULL,
+    [ProductVersion] nvarchar(32) NOT NULL,
+    CONSTRAINT [PK___EFMigrationsHistory] PRIMARY KEY ([MigrationId])
+);
+2021-09-26 04:15:36.351 +03:00 [INF] Executed DbCommand (10ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE [__EFMigrationsHistory] (
+    [MigrationId] nvarchar(150) NOT NULL,
+    [ProductVersion] nvarchar(32) NOT NULL,
+    CONSTRAINT [PK___EFMigrationsHistory] PRIMARY KEY ([MigrationId])
+);
+2021-09-26 04:15:36.353 +03:00 [DBG] Closing connection to database 'BitirDb' on server '.'.
+2021-09-26 04:15:36.354 +03:00 [DBG] Closed connection to database 'BitirDb' on server '.'.
+2021-09-26 04:15:36.356 +03:00 [DBG] Opening connection to database 'BitirDb' on server '.'.
+2021-09-26 04:15:36.357 +03:00 [DBG] Opened connection to database 'BitirDb' on server '.'.
+2021-09-26 04:15:36.358 +03:00 [DBG] Creating DbCommand for 'ExecuteNonQuery'.
+2021-09-26 04:15:36.359 +03:00 [DBG] Created DbCommand for 'ExecuteNonQuery' (0ms).
+2021-09-26 04:15:36.359 +03:00 [DBG] Executing DbCommand [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT 1
+2021-09-26 04:15:36.362 +03:00 [INF] Executed DbCommand (3ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT 1
+2021-09-26 04:15:36.365 +03:00 [DBG] Closing connection to database 'BitirDb' on server '.'.
+2021-09-26 04:15:36.366 +03:00 [DBG] Closed connection to database 'BitirDb' on server '.'.
+2021-09-26 04:15:36.367 +03:00 [DBG] Creating DbCommand for 'ExecuteScalar'.
+2021-09-26 04:15:36.367 +03:00 [DBG] Created DbCommand for 'ExecuteScalar' (0ms).
+2021-09-26 04:15:36.368 +03:00 [DBG] Opening connection to database 'BitirDb' on server '.'.
+2021-09-26 04:15:36.369 +03:00 [DBG] Opened connection to database 'BitirDb' on server '.'.
+2021-09-26 04:15:36.370 +03:00 [DBG] Executing DbCommand [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT OBJECT_ID(N'[__EFMigrationsHistory]');
+2021-09-26 04:15:36.374 +03:00 [INF] Executed DbCommand (4ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT OBJECT_ID(N'[__EFMigrationsHistory]');
+2021-09-26 04:15:36.375 +03:00 [DBG] Closing connection to database 'BitirDb' on server '.'.
+2021-09-26 04:15:36.376 +03:00 [DBG] Closed connection to database 'BitirDb' on server '.'.
+2021-09-26 04:15:36.378 +03:00 [DBG] Creating DbCommand for 'ExecuteReader'.
+2021-09-26 04:15:36.380 +03:00 [DBG] Created DbCommand for 'ExecuteReader' (2ms).
+2021-09-26 04:15:36.381 +03:00 [DBG] Opening connection to database 'BitirDb' on server '.'.
+2021-09-26 04:15:36.382 +03:00 [DBG] Opened connection to database 'BitirDb' on server '.'.
+2021-09-26 04:15:36.383 +03:00 [DBG] Executing DbCommand [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [MigrationId], [ProductVersion]
+FROM [__EFMigrationsHistory]
+ORDER BY [MigrationId];
+2021-09-26 04:15:36.386 +03:00 [INF] Executed DbCommand (4ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [MigrationId], [ProductVersion]
+FROM [__EFMigrationsHistory]
+ORDER BY [MigrationId];
+2021-09-26 04:15:36.389 +03:00 [DBG] A data reader was disposed.
+2021-09-26 04:15:36.390 +03:00 [DBG] Closing connection to database 'BitirDb' on server '.'.
+2021-09-26 04:15:36.391 +03:00 [DBG] Closed connection to database 'BitirDb' on server '.'.
+2021-09-26 04:15:36.398 +03:00 [DBG] No migrations were found in assembly 'Bitir.Data'.
+2021-09-26 04:15:36.401 +03:00 [INF] No migrations were applied. The database is already up to date.
+2021-09-26 04:15:36.403 +03:00 [DBG] 'BitirMainContext' disposed.
+2021-09-26 04:15:36.432 +03:00 [DBG] Failed to locate the development https certificate at 'null'.
+2021-09-26 04:15:36.454 +03:00 [INF] Now listening on: http://localhost:5000
+2021-09-26 04:15:36.455 +03:00 [DBG] Loaded hosting startup assembly Bitir.Api
+2021-09-26 04:15:36.457 +03:00 [INF] Application started. Press Ctrl+C to shut down.
+2021-09-26 04:15:36.458 +03:00 [INF] Hosting environment: Development
+2021-09-26 04:15:36.461 +03:00 [INF] Content root path: C:\Users\leven\source\repos\Bitir\API\Bitir.Api
+2021-09-26 04:15:36.461 +03:00 [DBG] Hosting started
+2021-09-26 04:15:36.761 +03:00 [DBG] Connection id "0HMC0HCINTT4R" accepted.
+2021-09-26 04:15:36.762 +03:00 [DBG] Connection id "0HMC0HCINTT4R" received FIN.
+2021-09-26 04:15:36.763 +03:00 [DBG] Connection id "0HMC0HCINTT4R" started.
+2021-09-26 04:15:36.768 +03:00 [DBG] Connection id "0HMC0HCINTT4R" sending FIN because: "The client closed the connection."
+2021-09-26 04:15:36.770 +03:00 [DBG] Connection id "0HMC0HCINTT4S" accepted.
+2021-09-26 04:15:36.771 +03:00 [DBG] Connection id "0HMC0HCINTT4R" disconnecting.
+2021-09-26 04:15:36.771 +03:00 [DBG] Connection id "0HMC0HCINTT4S" started.
+2021-09-26 04:15:36.775 +03:00 [DBG] Connection id "0HMC0HCINTT4R" stopped.
+2021-09-26 04:15:36.787 +03:00 [INF] Request starting HTTP/1.1 HEAD http://localhost:5000/  
+2021-09-26 04:15:36.789 +03:00 [DBG] Wildcard detected, all requests with hosts will be allowed.
+2021-09-26 04:15:36.804 +03:00 [DBG] No candidates found for the request path '/'
+2021-09-26 04:15:36.806 +03:00 [DBG] Request did not match any endpoints
+2021-09-26 04:15:36.817 +03:00 [DBG] The request path  does not match the path filter
+2021-09-26 04:15:36.824 +03:00 [DBG] Connection id "0HMC0HCINTT4S" completed keep alive response.
+2021-09-26 04:15:36.825 +03:00 [INF] Request finished in 40.5191ms 404 
+2021-09-26 04:15:37.068 +03:00 [DBG] Connection id "0HMC0HCINTT4T" accepted.
+2021-09-26 04:15:37.071 +03:00 [DBG] Connection id "0HMC0HCINTT4T" started.
+2021-09-26 04:15:37.072 +03:00 [DBG] Connection id "0HMC0HCINTT4U" accepted.
+2021-09-26 04:15:37.078 +03:00 [DBG] Connection id "0HMC0HCINTT4U" started.
+2021-09-26 04:15:37.087 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5000/swagger/index.html  
+2021-09-26 04:15:37.090 +03:00 [DBG] No candidates found for the request path '/swagger/index.html'
+2021-09-26 04:15:37.091 +03:00 [DBG] Request did not match any endpoints
+2021-09-26 04:15:37.112 +03:00 [DBG] Connection id "0HMC0HCINTT4T" completed keep alive response.
+2021-09-26 04:15:37.113 +03:00 [INF] Request finished in 25.8847ms 200 text/html;charset=utf-8
+2021-09-26 04:15:37.318 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5000/swagger/v1/swagger.json  
+2021-09-26 04:15:37.320 +03:00 [DBG] No candidates found for the request path '/swagger/v1/swagger.json'
+2021-09-26 04:15:37.320 +03:00 [DBG] Request did not match any endpoints
+2021-09-26 04:15:37.388 +03:00 [DBG] Connection id "0HMC0HCINTT4T" completed keep alive response.
+2021-09-26 04:15:37.390 +03:00 [INF] Request finished in 72.14ms 200 application/json;charset=utf-8
