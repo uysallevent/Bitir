@@ -4,13 +4,12 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace AuthModule.Entities
 {
-    public class UserToken : IEntity
+    public class UserToken : BaseEntity
     {
-        public int Id { get; set; }
         public int UserId { get; set; }
         public string RefreshToken { get; set; }
         public DateTime RefreshTokenExpirationDate { get; set; }
-        public int Status { get; set; }
+
         [ForeignKey("UserId")]
         public UserAccount UserAccount { get; set; }
     }
