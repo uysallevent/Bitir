@@ -141,7 +141,7 @@ namespace Bitir.Mobile.ViewModels
                 IsBusy = true;
                 try
                 {
-                    var result = await authService.LoginCheck(new Models.Auth.AuthRequest
+                    var result = await authService.LoginCheck(new Models.Auth.AuthLoginRequest
                     {
                         Username = Email.Value,
                         Password = password.Value

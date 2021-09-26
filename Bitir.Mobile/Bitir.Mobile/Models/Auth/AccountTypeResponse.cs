@@ -4,9 +4,8 @@ using System.Text;
 
 namespace Bitir.Mobile.Models.Auth
 {
-    public class AuthRequest
+    public class AccountTypeResponse
     {
-        public string Username { get; set; }
-        public string Password { get; set; }
+        public string Name { get; set; }
     }
 }

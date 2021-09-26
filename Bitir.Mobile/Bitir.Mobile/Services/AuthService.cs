@@ -13,7 +13,8 @@ namespace Bitir.Mobile.Services
     public class AuthService : BaseService, IAuthService
     {
         private const string loginCheckPath = "AuthModule/AuthBase/Login";
-        public async Task<ResponseWrapper<AuthResponse>> LoginCheck(AuthRequest request)
+        private const string accountTypesPath = "AuthModule/AccountType/GetAll";
+        public async Task<ResponseWrapper<AuthResponse>> LoginCheck(AuthLoginRequest request)
         {
             ResponseWrapper<AuthResponse> result = null;
             var httpClient = await GetClient();
@@ -32,5 +33,46 @@ namespace Bitir.Mobile.Services
             Dispose();
             return result;
         }
+
+        public async Task<ResponseWrapper<AccountTypeResponse>> GetAccoutTypes()
+        {
+            ResponseWrapper<AccountTypeResponse> result = null;
+            var httpClient = await GetClient();
+            var response = await httpClient.PostAsync(accountTypesPath, new StringContent(JsonConvert.SerializeObject(new { }), Encoding.UTF8, "application/json"));
+            if (response.StatusCode == HttpStatusCode.OK)
+            {
+                var stringInResponse = await response.Content.ReadAsStringAsync();
+                result = JsonConvert.DeserializeObject<ResponseWrapperListing<AccountTypeResponse>>(stringInResponse);
+            }
+            else
+            {
+                var stringInResponse = (await response.Content.ReadAsStringAsync()) ?? string.Empty;
+                throw new ServiceException($"Servis hatası !! | {stringInResponse}");
+            }
+
+            Dispose();
+            return result;
+        }
+
+        public async Task<ResponseWrapper<AuthResponse>> Register(AuthRegisterRequest request)
+        {
+            ResponseWrapper<AuthResponse> result = null;
+            var httpClient = await GetClient();
+            var response = await httpClient.PostAsync(loginCheckPath, new StringContent(JsonConvert.SerializeObject(request), Encoding.UTF8, "application/json"));
+            if (response.StatusCode == HttpStatusCode.OK)
+            {
+                var stringInResponse = await response.Content.ReadAsStringAsync();
+                result = JsonConvert.DeserializeObject<ResponseWrapper<AuthResponse>>(stringInResponse);
+            }
+            else
+            {
+                var stringInResponse = (await response.Content.ReadAsStringAsync()) ?? string.Empty;
+                throw new ServiceException($"Servis hatası !! | {stringInResponse}");
+            }
+
+            Dispose();
+            return result;
+        }
+
     }
 }

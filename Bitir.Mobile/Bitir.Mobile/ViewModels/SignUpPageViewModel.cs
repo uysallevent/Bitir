@@ -1,6 +1,7 @@
 ﻿using Bitir.Mobile.Validators;
 using Bitir.Mobile.Validators.Rules;
 using Bitir.Mobile.Views;
+using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Internals;
 
@@ -18,6 +19,9 @@ namespace Bitir.Mobile.ViewModels
 
         private ValidatablePair<string> password;
 
+        private ValidatableObject<bool> customer;
+
+        private ValidatableObject<bool> vendor;
         #endregion
 
         #region Constructor
@@ -30,8 +34,9 @@ namespace Bitir.Mobile.ViewModels
             this.InitializeProperties();
             this.AddValidationRules();
             this.LoginCommand = new Command(this.LoginClicked);
-            this.SignUpCommand = new Command(this.SignUpClicked);
+            this.SignUpCommand = new Command(async (obj) => await SignUpClicked(obj));
             this.BackButtonCommand = new Command(this.BackButtonClicked);
+            Task.Run(async () =>await GetAccountTypes());
         }
         #endregion
 
@@ -76,6 +81,42 @@ namespace Bitir.Mobile.ViewModels
                 }
 
                 this.SetProperty(ref this.password, value);
+            }
+        }
+
+        public ValidatableObject<bool> Customer
+        {
+            get
+            {
+                return this.customer;
+            }
+
+            set
+            {
+                if (this.customer == value)
+                {
+                    return;
+                }
+
+                this.SetProperty(ref this.customer, value);
+            }
+        }
+
+        public ValidatableObject<bool> Vendor
+        {
+            get
+            {
+                return this.vendor;
+            }
+
+            set
+            {
+                if (this.vendor == value)
+                {
+                    return;
+                }
+
+                this.SetProperty(ref this.vendor, value);
             }
         }
         #endregion
@@ -141,11 +182,23 @@ namespace Bitir.Mobile.ViewModels
         /// Invoked when the Sign Up button is clicked.
         /// </summary>
         /// <param name="obj">The Object</param>
-        private void SignUpClicked(object obj)
+        private async Task SignUpClicked(object obj)
         {
             if (this.AreFieldsValid())
             {
                 // Do something
+            }
+        }
+
+        private async Task GetAccountTypes()
+        {
+            try
+            {
+                //var result =await authService.GetAccoutTypes();
+            }
+            catch (System.Exception)
+            {
+
             }
         }
 

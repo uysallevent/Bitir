@@ -24,6 +24,7 @@ namespace Bitir.Data.Contexts
             new ProductStockConfiguraiton().Configure(modelBuilder.Entity<ProductStock>());
             new CategoryConfiguration().Configure(modelBuilder.Entity<Category>());
             new UnitConfiguration().Configure(modelBuilder.Entity<Unit>());
+            new AccountTypeConfiguration().Configure(modelBuilder.Entity<AccountType>());
         }
     }
 }

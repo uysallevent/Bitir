@@ -8,10 +8,10 @@ namespace Core.Entities
         public virtual int Id { get; set; }
 
         [JsonIgnore]
-        public virtual DateTime InsertDate { get; set; }
+        public virtual DateTime? InsertDate { get; set; }
 
         [JsonIgnore]
-        public virtual DateTime UpdateDate { get; set; }
+        public virtual DateTime? UpdateDate { get; set; }
 
         public int Status { get; set; }
     }

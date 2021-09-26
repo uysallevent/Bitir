@@ -2,6 +2,8 @@ using AuthModule.Business;
 using AuthModule.Entities;
 using AuthModule.Interfaces;
 using AuthModule.Security.JWT;
+using BaseModule.Business;
+using BaseModule.Interfaces;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -53,7 +55,9 @@ namespace AuthModule
             });
             services.AddAuthorization();
             services.AddSingleton<ITokenHelper, JwtHelper>();
-            services.AddScoped<IAuthBusinessBase<UserAccount>, AuthBusinessBase>();  
+            services.AddScoped<IAuthBusinessBase<UserAccount>, AuthBusinessBase>();
+            services.AddScoped<IBusinessBase<AccountType>, BusinessBase<AccountType>>();
+
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

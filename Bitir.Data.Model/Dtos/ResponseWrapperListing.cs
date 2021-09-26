@@ -10,11 +10,11 @@ namespace Bitir.Data.Model.Dtos
         {
             Total = total;
             Page = page;
-            TEntities = tentities;
+            List = tentities;
         }
 
         public int Total { get; set; }
         public int Page { get; set; }
-        public IEnumerable<T> TEntities { get; set; }
+        public IEnumerable<T> List { get; set; }
     }
 }

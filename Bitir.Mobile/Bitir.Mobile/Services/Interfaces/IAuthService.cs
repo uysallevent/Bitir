@@ -6,6 +6,7 @@ namespace Bitir.Mobile.Services.Interfaces
 {
     public interface IAuthService
     {
-        Task<ResponseWrapper<AuthResponse>> LoginCheck(AuthRequest request);
+        Task<ResponseWrapper<AuthResponse>> LoginCheck(AuthLoginRequest request);
+        Task<ResponseWrapper<AccountTypeResponse>> GetAccoutTypes();
     }
 }

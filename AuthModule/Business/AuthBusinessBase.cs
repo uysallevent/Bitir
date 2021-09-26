@@ -58,8 +58,6 @@ namespace AuthModule.Business
             HashingHelper.CreatePasswordHash(entity.Password, out passwordHash, out passwordSalt);
             entity.PasswordHash = passwordHash;
             entity.PasswordSalt = passwordSalt;
-            entity.InsertDate = DateTime.Now;
-            entity.UpdateDate = DateTime.Now;
             await _userAccountRepository.AddAsync(entity);
             var result = await _uow.SaveChangesAsync();
 

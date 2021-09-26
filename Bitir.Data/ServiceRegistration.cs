@@ -27,6 +27,7 @@ namespace Bitir.Data
             serviceCollection.AddScoped<IRepository<Unit>, EFRepository<Unit, BitirMainContext>>();
             serviceCollection.AddScoped<IRepository<ProductPrice>, EFRepository<ProductPrice, BitirMainContext>>();
             serviceCollection.AddScoped<IRepository<ProductStock>, EFRepository<ProductStock, BitirMainContext>>();
+            serviceCollection.AddScoped<IRepository<AccountType>, EFRepository<AccountType, BitirMainContext>>();
 
 
         }
