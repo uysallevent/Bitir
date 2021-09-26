@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace Bitir.Mobile.Services
+namespace Bitir.Mobile.Services.Interfaces
 {
     public interface IDataStore<T>
     {

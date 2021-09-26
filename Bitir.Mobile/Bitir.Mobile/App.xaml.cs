@@ -1,4 +1,5 @@
 using Bitir.Mobile.Services;
+using Bitir.Mobile.Services.Interfaces;
 using Bitir.Mobile.Views;
 using System;
 using Xamarin.Forms;
@@ -18,10 +19,12 @@ namespace Bitir.Mobile
         public App()
         {
             InitializeComponent();
-
             DependencyService.Register<MockDataStore>();
+            DependencyService.Register<IAuthService,AuthService>();
             MainPage = new LoginPage();
         }
+
+        public static string Token;
 
         protected override void OnStart()
         {
