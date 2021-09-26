@@ -1,24 +1,20 @@
-using AuthModule.Dal;
-using AuthModule.Interfaces;
-using Bitir.Business;
-using Bitir.Business.Interfaces;
-using Bitir.Dal.TestDal;
-using Bitir.Dal.TestDal.Context;
-using Bitir.Dal.TestDal.Interfaces;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Bitir.Data;
+using Bitir.Data.Contexts;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.IdentityModel.Tokens;
-using System;
-using System.Text;
-using System.Threading.Tasks;
+using Microsoft.Extensions.Options;
+using Microsoft.OpenApi.Models;
+using ModulerApi.ModuleIntegration;
+using System.Collections.Generic;
 
-namespace Bitir.Api
+namespace ModulerApi
 {
-    public class Startup : AuthModule.AuthModule
+    public class Startup
     {
         public Startup(IConfiguration configuration)
         {
@@ -27,62 +23,67 @@ namespace Bitir.Api
 
         public IConfiguration Configuration { get; }
 
-        public override void ConfigureServices(IServiceCollection services)
+        public void ConfigureServices(IServiceCollection services)
         {
-            base.ConfigureServices(services);
-            services.AddControllers();
-            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-            .AddJwtBearer(options =>
+            services.AddSwaggerGen(options =>
             {
-                options.TokenValidationParameters = new TokenValidationParameters
+                options.SwaggerDoc("v1", new OpenApiInfo()
                 {
-                    ValidateIssuer = true,
-                    ValidateAudience = true,
-                    ValidateLifetime = true,
-                    ValidateIssuerSigningKey = true,
-                    ValidIssuer = Configuration["TokenOptions:Issuer"],
-                    ValidAudience = Configuration["TokenOptions:Audience"],
-                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(Configuration["TokenOptions:SecurityKey"])),
-                    ClockSkew = TimeSpan.Zero,
-                };
-                options.Events = new JwtBearerEvents
-                {
-                    OnAuthenticationFailed = context =>
-                    {
-                        if (context.Exception.GetType() == typeof(SecurityTokenExpiredException))
-                        {
-                            //var serviceProvider = services.BuildServiceProvider();
-                            //var service = serviceProvider.GetService<AuthBusinessBase>();
-                            //_ = service.RefreshTokenLogin(1, "zvyZ8g8oa4beUzeJFRhJXKasw4WgZzFENWSiL1XohyA=");
-                        }
-                        return Task.CompletedTask;
-                    }
-                };
+                    Version = "v1",
+                    Title = "BitirApi"
+                });
             });
-            services.AddAuthorization();
+            services.AddLogging();
 
-            services.AddScoped<IUserAccountDal, UserAccountDal<TestContext>>();
-            services.AddScoped<IUserTokenDal, UserTokenDal<TestContext>>();
-            services.AddSingleton<ICategoryDal, CategoryDal>();
-            services.AddScoped<ICategoryBusiness, CategoryBusiness>();
+            services.AddControllers().ConfigureApplicationPartManager(manager =>
+            {
+                // Clear all auto detected controllers.
+                manager.ApplicationParts.Clear();
+                // Add feature provider to allow "internal" controller
+                manager.FeatureProviders.Add(new InternalControllerFeatureProvider());
+            });
+
+            // Register a convention allowing to us to prefix routes to modules.
+            services.AddTransient<IPostConfigureOptions<MvcOptions>, ModuleRoutingMvcOptionsPostConfigure>();
+            services.AddModule<BaseModule.Startup>("BaseModule");
+            services.AddModule<AuthModule.Startup>("AuthModule");
+            services.AddModule<ProductModule.Startup>("ProductModule");
+            services.AddDataServices(Configuration);
         }
 
-        public override void Configure(IApplicationBuilder app, IHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            base.Configure(app, env);
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
             }
 
-            app.UseHttpsRedirection();
             app.UseRouting();
-            app.UseAuthentication();
-            app.UseAuthorization();
-            app.UseEndpoints(endpoints =>
+            app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
+
+            // Adds endpoints defined in modules
+            var modules = app.ApplicationServices.GetRequiredService<IEnumerable<ModuleIntegration.Module>>();
+            foreach (var module in modules)
             {
-                endpoints.MapControllers();
+                app.Map($"/{module.RoutePrefix}", builder =>
+                {
+                    builder.UseRouting();
+                    module.Startup.Configure(builder, env);
+                });
+            }
+
+            app.UseSwagger();
+            app.UseSwaggerUI(options =>
+            {
+                options.SwaggerEndpoint("/swagger/v1/swagger.json", "BitirApi V1");
             });
+
+            using (var serviceScope = app.ApplicationServices.GetService<IServiceScopeFactory>().CreateScope())
+            {
+                var context = serviceScope.ServiceProvider.GetRequiredService<BitirMainContext>();
+                context.Database.EnsureCreated();
+                context.Database.Migrate();
+            }
         }
     }
 }

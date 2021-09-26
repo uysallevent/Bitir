@@ -1,4 +1,4 @@
-﻿using AuthModule.Models;
+﻿using AuthModule.Entities;
 using FluentValidation;
 
 namespace AuthModule.Validations

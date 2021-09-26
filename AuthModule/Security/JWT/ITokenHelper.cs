@@ -1,5 +1,5 @@
 ﻿using AuthModule.Dtos;
-using AuthModule.Models;
+using AuthModule.Entities;
 using System.Collections.Generic;
 
 namespace AuthModule.Security.JWT
