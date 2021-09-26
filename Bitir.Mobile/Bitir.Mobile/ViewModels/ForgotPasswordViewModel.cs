@@ -1,4 +1,5 @@
-﻿using Xamarin.Forms;
+﻿using Bitir.Mobile.Views;
+using Xamarin.Forms;
 using Xamarin.Forms.Internals;
 
 namespace Bitir.Mobile.ViewModels
@@ -18,6 +19,7 @@ namespace Bitir.Mobile.ViewModels
         {
             this.SignUpCommand = new Command(this.SignUpClicked);
             this.SendCommand = new Command(this.SendClicked);
+            this.BackButtonCommand = new Command(this.BackButtonClicked);
         }
 
         #endregion
@@ -33,6 +35,8 @@ namespace Bitir.Mobile.ViewModels
         /// Gets or sets the command that is executed when the Sign Up button is clicked.
         /// </summary>
         public Command SignUpCommand { get; set; }
+
+        public Command BackButtonCommand { get; set; }
 
         #endregion
 
@@ -54,10 +58,18 @@ namespace Bitir.Mobile.ViewModels
         /// Invoked when the Sign Up button is clicked.
         /// </summary>
         /// <param name="obj">The Object</param>
-        private void SignUpClicked(object obj)
+        private async void SignUpClicked(object obj)
         {
-            // Do something
+
+            await Application.Current.MainPage.Navigation.PushModalAsync(new SignUpPage(), true);
+
         }
+
+        private async void BackButtonClicked(object obj)
+        {
+            await Application.Current.MainPage.Navigation.PopModalAsync(true);
+        }
+
 
         #endregion
     }

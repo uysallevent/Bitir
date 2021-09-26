@@ -1,5 +1,7 @@
-﻿using Bitir.Mobile.Validators;
+﻿using Bitir.Mobile.Helper;
+using Bitir.Mobile.Validators;
 using Bitir.Mobile.Validators.Rules;
+using Bitir.Mobile.Views;
 using Xamarin.Forms;
 using Xamarin.Forms.Internals;
 
@@ -30,6 +32,7 @@ namespace Bitir.Mobile.ViewModels
             this.SignUpCommand = new Command(this.SignUpClicked);
             this.ForgotPasswordCommand = new Command(this.ForgotPasswordClicked);
             this.SocialMediaLoginCommand = new Command(this.SocialLoggedIn);
+            this.BackButtonCommand = new Command(this.BackButtonClicked);
         }
 
         #endregion
@@ -81,9 +84,21 @@ namespace Bitir.Mobile.ViewModels
         /// </summary>
         public Command SocialMediaLoginCommand { get; set; }
 
+        public Command BackButtonCommand { get; set; }
+
         #endregion
 
         #region methods
+
+        public void BackButtonClicked(object obj)
+        {
+            AlertHelper.DisplayAlertYesNo("Çıkış yapmak istediğinize emin misiniz?", ApplicationExit);
+        }
+
+        public void ApplicationExit()
+        {
+            Application.Current.Quit();
+        }
 
         /// <summary>
         /// Check the password is null or empty
@@ -116,8 +131,11 @@ namespace Bitir.Mobile.ViewModels
         /// Invoked when the Log In button is clicked.
         /// </summary>
         /// <param name="obj">The Object</param>
-        private void LoginClicked(object obj)
+        private async void LoginClicked(object obj)
         {
+
+            await Application.Current.MainPage.Navigation.PushModalAsync(new DashboardPage(), true);
+
             if (this.AreFieldsValid())
             {
                 // Do Something
@@ -128,18 +146,22 @@ namespace Bitir.Mobile.ViewModels
         /// Invoked when the Sign Up button is clicked.
         /// </summary>
         /// <param name="obj">The Object</param>
-        private void SignUpClicked(object obj)
+        private async void SignUpClicked(object obj)
         {
-            // Do Something
+
+            await Application.Current.MainPage.Navigation.PushModalAsync(new SignUpPage(), true);
+
         }
 
         /// <summary>
         /// Invoked when the Forgot Password button is clicked.
         /// </summary>
         /// <param name="obj">The Object</param>
-        private void ForgotPasswordClicked(object obj)
+        private async void ForgotPasswordClicked(object obj)
         {
-            // Do something
+
+            await Application.Current.MainPage.Navigation.PushModalAsync(new ForgotPasswordPage(), true);
+
         }
 
         /// <summary>

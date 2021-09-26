@@ -62,14 +62,14 @@
                         <Label
                             FontSize="20"
                             Style="{StaticResource TitleLabelStyle}"
-                            Text="Sign Up"
+                            Text="BİTİR"
                             TextColor="{DynamicResource Gray-White}" />
 
                         <!--  Label to display the description of this page  -->
                         <Label
                             Margin="0,-16,0,8"
                             Style="{StaticResource DescriptionLabelStyle}"
-                            Text="Create an account to start doing more"
+                            Text="Kayıt"
                             TextColor="{DynamicResource Gray-White}" />
 
                         <StackLayout>
@@ -81,7 +81,7 @@
                                         x:Name="NameEntry"
                                         Margin="15,0"
                                         HeightRequest="40"
-                                        Placeholder="Name"
+                                        Placeholder="Ad Soyad"
                                         PlaceholderColor="{StaticResource EntryPlaceholderColor}"
                                         Style="{StaticResource BorderlessEntryStyle}"
                                         Text="{Binding Name.Value}"
@@ -124,7 +124,7 @@
                                         Margin="15,0"
                                         HeightRequest="40"
                                         IsPassword="true"
-                                        Placeholder="Password"
+                                        Placeholder="Şifre"
                                         PlaceholderColor="{StaticResource EntryPlaceholderColor}"
                                         Style="{StaticResource BorderlessEntryStyle}"
                                         Text="{Binding Password.Item1.Value}"
@@ -164,7 +164,7 @@
                                         Margin="15,0"
                                         HeightRequest="40"
                                         IsPassword="true"
-                                        Placeholder="Confirm Password"
+                                        Placeholder="Şifre Tekrar"
                                         PlaceholderColor="{StaticResource EntryPlaceholderColor}"
                                         Style="{StaticResource BorderlessEntryStyle}"
                                         Text="{Binding Password.Item2.Value}"
@@ -199,7 +199,7 @@
                             Command="{Binding SignUpCommand}"
                             HorizontalOptions="FillAndExpand"
                             Style="{StaticResource GradientButtonStyle}"
-                            Text="REGISTER" />
+                            Text="KAYIT" />
                     </StackLayout>
 
                     <StackLayout
@@ -217,14 +217,14 @@
 
                         <Label
                             Style="{StaticResource DescriptionLabelStyle}"
-                            Text="Already have an account?"
+                            Text="Hesabınız Var Mı?"
                             TextColor="{DynamicResource Gray-White}"
                             VerticalTextAlignment="Center" />
 
                         <buttons:SfButton
                             Command="{Binding LoginCommand}"
                             Style="{StaticResource TransparentButtonStyle}"
-                            Text="Log In"
+                            Text="Giriş Yap"
                             TextColor="{DynamicResource PrimaryColor}" />
 
                     </StackLayout>

@@ -62,7 +62,7 @@
                         <Label
                             FontSize="20"
                             Style="{StaticResource TitleLabelStyle}"
-                            Text="Log In"
+                            Text="BİTİR"
                             TextColor="{DynamicResource Gray-White}" />
 
                         <!--  Label to display the description of this page  -->
@@ -70,7 +70,7 @@
                             Grid.Row="1"
                             Margin="0,8"
                             Style="{StaticResource DescriptionLabelStyle}"
-                            Text="Let's get to work"
+                            Text="Hoşgeldiniz"
                             TextColor="{DynamicResource Gray-White}" />
 
                         <!--  Entry to get email ID from user  -->
@@ -86,7 +86,7 @@
                                         Margin="15,0"
                                         HeightRequest="40"
                                         IsPassword="True"
-                                        Placeholder="Password"
+                                        Placeholder="Şifre"
                                         PlaceholderColor="{StaticResource EntryPlaceholderColor}"
                                         Style="{StaticResource BorderlessEntryStyle}"
                                         Text="{Binding Password.Value}"
@@ -125,7 +125,7 @@
                             FontSize="12"
                             HorizontalOptions="End"
                             Style="{StaticResource TransparentButtonStyle}"
-                            Text="FORGOT PASSWORD?"
+                            Text="ŞİFREMi UNUTTUM?"
                             TextColor="{DynamicResource Gray-White}" />
 
 
@@ -136,16 +136,16 @@
                             Command="{Binding LoginCommand}"
                             HorizontalOptions="Fill"
                             Style="{StaticResource GradientButtonStyle}"
-                            Text="LOG IN" />
+                            Text="GİRİŞ YAP" />
 
 
-                        <Label
+                        <!--<Label
                             Grid.Row="6"
                             Style="{StaticResource DescriptionLabelStyle}"
                             Text="Or log in with your Facebook credentials"
                             TextColor="{DynamicResource Gray-White}" />
 
-                        <!--  Login through facebook account  -->
+                        --><!--  Login through facebook account  --><!--
                         <buttons:SfButton
                             Grid.Row="7"
                             Margin="0,16,0,16"
@@ -171,7 +171,7 @@
                                         TextColor="{DynamicResource Gray-White}" />
                                 </StackLayout>
                             </buttons:SfButton.Content>
-                        </buttons:SfButton>
+                        </buttons:SfButton>-->
 
                     </Grid>
 
@@ -190,7 +190,7 @@
 
                         <Label
                             Style="{StaticResource DescriptionLabelStyle}"
-                            Text="Don't have an account?"
+                            Text="Hesabınız Yok Mu?"
                             TextColor="{DynamicResource Gray-White}"
                             VerticalTextAlignment="Center" />
 
@@ -198,7 +198,7 @@
                         <buttons:SfButton
                             Command="{Binding SignUpCommand}"
                             Style="{StaticResource TransparentButtonStyle}"
-                            Text="Sign Up"
+                            Text="Kayıt Ol"
                             TextColor="{DynamicResource PrimaryColor}" />
 
                     </StackLayout>
