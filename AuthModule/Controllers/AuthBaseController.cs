@@ -23,7 +23,6 @@ namespace AuthModule.Controllers
             _logger = logger;
         }
 
-        [AllowAnonymous]
         [HttpPost("Login")]
         public async Task<IActionResult> Login([FromBody] LoginDto loginDto)
         {
@@ -39,6 +38,20 @@ namespace AuthModule.Controllers
             }
         }
 
+        [HttpPost("Register")]
+        public async Task<IActionResult> Register([FromBody] UserAccount userAccount)
+        {
+            try
+            {
+                var result = await _authBusinessBase.Register(userAccount);
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, ex.Message ?? "While login operation, error occurred");
+                return BadRequest(ex.Message ?? "While login operation, error occurred");
+            }
+        }
 
         [NonAction]
         public override Task<IActionResult> Update([FromBody] UserAccount entity)
@@ -50,6 +63,12 @@ namespace AuthModule.Controllers
         public override Task<IActionResult> GetAll([FromBody] UserAccount entity = null)
         {
             return base.GetAll(entity);
+        }
+
+        [NonAction]
+        public override Task<IActionResult> Add([FromBody] UserAccount entity)
+        {
+            return base.Add(entity);
         }
     }
 }

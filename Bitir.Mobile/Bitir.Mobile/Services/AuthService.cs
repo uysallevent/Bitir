@@ -14,6 +14,7 @@ namespace Bitir.Mobile.Services
     {
         private const string loginCheckPath = "AuthModule/AuthBase/Login";
         private const string accountTypesPath = "AuthModule/AccountType/GetAll";
+        private const string registerTypesPath = "AuthModule/AuthBase/Register";
         public async Task<ResponseWrapper<AuthResponse>> LoginCheck(AuthLoginRequest request)
         {
             ResponseWrapper<AuthResponse> result = null;
@@ -34,9 +35,9 @@ namespace Bitir.Mobile.Services
             return result;
         }
 
-        public async Task<ResponseWrapper<AccountTypeResponse>> GetAccoutTypes()
+        public async Task<ResponseWrapperListing<AccountTypeResponse>> GetAccoutTypes()
         {
-            ResponseWrapper<AccountTypeResponse> result = null;
+            ResponseWrapperListing<AccountTypeResponse> result = null;
             var httpClient = await GetClient();
             var response = await httpClient.PostAsync(accountTypesPath, new StringContent(JsonConvert.SerializeObject(new { }), Encoding.UTF8, "application/json"));
             if (response.StatusCode == HttpStatusCode.OK)
@@ -58,7 +59,7 @@ namespace Bitir.Mobile.Services
         {
             ResponseWrapper<AuthResponse> result = null;
             var httpClient = await GetClient();
-            var response = await httpClient.PostAsync(loginCheckPath, new StringContent(JsonConvert.SerializeObject(request), Encoding.UTF8, "application/json"));
+            var response = await httpClient.PostAsync(registerTypesPath, new StringContent(JsonConvert.SerializeObject(request), Encoding.UTF8, "application/json"));
             if (response.StatusCode == HttpStatusCode.OK)
             {
                 var stringInResponse = await response.Content.ReadAsStringAsync();

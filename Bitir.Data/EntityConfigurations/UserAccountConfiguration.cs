@@ -31,7 +31,7 @@ namespace Bitir.Data.EntityConfigurations
                     Id=1,
                     Name="test",
                     Surname="test",
-                    Status=1,
+                    Status=Core.Enums.Status.Active,
                     AccountTypeId=1,
                      Email="t@t.com",
                      Phone="505",

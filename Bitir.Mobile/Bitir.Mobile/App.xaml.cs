@@ -1,4 +1,5 @@
-﻿using Bitir.Mobile.Models.Auth;
+﻿using Bitir.Mobile.Models;
+using Bitir.Mobile.Models.Auth;
 using Bitir.Mobile.Services;
 using Bitir.Mobile.Services.Interfaces;
 using Bitir.Mobile.ViewModels;
@@ -26,9 +27,12 @@ namespace Bitir.Mobile
             DependencyService.Register<AuthService>();
 
 
-            MessagingCenter.Subscribe<BaseViewModel, string>(this, "infomessage", (s,e) =>
+            MessagingCenter.Subscribe<BaseViewModel, ExceptionTransfer>(this, "infomessage", (s, e) =>
            {
-               App.Current.MainPage.DisplayAlert("Bilgi", e, "Tamam");
+               if (!string.IsNullOrEmpty(e.NotificationMessage))
+               {
+                   App.Current.MainPage.DisplayAlert("Bilgi", e.NotificationMessage, "Tamam");
+               }
            });
 
             MainPage = new LoginPage();

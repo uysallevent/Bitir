@@ -1,4 +1,5 @@
 ﻿using AuthModule.Dto;
+using AuthModule.Entities;
 using AuthModule.Security.JWT;
 using BaseModule.Interfaces;
 using Bitir.Data.Model.Dtos;
@@ -12,5 +13,6 @@ namespace AuthModule.Interfaces
     {
         Task<ResponseWrapper<AccessToken>> Login(LoginDto loginDto);
         Task<ResponseWrapper<AccessToken>> RefreshTokenLogin(int userId, string refreshToken);
+        Task<ResponseWrapper<AccessToken>> Register(UserAccount entity);
     }
 }

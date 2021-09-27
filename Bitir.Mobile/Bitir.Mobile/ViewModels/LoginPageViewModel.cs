@@ -1,5 +1,6 @@
 ﻿using Bitir.Mobile.Exeptions;
 using Bitir.Mobile.Helper;
+using Bitir.Mobile.Models;
 using Bitir.Mobile.Validators;
 using Bitir.Mobile.Validators.Rules;
 using Bitir.Mobile.Views;
@@ -150,12 +151,13 @@ namespace Bitir.Mobile.ViewModels
                     if (result != null)
                     {
                         App.authResponse = result.Result;
-                        await Application.Current.MainPage.Navigation.PushModalAsync(new DashboardPage(), true);
+                        Application.Current.MainPage = new NavigationPage(new DashboardPage());
+                       // await Application.Current.MainPage.Navigation.PushModalAsync(new DashboardPage(), true);
                     }
                 }
                 catch (ServiceException ex)
                 {
-                    SendNotification("Giriş başarısız !!");
+                    SendNotification(new ExceptionTransfer { ex = ex, NotificationMessage = "Giriş başarısız !!" });
                 }
                 finally
                 {

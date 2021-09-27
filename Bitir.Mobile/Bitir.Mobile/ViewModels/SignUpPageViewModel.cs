@@ -1,6 +1,13 @@
-﻿using Bitir.Mobile.Validators;
+﻿using Bitir.Mobile.Exeptions;
+using Bitir.Mobile.Models;
+using Bitir.Mobile.Models.Auth;
+using Bitir.Mobile.Validators;
 using Bitir.Mobile.Validators.Rules;
 using Bitir.Mobile.Views;
+using System.Collections;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Linq;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Internals;
@@ -22,6 +29,9 @@ namespace Bitir.Mobile.ViewModels
         private ValidatableObject<bool> customer;
 
         private ValidatableObject<bool> vendor;
+
+        private IList<AccountTypeResponse> accountTypes;
+
         #endregion
 
         #region Constructor
@@ -36,7 +46,7 @@ namespace Bitir.Mobile.ViewModels
             this.LoginCommand = new Command(this.LoginClicked);
             this.SignUpCommand = new Command(async (obj) => await SignUpClicked(obj));
             this.BackButtonCommand = new Command(this.BackButtonClicked);
-            Task.Run(async () =>await GetAccountTypes());
+            Task.Run(async () => await GetAccountTypes());
         }
         #endregion
 
@@ -119,6 +129,24 @@ namespace Bitir.Mobile.ViewModels
                 this.SetProperty(ref this.vendor, value);
             }
         }
+
+        public IList<AccountTypeResponse> AccountTypes
+        {
+            get
+            {
+                return this.accountTypes;
+            }
+
+            set
+            {
+                if (this.vendor == value)
+                {
+                    return;
+                }
+
+                this.SetProperty(ref this.accountTypes, value);
+            }
+        }
         #endregion
 
         #region Command
@@ -157,6 +185,10 @@ namespace Bitir.Mobile.ViewModels
         {
             this.Name = new ValidatableObject<string>();
             this.Password = new ValidatablePair<string>();
+            this.Customer = new ValidatableObject<bool>();
+            this.Vendor = new ValidatableObject<bool>();
+            this.customer.Value = true;
+            this.vendor.Value = false;
         }
 
         /// <summary>
@@ -186,19 +218,57 @@ namespace Bitir.Mobile.ViewModels
         {
             if (this.AreFieldsValid())
             {
-                // Do something
+                IsBusy = true;
+                try
+                {
+                    var accountType = (this.Customer.Value) ? this.AccountTypes.FirstOrDefault(x => x.Name == "Customer").Id
+                                           : this.AccountTypes.FirstOrDefault(x => x.Name == "Vendor").Id;
+
+                    var result = await authService.Register(new AuthRegisterRequest
+                    {
+                        Name = this.Name.Value,
+                        Username = this.Email.Value,
+                        Email = this.Email.Value,
+                        Password = this.Password.Item1.Value,
+                        AccountTypeId = accountType
+                    });
+                    if (result != null && !string.IsNullOrEmpty(result.Result.Token))
+                    {
+                        App.authResponse = result.Result;
+                        await Application.Current.MainPage.Navigation.PopModalAsync();
+                        Application.Current.MainPage = new NavigationPage(new DashboardPage());
+                        SendNotification(new ExceptionTransfer { NotificationMessage = "Hesap Oluşturma Başarılı" });
+                    }
+                }
+                catch (ServiceException ex)
+                {
+                    SendNotification(new ExceptionTransfer { ex = ex, NotificationMessage = "Hesap oluşturulamadı" });
+                }
+                finally
+                {
+                    IsBusy = false;
+                }
             }
         }
 
         private async Task GetAccountTypes()
         {
+            IsBusy = true;
             try
             {
-                //var result =await authService.GetAccoutTypes();
+                var result = await authService.GetAccoutTypes();
+                if (result != null && result.List.Any())
+                {
+                    AccountTypes = result.List.ToList();
+                }
             }
-            catch (System.Exception)
+            catch (ServiceException ex)
             {
-
+                SendNotification(new ExceptionTransfer { ex = ex, NotificationMessage = "Hesap tipleri yüklenemedi" });
+            }
+            finally
+            {
+                IsBusy = false;
             }
         }
 

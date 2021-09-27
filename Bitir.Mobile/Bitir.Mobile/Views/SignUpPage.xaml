@@ -74,7 +74,7 @@
 
                         <StackLayout  Orientation="Horizontal" HorizontalOptions="Center">
                             <buttons:SfRadioGroup Orientation='Horizontal'>
-                                <buttons:SfRadioButton Text="Alıcı" IsChecked="{Binding Customer.Value}" IsEnabled="True" FontAttributes="Bold"/>
+                                <buttons:SfRadioButton Text="Alıcı" IsChecked="{Binding Customer.Value}" FontAttributes="Bold"/>
                                 <buttons:SfRadioButton Text="Satıcı" FontAttributes="Bold" IsChecked="{Binding Vendor.Value}" />
                             </buttons:SfRadioGroup>
                         </StackLayout>
@@ -246,7 +246,7 @@
                 Text="{StaticResource Close}"
                 TextColor="{DynamicResource Gray-White}"
                 VerticalOptions="Start" />
-
+            <local:LoaderView/>
         </Grid>
     </ContentPage.Content>
 </ContentPage>

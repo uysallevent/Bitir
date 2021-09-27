@@ -23,7 +23,7 @@ namespace Bitir.Data.EntityConfigurations
                     InsertDate=DateTime.Now,
                     UpdateDate=DateTime.Now,
                     Name="Admin",
-                    Status=1
+                    Status=Core.Enums.Status.Active
                 },
                 new AccountType
                 {
@@ -31,7 +31,7 @@ namespace Bitir.Data.EntityConfigurations
                     InsertDate=DateTime.Now,
                     UpdateDate=DateTime.Now,
                     Name="Customer",
-                    Status=1
+                    Status=Core.Enums.Status.Active
                 }
                 ,
                 new AccountType
@@ -40,7 +40,7 @@ namespace Bitir.Data.EntityConfigurations
                     InsertDate=DateTime.Now,
                     UpdateDate=DateTime.Now,
                     Name="Vendor",
-                    Status=1
+                    Status=Core.Enums.Status.Active
                 }
 
             });

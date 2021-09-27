@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Core.Enums;
+using System;
 using System.Text.Json.Serialization;
 
 namespace Core.Entities
@@ -13,6 +14,6 @@ namespace Core.Entities
         [JsonIgnore]
         public virtual DateTime? UpdateDate { get; set; }
 
-        public int Status { get; set; }
+        public Status Status { get; set; }
     }
 }

@@ -41,9 +41,9 @@ namespace Bitir.Mobile.ViewModels
             return true;
         }
 
-        protected void SendNotification(string message)
+        protected void SendNotification(ExceptionTransfer exceptionTransfer)
         {
-            MessagingCenter.Send(this, "infomessage", message);
+            MessagingCenter.Send(this, "infomessage", exceptionTransfer);
         }
 
         #region INotifyPropertyChanged

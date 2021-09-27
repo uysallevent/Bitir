@@ -10,6 +10,7 @@ using Bitir.Data.Model.Dtos;
 using Core.Aspects.Autofac.Validation;
 using Core.DataAccess;
 using Core.DataAccess.EntityFramework.Interfaces;
+using Core.Exceptions;
 using Core.Utilities.Results;
 using Microsoft.Extensions.Configuration;
 using System;
@@ -47,7 +48,7 @@ namespace AuthModule.Business
         }
 
         [ValidationAspect(typeof(UserAccountValidationRules))]
-        public override async Task<ResponseWrapper<UserAccount>> InsertAsync(UserAccount entity)
+        public  async Task<ResponseWrapper<AccessToken>> Register(UserAccount entity)
         {
             var userCheck = await _userAccountRepository.GetAsync(x => (x.Username == entity.Username) || (x.Email == entity.Email));
             if (userCheck != null)
@@ -60,49 +61,51 @@ namespace AuthModule.Business
             entity.PasswordSalt = passwordSalt;
             await _userAccountRepository.AddAsync(entity);
             var result = await _uow.SaveChangesAsync();
-
-            return new ResponseWrapper<UserAccount>(entity);
+            if (result < 1)
+            {
+                throw new OperationFailedException("User could not be insert");
+            }
+            AccessToken accessToken = await CreateToken(entity);
+            return new ResponseWrapper<AccessToken>(accessToken);
         }
 
         public async Task<ResponseWrapper<AccessToken>> Login(LoginDto loginDto)
         {
-            var user = await _userAccountRepository.GetAsync(x => (x.Username == loginDto.Username) || (x.Email == loginDto.Username));
-            if (user == null)
+            var entity = await _userAccountRepository.GetAsync(x => (x.Username == loginDto.Username) || (x.Email == loginDto.Username));
+            if (entity == null)
             {
-                throw new Exception("Username could not be found");
+                throw new OperationFailedException("Username could not be found");
             }
 
-            if (!HashingHelper.VerifyPasswordHash(loginDto.Password.Trim(), user.PasswordHash, user.PasswordSalt))
+            if (!HashingHelper.VerifyPasswordHash(loginDto.Password.Trim(), entity.PasswordHash, entity.PasswordSalt))
             {
-                throw new Exception("Incorrect password !!");
+                throw new OperationFailedException("Incorrect password !!");
             }
 
-            var accessToken = CreateAccessToken(user, new List<OperationClaim> { new OperationClaim { Id = user.Id, Name = user.Username } });
+            AccessToken accessToken = await CreateToken(entity);
+            return new ResponseWrapper<AccessToken>(accessToken);
+        }
+
+        private async Task<AccessToken> CreateToken(UserAccount entity)
+        {
+            var accessToken = CreateAccessToken(entity, new List<OperationClaim> { new OperationClaim { Id = entity.Id, Name = entity.Username, Email = entity.Email } });
             var sqlServerDatetime = DateTime.Now;
             int.TryParse(_configuration.GetSection("TokenOptions.RefreshTokenExpiration").Value, out int expirationDate);
 
-            var userToken = await _userTokenRepository.GetAsync(x => x.Id == user.Id && x.Status != 1);
+            var userToken = await _userTokenRepository.GetAsync(x => x.Id == entity.Id && x.Status != Core.Enums.Status.Active);
             if (userToken != null)
             {
                 await _userTokenRepository.AddAsync(
                 new UserToken
                 {
-                    UserId = user.Id,
+                    UserId = entity.Id,
                     RefreshTokenExpirationDate = sqlServerDatetime.AddMinutes(expirationDate),
                     RefreshToken = accessToken.RefreshToken,
-                    Status = 1
                 });
                 await _uow.SaveChangesAsync();
             }
 
-            return new ResponseWrapper<AccessToken>(
-                new AccessToken
-                {
-                    Token = accessToken.Token,
-                    Expiration = accessToken.Expiration,
-                    RefreshToken = accessToken.RefreshToken
-                }
-                );
+            return accessToken;
         }
 
         public async Task<ResponseWrapper<AccessToken>> RefreshTokenLogin(int userId, string refreshToken)

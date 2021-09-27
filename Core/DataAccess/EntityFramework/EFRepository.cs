@@ -1,4 +1,5 @@
 ﻿using Core.Entities;
+using Core.Enums;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -48,11 +49,7 @@ namespace Core.DataAccess.EntityFramework
 
         public async Task AddAsync(TEntity entity)
         {
-            if (entity.GetType().GetProperties().Any(x => x.Name == "InsertDate"))
-            {
-                PropertyInfo propertyInfo = entity.GetType().GetProperty("InsertDate");
-                propertyInfo.SetValue(entity, Convert.ChangeType(DateTime.Now, propertyInfo.PropertyType), null);
-            }
+            Initializer(entity,Status.Active);
             await _dbSet.AddAsync(entity);
         }
 
@@ -110,5 +107,32 @@ namespace Core.DataAccess.EntityFramework
             }
         }
         #endregion
+
+        private static void Initializer(TEntity entity,Status status)
+        {
+            var insertDateProp = entity.GetType().GetProperty("InsertDate");
+            if (insertDateProp != null)
+            {
+                Type t = Nullable.GetUnderlyingType(insertDateProp.PropertyType) ?? insertDateProp.PropertyType;
+                object safeValue = Convert.ChangeType(DateTime.Now, t);
+                insertDateProp.SetValue(entity, safeValue, null);
+            }
+
+            var updateDateProp = entity.GetType().GetProperty("UpdateDate");
+            if (entity.GetType().GetProperties().Any(x => x.Name == "UpdateDate"))
+            {
+                Type t = Nullable.GetUnderlyingType(updateDateProp.PropertyType) ?? updateDateProp.PropertyType;
+                object safeValue = Convert.ChangeType(DateTime.Now, t);
+                updateDateProp.SetValue(entity, safeValue, null);
+            }
+
+            var statusProp = entity.GetType().GetProperty("Status");
+            if (entity.GetType().GetProperties().Any(x => x.Name == "Status"))
+            {
+                Type t = Nullable.GetUnderlyingType(statusProp.PropertyType) ?? statusProp.PropertyType;
+                object safeValue = Convert.ChangeType(status, t);
+                statusProp.SetValue(entity, safeValue, null);
+            }
+        }
     }
 }
