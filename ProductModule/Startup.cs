@@ -13,7 +13,7 @@ namespace ProductModule
     {
         public IConfiguration Configuration { get; }
 
-        public void ConfigureServices(IServiceCollection services)
+        public void ConfigureServices(IServiceCollection services, IConfiguration configuration = null)
         {
             services.AddScoped<IProductBusinessBase<Product>, ProductBusinessBase>();
         }

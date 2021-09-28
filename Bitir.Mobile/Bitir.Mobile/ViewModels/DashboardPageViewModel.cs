@@ -1,4 +1,5 @@
 ﻿using Bitir.Mobile.Models;
+using Bitir.Mobile.Views;
 using System;
 using System.Collections.ObjectModel;
 using Xamarin.Forms;
@@ -245,9 +246,9 @@ namespace Bitir.Mobile.ViewModels
         /// Invoked when the profile image is clicked.
         /// </summary>
         /// <param name="obj">The object</param>
-        private void ProfileImageClicked(object obj)
+        private async void ProfileImageClicked(object obj)
         {
-            // Do something
+            await Application.Current.MainPage.Navigation.PushModalAsync(new ProfilePage(), true);
         }
 
         #endregion

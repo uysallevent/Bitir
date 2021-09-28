@@ -1,4 +1,5 @@
-﻿using Xamarin.Forms.Internals;
+﻿using Bitir.Mobile.ViewModels;
+using Xamarin.Forms.Internals;
 using Xamarin.Forms.Xaml;
 
 namespace Bitir.Mobile.Views

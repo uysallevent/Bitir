@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<pages:PopupPage
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="Bitir.Mobile.Views.ProfilePopupView"
+    xmlns:pages="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup"
+    xmlns:border="clr-namespace:Syncfusion.XForms.Border;assembly=Syncfusion.Core.XForms"
+    xmlns:buttons="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms"
+    xmlns:viewModel="clr-namespace:Bitir.Mobile.ViewModels"
+    xmlns:control="clr-namespace:Bitir.Mobile.Controls">
+
+    <ContentPage.BindingContext>
+        <viewModel:ProfilePopupViewModel />
+    </ContentPage.BindingContext>
+    
+    <Grid BackgroundColor="Black" Opacity="0.7" VerticalOptions="Center">
+        <border:SfBorder >
+            <Grid ColumnDefinitions="*, Auto">
+                <control:BorderlessEntry
+                    Grid.Row="0"
+                    x:Name="GenericEntry"
+                    Margin="15,0"
+                    HeightRequest="40"
+                    PlaceholderColor="{StaticResource EntryPlaceholderColor}"
+                    Style="{StaticResource BorderlessEntryStyle}"
+                    TextColor="{StaticResource Gray-White}">
+                </control:BorderlessEntry>
+
+                <StackLayout Orientation="Horizontal" Grid.Row="1" HorizontalOptions="CenterAndExpand" Spacing="10">
+                    <buttons:SfButton
+                            Margin="0,16"
+                            Command="{Binding ConfirmationCommand}"
+                            HorizontalOptions="Fill"
+                            Style="{StaticResource GradientButtonStyle}"
+                            Text="KAYDET" />
+
+                    <buttons:SfButton
+                        Margin="0,16"
+                        HorizontalOptions="Fill"
+                        Style="{StaticResource GradientButtonStyle}"
+                        Clicked="SfButton_Clicked"
+                        Text="KAPAT" />
+                </StackLayout>
+            </Grid>
+        </border:SfBorder>
+    </Grid>
+</pages:PopupPage>

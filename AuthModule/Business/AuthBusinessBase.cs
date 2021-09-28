@@ -48,7 +48,7 @@ namespace AuthModule.Business
         }
 
         [ValidationAspect(typeof(UserAccountValidationRules))]
-        public  async Task<ResponseWrapper<AccessToken>> Register(UserAccount entity)
+        public async Task<ResponseWrapper<AccessToken>> Register(UserAccount entity)
         {
             var userCheck = await _userAccountRepository.GetAsync(x => (x.Username == entity.Username) || (x.Email == entity.Email));
             if (userCheck != null)
@@ -88,7 +88,13 @@ namespace AuthModule.Business
 
         private async Task<AccessToken> CreateToken(UserAccount entity)
         {
-            var accessToken = CreateAccessToken(entity, new List<OperationClaim> { new OperationClaim { Id = entity.Id, Name = entity.Username, Email = entity.Email } });
+            var accessToken = CreateAccessToken(entity, new List<OperationClaim> {
+                new OperationClaim {
+                    Id = entity.Id,
+                    Name = entity.Username,
+                    Email = entity.Email,
+                    Phone=entity.Phone
+                } });
             var sqlServerDatetime = DateTime.Now;
             int.TryParse(_configuration.GetSection("TokenOptions.RefreshTokenExpiration").Value, out int expirationDate);
 

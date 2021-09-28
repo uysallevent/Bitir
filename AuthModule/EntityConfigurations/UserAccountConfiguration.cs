@@ -6,7 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Bitir.Data.EntityConfigurations
+namespace AuthModule.EntityConfigurations
 {
     public class UserAccountConfiguration : IEntityTypeConfiguration<UserAccount>
     {
@@ -16,7 +16,7 @@ namespace Bitir.Data.EntityConfigurations
         {
             builder.ToTable(tableName, schemaName).HasKey(x => x.Id);
             builder.Property(x => x.Username).IsRequired();
-            builder.Property(x => x.Password).IsRequired();
+            builder.Ignore(x => x.Password);
             builder.Property(x => x.PasswordHash).IsRequired();
             builder.Property(x => x.PasswordSalt).IsRequired();
             builder.Property(x => x.Status).IsRequired();

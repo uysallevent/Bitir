@@ -24,18 +24,26 @@
   <ItemGroup>
     <PackageReference Include="DotNetHelper-Connectivity" Version="2018.6.18.18" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+    <PackageReference Include="Rg.Plugins.Popup" Version="2.0.0.12" />
     <PackageReference Include="Syncfusion.Xamarin.Buttons" Version="19.2.0.62" />
     <PackageReference Include="Syncfusion.Xamarin.Core" Version="19.2.0.62" />
     <PackageReference Include="Syncfusion.Xamarin.SfChart" Version="19.2.0.62" />
     <PackageReference Include="Syncfusion.Xamarin.SfComboBox" Version="19.2.0.62" />
     <PackageReference Include="Syncfusion.Xamarin.SfListView" Version="19.2.0.62" />
     <PackageReference Include="Syncfusion.Xamarin.SfRating" Version="19.2.0.62" />
+    <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.11.0" />
     <PackageReference Include="Xamarin.Forms" Version="5.0.0.2012" />  
     <PackageReference Include="Xamarin.Essentials" Version="1.6.1" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\..\Bitir.Data.Model\Bitir.Data.Model.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Views\ProfilePopupView.xaml.cs">
+      <DependentUpon>ProfilePopupView.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
 
   <ItemGroup>
@@ -112,6 +120,9 @@
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Views\LoginPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\ProfilePage.xaml">
       <Generator>MSBuild:Compile</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Views\ResetPasswordPage.xaml">

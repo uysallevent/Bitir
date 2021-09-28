@@ -15,7 +15,7 @@ namespace Bitir.Mobile.Services
         private const string loginCheckPath = "AuthModule/AuthBase/Login";
         private const string accountTypesPath = "AuthModule/AccountType/GetAll";
         private const string registerTypesPath = "AuthModule/AuthBase/Register";
-        public async Task<ResponseWrapper<AuthResponse>> LoginCheck(AuthLoginRequest request)
+        public async Task<ResponseWrapper<AuthResponse>> LoginCheckAsync(AuthLoginRequest request)
         {
             ResponseWrapper<AuthResponse> result = null;
             var httpClient = await GetClient();
@@ -35,7 +35,7 @@ namespace Bitir.Mobile.Services
             return result;
         }
 
-        public async Task<ResponseWrapperListing<AccountTypeResponse>> GetAccoutTypes()
+        public async Task<ResponseWrapperListing<AccountTypeResponse>> GetAccoutTypesAsync()
         {
             ResponseWrapperListing<AccountTypeResponse> result = null;
             var httpClient = await GetClient();
@@ -55,7 +55,7 @@ namespace Bitir.Mobile.Services
             return result;
         }
 
-        public async Task<ResponseWrapper<AuthResponse>> Register(AuthRegisterRequest request)
+        public async Task<ResponseWrapper<AuthResponse>> RegisterAsync(AuthRegisterRequest request)
         {
             ResponseWrapper<AuthResponse> result = null;
             var httpClient = await GetClient();

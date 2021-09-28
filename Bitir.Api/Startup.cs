@@ -25,16 +25,6 @@ namespace ModulerApi
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddSwaggerGen(options =>
-            {
-                options.SwaggerDoc("v1", new OpenApiInfo()
-                {
-                    Version = "v1",
-                    Title = "BitirApi"
-                });
-            });
-            services.AddLogging();
-
             services.AddControllers().ConfigureApplicationPartManager(manager =>
             {
                 // Clear all auto detected controllers.
@@ -45,9 +35,9 @@ namespace ModulerApi
 
             // Register a convention allowing to us to prefix routes to modules.
             services.AddTransient<IPostConfigureOptions<MvcOptions>, ModuleRoutingMvcOptionsPostConfigure>();
-            services.AddModule<BaseModule.Startup>("BaseModule");
-            services.AddModule<AuthModule.Startup>("AuthModule");
-            services.AddModule<ProductModule.Startup>("ProductModule");
+            services.AddModule<BaseModule.Startup>("BaseModule",Configuration);
+            services.AddModule<AuthModule.Startup>("AuthModule", Configuration);
+            services.AddModule<ProductModule.Startup>("ProductModule", Configuration);
             services.AddDataServices(Configuration);
         }
 
@@ -57,10 +47,15 @@ namespace ModulerApi
             {
                 app.UseDeveloperExceptionPage();
             }
-
             app.UseRouting();
+            app.UseAuthentication();
+            app.UseAuthorization();
             app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
-
+            app.UseSwagger();
+            app.UseSwaggerUI(options =>
+            {
+                options.SwaggerEndpoint("/swagger/v1/swagger.json", "BitirApi V1");
+            });
             // Adds endpoints defined in modules
             var modules = app.ApplicationServices.GetRequiredService<IEnumerable<ModuleIntegration.Module>>();
             foreach (var module in modules)
@@ -72,11 +67,7 @@ namespace ModulerApi
                 });
             }
 
-            app.UseSwagger();
-            app.UseSwaggerUI(options =>
-            {
-                options.SwaggerEndpoint("/swagger/v1/swagger.json", "BitirApi V1");
-            });
+
 
             using (var serviceScope = app.ApplicationServices.GetService<IServiceScopeFactory>().CreateScope())
             {

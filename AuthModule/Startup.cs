@@ -21,9 +21,8 @@ namespace AuthModule
 {
     public class Startup : Module.Shared.IStartup
     {
-        public IConfiguration Configuration { get; }
 
-        public void ConfigureServices(IServiceCollection services)
+        public void ConfigureServices(IServiceCollection services, IConfiguration configuration = null)
         {
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             .AddJwtBearer(options =>
@@ -34,9 +33,9 @@ namespace AuthModule
                     ValidateAudience = true,
                     ValidateLifetime = true,
                     ValidateIssuerSigningKey = true,
-                    ValidIssuer = Configuration["TokenOptions:Issuer"],
-                    ValidAudience = Configuration["TokenOptions:Audience"],
-                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(Configuration["TokenOptions:SecurityKey"])),
+                    ValidIssuer = configuration["TokenOptions:Issuer"],
+                    ValidAudience = configuration["TokenOptions:Audience"],
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(configuration["TokenOptions:SecurityKey"])),
                     ClockSkew = TimeSpan.Zero,
                 };
                 options.Events = new JwtBearerEvents
@@ -53,7 +52,6 @@ namespace AuthModule
                     }
                 };
             });
-            services.AddAuthorization();
             services.AddSingleton<ITokenHelper, JwtHelper>();
             services.AddScoped<IAuthBusinessBase<UserAccount>, AuthBusinessBase>();
             services.AddScoped<IBusinessBase<AccountType>, BusinessBase<AccountType>>();
@@ -62,13 +60,7 @@ namespace AuthModule
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            app.UseEndpoints(endpoints =>
-                endpoints.MapGet("/AuthModule",
-                    async context =>
-                    {
-                        await context.Response.WriteAsync("Hello World from TestEndpoint in Module 2");
-                    })
-            );
+
         }
     }
 }

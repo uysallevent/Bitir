@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using System;
 
-namespace Bitir.Data.EntityConfigurations
+namespace AuthModule.EntityConfigurations
 {
     public class AccountTypeConfiguration : IEntityTypeConfiguration<AccountType>
     {

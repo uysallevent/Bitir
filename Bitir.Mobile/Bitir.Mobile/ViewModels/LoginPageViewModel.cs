@@ -133,16 +133,14 @@ namespace Bitir.Mobile.ViewModels
         /// Invoked when the Log In button is clicked.
         /// </summary>
         /// <param name="obj">The Object</param>
-        private async void LoginClicked(object obj)
+        private async void LoginClicked(object obj) 
         {
-
-
             if (this.AreFieldsValid())
             {
                 IsBusy = true;
                 try
                 {
-                    var result = await authService.LoginCheck(new Models.Auth.AuthLoginRequest
+                    var result = await authService.LoginCheckAsync(new Models.Auth.AuthLoginRequest
                     {
                         Username = Email.Value,
                         Password = password.Value
@@ -151,8 +149,7 @@ namespace Bitir.Mobile.ViewModels
                     if (result != null)
                     {
                         App.authResponse = result.Result;
-                        Application.Current.MainPage = new NavigationPage(new DashboardPage());
-                       // await Application.Current.MainPage.Navigation.PushModalAsync(new DashboardPage(), true);
+                        await Application.Current.MainPage.Navigation.PushModalAsync(new DashboardPage(), true);
                     }
                 }
                 catch (ServiceException ex)

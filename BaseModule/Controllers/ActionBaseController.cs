@@ -1,5 +1,6 @@
 ﻿using BaseModule.Interfaces;
 using Core.Entities;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
@@ -8,6 +9,7 @@ using System.Threading.Tasks;
 namespace BaseModule.Controllers
 {
     [Route("[module]/[controller]")]
+    [Authorize]
     public class ActionBaseController<T> : Controller
     where T : class, IEntity, new()
     {

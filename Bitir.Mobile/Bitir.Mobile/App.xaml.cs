@@ -1,10 +1,11 @@
-﻿using Bitir.Mobile.Models;
+using Bitir.Mobile.Models;
 using Bitir.Mobile.Models.Auth;
 using Bitir.Mobile.Services;
 using Bitir.Mobile.Services.Interfaces;
 using Bitir.Mobile.ViewModels;
 using Bitir.Mobile.Views;
 using System;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -23,15 +24,15 @@ namespace Bitir.Mobile
         {
             Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense("NTA1NzQ5QDMxMzkyZTMyMmUzMFBtdldHWFdrWS90K3o1azl6V3hpRmdSTnlIVFpHYzRsSkZjMEZDNXB2REE9");
             InitializeComponent();
-            DependencyService.Register<MockDataStore>();
             DependencyService.Register<AuthService>();
-
-
             MessagingCenter.Subscribe<BaseViewModel, ExceptionTransfer>(this, "infomessage", (s, e) =>
            {
                if (!string.IsNullOrEmpty(e.NotificationMessage))
                {
-                   App.Current.MainPage.DisplayAlert("Bilgi", e.NotificationMessage, "Tamam");
+                   MainThread.BeginInvokeOnMainThread(async() =>
+                   {
+                      await App.Current.MainPage.DisplayAlert("Bilgi", e.NotificationMessage, "Tamam");
+                   });
                }
            });
 

@@ -11,7 +11,6 @@ namespace Bitir.Mobile.ViewModels
 {
     public class BaseViewModel : INotifyPropertyChanged
     {
-        public IDataStore<Item> DataStore => DependencyService.Get<IDataStore<Item>>();
         public IAuthService authService => DependencyService.Get<IAuthService>();
 
         bool isBusy = false;
@@ -40,6 +39,8 @@ namespace Bitir.Mobile.ViewModels
             OnPropertyChanged(propertyName);
             return true;
         }
+
+        public Page CurrentPage { get;  set; }
 
         protected void SendNotification(ExceptionTransfer exceptionTransfer)
         {

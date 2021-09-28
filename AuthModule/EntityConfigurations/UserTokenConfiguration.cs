@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace Bitir.Data.EntityConfigurations
+namespace AuthModule.EntityConfigurations
 {
     public class UserTokenConfiguration : IEntityTypeConfiguration<UserToken>
     {

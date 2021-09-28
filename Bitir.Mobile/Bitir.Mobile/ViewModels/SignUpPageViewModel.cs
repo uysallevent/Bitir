@@ -224,7 +224,7 @@ namespace Bitir.Mobile.ViewModels
                     var accountType = (this.Customer.Value) ? this.AccountTypes.FirstOrDefault(x => x.Name == "Customer").Id
                                            : this.AccountTypes.FirstOrDefault(x => x.Name == "Vendor").Id;
 
-                    var result = await authService.Register(new AuthRegisterRequest
+                    var result = await authService.RegisterAsync(new AuthRegisterRequest
                     {
                         Name = this.Name.Value,
                         Username = this.Email.Value,
@@ -256,7 +256,7 @@ namespace Bitir.Mobile.ViewModels
             IsBusy = true;
             try
             {
-                var result = await authService.GetAccoutTypes();
+                var result = await authService.GetAccoutTypesAsync();
                 if (result != null && result.List.Any())
                 {
                     AccountTypes = result.List.ToList();
@@ -264,7 +264,7 @@ namespace Bitir.Mobile.ViewModels
             }
             catch (ServiceException ex)
             {
-                SendNotification(new ExceptionTransfer { ex = ex, NotificationMessage = "Hesap tipleri yüklenemedi" });
+                SendNotification(new ExceptionTransfer { ex = ex, NotificationMessage = "Hesap tipleri yüklenemedi"});
             }
             finally
             {

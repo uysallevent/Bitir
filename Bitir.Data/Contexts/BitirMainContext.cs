@@ -1,4 +1,5 @@
 ﻿using AuthModule.Entities;
+using AuthModule.EntityConfigurations;
 using Bitir.Data.EntityConfigurations;
 using Microsoft.EntityFrameworkCore;
 using ProductModule.Entities;
