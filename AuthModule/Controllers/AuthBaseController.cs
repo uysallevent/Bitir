@@ -23,6 +23,7 @@ namespace AuthModule.Controllers
             _logger = logger;
         }
 
+        [AllowAnonymous]
         [HttpPost("Login")]
         public async Task<IActionResult> Login([FromBody] LoginDto loginDto)
         {
@@ -38,6 +39,7 @@ namespace AuthModule.Controllers
             }
         }
 
+        [AllowAnonymous]
         [HttpPost("Register")]
         public async Task<IActionResult> Register([FromBody] UserAccount userAccount)
         {
@@ -53,7 +55,8 @@ namespace AuthModule.Controllers
             }
         }
 
-        [NonAction]
+        [AllowAnonymous]
+        [HttpPost("Update")]
         public override Task<IActionResult> Update([FromBody] UserAccount entity)
         {
             return base.Update(entity);

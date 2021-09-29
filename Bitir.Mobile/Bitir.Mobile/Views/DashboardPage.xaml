@@ -46,13 +46,7 @@
                             BackgroundColor="{DynamicResource Gray-200}"
                             BorderColor="{DynamicResource Gray-Bg}"
                             Style="{StaticResource ProfileBorderStyle}">
-                            <Image HeightRequest="40" WidthRequest="40">
-                                <Image.Source>
-                                    <UriImageSource
-                                        CacheValidity="14"
-                                        CachingEnabled="true"
-                                        Uri="{Binding Path=BindingContext.ProfileImage, Source={x:Reference healthCarePage}}" />
-                                </Image.Source>
+                            <Image HeightRequest="40" WidthRequest="40" Source="blankprofilepicture">
                                 <Image.GestureRecognizers>
                                     <TapGestureRecognizer Command="{Binding ProfileSelectedCommand}" CommandParameter="{Binding}" />
                                 </Image.GestureRecognizers>

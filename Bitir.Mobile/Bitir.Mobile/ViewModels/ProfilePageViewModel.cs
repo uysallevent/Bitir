@@ -1,7 +1,14 @@
-﻿using Bitir.Mobile.Models;
+﻿using Bitir.Mobile.Exeptions;
+using Bitir.Mobile.Models;
+using Bitir.Mobile.Models.Auth;
 using Bitir.Mobile.Views;
 using Rg.Plugins.Popup.Services;
+using System;
+using System.IdentityModel.Tokens.Jwt;
+using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.Internals;
 
@@ -26,7 +33,17 @@ namespace Bitir.Mobile.ViewModels
             this.EmailCommand = new Command(this.EmailButtonClicked);
             this.PhoneCommand = new Command(this.PhoneButtonClicked);
             this.BackButtonCommand = new Command(this.BackButtonClicked);
-
+            Task.Run(async () => await LoadProfile());
+            MessagingCenter.Subscribe<ProfilePopupViewModel, bool>(this, "ReLoadAccountDetails", (s, e) =>
+               {
+                   if (e)
+                   {
+                       MainThread.BeginInvokeOnMainThread(async () =>
+                       {
+                           await LoadProfile();
+                       });
+                   }
+               });
         }
 
         #endregion
@@ -47,11 +64,58 @@ namespace Bitir.Mobile.ViewModels
 
         #endregion
 
+        #region Property
+        public ProfileResponse ProfileResponse
+        {
+            get
+            {
+                return this.profileResponse;
+            }
+
+            set
+            {
+                if (this.profileResponse == value)
+                {
+                    return;
+                }
+
+                this.SetProperty(ref this.profileResponse, value);
+            }
+        }
+        #endregion
+
+        #region Field
+        private ProfileResponse profileResponse;
+        #endregion
+
         #region Methods
         private void EditButtonClicked(object obj)
         {
             // Do something
         }
+
+        private async Task LoadProfile()
+        {
+            IsBusy = true;
+            try
+            {
+                var accountDataFromClaims = GetClaims();
+                if (accountDataFromClaims != null && accountDataFromClaims.Id > 0)
+                {
+                    var accountDetail = await authService.GetAccountByIdAsync(accountDataFromClaims.Id);
+                    ProfileResponse = accountDetail.Result;
+                }
+            }
+            catch (ServiceException ex)
+            {
+                SendNotification(new ExceptionTransfer { ex = ex, NotificationMessage = "Hesap bilgileri bulunamadı" });
+            }
+            finally
+            {
+                IsBusy = false;
+            }
+        }
+
 
         private async void ProfileNameClicked(object obj)
         {
@@ -59,8 +123,7 @@ namespace Bitir.Mobile.ViewModels
             (obj as Grid).BackgroundColor = (Color)retVal;
             await Task.Delay(100).ConfigureAwait(true);
             (obj as Grid).BackgroundColor = Color.Transparent;
-            await PopupNavigation.Instance.PushAsync(new ProfilePopupView(new PopupDataTransfer("", "Ad Soyad")));
-
+            await PopupNavigation.Instance.PushAsync(new ProfilePopupView(new PopupDataTransfer($"{GetClaims().Name} {GetClaims().Surname}", "Ad Soyad", "Name")));
         }
 
         private async void EmailButtonClicked(object obj)
@@ -69,7 +132,7 @@ namespace Bitir.Mobile.ViewModels
             (obj as Grid).BackgroundColor = (Color)retVal;
             await Task.Delay(100).ConfigureAwait(true);
             (obj as Grid).BackgroundColor = Color.Transparent;
-            await PopupNavigation.Instance.PushAsync(new ProfilePopupView(new PopupDataTransfer("", "Email")));
+            await PopupNavigation.Instance.PushAsync(new ProfilePopupView(new PopupDataTransfer(GetClaims().Email, "Email", "Email")));
         }
 
         private async void PhoneButtonClicked(object obj)
@@ -78,7 +141,7 @@ namespace Bitir.Mobile.ViewModels
             (obj as Grid).BackgroundColor = (Color)retVal;
             await Task.Delay(100).ConfigureAwait(true);
             (obj as Grid).BackgroundColor = Color.Transparent;
-            await PopupNavigation.Instance.PushAsync(new ProfilePopupView(new PopupDataTransfer("", "Telefon")));
+            await PopupNavigation.Instance.PushAsync(new ProfilePopupView(new PopupDataTransfer(GetClaims().Phone, "Telefon", "Phone")));
 
         }
 
@@ -88,7 +151,7 @@ namespace Bitir.Mobile.ViewModels
             (obj as Grid).BackgroundColor = (Color)retVal;
             await Task.Delay(100).ConfigureAwait(true);
             (obj as Grid).BackgroundColor = Color.Transparent;
-            await PopupNavigation.Instance.PushAsync(new ProfilePopupView(new PopupDataTransfer("", "Şifre",true)));
+            await PopupNavigation.Instance.PushAsync(new ProfilePopupView(new PopupDataTransfer("", "Şifre", "Password", true)));
 
         }
 

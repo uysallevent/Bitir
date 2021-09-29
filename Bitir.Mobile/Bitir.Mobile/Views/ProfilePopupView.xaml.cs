@@ -14,6 +14,7 @@ namespace Bitir.Mobile.Views
         {
             InitializeComponent();
             BindingContext = profilePopupViewModel = new ProfilePopupViewModel();
+            profilePopupViewModel.PropertyName = popupDataTransfer.PropertyName;
             GenericEntry.Text = popupDataTransfer.Value;
             GenericEntry.IsPassword = popupDataTransfer.IsPassword;
             GenericEntry.Placeholder = popupDataTransfer.PlaceHolder;

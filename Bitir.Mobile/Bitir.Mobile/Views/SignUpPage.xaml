@@ -204,6 +204,7 @@
                             Command="{Binding SignUpCommand}"
                             HorizontalOptions="FillAndExpand"
                             Style="{StaticResource GradientButtonStyle}"
+                            IsEnabled="{Binding SignUpButtonStatus,Mode=TwoWay}"
                             Text="KAYIT" />
                     </StackLayout>
 

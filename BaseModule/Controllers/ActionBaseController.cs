@@ -88,7 +88,7 @@ namespace BaseModule.Controllers
             try
             {
                 var result = await _businessBase.UpdateAsync(entity);
-                return BadRequest(result);
+                return Ok(result);
             }
             catch (Exception ex)
             {

@@ -67,7 +67,7 @@
                     Margin="0,10,0,10"
                     FontFamily="Montserrat-Bold"
                     Style="{StaticResource TitleLabelStyle}"
-                    Text="Julia Grant"
+                    Text="{Binding ProfileResponse.FullName}"
                     VerticalOptions="Center" />
 
                 <Grid
@@ -90,7 +90,7 @@
                         FontFamily="Montserrat-Medium"
                         HorizontalOptions="Start"
                         Style="{StaticResource TitleLabelStyle}"
-                        Text="Julia Grant"
+                        Text="{Binding ProfileResponse.FullName}"
                         VerticalOptions="Center" />
 
                     <Label
@@ -157,7 +157,7 @@
                         FontFamily="Montserrat-Medium"
                         HorizontalOptions="Start"
                         Style="{StaticResource TitleLabelStyle}"
-                        Text="Julia Grant"
+                        Text="{Binding ProfileResponse.Email}"
                         VerticalOptions="Center" />
 
                     <Label
@@ -191,7 +191,7 @@
                         FontFamily="Montserrat-Medium"
                         HorizontalOptions="Start"
                         Style="{StaticResource TitleLabelStyle}"
-                        Text="+1-202-555-0101"
+                        Text="{Binding ProfileResponse.Phone}"
                         VerticalOptions="Center" />
 
                     <Label

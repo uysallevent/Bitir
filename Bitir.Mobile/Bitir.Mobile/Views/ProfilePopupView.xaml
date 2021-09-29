@@ -23,13 +23,14 @@
                     HeightRequest="40"
                     PlaceholderColor="{StaticResource EntryPlaceholderColor}"
                     Style="{StaticResource BorderlessEntryStyle}"
+                    Text="{Binding UpdateData}"
                     TextColor="{StaticResource Gray-White}">
                 </control:BorderlessEntry>
 
                 <StackLayout Orientation="Horizontal" Grid.Row="1" HorizontalOptions="CenterAndExpand" Spacing="10">
                     <buttons:SfButton
                             Margin="0,16"
-                            Command="{Binding ConfirmationCommand}"
+                            Command="{Binding ProfileUpdateCommand}"
                             HorizontalOptions="Fill"
                             Style="{StaticResource GradientButtonStyle}"
                             Text="KAYDET" />

@@ -16,7 +16,7 @@ namespace Bitir.Mobile.Views
         public ProfilePage()
         {
             this.InitializeComponent();
-            //this.ProfileImage.Source = App.ImageServerPath + "ProfileImage11.png";
         }
+
     }
 }

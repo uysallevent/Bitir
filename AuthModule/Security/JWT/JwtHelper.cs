@@ -70,10 +70,11 @@ namespace AuthModule.Security.JWT
         {
             var claims = new List<Claim>();
             claims.AddNameIdentifier(user.Id.ToString());
-            claims.AddEmail(user.Email);
-            claims.AddName($"{user.Name} {user.Surname}");
+            claims.AddEmail((!string.IsNullOrEmpty(user.Email)? user.Email:string.Empty));
+            claims.AddPhone((!string.IsNullOrEmpty(user.Phone) ? user.Phone : string.Empty));
+            claims.AddName((!string.IsNullOrEmpty(user.Name) ? user.Name : string.Empty));
+            claims.AddSurname((!string.IsNullOrEmpty(user.Surname) ? user.Surname : string.Empty));
             claims.AddRoles(operationClaims.Select(c => c.Name).ToArray());
-
             return claims;
         }
     }

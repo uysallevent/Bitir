@@ -23,5 +23,11 @@ namespace AuthModule.Controllers
             _accountTypeBusinessBase = accountTypeBusinessBase;
             _logger = logger;
         }
+
+        [AllowAnonymous]
+        public override Task<IActionResult> GetAll([FromBody] AccountType entity = null)
+        {
+            return base.GetAll(entity);
+        }
     }
 }

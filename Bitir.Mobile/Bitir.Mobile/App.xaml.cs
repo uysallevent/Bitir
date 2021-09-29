@@ -1,4 +1,4 @@
-using Bitir.Mobile.Models;
+    using Bitir.Mobile.Models;
 using Bitir.Mobile.Models.Auth;
 using Bitir.Mobile.Services;
 using Bitir.Mobile.Services.Interfaces;

@@ -31,6 +31,7 @@ namespace Bitir.Mobile.ViewModels
         private ValidatableObject<bool> vendor;
 
         private IList<AccountTypeResponse> accountTypes;
+        private bool signUpButtonStatus;
 
         #endregion
 
@@ -147,6 +148,24 @@ namespace Bitir.Mobile.ViewModels
                 this.SetProperty(ref this.accountTypes, value);
             }
         }
+
+        public bool SignUpButtonStatus
+        {
+            get
+            {
+                return this.signUpButtonStatus;
+            }
+
+            set
+            {
+                if (this.signUpButtonStatus == value)
+                {
+                    return;
+                }
+
+                this.SetProperty(ref this.signUpButtonStatus, value);
+            }
+        }
         #endregion
 
         #region Command
@@ -189,6 +208,7 @@ namespace Bitir.Mobile.ViewModels
             this.Vendor = new ValidatableObject<bool>();
             this.customer.Value = true;
             this.vendor.Value = false;
+            this.signUpButtonStatus = true;
         }
 
         /// <summary>
@@ -197,6 +217,7 @@ namespace Bitir.Mobile.ViewModels
         private void AddValidationRules()
         {
             this.Name.Validations.Add(new IsNotNullOrEmptyRule<string> { ValidationMessage = "Ad Soyad Zorunludur!" });
+            this.Email.Validations.Add(new IsNotNullOrEmptyRule<string> { ValidationMessage = "Email Zorunludur!" });
             this.Password.Item1.Validations.Add(new IsNotNullOrEmptyRule<string> { ValidationMessage = "Şifre Zorunludur!" });
             this.Password.Item2.Validations.Add(new IsNotNullOrEmptyRule<string> { ValidationMessage = "Şifre Tekrarı Zorunludur!" });
         }
@@ -226,7 +247,8 @@ namespace Bitir.Mobile.ViewModels
 
                     var result = await authService.RegisterAsync(new AuthRegisterRequest
                     {
-                        Name = this.Name.Value,
+                        Name = (this.Name.Value.Contains(' ')) ? this.Name.Value.Split(' ')[0] : this.Name.Value,
+                        Surname = (this.Name.Value.Contains(' ')) ? this.Name.Value.Split(' ')[1] : string.Empty,
                         Username = this.Email.Value,
                         Email = this.Email.Value,
                         Password = this.Password.Item1.Value,
@@ -264,7 +286,8 @@ namespace Bitir.Mobile.ViewModels
             }
             catch (ServiceException ex)
             {
-                SendNotification(new ExceptionTransfer { ex = ex, NotificationMessage = "Hesap tipleri yüklenemedi"});
+                this.SignUpButtonStatus = false;
+                SendNotification(new ExceptionTransfer { ex = ex, NotificationMessage = "Hesap tipleri yüklenemedi" });
             }
             finally
             {

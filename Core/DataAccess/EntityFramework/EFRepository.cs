@@ -49,7 +49,7 @@ namespace Core.DataAccess.EntityFramework
 
         public async Task AddAsync(TEntity entity)
         {
-            Initializer(entity,Status.Active);
+            InsertInitializer(entity, Status.Active);
             await _dbSet.AddAsync(entity);
         }
 
@@ -60,8 +60,14 @@ namespace Core.DataAccess.EntityFramework
 
         public void Update(TEntity entity)
         {
+            UpdateInitializer(entity);
             _dbSet.Attach(entity);
             _dbContext.Entry(entity).State = EntityState.Modified;
+            foreach (var property in _dbContext.Entry(entity).Properties)
+            {
+                if (property.CurrentValue == null)
+                    _dbContext.Entry(entity).Property(property.Metadata.Name).IsModified = false;
+            }
         }
 
         public void Delete(TEntity entity)
@@ -108,7 +114,7 @@ namespace Core.DataAccess.EntityFramework
         }
         #endregion
 
-        private static void Initializer(TEntity entity,Status status)
+        private static void InsertInitializer(TEntity entity, Status status)
         {
             var insertDateProp = entity.GetType().GetProperty("InsertDate");
             if (insertDateProp != null)
@@ -132,6 +138,17 @@ namespace Core.DataAccess.EntityFramework
                 Type t = Nullable.GetUnderlyingType(statusProp.PropertyType) ?? statusProp.PropertyType;
                 object safeValue = Convert.ChangeType(status, t);
                 statusProp.SetValue(entity, safeValue, null);
+            }
+        }
+
+        private static void UpdateInitializer(TEntity entity)
+        {
+            var updateDateProp = entity.GetType().GetProperty("UpdateDate");
+            if (entity.GetType().GetProperties().Any(x => x.Name == "UpdateDate"))
+            {
+                Type t = Nullable.GetUnderlyingType(updateDateProp.PropertyType) ?? updateDateProp.PropertyType;
+                object safeValue = Convert.ChangeType(DateTime.Now, t);
+                updateDateProp.SetValue(entity, safeValue, null);
             }
         }
     }

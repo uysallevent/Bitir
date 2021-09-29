@@ -20,7 +20,7 @@ namespace AuthModule.Entities
         public string Surname { get; set; }
         public string Phone { get; set; }
         public string Email { get; set; }
-        public int AccountTypeId { get; set; }
+        public int? AccountTypeId { get; set; }
 
         [JsonIgnore]
         public ICollection<UserToken> UserTokens { get; set; }

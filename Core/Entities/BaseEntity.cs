@@ -14,6 +14,6 @@ namespace Core.Entities
         [JsonIgnore]
         public virtual DateTime? UpdateDate { get; set; }
 
-        public Status Status { get; set; }
+        public Status? Status { get; set; }
     }
 }
