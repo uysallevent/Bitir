@@ -13,6 +13,6 @@ namespace Bitir.Mobile.Models.Auth
         public string Surname { get; set; }
         public string Phone { get; set; }
         public string Email { get; set; }
-        public int AccountTypeId { get; set; }
+        public int? AccountTypeId { get; set; }
     }
 }

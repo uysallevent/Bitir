@@ -55,13 +55,6 @@ namespace AuthModule.Controllers
             }
         }
 
-        [AllowAnonymous]
-        [HttpPost("Update")]
-        public override Task<IActionResult> Update([FromBody] UserAccount entity)
-        {
-            return base.Update(entity);
-        }
-
         [NonAction]
         public override Task<IActionResult> GetAll([FromBody] UserAccount entity = null)
         {

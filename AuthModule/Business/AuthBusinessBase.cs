@@ -69,6 +69,18 @@ namespace AuthModule.Business
             return new ResponseWrapper<AccessToken>(accessToken);
         }
 
+        public override Task<ResponseWrapper<UserAccount>> UpdateAsync(UserAccount entity)
+        {
+            if (!string.IsNullOrEmpty(entity.Password))
+            {
+                byte[] passwordHash, passwordSalt;
+                HashingHelper.CreatePasswordHash(entity.Password, out passwordHash, out passwordSalt);
+                entity.PasswordHash = passwordHash;
+                entity.PasswordSalt = passwordSalt;
+            }
+            return base.UpdateAsync(entity);
+        }
+
         public async Task<ResponseWrapper<AccessToken>> Login(LoginDto loginDto)
         {
             var entity = await _userAccountRepository.GetAsync(x => (x.Username == loginDto.Username) || (x.Email == loginDto.Username));
