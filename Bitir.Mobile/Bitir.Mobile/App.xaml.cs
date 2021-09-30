@@ -36,7 +36,7 @@ namespace Bitir.Mobile
                }
            });
 
-            MainPage = new LoginPage();
+            MainPage = new DashboardPage();
         }
 
         public static AuthResponse authResponse;
