@@ -105,7 +105,7 @@ namespace Bitir.Mobile.Services
         {
             ResponseWrapper<ProfileResponse> result = null;
             var httpClient = await GetClient();
-            var response = await httpClient.PostAsync(updateAccountPath, new StringContent(JsonConvert.SerializeObject(request), Encoding.UTF8, "application/json"));
+            var response = await httpClient.PutAsync(updateAccountPath, new StringContent(JsonConvert.SerializeObject(request), Encoding.UTF8, "application/json"));
             if (response.StatusCode == HttpStatusCode.OK)
             {
                 var stringInResponse = await response.Content.ReadAsStringAsync();

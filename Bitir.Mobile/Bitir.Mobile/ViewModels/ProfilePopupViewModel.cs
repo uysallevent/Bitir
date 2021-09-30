@@ -1,6 +1,8 @@
 ﻿using Bitir.Mobile.Exeptions;
 using Bitir.Mobile.Models;
 using Bitir.Mobile.Models.Auth;
+using Bitir.Mobile.Validators;
+using Bitir.Mobile.Validators.Rules;
 using Rg.Plugins.Popup.Services;
 using System.IdentityModel.Tokens.Jwt;
 using System.Threading.Tasks;
@@ -15,10 +17,26 @@ namespace Bitir.Mobile.ViewModels
         #region Constructor
         public ProfilePopupViewModel()
         {
+            InitializeProperties();
+            this.AddValidationRules();
             this.ProfileUpdateCommand = new Command(async () => await this.UpdateProfileClicked());
         }
         #endregion
 
+        private void InitializeProperties()
+        {
+            this.passwordCompare = false;
+            this.UpdateData = new ValidatableObject<string>();
+        }
+
+        #region Validation
+
+
+        private void AddValidationRules()
+        {
+            this.UpdateData.Validations.Add(new IsNotNullOrEmptyRule<string> { ValidationMessage = $"Alan Zorunludur!" });
+        }
+        #endregion
 
         #region Command
         public Command ProfileUpdateCommand { get; set; }
@@ -27,7 +45,7 @@ namespace Bitir.Mobile.ViewModels
 
 
         #region Property
-        public string UpdateData
+        public ValidatableObject<string> UpdateData
         {
             get
             {
@@ -61,11 +79,29 @@ namespace Bitir.Mobile.ViewModels
                 this.SetProperty(ref this.propertyname, value);
             }
         }
+        public bool PasswordCompare
+        {
+            get
+            {
+                return this.passwordCompare;
+            }
+
+            set
+            {
+                if (this.passwordCompare == value)
+                {
+                    return;
+                }
+
+                this.SetProperty(ref this.passwordCompare, value);
+            }
+        }
         #endregion
 
         #region Field
-        public string updateData;
+        public ValidatableObject<string> updateData;
         public string propertyname;
+        public bool passwordCompare;
         #endregion
 
         #region Method
@@ -74,16 +110,17 @@ namespace Bitir.Mobile.ViewModels
             IsBusy = true;
             try
             {
-                if (!string.IsNullOrEmpty(updateData) && !string.IsNullOrEmpty(propertyname))
+                if (!string.IsNullOrEmpty(updateData.Value) && !string.IsNullOrEmpty(propertyname) && UpdateData.Validate())
                 {
-                    var result =await authService.UpdateAccountAsync(new AuthRegisterRequest
+                    var result = await authService.UpdateAccountAsync(new AuthRegisterRequest
                     {
                         Id = GetClaims().Id,
-                        Name = (PropertyName == "Name") ? (updateData.Contains(" ") ? updateData.Split(' ')[0] : updateData) : null,
-                        Surname = (PropertyName == "Name") ? (updateData.Contains(" ") ? updateData.Split(' ')[1] : null) : null,
-                        Email = (PropertyName == "Email") ? updateData : null,
-                        Phone = (PropertyName == "Phone") ? updateData : null,
-                        Username = (PropertyName == "Email") ? updateData : null
+                        Name = (PropertyName == "Name") ? (updateData.Value.Contains(" ") ? updateData.Value.Split(' ')[0] : updateData.Value) : null,
+                        Surname = (PropertyName == "Name") ? (updateData.Value.Contains(" ") ? updateData.Value.Split(' ')[1] : null) : null,
+                        Email = (PropertyName == "Email") ? updateData.Value : null,
+                        Phone = (PropertyName == "Phone") ? updateData.Value : null,
+                        Username = (PropertyName == "Username") ? updateData.Value : null,
+                        Password = (PropertyName == "Password") ? updateData.Value : null
                     });
                     if (result != null)
                     {

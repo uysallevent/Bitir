@@ -7,42 +7,70 @@
     xmlns:border="clr-namespace:Syncfusion.XForms.Border;assembly=Syncfusion.Core.XForms"
     xmlns:buttons="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms"
     xmlns:viewModel="clr-namespace:Bitir.Mobile.ViewModels"
+    xmlns:converter="clr-namespace:Bitir.Mobile.Converters"
     xmlns:control="clr-namespace:Bitir.Mobile.Controls">
 
     <ContentPage.BindingContext>
         <viewModel:ProfilePopupViewModel />
     </ContentPage.BindingContext>
-    
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converter:BooleanToColorConverter x:Key="ColorConverter" />
+            <converter:InverseBoolConverter x:Key="InverseBoolConverter" />
+            <converter:NameValidationConverter x:Key="FirstValidationErrorConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
     <Grid BackgroundColor="Black" Opacity="0.7" VerticalOptions="Center">
-        <border:SfBorder >
-            <Grid ColumnDefinitions="*, Auto">
-                <control:BorderlessEntry
-                    Grid.Row="0"
+        <StackLayout HorizontalOptions="Center"
+                        Spacing="24"
+                        VerticalOptions="CenterAndExpand">
+            <StackLayout >
+                <border:SfBorder BorderColor="{Binding Source={x:Reference GenericEntry}, Path=IsFocused, Converter={StaticResource ColorConverter}, ConverterParameter=0}" Style="{StaticResource LoginFormBorderlessEntryBorderStyle}" Margin="0,20">
+                    <Grid ColumnDefinitions="*, Auto">
+                        <control:BorderlessEntry
                     x:Name="GenericEntry"
                     Margin="15,0"
                     HeightRequest="40"
                     PlaceholderColor="{StaticResource EntryPlaceholderColor}"
                     Style="{StaticResource BorderlessEntryStyle}"
-                    Text="{Binding UpdateData}"
+                    Text="{Binding UpdateData.Value}"
                     TextColor="{StaticResource Gray-White}">
-                </control:BorderlessEntry>
+                        </control:BorderlessEntry>
 
-                <StackLayout Orientation="Horizontal" Grid.Row="1" HorizontalOptions="CenterAndExpand" Spacing="10">
-                    <buttons:SfButton
+                        <Label
+                    Grid.Column="1"
+                    IsVisible="{Binding Path=IsVisible, Source={x:Reference NameValidationLabel}}"
+                    Style="{StaticResource ErrorIconLabelStyle}"
+                    Text="{StaticResource Error}" />
+                    </Grid>
+                </border:SfBorder>
+                <Label
+                x:Name="NameValidationLabel"
+                Margin="15,-3,0,0"
+                IsVisible="{Binding UpdateData.IsValid, Converter={StaticResource InverseBoolConverter}}"
+                Style="{StaticResource SimpleLabelStyle}"
+                Text="{Binding UpdateData.Errors, Converter={StaticResource FirstValidationErrorConverter}}"
+                TextColor="{DynamicResource Red}"
+                VerticalOptions="FillAndExpand" />
+            </StackLayout>
+
+            <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand" Spacing="10">
+                <buttons:SfButton
                             Margin="0,16"
                             Command="{Binding ProfileUpdateCommand}"
                             HorizontalOptions="Fill"
                             Style="{StaticResource GradientButtonStyle}"
                             Text="KAYDET" />
 
-                    <buttons:SfButton
+                <buttons:SfButton
                         Margin="0,16"
                         HorizontalOptions="Fill"
                         Style="{StaticResource GradientButtonStyle}"
                         Clicked="SfButton_Clicked"
                         Text="KAPAT" />
-                </StackLayout>
-            </Grid>
-        </border:SfBorder>
+            </StackLayout>
+        </StackLayout>
     </Grid>
 </pages:PopupPage>

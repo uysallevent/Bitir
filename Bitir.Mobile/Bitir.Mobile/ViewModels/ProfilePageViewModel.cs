@@ -123,7 +123,7 @@ namespace Bitir.Mobile.ViewModels
             (obj as Grid).BackgroundColor = (Color)retVal;
             await Task.Delay(100).ConfigureAwait(true);
             (obj as Grid).BackgroundColor = Color.Transparent;
-            await PopupNavigation.Instance.PushAsync(new ProfilePopupView(new PopupDataTransfer($"{GetClaims().Name} {GetClaims().Surname}", "Ad Soyad", "Name")));
+            await PopupNavigation.Instance.PushAsync(new ProfilePopupView(new PopupDataTransfer($"{this.ProfileResponse.Name} {this.ProfileResponse.Surname}", "Ad Soyad", "Name")));
         }
 
         private async void EmailButtonClicked(object obj)
@@ -132,7 +132,7 @@ namespace Bitir.Mobile.ViewModels
             (obj as Grid).BackgroundColor = (Color)retVal;
             await Task.Delay(100).ConfigureAwait(true);
             (obj as Grid).BackgroundColor = Color.Transparent;
-            await PopupNavigation.Instance.PushAsync(new ProfilePopupView(new PopupDataTransfer(GetClaims().Email, "Email", "Email")));
+            await PopupNavigation.Instance.PushAsync(new ProfilePopupView(new PopupDataTransfer(this.ProfileResponse.Email, "Email", "Email")));
         }
 
         private async void PhoneButtonClicked(object obj)
@@ -141,7 +141,7 @@ namespace Bitir.Mobile.ViewModels
             (obj as Grid).BackgroundColor = (Color)retVal;
             await Task.Delay(100).ConfigureAwait(true);
             (obj as Grid).BackgroundColor = Color.Transparent;
-            await PopupNavigation.Instance.PushAsync(new ProfilePopupView(new PopupDataTransfer(GetClaims().Phone, "Telefon", "Phone")));
+            await PopupNavigation.Instance.PushAsync(new ProfilePopupView(new PopupDataTransfer(this.ProfileResponse.Phone, "Telefon", "Phone")));
 
         }
 
@@ -152,7 +152,6 @@ namespace Bitir.Mobile.ViewModels
             await Task.Delay(100).ConfigureAwait(true);
             (obj as Grid).BackgroundColor = Color.Transparent;
             await PopupNavigation.Instance.PushAsync(new ProfilePopupView(new PopupDataTransfer("", "Şifre", "Password", true)));
-
         }
 
         private async void BackButtonClicked(object obj)
