@@ -1,4 +1,5 @@
 ﻿using Bitir.Mobile.Models;
+using Bitir.Mobile.Models.Common;
 using Bitir.Mobile.ViewModels;
 using Rg.Plugins.Popup.Services;
 using System;

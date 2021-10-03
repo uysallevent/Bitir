@@ -3,6 +3,7 @@ using AuthModule.Dto;
 using AuthModule.Entities;
 using AuthModule.Interfaces;
 using BaseModule.Controllers;
+using Core.Exceptions;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -27,32 +28,17 @@ namespace AuthModule.Controllers
         [HttpPost("Login")]
         public async Task<IActionResult> Login([FromBody] LoginDto loginDto)
         {
-            try
-            {
-                var result = await _authBusinessBase.Login(loginDto);
-                return Ok(result);
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError(ex, ex.Message ?? "While login operation, error occurred");
-                return BadRequest(ex.Message ?? "While login operation, error occurred");
-            }
+            var result = await _authBusinessBase.Login(loginDto);
+            return Ok(result);
+
         }
 
         [AllowAnonymous]
         [HttpPost("Register")]
         public async Task<IActionResult> Register([FromBody] UserAccount userAccount)
         {
-            try
-            {
-                var result = await _authBusinessBase.Register(userAccount);
-                return Ok(result);
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError(ex, ex.Message ?? "While login operation, error occurred");
-                return BadRequest(ex.Message ?? "While login operation, error occurred");
-            }
+            var result = await _authBusinessBase.Register(userAccount);
+            return Ok(result);
         }
 
         [NonAction]

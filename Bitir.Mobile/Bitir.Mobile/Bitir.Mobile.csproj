@@ -6,6 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Data\profile.json" />
     <None Remove="Resources\Fonts\Montserrat-Bold.ttf" />
     <None Remove="Resources\Fonts\Montserrat-Medium.ttf" />
     <None Remove="Resources\Fonts\Montserrat-Regular.ttf" />
@@ -14,6 +15,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <EmbeddedResource Include="Data\profile.json" />
     <EmbeddedResource Include="Resources\Fonts\Montserrat-Bold.ttf" />
     <EmbeddedResource Include="Resources\Fonts\Montserrat-Medium.ttf" />
     <EmbeddedResource Include="Resources\Fonts\Montserrat-Regular.ttf" />
@@ -24,8 +26,10 @@
   <ItemGroup>
     <PackageReference Include="DotNetHelper-Connectivity" Version="2018.6.18.18" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+    <PackageReference Include="RestSharp" Version="106.12.0" />
     <PackageReference Include="Rg.Plugins.Popup" Version="2.0.0.12" />
     <PackageReference Include="Syncfusion.Xamarin.Buttons" Version="19.2.0.62" />
+    <PackageReference Include="Syncfusion.Xamarin.Cards" Version="19.2.0.62" />
     <PackageReference Include="Syncfusion.Xamarin.Core" Version="19.2.0.62" />
     <PackageReference Include="Syncfusion.Xamarin.SfChart" Version="19.2.0.62" />
     <PackageReference Include="Syncfusion.Xamarin.SfComboBox" Version="19.2.0.62" />
@@ -123,6 +127,9 @@
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Views\LoginPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\MasterPage.xaml">
       <Generator>MSBuild:Compile</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Views\ProductAddPage.xaml">

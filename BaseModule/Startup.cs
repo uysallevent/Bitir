@@ -1,3 +1,5 @@
+using Core.Extensions;
+using Core.Middlewares;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;

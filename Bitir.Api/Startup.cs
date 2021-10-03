@@ -1,5 +1,7 @@
 using Bitir.Data;
 using Bitir.Data.Contexts;
+using Core.Extensions;
+using Core.Middlewares;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -47,6 +49,7 @@ namespace ModulerApi
             {
                 app.UseDeveloperExceptionPage();
             }
+            app.UseMiddleware<ExceptionMiddleware>();
             app.UseRouting();
             app.UseAuthentication();
             app.UseAuthorization();
@@ -66,8 +69,6 @@ namespace ModulerApi
                     module.Startup.Configure(builder, env);
                 });
             }
-
-
 
             using (var serviceScope = app.ApplicationServices.GetService<IServiceScopeFactory>().CreateScope())
             {

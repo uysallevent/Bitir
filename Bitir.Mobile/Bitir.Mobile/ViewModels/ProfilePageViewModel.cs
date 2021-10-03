@@ -1,6 +1,8 @@
-﻿using Bitir.Mobile.Exeptions;
+﻿
+using Bitir.Mobile.Exceptions;
 using Bitir.Mobile.Models;
 using Bitir.Mobile.Models.Auth;
+using Bitir.Mobile.Models.Common;
 using Bitir.Mobile.Views;
 using Rg.Plugins.Popup.Services;
 using System;

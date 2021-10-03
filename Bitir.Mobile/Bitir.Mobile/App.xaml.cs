@@ -1,5 +1,6 @@
     using Bitir.Mobile.Models;
 using Bitir.Mobile.Models.Auth;
+using Bitir.Mobile.Models.Common;
 using Bitir.Mobile.Services;
 using Bitir.Mobile.Services.Interfaces;
 using Bitir.Mobile.ViewModels;
@@ -26,17 +27,17 @@ namespace Bitir.Mobile
             InitializeComponent();
             DependencyService.Register<AuthService>();
             MessagingCenter.Subscribe<BaseViewModel, ExceptionTransfer>(this, "infomessage", (s, e) =>
-           {
-               if (!string.IsNullOrEmpty(e.NotificationMessage))
                {
-                   MainThread.BeginInvokeOnMainThread(async() =>
+                   if (!string.IsNullOrEmpty(e.NotificationMessage))
                    {
-                      await App.Current.MainPage.DisplayAlert("Bilgi", e.NotificationMessage, "Tamam");
-                   });
-               }
-           });
+                       MainThread.BeginInvokeOnMainThread(async() =>
+                       {
+                          await Current.MainPage.DisplayAlert("Bilgi", e.NotificationMessage, "Tamam");
+                       });
+                   }
+               });
 
-            MainPage = new DashboardPage();
+            MainPage = new LoginPage();
         }
 
         public static AuthResponse authResponse;

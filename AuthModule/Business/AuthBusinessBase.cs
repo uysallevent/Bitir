@@ -13,6 +13,7 @@ using Core.DataAccess.EntityFramework.Interfaces;
 using Core.Exceptions;
 using Core.Utilities.Results;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -26,19 +27,22 @@ namespace AuthModule.Business
         private IUnitOfWork _uow;
         private readonly ITokenHelper _tokenHelper;
         private readonly IConfiguration _configuration;
+        private readonly ILogger _logger;
 
         public AuthBusinessBase(
             IRepository<UserAccount> userAccountRepository,
             IRepository<UserToken> userTokenRepository,
             IUnitOfWork uow,
             ITokenHelper tokenHelper,
-            IConfiguration configuration) : base(userAccountRepository, uow)
+            IConfiguration configuration,
+            ILoggerFactory logger) : base(userAccountRepository, uow)
         {
             _userAccountRepository = userAccountRepository;
             _userTokenRepository = userTokenRepository;
             _uow = uow;
             _tokenHelper = tokenHelper;
             _configuration = configuration;
+            _logger = logger.CreateLogger<AuthBusinessBase>();
         }
 
         private AccessToken CreateAccessToken(UserAccount user, List<OperationClaim> list)
@@ -53,7 +57,7 @@ namespace AuthModule.Business
             var userCheck = await _userAccountRepository.GetAsync(x => (x.Username == entity.Username) || (x.Email == entity.Email));
             if (userCheck != null)
             {
-                throw new Exception("This username already exists in the system");
+                throw new BadRequestException("This username already exists in the system");
             }
             byte[] passwordHash, passwordSalt;
             HashingHelper.CreatePasswordHash(entity.Password, out passwordHash, out passwordSalt);
@@ -63,7 +67,7 @@ namespace AuthModule.Business
             var result = await _uow.SaveChangesAsync();
             if (result < 1)
             {
-                throw new OperationFailedException("User could not be insert");
+                throw new BadRequestException("User could not be insert");
             }
             AccessToken accessToken = await CreateToken(entity);
             return new ResponseWrapper<AccessToken>(accessToken);
@@ -86,12 +90,14 @@ namespace AuthModule.Business
             var entity = await _userAccountRepository.GetAsync(x => (x.Username == loginDto.Username) || (x.Email == loginDto.Username));
             if (entity == null)
             {
-                throw new OperationFailedException("Username could not be found");
+                _logger.LogError("Username could not be found");
+                throw new BadRequestException("Username could not be found");
             }
 
             if (!HashingHelper.VerifyPasswordHash(loginDto.Password.Trim(), entity.PasswordHash, entity.PasswordSalt))
             {
-                throw new OperationFailedException("Incorrect password !!");
+                _logger.LogError("Incorrect password");
+                throw new BadRequestException("Incorrect password !!");
             }
 
             AccessToken accessToken = await CreateToken(entity);

@@ -1,4 +1,4 @@
-﻿namespace Bitir.Mobile.Models
+﻿namespace Bitir.Mobile.Models.Common
 {
     public class PopupDataTransfer
     {

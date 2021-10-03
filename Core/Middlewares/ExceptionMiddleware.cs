@@ -1,9 +1,15 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Core.Exceptions;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Abstractions;
+using Microsoft.AspNetCore.Mvc.Infrastructure;
+using Microsoft.AspNetCore.Routing;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using System;
 using System.IO;
 using System.Net;
+using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -11,56 +17,83 @@ namespace Core.Middlewares
 {
     public class ExceptionMiddleware
     {
-        private readonly RequestDelegate _next;
+        private readonly RequestDelegate next;
+        private readonly IActionResultExecutor<ObjectResult> executor;
         private readonly ILogger<ExceptionMiddleware> _logger;
+        private static readonly ActionDescriptor EmptyActionDescriptor = new ActionDescriptor();
 
-        public ExceptionMiddleware(RequestDelegate next, ILogger<ExceptionMiddleware> logger)
+        public ExceptionMiddleware(RequestDelegate next, IActionResultExecutor<ObjectResult> executor, ILoggerFactory loggerFactory)
         {
-            _next = next;
-            _logger = logger;
+            this.next = next;
+            this.executor = executor;
+            _logger = loggerFactory.CreateLogger<ExceptionMiddleware>();
         }
 
-        public async Task InvokeAsync(HttpContext httpContext)
+        public async Task Invoke(HttpContext context)
         {
             try
             {
-                await _next(httpContext);
+                await next(context);
+            }
+            catch (BadRequestException ex)
+            {
+                _logger.LogError(ex, ex.Message);
+                if (context.Response.HasStarted)
+                {
+                    throw;
+                }
+                await ErrorHandle(context, ex, ErrorType.badRequest);
             }
             catch (Exception ex)
             {
-                try
+                _logger.LogError(ex, $"An unhandled exception has occurred while executing the request.");
+                if (context.Response.HasStarted)
                 {
-                    var requestBody = await FormatRequest(httpContext.Request);
-                    await HandleExceptionAsync(httpContext, ex, requestBody);
+                    throw;
                 }
-                catch (Exception aex)
-                {
-                    Console.WriteLine(JsonConvert.SerializeObject(aex));
-                    throw aex;
-                }
+                await ErrorHandle(context, ex, ErrorType.internalServer);
             }
         }
 
-        private Task HandleExceptionAsync(HttpContext context, Exception exception, string requestBody)
+        private async Task ErrorHandle(HttpContext context, Exception ex, ErrorType type)
         {
-            context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
-            Console.WriteLine(JsonConvert.SerializeObject(exception));
-            return context.Response.WriteAsync(exception.Message);
-        }
-
-        private async Task<string> FormatRequest(HttpRequest request)
-        {
-            var bodyStr = "";
-            var req = request;
-            req.EnableBuffering();
-
-            using (StreamReader reader = new StreamReader(req.Body, Encoding.UTF8, true, 1024, true))
+            ObjectResult result;
+            var routeData = context.GetRouteData() ?? new RouteData();
+            var actionContext = new ActionContext(context, routeData, EmptyActionDescriptor);
+            if (type == ErrorType.badRequest)
             {
-                bodyStr = await reader.ReadToEndAsync();
-                req.Body.Position = 0;
+                result = new ObjectResult(new ErrorResponse(ex.Message))
+                {
+                    StatusCode = (int)HttpStatusCode.BadRequest,
+                };
+            }
+            else
+            {
+                result = new ObjectResult(new ErrorResponse("Something went wrong"))
+                {
+                    StatusCode = (int)HttpStatusCode.InternalServerError,
+                };
             }
 
-            return bodyStr;
+            await executor.ExecuteAsync(actionContext, result);
+        }
+
+        [DataContract(Name = "ErrorResponse")]
+        public class ErrorResponse
+        {
+            [DataMember(Name = "Message")]
+            public string Message { get; set; }
+
+            public ErrorResponse(string message)
+            {
+                Message = message;
+            }
+        }
+
+        public enum ErrorType
+        {
+            internalServer,
+            badRequest
         }
     }
 }

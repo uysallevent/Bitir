@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Bitir.Mobile.Exeptions
+namespace Bitir.Mobile.Exceptions
 {
     public class ServiceException : Exception
     {

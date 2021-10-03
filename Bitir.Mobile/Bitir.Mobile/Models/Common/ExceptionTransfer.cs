@@ -1,7 +1,7 @@
 ﻿using System;
 using Xamarin.Forms;
 
-namespace Bitir.Mobile.Models
+namespace Bitir.Mobile.Models.Common
 {
     public class ExceptionTransfer
     {

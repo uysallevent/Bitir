@@ -1,8 +1,12 @@
-﻿using Bitir.Mobile.Exeptions;
+﻿using Bitir.Mobile.Exceptions;
+using Bitir.Mobile.Models.Common;
+using Newtonsoft.Json;
+using RestSharp;
 using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Linq;
+using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
@@ -12,21 +16,23 @@ using Xamarin.Essentials;
 
 namespace Bitir.Mobile.Services
 {
-    public abstract class BaseService : HttpClient, IDisposable
+    public abstract class BaseService : RestClient
     {
         private const string rootUrl = "192.168.1.73";
         private const int port = 45455;
-        protected HttpClient Client;
-        protected static object lockObj = new object();
+        protected RestClient restClient;
         protected UriBuilder uriBuilder;
 
-        public virtual async Task<HttpClient> GetClient(string path = null)
+        public virtual async Task<(RestClient, RestRequest)> GetRestClient(Method method, string path = null)
         {
             uriBuilder = new UriBuilder();
             uriBuilder.Host = rootUrl;
             uriBuilder.Port = port;
-            uriBuilder.Path = path;
-
+            if (restClient == null)
+            {
+                restClient = new RestClient(uriBuilder.Uri);
+                restClient.Timeout = 5000;
+            }
             if (Connectivity.NetworkAccess != NetworkAccess.Internet)
                 throw new ServiceException("İnternet bağlantınızı kontrol edin");
 
@@ -37,30 +43,27 @@ namespace Bitir.Mobile.Services
                 if (!IsServiceOn)
                     throw new ServiceException("Servise erişilemiyor");
             }
+            RestRequest restRequest = new RestRequest(path, method);
+            restRequest.AddHeader("Authorization", $"Bearer {App.authResponse?.Token}");
+            restRequest.AddHeader("Accept", "Application/json");
+            return (restClient, restRequest);
+        }
 
-            if (Client == null)
+        protected virtual T ResponseHandler<T>(IRestResponse<T> restResponse)
+        {
+            if (restResponse.StatusCode == HttpStatusCode.OK)
             {
-                Client = new HttpClient();
-                Client.BaseAddress = uriBuilder.Uri;
+                return restResponse.Data;
+            }
+            else if (restResponse.StatusCode == HttpStatusCode.BadRequest)
+            {
+                throw new BadRequestException(JsonConvert.DeserializeObject<ErrorResponse>(restResponse.Content));
+            }
+            else
+            {
+                throw new InternalServerErrorException("Servis hatası");
             }
 
-            Client.DefaultRequestHeaders.Authorization = (App.authResponse != null) ? new AuthenticationHeaderValue("Bearer", App.authResponse.Token) : null;
-            Client.DefaultRequestHeaders.Add("accept", "Application/json");
-            return await Task.FromResult(Client);
-        }
-
-        public string QueryParamBuilder(NameValueCollection parameters)
-        {
-            var query = HttpUtility.ParseQueryString(uriBuilder.Query);
-            query.Add(parameters);
-            uriBuilder.Query = query.ToString();
-            return uriBuilder.ToString();
-        }
-
-        public void Dispose()
-        {
-            GC.SuppressFinalize(this);
-            base.Dispose();
         }
     }
 }
