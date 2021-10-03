@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using ProductModule.Entities;
 using ProductModule.Interfaces;
+using System.Threading.Tasks;
 
 namespace ProductModule.Controllers
 {
@@ -15,6 +16,13 @@ namespace ProductModule.Controllers
         {
             _productBusinessBase = productBusinessBase;
             _logger = logger;
+        }
+
+        [HttpPost("GetSystemProducts")]
+        public async Task<IActionResult> GetSystemProducts()
+        {
+            var result = await _productBusinessBase.GetSystemProducts();
+            return Ok(result);
         }
     }
 }

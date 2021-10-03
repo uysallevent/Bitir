@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace ProductModule.Entities
 {
-    public class Unit:BaseEntity
+    public class Unit : BaseEntity
     {
         public string Name { get; set; }
         public string Abbreviation { get; set; }

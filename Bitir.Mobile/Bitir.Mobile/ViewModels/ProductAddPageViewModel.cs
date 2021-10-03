@@ -1,5 +1,9 @@
-﻿using Bitir.Mobile.Validators;
+﻿using Bitir.Mobile.Exceptions;
+using Bitir.Mobile.Models.Common;
+using Bitir.Mobile.Validators;
 using Bitir.Mobile.Validators.Rules;
+using System.Linq;
+using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Internals;
 
@@ -21,6 +25,7 @@ namespace Bitir.Mobile.ViewModels
             this.InitializeProperties();
             this.AddValidationRules();
             this.SubmitCommand = new Command(this.SubmitClicked);
+            Task.Run(async () => await GetSystemProducts());
         }
 
         #endregion
@@ -106,6 +111,29 @@ namespace Bitir.Mobile.ViewModels
             if (this.AreFieldsValid())
             {
                 // Do Something
+            }
+        }
+
+        private async Task GetSystemProducts()
+        {
+            IsBusy = true;
+            try
+            {
+                var result = await productService.GetSystemProducts();
+
+            }
+            catch (BadRequestException ex)
+            {
+                SendNotification(new ExceptionTransfer { ex = ex, NotificationMessage = ex.Message });
+
+            }
+            catch (InternalServerErrorException ex)
+            {
+                SendNotification(new ExceptionTransfer { ex = ex, NotificationMessage = "Servis hatası !!" });
+            }
+            finally
+            {
+                IsBusy = false;
             }
         }
 

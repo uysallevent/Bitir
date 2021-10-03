@@ -26,6 +26,7 @@ namespace Bitir.Mobile
             Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense("NTA1NzQ5QDMxMzkyZTMyMmUzMFBtdldHWFdrWS90K3o1azl6V3hpRmdSTnlIVFpHYzRsSkZjMEZDNXB2REE9");
             InitializeComponent();
             DependencyService.Register<AuthService>();
+            DependencyService.Register<ProductService>();
             MessagingCenter.Subscribe<BaseViewModel, ExceptionTransfer>(this, "infomessage", (s, e) =>
                {
                    if (!string.IsNullOrEmpty(e.NotificationMessage))

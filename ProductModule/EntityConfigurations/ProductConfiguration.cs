@@ -5,7 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Bitir.Data.EntityConfigurations
+namespace ProductModule.EntityConfigurations
 {
     public class ProductConfiguration : IEntityTypeConfiguration<Product>
     {
@@ -16,10 +16,22 @@ namespace Bitir.Data.EntityConfigurations
             builder.ToTable(tableName, schemaName).HasKey(x => x.Id);
             builder.Property(x => x.Name).IsRequired();
             builder.Property(x => x.CategoryId).IsRequired();
-            builder.Property(x => x.UnitId).IsRequired();
             builder.Property(x => x.Status).IsRequired();
             builder.Property(x => x.InsertDate).HasColumnType("datetime").HasDefaultValueSql("getdate()").IsRequired();
             builder.Property(x => x.UpdateDate).HasColumnType("datetime").IsRequired();
+            builder.HasData(new Product[]
+            {
+                new Product
+                {
+                    Id=1,
+                    Name="Süt 1 LT",
+                    CategoryId=1,
+                    Description="Günlük İnek Sütü",
+                    Status=Core.Enums.Status.Active,
+                    InsertDate=DateTime.Now,
+                    UpdateDate=DateTime.Now
+                }
+            });
         }
     }
 }

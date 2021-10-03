@@ -134,7 +134,7 @@ namespace Bitir.Mobile.ViewModels
         /// Invoked when the Log In button is clicked.
         /// </summary>
         /// <param name="obj">The Object</param>
-        private async void LoginClicked(object obj) 
+        private async void LoginClicked(object obj)
         {
             if (this.AreFieldsValid())
             {
@@ -150,10 +150,11 @@ namespace Bitir.Mobile.ViewModels
                     if (result != null)
                     {
                         App.authResponse = result.Result;
-                        await Application.Current.MainPage.Navigation.PushModalAsync(new DashboardPage(), true);
+                        await Application.Current.MainPage.Navigation.PushModalAsync(new ProductAddPage(), true);
+                        //await Application.Current.MainPage.Navigation.PushModalAsync(new DashboardPage(), true);
                     }
                 }
-                catch(BadRequestException ex)
+                catch (BadRequestException ex)
                 {
                     SendNotification(new ExceptionTransfer { ex = ex, NotificationMessage = ex.Message });
 

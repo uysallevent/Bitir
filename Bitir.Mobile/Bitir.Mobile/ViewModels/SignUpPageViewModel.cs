@@ -249,6 +249,7 @@ namespace Bitir.Mobile.ViewModels
 
                     var result = await authService.RegisterAsync(new AuthRegisterRequest
                     {
+                        Id = 0,
                         Name = (this.Name.Value.Contains(' ')) ? this.Name.Value.Split(' ')[0] : this.Name.Value,
                         Surname = (this.Name.Value.Contains(' ')) ? this.Name.Value.Split(' ')[1] : string.Empty,
                         Username = this.Email.Value,
@@ -264,9 +265,14 @@ namespace Bitir.Mobile.ViewModels
                         SendNotification(new ExceptionTransfer { NotificationMessage = "Hesap Oluşturma Başarılı" });
                     }
                 }
-                catch (ServiceException ex)
+                catch (BadRequestException ex)
                 {
-                    SendNotification(new ExceptionTransfer { ex = ex, NotificationMessage = "Hesap oluşturulamadı" });
+                    SendNotification(new ExceptionTransfer { ex = ex, NotificationMessage = ex.Message });
+
+                }
+                catch (InternalServerErrorException ex)
+                {
+                    SendNotification(new ExceptionTransfer { ex = ex, NotificationMessage = "Servis hatası !!" });
                 }
                 finally
                 {

@@ -28,6 +28,7 @@ namespace Bitir.Mobile.Services
         public async Task<ResponseWrapperListing<AccountTypeResponse>> GetAccoutTypesAsync()
         {
             var restClientRequest = await GetRestClient(Method.POST, accountTypesPath);
+            restClientRequest.Item2.AddParameter("application/json", "{}", ParameterType.RequestBody);
             var restResponse = await restClientRequest.Item1.ExecuteAsync<ResponseWrapperListing<AccountTypeResponse>>(restClientRequest.Item2);
             return ResponseHandler(restResponse);
 

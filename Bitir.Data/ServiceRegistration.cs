@@ -7,6 +7,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using ProductModule.Entities;
+using ProductModule.EntityConfigurations;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -28,8 +29,8 @@ namespace Bitir.Data
             serviceCollection.AddScoped<IRepository<ProductPrice>, EFRepository<ProductPrice, BitirMainContext>>();
             serviceCollection.AddScoped<IRepository<ProductStock>, EFRepository<ProductStock, BitirMainContext>>();
             serviceCollection.AddScoped<IRepository<AccountType>, EFRepository<AccountType, BitirMainContext>>();
-
-
+            serviceCollection.AddScoped<IRepository<ProductQuantity>, EFRepository<ProductQuantity, BitirMainContext>>();
+            serviceCollection.AddScoped<IRepository<Product_ProductQuantity>, EFRepository<Product_ProductQuantity, BitirMainContext>>();
         }
     }
 }

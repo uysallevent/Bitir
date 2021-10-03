@@ -17,6 +17,7 @@ namespace Bitir.Mobile.ViewModels
     public class BaseViewModel : INotifyPropertyChanged
     {
         public IAuthService authService => DependencyService.Get<IAuthService>();
+        public IProductService productService => DependencyService.Get<IProductService>();
 
         bool isBusy = false;
         public bool IsBusy

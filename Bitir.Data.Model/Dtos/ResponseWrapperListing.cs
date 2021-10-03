@@ -12,6 +12,10 @@ namespace Bitir.Data.Model.Dtos
             Page = page;
             List = tentities;
         }
+        public ResponseWrapperListing()
+        {
+
+        }
 
         public int Total { get; set; }
         public int Page { get; set; }

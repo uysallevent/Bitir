@@ -2,10 +2,8 @@
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using ProductModule.Entities;
 using System;
-using System.Collections.Generic;
-using System.Text;
 
-namespace Bitir.Data.EntityConfigurations
+namespace ProductModule.EntityConfigurations
 {
     public class UnitConfiguration : IEntityTypeConfiguration<Unit>
     {
@@ -19,6 +17,17 @@ namespace Bitir.Data.EntityConfigurations
             builder.Property(x => x.Status).IsRequired();
             builder.Property(x => x.InsertDate).HasColumnType("datetime").HasDefaultValueSql("getdate()").IsRequired();
             builder.Property(x => x.UpdateDate).HasColumnType("datetime").IsRequired();
+            builder.HasData(new Unit[] {
+                new Unit
+                {
+                    Id=1,
+                    Name="Litre",
+                    Abbreviation="lt",
+                    Status=Core.Enums.Status.Active,
+                    InsertDate=DateTime.Now,
+                    UpdateDate=DateTime.Now
+                }
+            });
         }
     }
 }

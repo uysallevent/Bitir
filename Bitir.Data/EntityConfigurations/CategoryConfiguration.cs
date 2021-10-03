@@ -18,6 +18,16 @@ namespace Bitir.Data.EntityConfigurations
             builder.Property(x => x.Status).IsRequired();
             builder.Property(x => x.InsertDate).HasColumnType("datetime").HasDefaultValueSql("getdate()").IsRequired();
             builder.Property(x => x.UpdateDate).HasColumnType("datetime").IsRequired();
+            builder.HasData(new Category[]{
+                new Category
+                {
+                    Id=1,
+                    Name="Süt Ürünleri",
+                    InsertDate=DateTime.Now,
+                    Status=Core.Enums.Status.Active,
+                    UpdateDate=DateTime.Now,
+                }
+            });
         }
     }
 }
