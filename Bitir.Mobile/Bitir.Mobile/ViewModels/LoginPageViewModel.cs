@@ -150,7 +150,11 @@ namespace Bitir.Mobile.ViewModels
                     if (result != null)
                     {
                         App.authResponse = result.Result;
-                        await Application.Current.MainPage.Navigation.PushModalAsync(new ProductAddPage(), true);
+
+                        Application.Current.MainPage = new AppShell();
+
+                        //await Application.Current.MainPage.Navigation.PushModalAsync(new ProductAddPage(), true);
+
                         //await Application.Current.MainPage.Navigation.PushModalAsync(new DashboardPage(), true);
                     }
                 }
