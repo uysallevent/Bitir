@@ -151,7 +151,8 @@ namespace Bitir.Mobile.ViewModels
                     {
                         App.authResponse = result.Result;
 
-                        Application.Current.MainPage = new AppShell();
+                        Application.Current.MainPage = new NavigationPage(new MainNavPage());
+                        //Application.Current.MainPage = new AppShell();
 
                         //await Application.Current.MainPage.Navigation.PushModalAsync(new ProductAddPage(), true);
 

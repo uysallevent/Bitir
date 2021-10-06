@@ -1,29 +1,26 @@
 ﻿using Bitir.Mobile.Exceptions;
 using Bitir.Mobile.Models.Common;
+using Bitir.Mobile.Models.Product;
 using Bitir.Mobile.Validators;
 using Bitir.Mobile.Validators.Rules;
-using System.Linq;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Internals;
 
 namespace Bitir.Mobile.ViewModels
 {
-    /// <summary>
-    /// ViewModel for Business Registration Form page 
-    /// </summary> 
     [Preserve(AllMembers = true)]
     public class ProductAddPageViewModel : LoginViewModel
     {
         #region Constructor
 
-        /// <summary>
-        /// Initializes a new instance of the <see cref="ProductAddPageViewModel" /> class
-        /// </summary>
         public ProductAddPageViewModel()
         {
             this.InitializeProperties();
             this.AddValidationRules();
+            this.BackButtonCommand = new Command(async () => await BackButtonClicked());
             this.SubmitCommand = new Command(this.SubmitClicked);
             Task.Run(async () => await GetSystemProducts());
         }
@@ -31,86 +28,120 @@ namespace Bitir.Mobile.ViewModels
         #endregion
 
         #region Properties
+        public IList<ProductResponse> SystemProducts
+        {
+            get
+            {
+                return this._systemProducts;
+            }
 
-        /// <summary>
-        /// Gets or sets the property that bounds with an entry that gets the Full Name from user.
-        /// </summary>
-        public ValidatableObject<string> FullName { get; set; }
+            set
+            {
+                if (this._systemProducts == value)
+                {
+                    return;
+                }
 
-        /// <summary>
-        /// Gets or sets the property that bounds with an entry that gets the Business Name from user.
-        /// </summary>
-        public string BusinessName { get; set; }
+                this.SetProperty(ref this._systemProducts, value);
+            }
+        }
 
-        /// <summary>
-        /// Gets or sets the property that bounds with a ComboBox that gets the Business from user.
-        /// </summary>
-        public string Business { get; set; }
+        public ValidatableObject<int?> Id
+        {
+            get
+            {
+                return this._id;
+            }
 
-        /// <summary>
-        /// Gets or sets the property that bounds with an entry that gets the Phone Number from user.
-        /// </summary>
-        public string PhoneNumber { get; set; }
+            set
+            {
+                if (this._id == value)
+                {
+                    return;
+                }
 
-        /// <summary>
-        /// Gets or sets the property that bounds with an entry that gets the Street Address from user.
-        /// </summary>
-        public string StreetAddress { get; set; }
+                this.SetProperty(ref this._id, value);
+            }
+        }
 
-        /// <summary>
-        /// Gets or sets the property that bounds with an entry that gets the City from user.
-        /// </summary>
-        public string City { get; set; }
+        public ValidatableObject<decimal?> Quantity
+        {
+            get
+            {
+                return this._quantity;
+            }
 
-        #endregion 
+            set
+            {
+                if (this._quantity == value)
+                {
+                    return;
+                }
+
+                this.SetProperty(ref this._quantity, value);
+            }
+        }
+
+        public ValidatableObject<decimal?> Price
+        {
+            get
+            {
+                return this._price;
+            }
+
+            set
+            {
+                if (this._price == value)
+                {
+                    return;
+                }
+
+                this.SetProperty(ref this._price, value);
+            }
+        }
+        #endregion
+
+        #region Fields
+        private IList<ProductResponse> _systemProducts;
+        private ValidatableObject<int?> _id;
+        private ValidatableObject<decimal?> _quantity;
+        private ValidatableObject<decimal?> _price;
+        #endregion
 
         #region Comments
-
-        /// <summary>
-        /// Gets or sets the command is executed when the Submit button is clicked.
-        /// </summary>
         public Command SubmitCommand { get; set; }
-
+        public Command BackButtonCommand { get; set; }
         #endregion
 
         #region Methods
-
-        /// <summary>
-        /// Initializzing the properties.
-        /// </summary>
         private void InitializeProperties()
         {
-            this.FullName = new ValidatableObject<string>();
+            this.Id = new ValidatableObject<int?>();
+            this.Quantity = new ValidatableObject<decimal?>();
+            this.Price = new ValidatableObject<decimal?>();
         }
 
-        /// <summary>
-        /// Validation rule for name
-        /// </summary>
         private void AddValidationRules()
         {
-            this.FullName.Validations.Add(new IsNotNullOrEmptyRule<string> { ValidationMessage = "Name Required" });
+            this.Id.Validations.Add(new IsNotNullOrEmptyRule<int?> { ValidationMessage = "Lütfen bir ürün seçin" });
+            this.Quantity.Validations.Add(new IsNotNullOrEmptyRule<decimal?> { ValidationMessage = "Lütfen miktar bilgisi girin" });
+            this.Price.Validations.Add(new IsNotNullOrEmptyRule<decimal?> { ValidationMessage = "Lütfen fiyat bilgisi girin" });
+
         }
 
-        /// <summary>
-        /// Check name is valid or not
-        /// </summary>
-        /// <returns>Returns the fields are valid or not</returns>
-        private bool AreFieldsValid()
+        private bool AreFieldsValid()   
         {
-            bool isEmailValid = this.Email.Validate();
-            bool isFullNameValid = this.FullName.Validate();
-            return isFullNameValid && isEmailValid;
+            bool isId = this.Id.Validate();
+            bool isQuantity = this.Quantity.Validate();
+            bool isPrice = this.Price.Validate();
+            return isId && isQuantity && isPrice;
         }
 
-        /// <summary>
-        /// Invoked when the Submit button clicked
-        /// </summary>
-        /// <param name="obj">The object</param>
         private void SubmitClicked(object obj)
         {
             if (this.AreFieldsValid())
             {
-                // Do Something
+
             }
         }
 
@@ -120,7 +151,7 @@ namespace Bitir.Mobile.ViewModels
             try
             {
                 var result = await productService.GetSystemProducts();
-
+                SystemProducts = new ObservableCollection<ProductResponse>(result.List);
             }
             catch (BadRequestException ex)
             {
@@ -136,6 +167,12 @@ namespace Bitir.Mobile.ViewModels
                 IsBusy = false;
             }
         }
+
+        private async Task BackButtonClicked()
+        {
+            _ = await App.Current.MainPage.Navigation.PopModalAsync(true);
+        }
+
 
         #endregion
     }

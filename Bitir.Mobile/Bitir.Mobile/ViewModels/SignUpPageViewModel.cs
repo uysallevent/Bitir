@@ -292,10 +292,14 @@ namespace Bitir.Mobile.ViewModels
                     AccountTypes = result.List.ToList();
                 }
             }
-            catch (ServiceException ex)
+            catch (BadRequestException ex)
             {
-                this.SignUpButtonStatus = false;
-                SendNotification(new ExceptionTransfer { ex = ex, NotificationMessage = "Hesap tipleri yüklenemedi" });
+                SendNotification(new ExceptionTransfer { ex = ex, NotificationMessage = ex.Message });
+
+            }
+            catch (InternalServerErrorException ex)
+            {
+                SendNotification(new ExceptionTransfer { ex = ex, NotificationMessage = "Servis hatası !!" });
             }
             finally
             {

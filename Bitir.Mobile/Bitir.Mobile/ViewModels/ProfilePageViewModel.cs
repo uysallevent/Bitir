@@ -108,9 +108,14 @@ namespace Bitir.Mobile.ViewModels
                     ProfileResponse = accountDetail.Result;
                 }
             }
-            catch (ServiceException ex)
+            catch (BadRequestException ex)
             {
-                SendNotification(new ExceptionTransfer { ex = ex, NotificationMessage = "Hesap bilgileri bulunamadı" });
+                SendNotification(new ExceptionTransfer { ex = ex, NotificationMessage = ex.Message });
+
+            }
+            catch (InternalServerErrorException ex)
+            {
+                SendNotification(new ExceptionTransfer { ex = ex, NotificationMessage = "Servis hatası !!" });
             }
             finally
             {

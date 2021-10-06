@@ -6,6 +6,5 @@ namespace Bitir.Mobile.Models.Auth
 {
     public class AuthRegisterResponse:AuthRegisterRequest
     {
-        public int Id { get; set; }
     }
 }

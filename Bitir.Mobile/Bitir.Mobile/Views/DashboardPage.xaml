@@ -10,7 +10,6 @@
     xmlns:controls="clr-namespace:Bitir.Mobile.Controls;assembly=Bitir.Mobile"
     xmlns:gradient="clr-namespace:Syncfusion.XForms.Graphics;assembly=Syncfusion.Core.XForms"
     xmlns:listView="clr-namespace:Syncfusion.ListView.XForms;assembly=Syncfusion.SfListView.XForms"
-    xmlns:local="clr-namespace:Bitir.Mobile.Views"
     xmlns:viewModel="clr-namespace:Bitir.Mobile.ViewModels"
     x:Name="healthCarePage"
     BackgroundColor="{DynamicResource Gray-Bg}"
@@ -29,17 +28,6 @@
                     Title="Ana Sayfa"
                     FontFamily="Montserrat-Medium"
                     FontSize="16">
-                    <controls:TitleView.LeadingView>
-
-                        <buttons:SfButton
-                            Command="{Binding Path=BindingContext.MenuCommand, Source={x:Reference healthCarePage}}"
-                            FontSize="22"
-                            HorizontalOptions="Start"
-                            Style="{StaticResource IconButtonStyle}"
-                            Text="{StaticResource BurgerMenu}" />
-
-                    </controls:TitleView.LeadingView>
-
                     <controls:TitleView.TrailingView>
 
                         <border:SfBorder

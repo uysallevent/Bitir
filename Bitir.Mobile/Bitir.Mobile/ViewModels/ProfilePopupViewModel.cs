@@ -133,9 +133,14 @@ namespace Bitir.Mobile.ViewModels
                 }
 
             }
-            catch (ServiceException ex)
+            catch (BadRequestException ex)
             {
-                SendNotification(new ExceptionTransfer { ex = ex, NotificationMessage = "Hesap bilgisi güncellenemedi" });
+                SendNotification(new ExceptionTransfer { ex = ex, NotificationMessage = ex.Message });
+
+            }
+            catch (InternalServerErrorException ex)
+            {
+                SendNotification(new ExceptionTransfer { ex = ex, NotificationMessage = "Servis hatası !!" });
             }
             finally
             {

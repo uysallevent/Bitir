@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<TabbedPage
+    x:Class="Bitir.Mobile.Views.MainNavPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:android="clr-namespace:Xamarin.Forms.PlatformConfiguration.AndroidSpecific;assembly=Xamarin.Forms.Core"
+    xmlns:local="clr-namespace:Bitir.Mobile.Views"
+    android:TabbedPage.BarItemColor="{DynamicResource Steel}"
+    android:TabbedPage.BarSelectedItemColor="{DynamicResource PrimaryColor}"
+    android:TabbedPage.ToolbarPlacement="Bottom"
+    BackgroundColor="{DynamicResource Gray-Bg}"
+    BarBackgroundColor="{DynamicResource Gray-Bg}"
+    NavigationPage.HasNavigationBar="False">
+    <local:DashboardPage Title="Dashboard">
+        <local:DashboardPage.IconImageSource>
+            <FontImageSource
+                FontFamily="FontIcons"
+                Glyph="{StaticResource Calendar}"
+                Size="16" />
+        </local:DashboardPage.IconImageSource>
+    </local:DashboardPage>
+    <local:DashboardPage Title="Siparisler">
+        <local:DashboardPage.IconImageSource>
+            <FontImageSource
+                FontFamily="FontIcons"
+                Glyph="{StaticResource AlbumsIcon}"
+                Size="16" />
+        </local:DashboardPage.IconImageSource>
+    </local:DashboardPage>
+    <local:SettingsPage Title="Settings">
+        <local:SettingsPage.IconImageSource>
+            <FontImageSource
+                FontFamily="FontIcons"
+                Glyph="{StaticResource Settings}"
+                Size="16" />
+        </local:SettingsPage.IconImageSource>
+    </local:SettingsPage>
+</TabbedPage>
