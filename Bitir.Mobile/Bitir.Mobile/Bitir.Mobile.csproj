@@ -38,6 +38,7 @@
     <PackageReference Include="Syncfusion.Xamarin.SfComboBox" Version="19.2.0.62" />
     <PackageReference Include="Syncfusion.Xamarin.SfListView" Version="19.2.0.62" />
     <PackageReference Include="Syncfusion.Xamarin.SfNavigationDrawer" Version="19.2.0.62" />
+    <PackageReference Include="Syncfusion.Xamarin.SfPicker" Version="19.2.0.62" />
     <PackageReference Include="Syncfusion.Xamarin.SfRating" Version="19.2.0.62" />
     <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.11.0" />
     <PackageReference Include="Xamarin.Forms" Version="5.0.0.2012" />  

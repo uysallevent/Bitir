@@ -3,7 +3,6 @@
     x:Class="Bitir.Mobile.Views.ProductAddPage"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:ListCollection="clr-namespace:System.Collections.Generic;assembly=netstandard"
     xmlns:border="clr-namespace:Syncfusion.XForms.Border;assembly=Syncfusion.Core.XForms"
     xmlns:buttons="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms"
     xmlns:combobox="clr-namespace:Syncfusion.XForms.ComboBox;assembly=Syncfusion.SfComboBox.XForms"
@@ -17,10 +16,6 @@
     x:Name="ProductAdd"
     NavigationPage.HasNavigationBar="False">
 
-    <ContentPage.BindingContext>
-        <viewModel:ProductAddPageViewModel />
-    </ContentPage.BindingContext>
-
     <ContentPage.Resources>
         <ResourceDictionary>
             <converter:BooleanToColorConverter x:Key="ColorConverter" />
@@ -28,6 +23,10 @@
             <converter:NameValidationConverter x:Key="FirstValidationErrorConverter" />
         </ResourceDictionary>
     </ContentPage.Resources>
+
+    <ContentPage.BindingContext>
+        <viewModel:ProductAddPageViewModel />
+    </ContentPage.BindingContext>
 
     <ContentPage.ControlTemplate>
         <ControlTemplate>
@@ -54,7 +53,8 @@
                 BackgroundColor="{DynamicResource Gray-100}"
                 Spacing="0">
                 <!--  Product -->
-                <Label
+                <StackLayout>
+                    <Label
                     Margin="0,24,0,4"
                     FontFamily="Montserrat-Medium"
                     FontSize="12"
@@ -62,37 +62,48 @@
                     Text="Ürün"
                     TextColor="{DynamicResource Gray-800}" />
 
-                <inputLayout:SfTextInputLayout Style="{DynamicResource TextInputLayoutStyle}">
-                    <combobox:SfComboBox
-                        x:Name="BusinessPicker"
+                    <inputLayout:SfTextInputLayout Style="{DynamicResource TextInputLayoutStyle}">
+                            <combobox:SfComboBox
+                        x:Name="ProductPicker"
                         DataSource="{Binding SystemProducts}"
                         DisplayMemberPath="Name"
                         SelectedValuePath="Id"
+                        SelectedItem="{Binding SelectedProduct.Value,Mode=TwoWay}"
                         Style="{StaticResource TextInputLayoutComboBoxStyle}"
                         VerticalOptions="CenterAndExpand"
                         Watermark="Ürün Seçin">
-                        <combobox:SfComboBox.ItemTemplate>
-                            <DataTemplate>
-                                <Label Text="{Binding Name}" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
-                            </DataTemplate>
-                        </combobox:SfComboBox.ItemTemplate>
-                    </combobox:SfComboBox>
-                </inputLayout:SfTextInputLayout>
+                                <combobox:SfComboBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <Label Text="{Binding Name}" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
+                                    </DataTemplate>
+                                </combobox:SfComboBox.ItemTemplate>
+                            </combobox:SfComboBox>
+                    </inputLayout:SfTextInputLayout>
+                    <!--  Label to display error message  -->
+                    <Label
+                                x:Name="ProductPickerValidationLabel"
+                                Margin="15,-3,0,0"
+                                IsVisible="{Binding SelectedProduct.IsValid, Converter={StaticResource InverseBoolConverter}}"
+                                Style="{StaticResource SimpleLabelStyle}"
+                                Text="{Binding SelectedProduct.Errors, Converter={StaticResource FirstValidationErrorConverter}}"
+                                TextColor="{DynamicResource Red}"
+                                VerticalOptions="FillAndExpand" />
+                </StackLayout>
+
 
                 <!--  Quantity  -->
-                <Label
+                <StackLayout>
+                    <Label
                     Margin="0,24,0,4"
                     FontFamily="Montserrat-Medium"
                     FontSize="12"
                     HeightRequest="18"
                     Text="Ürün Satış Stoğu"
                     TextColor="{DynamicResource Gray-800}" />
-
-                <border:SfBorder 
-                    BorderColor="{Binding Source={x:Reference ProductQuantityEntry}, Path=IsFocused, Converter={StaticResource ColorConverter}, ConverterParameter=3}" 
-                    Style="{StaticResource DataFormBorderlessEntryBorderStyle}">
-                    <Grid ColumnDefinitions="*, Auto">
-                        <controls:BorderlessEntry
+                    <border:SfBorder 
+                    BorderColor="{Binding Source={x:Reference ProductQuantityEntry}, Path=IsFocused, Converter={StaticResource ColorConverter}, ConverterParameter=0}" Style="{StaticResource DataFormBorderlessEntryBorderStyle}">
+                        <Grid ColumnDefinitions="*, Auto">
+                            <controls:BorderlessEntry
                         x:Name="ProductQuantityEntry"
                         Margin="12,0"
                         HeightRequest="40"
@@ -100,20 +111,20 @@
                         Placeholder="Adet"
                         Text="{Binding Quantity.Value}"
                         Style="{StaticResource BorderlessEntryStyle}">
-                            <Entry.Behaviors>
-                                <behaviour:EntryLineValidationBehaviour IsValid="{Binding Quantity.IsValid}" />
-                            </Entry.Behaviors>
-                        </controls:BorderlessEntry>
-                        <!--  Label to display error icon  -->
-                        <Label
+                                <Entry.Behaviors>
+                                    <behaviour:EntryLineValidationBehaviour IsValid="{Binding Quantity.IsValid}" />
+                                </Entry.Behaviors>
+                            </controls:BorderlessEntry>
+                            <!--  Label to display error icon  -->
+                            <Label
                                         Grid.Column="1"
                                         IsVisible="{Binding Path=IsVisible, Source={x:Reference QuantityValidationLabel}}"
                                         Style="{StaticResource ErrorIconLabelStyle}"
                                         Text="{StaticResource Error}" />
-                    </Grid>
-                </border:SfBorder>
-                <!--  Label to display error message  -->
-                <Label
+                        </Grid>
+                    </border:SfBorder>
+                    <!--  Label to display error message  -->
+                    <Label
                                 x:Name="QuantityValidationLabel"
                                 Margin="15,-3,0,0"
                                 IsVisible="{Binding Quantity.IsValid, Converter={StaticResource InverseBoolConverter}}"
@@ -121,26 +132,47 @@
                                 Text="{Binding Quantity.Errors, Converter={StaticResource FirstValidationErrorConverter}}"
                                 TextColor="{DynamicResource Red}"
                                 VerticalOptions="FillAndExpand" />
+                </StackLayout>
+
 
                 <!--  Price  -->
-                <Label
+                <StackLayout>
+                    <Label
                     Margin="0,24,0,4"
                     FontFamily="Montserrat-Medium"
                     FontSize="12"
                     HeightRequest="18"
                     Text="Ürün Birim Fiyatı"
                     TextColor="{DynamicResource Gray-800}" />
-
-                <border:SfBorder BorderColor="{Binding Source={x:Reference ProductQuantityEntry}, Path=IsFocused, Converter={StaticResource ColorConverter}, ConverterParameter=3}" Style="{StaticResource DataFormBorderlessEntryBorderStyle}">
-                    <controls:BorderlessEntry
+                    <border:SfBorder BorderColor="{Binding Source={x:Reference ProductQuantityEntry}, Path=IsFocused, Converter={StaticResource ColorConverter}, ConverterParameter=0}" Style="{StaticResource DataFormBorderlessEntryBorderStyle}">
+                        <Grid>
+                            <controls:BorderlessEntry
                         x:Name="ProductPriceEntry"
                         Margin="12,0"
                         HeightRequest="40"
                         Keyboard="Numeric"
                         Placeholder="Fiyat (TL)"
+                        Text="{Binding Price.Value}"
                         Style="{StaticResource BorderlessEntryStyle}">
-                    </controls:BorderlessEntry>
-                </border:SfBorder>
+                            </controls:BorderlessEntry>
+                            <Label
+                                        Grid.Column="1"
+                                        IsVisible="{Binding Path=IsVisible, Source={x:Reference PriceValidationLabel}}"
+                                        Style="{StaticResource ErrorIconLabelStyle}"
+                                        Text="{StaticResource Error}" />
+                        </Grid>
+                    </border:SfBorder>
+                    <!--  Label to display error message  -->
+                    <Label
+                                x:Name="PriceValidationLabel"
+                                Margin="15,-3,0,0"
+                                IsVisible="{Binding Price.IsValid, Converter={StaticResource InverseBoolConverter}}"
+                                Style="{StaticResource SimpleLabelStyle}"
+                                Text="{Binding Price.Errors, Converter={StaticResource FirstValidationErrorConverter}}"
+                                TextColor="{DynamicResource Red}"
+                                VerticalOptions="FillAndExpand" />
+                </StackLayout>
+
 
 
 

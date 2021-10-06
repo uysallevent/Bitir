@@ -1,14 +1,11 @@
 ﻿
 using Bitir.Mobile.Exceptions;
-using Bitir.Mobile.Models;
 using Bitir.Mobile.Models.Auth;
 using Bitir.Mobile.Models.Common;
 using Bitir.Mobile.Validators;
 using Bitir.Mobile.Validators.Rules;
 using Bitir.Mobile.Views;
-using System.Collections;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
 using Xamarin.Forms;
@@ -16,9 +13,6 @@ using Xamarin.Forms.Internals;
 
 namespace Bitir.Mobile.ViewModels
 {
-    /// <summary>
-    /// ViewModel for sign-up page.
-    /// </summary>
     [Preserve(AllMembers = true)]
     public class SignUpPageViewModel : LoginViewModel
     {
@@ -33,15 +27,13 @@ namespace Bitir.Mobile.ViewModels
         private ValidatableObject<bool> vendor;
 
         private IList<AccountTypeResponse> accountTypes;
+
         private bool signUpButtonStatus;
 
         #endregion
 
         #region Constructor
 
-        /// <summary>
-        /// Initializes a new instance for the <see cref="SignUpPageViewModel" /> class.
-        /// </summary>
         public SignUpPageViewModel()
         {
             this.InitializeProperties();
@@ -54,10 +46,6 @@ namespace Bitir.Mobile.ViewModels
         #endregion
 
         #region Property
-
-        /// <summary>
-        /// Gets or sets the property that bounds with an entry that gets the name from user in the Sign Up page.
-        /// </summary>
         public ValidatableObject<string> Name
         {
             get
@@ -76,9 +64,6 @@ namespace Bitir.Mobile.ViewModels
             }
         }
 
-        /// <summary>
-        /// Gets or sets the property that bounds with an entry that gets the password from users in the Sign Up page.
-        /// </summary>
         public ValidatablePair<string> Password
         {
             get
@@ -172,25 +157,14 @@ namespace Bitir.Mobile.ViewModels
 
         #region Command
 
-        /// <summary>
-        /// Gets or sets the command that is executed when the Log In button is clicked.
-        /// </summary>
         public Command LoginCommand { get; set; }
 
-        /// <summary>
-        /// Gets or sets the command that is executed when the Sign Up button is clicked.
-        /// </summary>
         public Command SignUpCommand { get; set; }
 
         public Command BackButtonCommand { get; set; }
         #endregion
 
         #region Methods
-
-        /// <summary>
-        /// Initialize whether fieldsvalue are true or false.
-        /// </summary>
-        /// <returns>true or false </returns>
         public bool AreFieldsValid()
         {
             bool isEmail = this.Email.Validate();
@@ -199,9 +173,6 @@ namespace Bitir.Mobile.ViewModels
             return isPasswordValid && isNameValid && isEmail;
         }
 
-        /// <summary>
-        /// Initializing the properties.
-        /// </summary>
         private void InitializeProperties()
         {
             this.Name = new ValidatableObject<string>();
@@ -213,9 +184,6 @@ namespace Bitir.Mobile.ViewModels
             this.signUpButtonStatus = true;
         }
 
-        /// <summary>
-        /// this method contains the validation rules
-        /// </summary>
         private void AddValidationRules()
         {
             this.Name.Validations.Add(new IsNotNullOrEmptyRule<string> { ValidationMessage = "Ad Soyad Zorunludur!" });
@@ -224,19 +192,12 @@ namespace Bitir.Mobile.ViewModels
             this.Password.Item2.Validations.Add(new IsNotNullOrEmptyRule<string> { ValidationMessage = "Şifre Tekrarı Zorunludur!" });
         }
 
-        /// <summary>
-        /// Invoked when the Log in button is clicked.
-        /// </summary>
-        /// <param name="obj">The Object</param>
+        
         private async void LoginClicked(object obj)
         {
             await Application.Current.MainPage.Navigation.PushModalAsync(new LoginPage(), true);
         }
 
-        /// <summary>
-        /// Invoked when the Sign Up button is clicked.
-        /// </summary>
-        /// <param name="obj">The Object</param>
         private async Task SignUpClicked(object obj)
         {
             if (this.AreFieldsValid())

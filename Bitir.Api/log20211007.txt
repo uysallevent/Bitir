@@ -1,0 +1,1252 @@
+2021-10-07 00:02:27.153 +03:00 [INF] Starting web host
+2021-10-07 00:02:27.853 +03:00 [DBG] Hosting starting
+2021-10-07 00:02:27.961 +03:00 [INF] User profile is available. Using 'C:\Users\leven\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2021-10-07 00:02:27.979 +03:00 [DBG] Reading data from file 'C:\Users\leven\AppData\Local\ASP.NET\DataProtection-Keys\key-14642b65-a18c-49a2-99af-52420015a828.xml'.
+2021-10-07 00:02:28.002 +03:00 [DBG] Reading data from file 'C:\Users\leven\AppData\Local\ASP.NET\DataProtection-Keys\key-3aa2ae8c-81de-4273-8d4a-f52cc391033f.xml'.
+2021-10-07 00:02:28.004 +03:00 [DBG] Reading data from file 'C:\Users\leven\AppData\Local\ASP.NET\DataProtection-Keys\key-4d95ab8d-4041-43bb-8736-c55e7eebfed6.xml'.
+2021-10-07 00:02:28.011 +03:00 [DBG] Found key {14642b65-a18c-49a2-99af-52420015a828}.
+2021-10-07 00:02:28.016 +03:00 [DBG] Found key {3aa2ae8c-81de-4273-8d4a-f52cc391033f}.
+2021-10-07 00:02:28.017 +03:00 [DBG] Found key {4d95ab8d-4041-43bb-8736-c55e7eebfed6}.
+2021-10-07 00:02:28.023 +03:00 [DBG] Considering key {3aa2ae8c-81de-4273-8d4a-f52cc391033f} with expiration date 2021-10-31 07:22:50Z as default key.
+2021-10-07 00:02:28.030 +03:00 [DBG] Forwarded activator type request from Microsoft.AspNetCore.DataProtection.XmlEncryption.DpapiXmlDecryptor, Microsoft.AspNetCore.DataProtection, Version=3.1.16.0, Culture=neutral, PublicKeyToken=adb9793829ddae60 to Microsoft.AspNetCore.DataProtection.XmlEncryption.DpapiXmlDecryptor, Microsoft.AspNetCore.DataProtection, Culture=neutral, PublicKeyToken=adb9793829ddae60
+2021-10-07 00:02:28.033 +03:00 [DBG] Decrypting secret element using Windows DPAPI.
+2021-10-07 00:02:28.035 +03:00 [DBG] Forwarded activator type request from Microsoft.AspNetCore.DataProtection.AuthenticatedEncryption.ConfigurationModel.AuthenticatedEncryptorDescriptorDeserializer, Microsoft.AspNetCore.DataProtection, Version=3.1.16.0, Culture=neutral, PublicKeyToken=adb9793829ddae60 to Microsoft.AspNetCore.DataProtection.AuthenticatedEncryption.ConfigurationModel.AuthenticatedEncryptorDescriptorDeserializer, Microsoft.AspNetCore.DataProtection, Culture=neutral, PublicKeyToken=adb9793829ddae60
+2021-10-07 00:02:28.039 +03:00 [DBG] Opening CNG algorithm 'AES' from provider 'null' with chaining mode CBC.
+2021-10-07 00:02:28.042 +03:00 [DBG] Opening CNG algorithm 'SHA256' from provider 'null' with HMAC.
+2021-10-07 00:02:28.045 +03:00 [DBG] Using key {3aa2ae8c-81de-4273-8d4a-f52cc391033f} as the default key.
+2021-10-07 00:02:28.047 +03:00 [DBG] Key ring with default key {3aa2ae8c-81de-4273-8d4a-f52cc391033f} was loaded during application startup.
+2021-10-07 00:02:28.308 +03:00 [DBG] An 'IServiceProvider' was created for internal use by Entity Framework.
+2021-10-07 00:02:28.910 +03:00 [DBG] The property 'UnitId' on entity type 'Unit' was created in shadow state because there are no eligible CLR members with a matching name.
+2021-10-07 00:02:28.931 +03:00 [WRN] No type was specified for the decimal column 'Price' on entity type 'ProductPrice'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values using 'HasColumnType()'.
+2021-10-07 00:02:28.932 +03:00 [WRN] No type was specified for the decimal column 'Quantity' on entity type 'ProductStock'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values using 'HasColumnType()'.
+2021-10-07 00:02:28.958 +03:00 [INF] Entity Framework Core 3.1.14 initialized 'BitirMainContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: None
+2021-10-07 00:02:28.983 +03:00 [DBG] Opening connection to database 'BitirDb' on server '.'.
+2021-10-07 00:02:29.153 +03:00 [DBG] Opened connection to database 'BitirDb' on server '.'.
+2021-10-07 00:02:29.158 +03:00 [DBG] Creating DbCommand for 'ExecuteNonQuery'.
+2021-10-07 00:02:29.163 +03:00 [DBG] Created DbCommand for 'ExecuteNonQuery' (2ms).
+2021-10-07 00:02:29.170 +03:00 [DBG] Executing DbCommand [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT 1
+2021-10-07 00:02:29.190 +03:00 [INF] Executed DbCommand (21ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT 1
+2021-10-07 00:02:29.193 +03:00 [DBG] Closing connection to database 'BitirDb' on server '.'.
+2021-10-07 00:02:29.197 +03:00 [DBG] Closed connection to database 'BitirDb' on server '.'.
+2021-10-07 00:02:29.199 +03:00 [DBG] Creating DbCommand for 'ExecuteScalar'.
+2021-10-07 00:02:29.199 +03:00 [DBG] Created DbCommand for 'ExecuteScalar' (0ms).
+2021-10-07 00:02:29.201 +03:00 [DBG] Opening connection to database 'BitirDb' on server '.'.
+2021-10-07 00:02:29.202 +03:00 [DBG] Opened connection to database 'BitirDb' on server '.'.
+2021-10-07 00:02:29.203 +03:00 [DBG] Executing DbCommand [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+
+IF EXISTS
+    (SELECT *
+     FROM [sys].[objects] o
+     WHERE [o].[type] = 'U'
+     AND [o].[is_ms_shipped] = 0
+     AND NOT EXISTS (SELECT *
+         FROM [sys].[extended_properties] AS [ep]
+         WHERE [ep].[major_id] = [o].[object_id]
+             AND [ep].[minor_id] = 0
+             AND [ep].[class] = 1
+             AND [ep].[name] = N'microsoft_database_tools_support'
+    )
+)
+SELECT 1 ELSE SELECT 0
+2021-10-07 00:02:29.216 +03:00 [INF] Executed DbCommand (13ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+
+IF EXISTS
+    (SELECT *
+     FROM [sys].[objects] o
+     WHERE [o].[type] = 'U'
+     AND [o].[is_ms_shipped] = 0
+     AND NOT EXISTS (SELECT *
+         FROM [sys].[extended_properties] AS [ep]
+         WHERE [ep].[major_id] = [o].[object_id]
+             AND [ep].[minor_id] = 0
+             AND [ep].[class] = 1
+             AND [ep].[name] = N'microsoft_database_tools_support'
+    )
+)
+SELECT 1 ELSE SELECT 0
+2021-10-07 00:02:29.218 +03:00 [DBG] Closing connection to database 'BitirDb' on server '.'.
+2021-10-07 00:02:29.220 +03:00 [DBG] Closed connection to database 'BitirDb' on server '.'.
+2021-10-07 00:02:29.223 +03:00 [DBG] Migrating using database 'BitirDb' on server '.'.
+2021-10-07 00:02:29.224 +03:00 [DBG] Opening connection to database 'BitirDb' on server '.'.
+2021-10-07 00:02:29.225 +03:00 [DBG] Opened connection to database 'BitirDb' on server '.'.
+2021-10-07 00:02:29.225 +03:00 [DBG] Creating DbCommand for 'ExecuteNonQuery'.
+2021-10-07 00:02:29.226 +03:00 [DBG] Created DbCommand for 'ExecuteNonQuery' (0ms).
+2021-10-07 00:02:29.227 +03:00 [DBG] Executing DbCommand [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT 1
+2021-10-07 00:02:29.231 +03:00 [INF] Executed DbCommand (4ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT 1
+2021-10-07 00:02:29.232 +03:00 [DBG] Closing connection to database 'BitirDb' on server '.'.
+2021-10-07 00:02:29.233 +03:00 [DBG] Closed connection to database 'BitirDb' on server '.'.
+2021-10-07 00:02:29.235 +03:00 [DBG] Creating DbCommand for 'ExecuteScalar'.
+2021-10-07 00:02:29.236 +03:00 [DBG] Created DbCommand for 'ExecuteScalar' (0ms).
+2021-10-07 00:02:29.237 +03:00 [DBG] Opening connection to database 'BitirDb' on server '.'.
+2021-10-07 00:02:29.238 +03:00 [DBG] Opened connection to database 'BitirDb' on server '.'.
+2021-10-07 00:02:29.238 +03:00 [DBG] Executing DbCommand [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT OBJECT_ID(N'[__EFMigrationsHistory]');
+2021-10-07 00:02:29.241 +03:00 [INF] Executed DbCommand (3ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT OBJECT_ID(N'[__EFMigrationsHistory]');
+2021-10-07 00:02:29.242 +03:00 [DBG] Closing connection to database 'BitirDb' on server '.'.
+2021-10-07 00:02:29.243 +03:00 [DBG] Closed connection to database 'BitirDb' on server '.'.
+2021-10-07 00:02:29.245 +03:00 [DBG] Opening connection to database 'BitirDb' on server '.'.
+2021-10-07 00:02:29.246 +03:00 [DBG] Opened connection to database 'BitirDb' on server '.'.
+2021-10-07 00:02:29.247 +03:00 [DBG] Creating DbCommand for 'ExecuteNonQuery'.
+2021-10-07 00:02:29.248 +03:00 [DBG] Created DbCommand for 'ExecuteNonQuery' (0ms).
+2021-10-07 00:02:29.249 +03:00 [DBG] Executing DbCommand [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT 1
+2021-10-07 00:02:29.252 +03:00 [INF] Executed DbCommand (3ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT 1
+2021-10-07 00:02:29.253 +03:00 [DBG] Closing connection to database 'BitirDb' on server '.'.
+2021-10-07 00:02:29.254 +03:00 [DBG] Closed connection to database 'BitirDb' on server '.'.
+2021-10-07 00:02:29.255 +03:00 [DBG] Creating DbCommand for 'ExecuteScalar'.
+2021-10-07 00:02:29.255 +03:00 [DBG] Created DbCommand for 'ExecuteScalar' (0ms).
+2021-10-07 00:02:29.256 +03:00 [DBG] Opening connection to database 'BitirDb' on server '.'.
+2021-10-07 00:02:29.257 +03:00 [DBG] Opened connection to database 'BitirDb' on server '.'.
+2021-10-07 00:02:29.258 +03:00 [DBG] Executing DbCommand [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT OBJECT_ID(N'[__EFMigrationsHistory]');
+2021-10-07 00:02:29.260 +03:00 [INF] Executed DbCommand (2ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT OBJECT_ID(N'[__EFMigrationsHistory]');
+2021-10-07 00:02:29.262 +03:00 [DBG] Closing connection to database 'BitirDb' on server '.'.
+2021-10-07 00:02:29.263 +03:00 [DBG] Closed connection to database 'BitirDb' on server '.'.
+2021-10-07 00:02:29.271 +03:00 [DBG] Creating DbCommand for 'ExecuteReader'.
+2021-10-07 00:02:29.271 +03:00 [DBG] Created DbCommand for 'ExecuteReader' (0ms).
+2021-10-07 00:02:29.272 +03:00 [DBG] Opening connection to database 'BitirDb' on server '.'.
+2021-10-07 00:02:29.273 +03:00 [DBG] Opened connection to database 'BitirDb' on server '.'.
+2021-10-07 00:02:29.274 +03:00 [DBG] Executing DbCommand [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [MigrationId], [ProductVersion]
+FROM [__EFMigrationsHistory]
+ORDER BY [MigrationId];
+2021-10-07 00:02:29.277 +03:00 [INF] Executed DbCommand (3ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [MigrationId], [ProductVersion]
+FROM [__EFMigrationsHistory]
+ORDER BY [MigrationId];
+2021-10-07 00:02:29.280 +03:00 [DBG] A data reader was disposed.
+2021-10-07 00:02:29.281 +03:00 [DBG] Closing connection to database 'BitirDb' on server '.'.
+2021-10-07 00:02:29.281 +03:00 [DBG] Closed connection to database 'BitirDb' on server '.'.
+2021-10-07 00:02:29.288 +03:00 [DBG] No migrations were found in assembly 'Bitir.Data'.
+2021-10-07 00:02:29.292 +03:00 [INF] No migrations were applied. The database is already up to date.
+2021-10-07 00:02:29.293 +03:00 [DBG] 'BitirMainContext' disposed.
+2021-10-07 00:02:29.324 +03:00 [DBG] Failed to locate the development https certificate at 'null'.
+2021-10-07 00:02:29.347 +03:00 [INF] Now listening on: http://localhost:5000
+2021-10-07 00:02:29.348 +03:00 [DBG] Loaded hosting startup assembly Bitir.Api
+2021-10-07 00:02:29.349 +03:00 [INF] Application started. Press Ctrl+C to shut down.
+2021-10-07 00:02:29.349 +03:00 [INF] Hosting environment: Development
+2021-10-07 00:02:29.350 +03:00 [INF] Content root path: C:\Users\leven\source\repos\Bitir\API\Bitir.Api
+2021-10-07 00:02:29.351 +03:00 [DBG] Hosting started
+2021-10-07 00:02:40.858 +03:00 [DBG] Connection id "0HMC91IH806S2" accepted.
+2021-10-07 00:02:40.859 +03:00 [DBG] Connection id "0HMC91IH806S2" started.
+2021-10-07 00:02:40.878 +03:00 [INF] Request starting HTTP/1.1 POST http://localhost:5000/AuthModule/AuthBase/Login application/json 36
+2021-10-07 00:02:40.881 +03:00 [DBG] Wildcard detected, all requests with hosts will be allowed.
+2021-10-07 00:02:40.903 +03:00 [DBG] 1 candidate(s) found for the request path '/AuthModule/AuthBase/Login'
+2021-10-07 00:02:40.906 +03:00 [DBG] Endpoint 'AuthModule.Controllers.AuthBaseController.Login (AuthModule)' with route pattern 'AuthModule/AuthBase/Login' is valid for the request path '/AuthModule/AuthBase/Login'
+2021-10-07 00:02:40.908 +03:00 [DBG] Request matched endpoint 'AuthModule.Controllers.AuthBaseController.Login (AuthModule)'
+2021-10-07 00:02:40.958 +03:00 [DBG] AuthenticationScheme: Bearer was not authenticated.
+2021-10-07 00:02:40.961 +03:00 [INF] Executing endpoint 'AuthModule.Controllers.AuthBaseController.Login (AuthModule)'
+2021-10-07 00:02:40.967 +03:00 [DBG] Registered model binder providers, in the following order: ["Microsoft.AspNetCore.Mvc.ModelBinding.Binders.BinderTypeModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.ServicesModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.BodyModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.HeaderModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.FloatingPointTypeModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.EnumTypeModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.SimpleTypeModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.CancellationTokenModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.ByteArrayModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.FormFileModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.FormCollectionModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.KeyValuePairModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.DictionaryModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.ArrayModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.CollectionModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.ComplexTypeModelBinderProvider"]
+2021-10-07 00:02:40.992 +03:00 [INF] Route matched with {module = "AuthModule", action = "Login", controller = "AuthBase"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Login(AuthModule.Dto.LoginDto) on controller AuthModule.Controllers.AuthBaseController (AuthModule).
+2021-10-07 00:02:40.995 +03:00 [DBG] Execution plan of authorization filters (in the following order): ["None"]
+2021-10-07 00:02:40.996 +03:00 [DBG] Execution plan of resource filters (in the following order): ["None"]
+2021-10-07 00:02:40.997 +03:00 [DBG] Execution plan of action filters (in the following order): ["Microsoft.AspNetCore.Mvc.Filters.ControllerActionFilter (Order: -2147483648)","Microsoft.AspNetCore.Mvc.ModelBinding.UnsupportedContentTypeFilter (Order: -3000)","Microsoft.AspNetCore.Mvc.Infrastructure.ModelStateInvalidFilter (Order: -2000)"]
+2021-10-07 00:02:40.999 +03:00 [DBG] Execution plan of exception filters (in the following order): ["None"]
+2021-10-07 00:02:41.000 +03:00 [DBG] Execution plan of result filters (in the following order): ["Microsoft.AspNetCore.Mvc.Infrastructure.ClientErrorResultFilter (Order: -2000)"]
+2021-10-07 00:02:41.001 +03:00 [DBG] Executing controller factory for controller AuthModule.Controllers.AuthBaseController (AuthModule)
+2021-10-07 00:02:41.004 +03:00 [INF] Entity Framework Core 3.1.14 initialized 'BitirMainContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: None
+2021-10-07 00:02:41.007 +03:00 [DBG] Executed controller factory for controller AuthModule.Controllers.AuthBaseController (AuthModule)
+2021-10-07 00:02:41.017 +03:00 [DBG] Attempting to bind parameter 'loginDto' of type 'AuthModule.Dto.LoginDto' ...
+2021-10-07 00:02:41.019 +03:00 [DBG] Attempting to bind parameter 'loginDto' of type 'AuthModule.Dto.LoginDto' using the name '' in request data ...
+2021-10-07 00:02:41.021 +03:00 [DBG] Selected input formatter 'Microsoft.AspNetCore.Mvc.Formatters.SystemTextJsonInputFormatter' for content type 'application/json'.
+2021-10-07 00:02:41.026 +03:00 [DBG] Connection id "0HMC91IH806S2", Request id "0HMC91IH806S2:00000001": started reading request body.
+2021-10-07 00:02:41.027 +03:00 [DBG] Connection id "0HMC91IH806S2", Request id "0HMC91IH806S2:00000001": done reading request body.
+2021-10-07 00:02:41.030 +03:00 [DBG] JSON input formatter succeeded, deserializing to type 'AuthModule.Dto.LoginDto'
+2021-10-07 00:02:41.031 +03:00 [DBG] Done attempting to bind parameter 'loginDto' of type 'AuthModule.Dto.LoginDto'.
+2021-10-07 00:02:41.032 +03:00 [DBG] Done attempting to bind parameter 'loginDto' of type 'AuthModule.Dto.LoginDto'.
+2021-10-07 00:02:41.033 +03:00 [DBG] Attempting to validate the bound parameter 'loginDto' of type 'AuthModule.Dto.LoginDto' ...
+2021-10-07 00:02:41.035 +03:00 [DBG] Done attempting to validate the bound parameter 'loginDto' of type 'AuthModule.Dto.LoginDto'.
+2021-10-07 00:02:41.179 +03:00 [DBG] queryContext => ShapedQueryCompilingExpressionVisitor.SingleOrDefaultAsync<UserAccount>(
+    asyncEnumerable: new QueryingEnumerable<UserAccount>(
+        (RelationalQueryContext)queryContext, 
+        RelationalCommandCache, 
+        null, 
+        null, 
+        Func<QueryContext, DbDataReader, ResultContext, int[], ResultCoordinator, UserAccount>, 
+        Bitir.Data.Contexts.BitirMainContext, 
+        null
+    ), 
+    cancellationToken: queryContext.CancellationToken)
+2021-10-07 00:02:41.202 +03:00 [DBG] Creating DbCommand for 'ExecuteReader'.
+2021-10-07 00:02:41.203 +03:00 [DBG] Created DbCommand for 'ExecuteReader' (0ms).
+2021-10-07 00:02:41.207 +03:00 [DBG] Opening connection to database 'BitirDb' on server '.'.
+2021-10-07 00:02:41.210 +03:00 [DBG] Opened connection to database 'BitirDb' on server '.'.
+2021-10-07 00:02:41.214 +03:00 [DBG] Executing DbCommand [Parameters=[@__loginDto_Username_0='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [u].[Id], [u].[AccountTypeId], [u].[Email], [u].[InsertDate], [u].[Name], [u].[PasswordHash], [u].[PasswordSalt], [u].[Phone], [u].[Status], [u].[Surname], [u].[UpdateDate], [u].[Username]
+FROM [auth].[UserAccount] AS [u]
+WHERE ([u].[Username] = @__loginDto_Username_0) OR ([u].[Email] = @__loginDto_Username_0)
+2021-10-07 00:02:41.246 +03:00 [INF] Executed DbCommand (35ms) [Parameters=[@__loginDto_Username_0='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [u].[Id], [u].[AccountTypeId], [u].[Email], [u].[InsertDate], [u].[Name], [u].[PasswordHash], [u].[PasswordSalt], [u].[Phone], [u].[Status], [u].[Surname], [u].[UpdateDate], [u].[Username]
+FROM [auth].[UserAccount] AS [u]
+WHERE ([u].[Username] = @__loginDto_Username_0) OR ([u].[Email] = @__loginDto_Username_0)
+2021-10-07 00:02:41.267 +03:00 [DBG] Context 'BitirMainContext' started tracking 'UserAccount' entity. Consider using 'DbContextOptionsBuilder.EnableSensitiveDataLogging' to see key values.
+2021-10-07 00:02:41.288 +03:00 [DBG] A data reader was disposed.
+2021-10-07 00:02:41.291 +03:00 [DBG] Closing connection to database 'BitirDb' on server '.'.
+2021-10-07 00:02:41.293 +03:00 [DBG] Closed connection to database 'BitirDb' on server '.'.
+2021-10-07 00:02:41.392 +03:00 [DBG] queryContext => ShapedQueryCompilingExpressionVisitor.SingleOrDefaultAsync<UserToken>(
+    asyncEnumerable: new QueryingEnumerable<UserToken>(
+        (RelationalQueryContext)queryContext, 
+        RelationalCommandCache, 
+        null, 
+        null, 
+        Func<QueryContext, DbDataReader, ResultContext, int[], ResultCoordinator, UserToken>, 
+        Bitir.Data.Contexts.BitirMainContext, 
+        null
+    ), 
+    cancellationToken: queryContext.CancellationToken)
+2021-10-07 00:02:41.396 +03:00 [DBG] Creating DbCommand for 'ExecuteReader'.
+2021-10-07 00:02:41.397 +03:00 [DBG] Created DbCommand for 'ExecuteReader' (1ms).
+2021-10-07 00:02:41.398 +03:00 [DBG] Opening connection to database 'BitirDb' on server '.'.
+2021-10-07 00:02:41.399 +03:00 [DBG] Opened connection to database 'BitirDb' on server '.'.
+2021-10-07 00:02:41.400 +03:00 [DBG] Executing DbCommand [Parameters=[@__entity_Id_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [u].[Id], [u].[InsertDate], [u].[RefreshToken], [u].[RefreshTokenExpirationDate], [u].[Status], [u].[UpdateDate], [u].[UserId]
+FROM [auth].[UserToken] AS [u]
+WHERE ([u].[Id] = @__entity_Id_0) AND ([u].[Status] <> 1)
+2021-10-07 00:02:41.404 +03:00 [INF] Executed DbCommand (4ms) [Parameters=[@__entity_Id_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [u].[Id], [u].[InsertDate], [u].[RefreshToken], [u].[RefreshTokenExpirationDate], [u].[Status], [u].[UpdateDate], [u].[UserId]
+FROM [auth].[UserToken] AS [u]
+WHERE ([u].[Id] = @__entity_Id_0) AND ([u].[Status] <> 1)
+2021-10-07 00:02:41.406 +03:00 [DBG] A data reader was disposed.
+2021-10-07 00:02:41.407 +03:00 [DBG] Closing connection to database 'BitirDb' on server '.'.
+2021-10-07 00:02:41.407 +03:00 [DBG] Closed connection to database 'BitirDb' on server '.'.
+2021-10-07 00:02:41.411 +03:00 [DBG] List of registered output formatters, in the following order: ["Microsoft.AspNetCore.Mvc.Formatters.HttpNoContentOutputFormatter","Microsoft.AspNetCore.Mvc.Formatters.StringOutputFormatter","Microsoft.AspNetCore.Mvc.Formatters.StreamOutputFormatter","Microsoft.AspNetCore.Mvc.Formatters.SystemTextJsonOutputFormatter"]
+2021-10-07 00:02:41.415 +03:00 [DBG] Attempting to select an output formatter based on Accept header '["Application/json"]'.
+2021-10-07 00:02:41.416 +03:00 [DBG] Selected output formatter 'Microsoft.AspNetCore.Mvc.Formatters.SystemTextJsonOutputFormatter' and content type 'application/json' to write the response.
+2021-10-07 00:02:41.417 +03:00 [INF] Executing ObjectResult, writing value of type 'Bitir.Data.Model.Dtos.ResponseWrapper`1[[AuthModule.Security.JWT.AccessToken, AuthModule, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2021-10-07 00:02:41.427 +03:00 [INF] Executed action AuthModule.Controllers.AuthBaseController.Login (AuthModule) in 423.764ms
+2021-10-07 00:02:41.429 +03:00 [INF] Executed endpoint 'AuthModule.Controllers.AuthBaseController.Login (AuthModule)'
+2021-10-07 00:02:41.431 +03:00 [DBG] Connection id "0HMC91IH806S2" completed keep alive response.
+2021-10-07 00:02:41.432 +03:00 [DBG] 'BitirMainContext' disposed.
+2021-10-07 00:02:41.434 +03:00 [INF] Request finished in 557.661ms 200 application/json; charset=utf-8
+2021-10-07 00:02:53.858 +03:00 [INF] Request starting HTTP/1.1 POST http://localhost:5000/ProductModule/Product/GetSystemProducts  0
+2021-10-07 00:02:53.860 +03:00 [DBG] 1 candidate(s) found for the request path '/ProductModule/Product/GetSystemProducts'
+2021-10-07 00:02:53.861 +03:00 [DBG] Endpoint 'ProductModule.Controllers.ProductController.GetSystemProducts (ProductModule)' with route pattern 'ProductModule/Product/GetSystemProducts' is valid for the request path '/ProductModule/Product/GetSystemProducts'
+2021-10-07 00:02:53.862 +03:00 [DBG] Request matched endpoint 'ProductModule.Controllers.ProductController.GetSystemProducts (ProductModule)'
+2021-10-07 00:02:53.904 +03:00 [INF] Successfully validated the token.
+2021-10-07 00:02:53.906 +03:00 [DBG] AuthenticationScheme: Bearer was successfully authenticated.
+2021-10-07 00:02:53.909 +03:00 [INF] Authorization was successful.
+2021-10-07 00:02:53.910 +03:00 [INF] Executing endpoint 'ProductModule.Controllers.ProductController.GetSystemProducts (ProductModule)'
+2021-10-07 00:02:53.913 +03:00 [INF] Route matched with {module = "ProductModule", action = "GetSystemProducts", controller = "Product"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetSystemProducts() on controller ProductModule.Controllers.ProductController (ProductModule).
+2021-10-07 00:02:53.917 +03:00 [DBG] Execution plan of authorization filters (in the following order): ["None"]
+2021-10-07 00:02:53.918 +03:00 [DBG] Execution plan of resource filters (in the following order): ["None"]
+2021-10-07 00:02:53.919 +03:00 [DBG] Execution plan of action filters (in the following order): ["Microsoft.AspNetCore.Mvc.Filters.ControllerActionFilter (Order: -2147483648)","Microsoft.AspNetCore.Mvc.ModelBinding.UnsupportedContentTypeFilter (Order: -3000)","Microsoft.AspNetCore.Mvc.Infrastructure.ModelStateInvalidFilter (Order: -2000)"]
+2021-10-07 00:02:53.921 +03:00 [DBG] Execution plan of exception filters (in the following order): ["None"]
+2021-10-07 00:02:53.922 +03:00 [DBG] Execution plan of result filters (in the following order): ["Microsoft.AspNetCore.Mvc.Infrastructure.ClientErrorResultFilter (Order: -2000)"]
+2021-10-07 00:02:53.923 +03:00 [DBG] Executing controller factory for controller ProductModule.Controllers.ProductController (ProductModule)
+2021-10-07 00:02:53.947 +03:00 [INF] Entity Framework Core 3.1.14 initialized 'BitirMainContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: None
+2021-10-07 00:02:53.950 +03:00 [DBG] Executed controller factory for controller ProductModule.Controllers.ProductController (ProductModule)
+2021-10-07 00:02:53.954 +03:00 [DBG] List of registered output formatters, in the following order: ["Microsoft.AspNetCore.Mvc.Formatters.HttpNoContentOutputFormatter","Microsoft.AspNetCore.Mvc.Formatters.StringOutputFormatter","Microsoft.AspNetCore.Mvc.Formatters.StreamOutputFormatter","Microsoft.AspNetCore.Mvc.Formatters.SystemTextJsonOutputFormatter"]
+2021-10-07 00:02:53.957 +03:00 [DBG] Attempting to select an output formatter based on Accept header '["Application/json"]'.
+2021-10-07 00:02:53.958 +03:00 [DBG] Selected output formatter 'Microsoft.AspNetCore.Mvc.Formatters.SystemTextJsonOutputFormatter' and content type 'application/json' to write the response.
+2021-10-07 00:02:53.959 +03:00 [INF] Executing ObjectResult, writing value of type 'Bitir.Data.Model.Dtos.ResponseWrapperListing`1[[ProductModule.Entities.Product, ProductModule, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2021-10-07 00:03:01.811 +03:00 [DBG] queryContext => new QueryingEnumerable<Product>(
+    (RelationalQueryContext)queryContext, 
+    RelationalCommandCache, 
+    null, 
+    null, 
+    Func<QueryContext, DbDataReader, ResultContext, int[], ResultCoordinator, Product>, 
+    Bitir.Data.Contexts.BitirMainContext, 
+    null
+)
+2021-10-07 00:03:01.815 +03:00 [DBG] Creating DbCommand for 'ExecuteReader'.
+2021-10-07 00:03:01.816 +03:00 [DBG] Created DbCommand for 'ExecuteReader' (1ms).
+2021-10-07 00:03:01.817 +03:00 [DBG] Opening connection to database 'BitirDb' on server '.'.
+2021-10-07 00:03:01.818 +03:00 [DBG] Opened connection to database 'BitirDb' on server '.'.
+2021-10-07 00:03:01.819 +03:00 [DBG] Executing DbCommand [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [p].[Id], [p0].[Name], [p1].[Quantity], [u].[Name]
+FROM [product].[Product_ProductQuantity] AS [p]
+INNER JOIN [product].[Product] AS [p0] ON [p].[ProductId] = [p0].[Id]
+INNER JOIN [product].[ProductQuantity] AS [p1] ON [p].[ProductQuantityId] = [p1].[Id]
+INNER JOIN [product].[Unit] AS [u] ON [p1].[UnitId] = [u].[Id]
+2021-10-07 00:03:01.824 +03:00 [INF] Executed DbCommand (5ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [p].[Id], [p0].[Name], [p1].[Quantity], [u].[Name]
+FROM [product].[Product_ProductQuantity] AS [p]
+INNER JOIN [product].[Product] AS [p0] ON [p].[ProductId] = [p0].[Id]
+INNER JOIN [product].[ProductQuantity] AS [p1] ON [p].[ProductQuantityId] = [p1].[Id]
+INNER JOIN [product].[Unit] AS [u] ON [p1].[UnitId] = [u].[Id]
+2021-10-07 00:03:01.830 +03:00 [INF] Executed action ProductModule.Controllers.ProductController.GetSystemProducts (ProductModule) in 7906.6528ms
+2021-10-07 00:03:01.831 +03:00 [INF] Executed endpoint 'ProductModule.Controllers.ProductController.GetSystemProducts (ProductModule)'
+2021-10-07 00:03:01.832 +03:00 [DBG] Connection id "0HMC91IH806S2" completed keep alive response.
+2021-10-07 00:03:01.833 +03:00 [DBG] 'BitirMainContext' disposed.
+2021-10-07 00:03:01.834 +03:00 [INF] Request finished in 7976.6557ms 200 application/json; charset=utf-8
+2021-10-07 00:10:21.942 +03:00 [INF] Starting web host
+2021-10-07 00:10:22.616 +03:00 [DBG] Hosting starting
+2021-10-07 00:10:22.655 +03:00 [INF] User profile is available. Using 'C:\Users\leven\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2021-10-07 00:10:22.668 +03:00 [DBG] Reading data from file 'C:\Users\leven\AppData\Local\ASP.NET\DataProtection-Keys\key-14642b65-a18c-49a2-99af-52420015a828.xml'.
+2021-10-07 00:10:22.683 +03:00 [DBG] Reading data from file 'C:\Users\leven\AppData\Local\ASP.NET\DataProtection-Keys\key-3aa2ae8c-81de-4273-8d4a-f52cc391033f.xml'.
+2021-10-07 00:10:22.684 +03:00 [DBG] Reading data from file 'C:\Users\leven\AppData\Local\ASP.NET\DataProtection-Keys\key-4d95ab8d-4041-43bb-8736-c55e7eebfed6.xml'.
+2021-10-07 00:10:22.689 +03:00 [DBG] Found key {14642b65-a18c-49a2-99af-52420015a828}.
+2021-10-07 00:10:22.692 +03:00 [DBG] Found key {3aa2ae8c-81de-4273-8d4a-f52cc391033f}.
+2021-10-07 00:10:22.693 +03:00 [DBG] Found key {4d95ab8d-4041-43bb-8736-c55e7eebfed6}.
+2021-10-07 00:10:22.698 +03:00 [DBG] Considering key {3aa2ae8c-81de-4273-8d4a-f52cc391033f} with expiration date 2021-10-31 07:22:50Z as default key.
+2021-10-07 00:10:22.706 +03:00 [DBG] Forwarded activator type request from Microsoft.AspNetCore.DataProtection.XmlEncryption.DpapiXmlDecryptor, Microsoft.AspNetCore.DataProtection, Version=3.1.16.0, Culture=neutral, PublicKeyToken=adb9793829ddae60 to Microsoft.AspNetCore.DataProtection.XmlEncryption.DpapiXmlDecryptor, Microsoft.AspNetCore.DataProtection, Culture=neutral, PublicKeyToken=adb9793829ddae60
+2021-10-07 00:10:22.708 +03:00 [DBG] Decrypting secret element using Windows DPAPI.
+2021-10-07 00:10:22.710 +03:00 [DBG] Forwarded activator type request from Microsoft.AspNetCore.DataProtection.AuthenticatedEncryption.ConfigurationModel.AuthenticatedEncryptorDescriptorDeserializer, Microsoft.AspNetCore.DataProtection, Version=3.1.16.0, Culture=neutral, PublicKeyToken=adb9793829ddae60 to Microsoft.AspNetCore.DataProtection.AuthenticatedEncryption.ConfigurationModel.AuthenticatedEncryptorDescriptorDeserializer, Microsoft.AspNetCore.DataProtection, Culture=neutral, PublicKeyToken=adb9793829ddae60
+2021-10-07 00:10:22.713 +03:00 [DBG] Opening CNG algorithm 'AES' from provider 'null' with chaining mode CBC.
+2021-10-07 00:10:22.716 +03:00 [DBG] Opening CNG algorithm 'SHA256' from provider 'null' with HMAC.
+2021-10-07 00:10:22.719 +03:00 [DBG] Using key {3aa2ae8c-81de-4273-8d4a-f52cc391033f} as the default key.
+2021-10-07 00:10:22.720 +03:00 [DBG] Key ring with default key {3aa2ae8c-81de-4273-8d4a-f52cc391033f} was loaded during application startup.
+2021-10-07 00:10:22.950 +03:00 [DBG] An 'IServiceProvider' was created for internal use by Entity Framework.
+2021-10-07 00:10:23.438 +03:00 [DBG] The property 'UnitId' on entity type 'Unit' was created in shadow state because there are no eligible CLR members with a matching name.
+2021-10-07 00:10:23.457 +03:00 [WRN] No type was specified for the decimal column 'Price' on entity type 'ProductPrice'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values using 'HasColumnType()'.
+2021-10-07 00:10:23.461 +03:00 [WRN] No type was specified for the decimal column 'Quantity' on entity type 'ProductStock'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values using 'HasColumnType()'.
+2021-10-07 00:10:23.485 +03:00 [INF] Entity Framework Core 3.1.14 initialized 'BitirMainContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: None
+2021-10-07 00:10:23.510 +03:00 [DBG] Opening connection to database 'BitirDb' on server '.'.
+2021-10-07 00:10:23.687 +03:00 [DBG] Opened connection to database 'BitirDb' on server '.'.
+2021-10-07 00:10:23.692 +03:00 [DBG] Creating DbCommand for 'ExecuteNonQuery'.
+2021-10-07 00:10:23.697 +03:00 [DBG] Created DbCommand for 'ExecuteNonQuery' (2ms).
+2021-10-07 00:10:23.705 +03:00 [DBG] Executing DbCommand [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT 1
+2021-10-07 00:10:23.726 +03:00 [INF] Executed DbCommand (22ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT 1
+2021-10-07 00:10:23.730 +03:00 [DBG] Closing connection to database 'BitirDb' on server '.'.
+2021-10-07 00:10:23.734 +03:00 [DBG] Closed connection to database 'BitirDb' on server '.'.
+2021-10-07 00:10:23.737 +03:00 [DBG] Creating DbCommand for 'ExecuteScalar'.
+2021-10-07 00:10:23.738 +03:00 [DBG] Created DbCommand for 'ExecuteScalar' (0ms).
+2021-10-07 00:10:23.739 +03:00 [DBG] Opening connection to database 'BitirDb' on server '.'.
+2021-10-07 00:10:23.740 +03:00 [DBG] Opened connection to database 'BitirDb' on server '.'.
+2021-10-07 00:10:23.741 +03:00 [DBG] Executing DbCommand [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+
+IF EXISTS
+    (SELECT *
+     FROM [sys].[objects] o
+     WHERE [o].[type] = 'U'
+     AND [o].[is_ms_shipped] = 0
+     AND NOT EXISTS (SELECT *
+         FROM [sys].[extended_properties] AS [ep]
+         WHERE [ep].[major_id] = [o].[object_id]
+             AND [ep].[minor_id] = 0
+             AND [ep].[class] = 1
+             AND [ep].[name] = N'microsoft_database_tools_support'
+    )
+)
+SELECT 1 ELSE SELECT 0
+2021-10-07 00:10:23.758 +03:00 [INF] Executed DbCommand (17ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+
+IF EXISTS
+    (SELECT *
+     FROM [sys].[objects] o
+     WHERE [o].[type] = 'U'
+     AND [o].[is_ms_shipped] = 0
+     AND NOT EXISTS (SELECT *
+         FROM [sys].[extended_properties] AS [ep]
+         WHERE [ep].[major_id] = [o].[object_id]
+             AND [ep].[minor_id] = 0
+             AND [ep].[class] = 1
+             AND [ep].[name] = N'microsoft_database_tools_support'
+    )
+)
+SELECT 1 ELSE SELECT 0
+2021-10-07 00:10:23.760 +03:00 [DBG] Closing connection to database 'BitirDb' on server '.'.
+2021-10-07 00:10:23.761 +03:00 [DBG] Closed connection to database 'BitirDb' on server '.'.
+2021-10-07 00:10:23.764 +03:00 [DBG] Migrating using database 'BitirDb' on server '.'.
+2021-10-07 00:10:23.765 +03:00 [DBG] Opening connection to database 'BitirDb' on server '.'.
+2021-10-07 00:10:23.766 +03:00 [DBG] Opened connection to database 'BitirDb' on server '.'.
+2021-10-07 00:10:23.767 +03:00 [DBG] Creating DbCommand for 'ExecuteNonQuery'.
+2021-10-07 00:10:23.768 +03:00 [DBG] Created DbCommand for 'ExecuteNonQuery' (0ms).
+2021-10-07 00:10:23.768 +03:00 [DBG] Executing DbCommand [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT 1
+2021-10-07 00:10:23.772 +03:00 [INF] Executed DbCommand (3ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT 1
+2021-10-07 00:10:23.773 +03:00 [DBG] Closing connection to database 'BitirDb' on server '.'.
+2021-10-07 00:10:23.774 +03:00 [DBG] Closed connection to database 'BitirDb' on server '.'.
+2021-10-07 00:10:23.776 +03:00 [DBG] Creating DbCommand for 'ExecuteScalar'.
+2021-10-07 00:10:23.777 +03:00 [DBG] Created DbCommand for 'ExecuteScalar' (0ms).
+2021-10-07 00:10:23.778 +03:00 [DBG] Opening connection to database 'BitirDb' on server '.'.
+2021-10-07 00:10:23.778 +03:00 [DBG] Opened connection to database 'BitirDb' on server '.'.
+2021-10-07 00:10:23.780 +03:00 [DBG] Executing DbCommand [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT OBJECT_ID(N'[__EFMigrationsHistory]');
+2021-10-07 00:10:23.784 +03:00 [INF] Executed DbCommand (4ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT OBJECT_ID(N'[__EFMigrationsHistory]');
+2021-10-07 00:10:23.785 +03:00 [DBG] Closing connection to database 'BitirDb' on server '.'.
+2021-10-07 00:10:23.786 +03:00 [DBG] Closed connection to database 'BitirDb' on server '.'.
+2021-10-07 00:10:23.788 +03:00 [DBG] Opening connection to database 'BitirDb' on server '.'.
+2021-10-07 00:10:23.789 +03:00 [DBG] Opened connection to database 'BitirDb' on server '.'.
+2021-10-07 00:10:23.790 +03:00 [DBG] Creating DbCommand for 'ExecuteNonQuery'.
+2021-10-07 00:10:23.791 +03:00 [DBG] Created DbCommand for 'ExecuteNonQuery' (0ms).
+2021-10-07 00:10:23.792 +03:00 [DBG] Executing DbCommand [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT 1
+2021-10-07 00:10:23.794 +03:00 [INF] Executed DbCommand (3ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT 1
+2021-10-07 00:10:23.796 +03:00 [DBG] Closing connection to database 'BitirDb' on server '.'.
+2021-10-07 00:10:23.797 +03:00 [DBG] Closed connection to database 'BitirDb' on server '.'.
+2021-10-07 00:10:23.798 +03:00 [DBG] Creating DbCommand for 'ExecuteScalar'.
+2021-10-07 00:10:23.798 +03:00 [DBG] Created DbCommand for 'ExecuteScalar' (0ms).
+2021-10-07 00:10:23.800 +03:00 [DBG] Opening connection to database 'BitirDb' on server '.'.
+2021-10-07 00:10:23.801 +03:00 [DBG] Opened connection to database 'BitirDb' on server '.'.
+2021-10-07 00:10:23.802 +03:00 [DBG] Executing DbCommand [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT OBJECT_ID(N'[__EFMigrationsHistory]');
+2021-10-07 00:10:23.805 +03:00 [INF] Executed DbCommand (3ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT OBJECT_ID(N'[__EFMigrationsHistory]');
+2021-10-07 00:10:23.807 +03:00 [DBG] Closing connection to database 'BitirDb' on server '.'.
+2021-10-07 00:10:23.808 +03:00 [DBG] Closed connection to database 'BitirDb' on server '.'.
+2021-10-07 00:10:23.815 +03:00 [DBG] Creating DbCommand for 'ExecuteReader'.
+2021-10-07 00:10:23.817 +03:00 [DBG] Created DbCommand for 'ExecuteReader' (1ms).
+2021-10-07 00:10:23.818 +03:00 [DBG] Opening connection to database 'BitirDb' on server '.'.
+2021-10-07 00:10:23.819 +03:00 [DBG] Opened connection to database 'BitirDb' on server '.'.
+2021-10-07 00:10:23.820 +03:00 [DBG] Executing DbCommand [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [MigrationId], [ProductVersion]
+FROM [__EFMigrationsHistory]
+ORDER BY [MigrationId];
+2021-10-07 00:10:23.824 +03:00 [INF] Executed DbCommand (4ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [MigrationId], [ProductVersion]
+FROM [__EFMigrationsHistory]
+ORDER BY [MigrationId];
+2021-10-07 00:10:23.832 +03:00 [DBG] A data reader was disposed.
+2021-10-07 00:10:23.838 +03:00 [DBG] Closing connection to database 'BitirDb' on server '.'.
+2021-10-07 00:10:23.839 +03:00 [DBG] Closed connection to database 'BitirDb' on server '.'.
+2021-10-07 00:10:23.849 +03:00 [DBG] No migrations were found in assembly 'Bitir.Data'.
+2021-10-07 00:10:23.855 +03:00 [INF] No migrations were applied. The database is already up to date.
+2021-10-07 00:10:23.856 +03:00 [DBG] 'BitirMainContext' disposed.
+2021-10-07 00:10:23.899 +03:00 [DBG] Failed to locate the development https certificate at 'null'.
+2021-10-07 00:10:23.926 +03:00 [INF] Now listening on: http://localhost:5000
+2021-10-07 00:10:23.926 +03:00 [DBG] Loaded hosting startup assembly Bitir.Api
+2021-10-07 00:10:23.927 +03:00 [INF] Application started. Press Ctrl+C to shut down.
+2021-10-07 00:10:23.928 +03:00 [INF] Hosting environment: Development
+2021-10-07 00:10:23.929 +03:00 [INF] Content root path: C:\Users\leven\source\repos\Bitir\API\Bitir.Api
+2021-10-07 00:10:23.929 +03:00 [DBG] Hosting started
+2021-10-07 00:10:36.975 +03:00 [DBG] Connection id "0HMC91MV4JLQ0" accepted.
+2021-10-07 00:10:36.978 +03:00 [DBG] Connection id "0HMC91MV4JLQ0" started.
+2021-10-07 00:10:36.996 +03:00 [INF] Request starting HTTP/1.1 POST http://localhost:5000/AuthModule/AuthBase/Login application/json 36
+2021-10-07 00:10:37.000 +03:00 [DBG] Wildcard detected, all requests with hosts will be allowed.
+2021-10-07 00:10:37.023 +03:00 [DBG] 1 candidate(s) found for the request path '/AuthModule/AuthBase/Login'
+2021-10-07 00:10:37.027 +03:00 [DBG] Endpoint 'AuthModule.Controllers.AuthBaseController.Login (AuthModule)' with route pattern 'AuthModule/AuthBase/Login' is valid for the request path '/AuthModule/AuthBase/Login'
+2021-10-07 00:10:37.028 +03:00 [DBG] Request matched endpoint 'AuthModule.Controllers.AuthBaseController.Login (AuthModule)'
+2021-10-07 00:10:37.078 +03:00 [DBG] AuthenticationScheme: Bearer was not authenticated.
+2021-10-07 00:10:37.081 +03:00 [INF] Executing endpoint 'AuthModule.Controllers.AuthBaseController.Login (AuthModule)'
+2021-10-07 00:10:37.087 +03:00 [DBG] Registered model binder providers, in the following order: ["Microsoft.AspNetCore.Mvc.ModelBinding.Binders.BinderTypeModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.ServicesModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.BodyModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.HeaderModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.FloatingPointTypeModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.EnumTypeModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.SimpleTypeModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.CancellationTokenModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.ByteArrayModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.FormFileModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.FormCollectionModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.KeyValuePairModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.DictionaryModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.ArrayModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.CollectionModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.ComplexTypeModelBinderProvider"]
+2021-10-07 00:10:37.112 +03:00 [INF] Route matched with {module = "AuthModule", action = "Login", controller = "AuthBase"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Login(AuthModule.Dto.LoginDto) on controller AuthModule.Controllers.AuthBaseController (AuthModule).
+2021-10-07 00:10:37.114 +03:00 [DBG] Execution plan of authorization filters (in the following order): ["None"]
+2021-10-07 00:10:37.115 +03:00 [DBG] Execution plan of resource filters (in the following order): ["None"]
+2021-10-07 00:10:37.116 +03:00 [DBG] Execution plan of action filters (in the following order): ["Microsoft.AspNetCore.Mvc.Filters.ControllerActionFilter (Order: -2147483648)","Microsoft.AspNetCore.Mvc.ModelBinding.UnsupportedContentTypeFilter (Order: -3000)","Microsoft.AspNetCore.Mvc.Infrastructure.ModelStateInvalidFilter (Order: -2000)"]
+2021-10-07 00:10:37.118 +03:00 [DBG] Execution plan of exception filters (in the following order): ["None"]
+2021-10-07 00:10:37.119 +03:00 [DBG] Execution plan of result filters (in the following order): ["Microsoft.AspNetCore.Mvc.Infrastructure.ClientErrorResultFilter (Order: -2000)"]
+2021-10-07 00:10:37.121 +03:00 [DBG] Executing controller factory for controller AuthModule.Controllers.AuthBaseController (AuthModule)
+2021-10-07 00:10:37.124 +03:00 [INF] Entity Framework Core 3.1.14 initialized 'BitirMainContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: None
+2021-10-07 00:10:37.127 +03:00 [DBG] Executed controller factory for controller AuthModule.Controllers.AuthBaseController (AuthModule)
+2021-10-07 00:10:37.136 +03:00 [DBG] Attempting to bind parameter 'loginDto' of type 'AuthModule.Dto.LoginDto' ...
+2021-10-07 00:10:37.139 +03:00 [DBG] Attempting to bind parameter 'loginDto' of type 'AuthModule.Dto.LoginDto' using the name '' in request data ...
+2021-10-07 00:10:37.141 +03:00 [DBG] Selected input formatter 'Microsoft.AspNetCore.Mvc.Formatters.SystemTextJsonInputFormatter' for content type 'application/json'.
+2021-10-07 00:10:37.147 +03:00 [DBG] Connection id "0HMC91MV4JLQ0", Request id "0HMC91MV4JLQ0:00000001": started reading request body.
+2021-10-07 00:10:37.148 +03:00 [DBG] Connection id "0HMC91MV4JLQ0", Request id "0HMC91MV4JLQ0:00000001": done reading request body.
+2021-10-07 00:10:37.151 +03:00 [DBG] JSON input formatter succeeded, deserializing to type 'AuthModule.Dto.LoginDto'
+2021-10-07 00:10:37.152 +03:00 [DBG] Done attempting to bind parameter 'loginDto' of type 'AuthModule.Dto.LoginDto'.
+2021-10-07 00:10:37.153 +03:00 [DBG] Done attempting to bind parameter 'loginDto' of type 'AuthModule.Dto.LoginDto'.
+2021-10-07 00:10:37.154 +03:00 [DBG] Attempting to validate the bound parameter 'loginDto' of type 'AuthModule.Dto.LoginDto' ...
+2021-10-07 00:10:37.157 +03:00 [DBG] Done attempting to validate the bound parameter 'loginDto' of type 'AuthModule.Dto.LoginDto'.
+2021-10-07 00:10:37.304 +03:00 [DBG] queryContext => ShapedQueryCompilingExpressionVisitor.SingleOrDefaultAsync<UserAccount>(
+    asyncEnumerable: new QueryingEnumerable<UserAccount>(
+        (RelationalQueryContext)queryContext, 
+        RelationalCommandCache, 
+        null, 
+        null, 
+        Func<QueryContext, DbDataReader, ResultContext, int[], ResultCoordinator, UserAccount>, 
+        Bitir.Data.Contexts.BitirMainContext, 
+        null
+    ), 
+    cancellationToken: queryContext.CancellationToken)
+2021-10-07 00:10:37.331 +03:00 [DBG] Creating DbCommand for 'ExecuteReader'.
+2021-10-07 00:10:37.332 +03:00 [DBG] Created DbCommand for 'ExecuteReader' (1ms).
+2021-10-07 00:10:37.338 +03:00 [DBG] Opening connection to database 'BitirDb' on server '.'.
+2021-10-07 00:10:37.341 +03:00 [DBG] Opened connection to database 'BitirDb' on server '.'.
+2021-10-07 00:10:37.345 +03:00 [DBG] Executing DbCommand [Parameters=[@__loginDto_Username_0='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [u].[Id], [u].[AccountTypeId], [u].[Email], [u].[InsertDate], [u].[Name], [u].[PasswordHash], [u].[PasswordSalt], [u].[Phone], [u].[Status], [u].[Surname], [u].[UpdateDate], [u].[Username]
+FROM [auth].[UserAccount] AS [u]
+WHERE ([u].[Username] = @__loginDto_Username_0) OR ([u].[Email] = @__loginDto_Username_0)
+2021-10-07 00:10:37.379 +03:00 [INF] Executed DbCommand (36ms) [Parameters=[@__loginDto_Username_0='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [u].[Id], [u].[AccountTypeId], [u].[Email], [u].[InsertDate], [u].[Name], [u].[PasswordHash], [u].[PasswordSalt], [u].[Phone], [u].[Status], [u].[Surname], [u].[UpdateDate], [u].[Username]
+FROM [auth].[UserAccount] AS [u]
+WHERE ([u].[Username] = @__loginDto_Username_0) OR ([u].[Email] = @__loginDto_Username_0)
+2021-10-07 00:10:37.400 +03:00 [DBG] Context 'BitirMainContext' started tracking 'UserAccount' entity. Consider using 'DbContextOptionsBuilder.EnableSensitiveDataLogging' to see key values.
+2021-10-07 00:10:37.422 +03:00 [DBG] A data reader was disposed.
+2021-10-07 00:10:37.425 +03:00 [DBG] Closing connection to database 'BitirDb' on server '.'.
+2021-10-07 00:10:37.426 +03:00 [DBG] Closed connection to database 'BitirDb' on server '.'.
+2021-10-07 00:10:37.527 +03:00 [DBG] queryContext => ShapedQueryCompilingExpressionVisitor.SingleOrDefaultAsync<UserToken>(
+    asyncEnumerable: new QueryingEnumerable<UserToken>(
+        (RelationalQueryContext)queryContext, 
+        RelationalCommandCache, 
+        null, 
+        null, 
+        Func<QueryContext, DbDataReader, ResultContext, int[], ResultCoordinator, UserToken>, 
+        Bitir.Data.Contexts.BitirMainContext, 
+        null
+    ), 
+    cancellationToken: queryContext.CancellationToken)
+2021-10-07 00:10:37.530 +03:00 [DBG] Creating DbCommand for 'ExecuteReader'.
+2021-10-07 00:10:37.531 +03:00 [DBG] Created DbCommand for 'ExecuteReader' (0ms).
+2021-10-07 00:10:37.532 +03:00 [DBG] Opening connection to database 'BitirDb' on server '.'.
+2021-10-07 00:10:37.533 +03:00 [DBG] Opened connection to database 'BitirDb' on server '.'.
+2021-10-07 00:10:37.534 +03:00 [DBG] Executing DbCommand [Parameters=[@__entity_Id_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [u].[Id], [u].[InsertDate], [u].[RefreshToken], [u].[RefreshTokenExpirationDate], [u].[Status], [u].[UpdateDate], [u].[UserId]
+FROM [auth].[UserToken] AS [u]
+WHERE ([u].[Id] = @__entity_Id_0) AND ([u].[Status] <> 1)
+2021-10-07 00:10:37.538 +03:00 [INF] Executed DbCommand (4ms) [Parameters=[@__entity_Id_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [u].[Id], [u].[InsertDate], [u].[RefreshToken], [u].[RefreshTokenExpirationDate], [u].[Status], [u].[UpdateDate], [u].[UserId]
+FROM [auth].[UserToken] AS [u]
+WHERE ([u].[Id] = @__entity_Id_0) AND ([u].[Status] <> 1)
+2021-10-07 00:10:37.540 +03:00 [DBG] A data reader was disposed.
+2021-10-07 00:10:37.540 +03:00 [DBG] Closing connection to database 'BitirDb' on server '.'.
+2021-10-07 00:10:37.541 +03:00 [DBG] Closed connection to database 'BitirDb' on server '.'.
+2021-10-07 00:10:37.545 +03:00 [DBG] List of registered output formatters, in the following order: ["Microsoft.AspNetCore.Mvc.Formatters.HttpNoContentOutputFormatter","Microsoft.AspNetCore.Mvc.Formatters.StringOutputFormatter","Microsoft.AspNetCore.Mvc.Formatters.StreamOutputFormatter","Microsoft.AspNetCore.Mvc.Formatters.SystemTextJsonOutputFormatter"]
+2021-10-07 00:10:37.548 +03:00 [DBG] Attempting to select an output formatter based on Accept header '["Application/json"]'.
+2021-10-07 00:10:37.549 +03:00 [DBG] Selected output formatter 'Microsoft.AspNetCore.Mvc.Formatters.SystemTextJsonOutputFormatter' and content type 'application/json' to write the response.
+2021-10-07 00:10:37.550 +03:00 [INF] Executing ObjectResult, writing value of type 'Bitir.Data.Model.Dtos.ResponseWrapper`1[[AuthModule.Security.JWT.AccessToken, AuthModule, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2021-10-07 00:10:37.560 +03:00 [INF] Executed action AuthModule.Controllers.AuthBaseController.Login (AuthModule) in 436.8699ms
+2021-10-07 00:10:37.562 +03:00 [INF] Executed endpoint 'AuthModule.Controllers.AuthBaseController.Login (AuthModule)'
+2021-10-07 00:10:37.564 +03:00 [DBG] Connection id "0HMC91MV4JLQ0" completed keep alive response.
+2021-10-07 00:10:37.565 +03:00 [DBG] 'BitirMainContext' disposed.
+2021-10-07 00:10:37.567 +03:00 [INF] Request finished in 572.1461ms 200 application/json; charset=utf-8
+2021-10-07 00:10:43.557 +03:00 [INF] Request starting HTTP/1.1 POST http://localhost:5000/ProductModule/Product/GetSystemProducts  0
+2021-10-07 00:10:43.558 +03:00 [DBG] 1 candidate(s) found for the request path '/ProductModule/Product/GetSystemProducts'
+2021-10-07 00:10:43.560 +03:00 [DBG] Endpoint 'ProductModule.Controllers.ProductController.GetSystemProducts (ProductModule)' with route pattern 'ProductModule/Product/GetSystemProducts' is valid for the request path '/ProductModule/Product/GetSystemProducts'
+2021-10-07 00:10:43.562 +03:00 [DBG] Request matched endpoint 'ProductModule.Controllers.ProductController.GetSystemProducts (ProductModule)'
+2021-10-07 00:10:43.605 +03:00 [INF] Successfully validated the token.
+2021-10-07 00:10:43.609 +03:00 [DBG] AuthenticationScheme: Bearer was successfully authenticated.
+2021-10-07 00:10:43.614 +03:00 [INF] Authorization was successful.
+2021-10-07 00:10:43.615 +03:00 [INF] Executing endpoint 'ProductModule.Controllers.ProductController.GetSystemProducts (ProductModule)'
+2021-10-07 00:10:43.619 +03:00 [INF] Route matched with {module = "ProductModule", action = "GetSystemProducts", controller = "Product"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetSystemProducts() on controller ProductModule.Controllers.ProductController (ProductModule).
+2021-10-07 00:10:43.621 +03:00 [DBG] Execution plan of authorization filters (in the following order): ["None"]
+2021-10-07 00:10:43.622 +03:00 [DBG] Execution plan of resource filters (in the following order): ["None"]
+2021-10-07 00:10:43.624 +03:00 [DBG] Execution plan of action filters (in the following order): ["Microsoft.AspNetCore.Mvc.Filters.ControllerActionFilter (Order: -2147483648)","Microsoft.AspNetCore.Mvc.ModelBinding.UnsupportedContentTypeFilter (Order: -3000)","Microsoft.AspNetCore.Mvc.Infrastructure.ModelStateInvalidFilter (Order: -2000)"]
+2021-10-07 00:10:43.625 +03:00 [DBG] Execution plan of exception filters (in the following order): ["None"]
+2021-10-07 00:10:43.626 +03:00 [DBG] Execution plan of result filters (in the following order): ["Microsoft.AspNetCore.Mvc.Infrastructure.ClientErrorResultFilter (Order: -2000)"]
+2021-10-07 00:10:43.627 +03:00 [DBG] Executing controller factory for controller ProductModule.Controllers.ProductController (ProductModule)
+2021-10-07 00:10:43.651 +03:00 [INF] Entity Framework Core 3.1.14 initialized 'BitirMainContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: None
+2021-10-07 00:10:43.653 +03:00 [DBG] Executed controller factory for controller ProductModule.Controllers.ProductController (ProductModule)
+2021-10-07 00:11:24.099 +03:00 [DBG] List of registered output formatters, in the following order: ["Microsoft.AspNetCore.Mvc.Formatters.HttpNoContentOutputFormatter","Microsoft.AspNetCore.Mvc.Formatters.StringOutputFormatter","Microsoft.AspNetCore.Mvc.Formatters.StreamOutputFormatter","Microsoft.AspNetCore.Mvc.Formatters.SystemTextJsonOutputFormatter"]
+2021-10-07 00:11:24.103 +03:00 [DBG] Attempting to select an output formatter based on Accept header '["Application/json"]'.
+2021-10-07 00:11:24.104 +03:00 [DBG] Selected output formatter 'Microsoft.AspNetCore.Mvc.Formatters.SystemTextJsonOutputFormatter' and content type 'application/json' to write the response.
+2021-10-07 00:11:24.106 +03:00 [INF] Executing ObjectResult, writing value of type 'Bitir.Data.Model.Dtos.ResponseWrapperListing`1[[ProductModule.Entities.Product, ProductModule, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2021-10-07 00:11:24.147 +03:00 [DBG] queryContext => new QueryingEnumerable<Product>(
+    (RelationalQueryContext)queryContext, 
+    RelationalCommandCache, 
+    null, 
+    null, 
+    Func<QueryContext, DbDataReader, ResultContext, int[], ResultCoordinator, Product>, 
+    Bitir.Data.Contexts.BitirMainContext, 
+    null
+)
+2021-10-07 00:11:24.153 +03:00 [DBG] Creating DbCommand for 'ExecuteReader'.
+2021-10-07 00:11:24.154 +03:00 [DBG] Created DbCommand for 'ExecuteReader' (0ms).
+2021-10-07 00:11:24.155 +03:00 [DBG] Opening connection to database 'BitirDb' on server '.'.
+2021-10-07 00:11:24.156 +03:00 [DBG] Opened connection to database 'BitirDb' on server '.'.
+2021-10-07 00:11:24.157 +03:00 [DBG] Executing DbCommand [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [p].[Id], [p0].[Name], [p1].[Quantity], [u].[Name]
+FROM [product].[Product_ProductQuantity] AS [p]
+INNER JOIN [product].[Product] AS [p0] ON [p].[ProductId] = [p0].[Id]
+INNER JOIN [product].[ProductQuantity] AS [p1] ON [p].[ProductQuantityId] = [p1].[Id]
+INNER JOIN [product].[Unit] AS [u] ON [p1].[UnitId] = [u].[Id]
+2021-10-07 00:11:24.161 +03:00 [INF] Executed DbCommand (4ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [p].[Id], [p0].[Name], [p1].[Quantity], [u].[Name]
+FROM [product].[Product_ProductQuantity] AS [p]
+INNER JOIN [product].[Product] AS [p0] ON [p].[ProductId] = [p0].[Id]
+INNER JOIN [product].[ProductQuantity] AS [p1] ON [p].[ProductQuantityId] = [p1].[Id]
+INNER JOIN [product].[Unit] AS [u] ON [p1].[UnitId] = [u].[Id]
+2021-10-07 00:11:24.167 +03:00 [INF] Executed action ProductModule.Controllers.ProductController.GetSystemProducts (ProductModule) in 40539.3269ms
+2021-10-07 00:11:24.168 +03:00 [INF] Executed endpoint 'ProductModule.Controllers.ProductController.GetSystemProducts (ProductModule)'
+2021-10-07 00:11:24.169 +03:00 [DBG] Connection id "0HMC91MV4JLQ0" completed keep alive response.
+2021-10-07 00:11:24.170 +03:00 [DBG] 'BitirMainContext' disposed.
+2021-10-07 00:11:24.171 +03:00 [INF] Request finished in 40614.3891ms 200 application/json; charset=utf-8
+2021-10-07 00:15:13.115 +03:00 [INF] Starting web host
+2021-10-07 00:15:13.709 +03:00 [DBG] Hosting starting
+2021-10-07 00:15:13.750 +03:00 [INF] User profile is available. Using 'C:\Users\leven\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2021-10-07 00:15:13.765 +03:00 [DBG] Reading data from file 'C:\Users\leven\AppData\Local\ASP.NET\DataProtection-Keys\key-14642b65-a18c-49a2-99af-52420015a828.xml'.
+2021-10-07 00:15:13.784 +03:00 [DBG] Reading data from file 'C:\Users\leven\AppData\Local\ASP.NET\DataProtection-Keys\key-3aa2ae8c-81de-4273-8d4a-f52cc391033f.xml'.
+2021-10-07 00:15:13.785 +03:00 [DBG] Reading data from file 'C:\Users\leven\AppData\Local\ASP.NET\DataProtection-Keys\key-4d95ab8d-4041-43bb-8736-c55e7eebfed6.xml'.
+2021-10-07 00:15:13.790 +03:00 [DBG] Found key {14642b65-a18c-49a2-99af-52420015a828}.
+2021-10-07 00:15:13.794 +03:00 [DBG] Found key {3aa2ae8c-81de-4273-8d4a-f52cc391033f}.
+2021-10-07 00:15:13.795 +03:00 [DBG] Found key {4d95ab8d-4041-43bb-8736-c55e7eebfed6}.
+2021-10-07 00:15:13.800 +03:00 [DBG] Considering key {3aa2ae8c-81de-4273-8d4a-f52cc391033f} with expiration date 2021-10-31 07:22:50Z as default key.
+2021-10-07 00:15:13.806 +03:00 [DBG] Forwarded activator type request from Microsoft.AspNetCore.DataProtection.XmlEncryption.DpapiXmlDecryptor, Microsoft.AspNetCore.DataProtection, Version=3.1.16.0, Culture=neutral, PublicKeyToken=adb9793829ddae60 to Microsoft.AspNetCore.DataProtection.XmlEncryption.DpapiXmlDecryptor, Microsoft.AspNetCore.DataProtection, Culture=neutral, PublicKeyToken=adb9793829ddae60
+2021-10-07 00:15:13.810 +03:00 [DBG] Decrypting secret element using Windows DPAPI.
+2021-10-07 00:15:13.811 +03:00 [DBG] Forwarded activator type request from Microsoft.AspNetCore.DataProtection.AuthenticatedEncryption.ConfigurationModel.AuthenticatedEncryptorDescriptorDeserializer, Microsoft.AspNetCore.DataProtection, Version=3.1.16.0, Culture=neutral, PublicKeyToken=adb9793829ddae60 to Microsoft.AspNetCore.DataProtection.AuthenticatedEncryption.ConfigurationModel.AuthenticatedEncryptorDescriptorDeserializer, Microsoft.AspNetCore.DataProtection, Culture=neutral, PublicKeyToken=adb9793829ddae60
+2021-10-07 00:15:13.814 +03:00 [DBG] Opening CNG algorithm 'AES' from provider 'null' with chaining mode CBC.
+2021-10-07 00:15:13.816 +03:00 [DBG] Opening CNG algorithm 'SHA256' from provider 'null' with HMAC.
+2021-10-07 00:15:13.819 +03:00 [DBG] Using key {3aa2ae8c-81de-4273-8d4a-f52cc391033f} as the default key.
+2021-10-07 00:15:13.820 +03:00 [DBG] Key ring with default key {3aa2ae8c-81de-4273-8d4a-f52cc391033f} was loaded during application startup.
+2021-10-07 00:15:14.055 +03:00 [DBG] An 'IServiceProvider' was created for internal use by Entity Framework.
+2021-10-07 00:15:14.565 +03:00 [DBG] The property 'UnitId' on entity type 'Unit' was created in shadow state because there are no eligible CLR members with a matching name.
+2021-10-07 00:15:14.585 +03:00 [WRN] No type was specified for the decimal column 'Price' on entity type 'ProductPrice'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values using 'HasColumnType()'.
+2021-10-07 00:15:14.588 +03:00 [WRN] No type was specified for the decimal column 'Quantity' on entity type 'ProductStock'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values using 'HasColumnType()'.
+2021-10-07 00:15:14.615 +03:00 [INF] Entity Framework Core 3.1.14 initialized 'BitirMainContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: None
+2021-10-07 00:15:14.645 +03:00 [DBG] Opening connection to database 'BitirDb' on server '.'.
+2021-10-07 00:15:14.812 +03:00 [DBG] Opened connection to database 'BitirDb' on server '.'.
+2021-10-07 00:15:14.817 +03:00 [DBG] Creating DbCommand for 'ExecuteNonQuery'.
+2021-10-07 00:15:14.823 +03:00 [DBG] Created DbCommand for 'ExecuteNonQuery' (3ms).
+2021-10-07 00:15:14.830 +03:00 [DBG] Executing DbCommand [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT 1
+2021-10-07 00:15:14.851 +03:00 [INF] Executed DbCommand (22ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT 1
+2021-10-07 00:15:14.856 +03:00 [DBG] Closing connection to database 'BitirDb' on server '.'.
+2021-10-07 00:15:14.860 +03:00 [DBG] Closed connection to database 'BitirDb' on server '.'.
+2021-10-07 00:15:14.861 +03:00 [DBG] Creating DbCommand for 'ExecuteScalar'.
+2021-10-07 00:15:14.862 +03:00 [DBG] Created DbCommand for 'ExecuteScalar' (0ms).
+2021-10-07 00:15:14.863 +03:00 [DBG] Opening connection to database 'BitirDb' on server '.'.
+2021-10-07 00:15:14.865 +03:00 [DBG] Opened connection to database 'BitirDb' on server '.'.
+2021-10-07 00:15:14.867 +03:00 [DBG] Executing DbCommand [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+
+IF EXISTS
+    (SELECT *
+     FROM [sys].[objects] o
+     WHERE [o].[type] = 'U'
+     AND [o].[is_ms_shipped] = 0
+     AND NOT EXISTS (SELECT *
+         FROM [sys].[extended_properties] AS [ep]
+         WHERE [ep].[major_id] = [o].[object_id]
+             AND [ep].[minor_id] = 0
+             AND [ep].[class] = 1
+             AND [ep].[name] = N'microsoft_database_tools_support'
+    )
+)
+SELECT 1 ELSE SELECT 0
+2021-10-07 00:15:14.882 +03:00 [INF] Executed DbCommand (15ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+
+IF EXISTS
+    (SELECT *
+     FROM [sys].[objects] o
+     WHERE [o].[type] = 'U'
+     AND [o].[is_ms_shipped] = 0
+     AND NOT EXISTS (SELECT *
+         FROM [sys].[extended_properties] AS [ep]
+         WHERE [ep].[major_id] = [o].[object_id]
+             AND [ep].[minor_id] = 0
+             AND [ep].[class] = 1
+             AND [ep].[name] = N'microsoft_database_tools_support'
+    )
+)
+SELECT 1 ELSE SELECT 0
+2021-10-07 00:15:14.884 +03:00 [DBG] Closing connection to database 'BitirDb' on server '.'.
+2021-10-07 00:15:14.885 +03:00 [DBG] Closed connection to database 'BitirDb' on server '.'.
+2021-10-07 00:15:14.889 +03:00 [DBG] Migrating using database 'BitirDb' on server '.'.
+2021-10-07 00:15:14.890 +03:00 [DBG] Opening connection to database 'BitirDb' on server '.'.
+2021-10-07 00:15:14.892 +03:00 [DBG] Opened connection to database 'BitirDb' on server '.'.
+2021-10-07 00:15:14.893 +03:00 [DBG] Creating DbCommand for 'ExecuteNonQuery'.
+2021-10-07 00:15:14.893 +03:00 [DBG] Created DbCommand for 'ExecuteNonQuery' (0ms).
+2021-10-07 00:15:14.894 +03:00 [DBG] Executing DbCommand [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT 1
+2021-10-07 00:15:14.899 +03:00 [INF] Executed DbCommand (4ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT 1
+2021-10-07 00:15:14.900 +03:00 [DBG] Closing connection to database 'BitirDb' on server '.'.
+2021-10-07 00:15:14.901 +03:00 [DBG] Closed connection to database 'BitirDb' on server '.'.
+2021-10-07 00:15:14.903 +03:00 [DBG] Creating DbCommand for 'ExecuteScalar'.
+2021-10-07 00:15:14.904 +03:00 [DBG] Created DbCommand for 'ExecuteScalar' (0ms).
+2021-10-07 00:15:14.905 +03:00 [DBG] Opening connection to database 'BitirDb' on server '.'.
+2021-10-07 00:15:14.906 +03:00 [DBG] Opened connection to database 'BitirDb' on server '.'.
+2021-10-07 00:15:14.907 +03:00 [DBG] Executing DbCommand [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT OBJECT_ID(N'[__EFMigrationsHistory]');
+2021-10-07 00:15:14.909 +03:00 [INF] Executed DbCommand (3ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT OBJECT_ID(N'[__EFMigrationsHistory]');
+2021-10-07 00:15:14.911 +03:00 [DBG] Closing connection to database 'BitirDb' on server '.'.
+2021-10-07 00:15:14.912 +03:00 [DBG] Closed connection to database 'BitirDb' on server '.'.
+2021-10-07 00:15:14.914 +03:00 [DBG] Opening connection to database 'BitirDb' on server '.'.
+2021-10-07 00:15:14.915 +03:00 [DBG] Opened connection to database 'BitirDb' on server '.'.
+2021-10-07 00:15:14.916 +03:00 [DBG] Creating DbCommand for 'ExecuteNonQuery'.
+2021-10-07 00:15:14.917 +03:00 [DBG] Created DbCommand for 'ExecuteNonQuery' (0ms).
+2021-10-07 00:15:14.918 +03:00 [DBG] Executing DbCommand [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT 1
+2021-10-07 00:15:14.921 +03:00 [INF] Executed DbCommand (3ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT 1
+2021-10-07 00:15:14.923 +03:00 [DBG] Closing connection to database 'BitirDb' on server '.'.
+2021-10-07 00:15:14.924 +03:00 [DBG] Closed connection to database 'BitirDb' on server '.'.
+2021-10-07 00:15:14.925 +03:00 [DBG] Creating DbCommand for 'ExecuteScalar'.
+2021-10-07 00:15:14.926 +03:00 [DBG] Created DbCommand for 'ExecuteScalar' (0ms).
+2021-10-07 00:15:14.927 +03:00 [DBG] Opening connection to database 'BitirDb' on server '.'.
+2021-10-07 00:15:14.928 +03:00 [DBG] Opened connection to database 'BitirDb' on server '.'.
+2021-10-07 00:15:14.929 +03:00 [DBG] Executing DbCommand [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT OBJECT_ID(N'[__EFMigrationsHistory]');
+2021-10-07 00:15:14.932 +03:00 [INF] Executed DbCommand (3ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT OBJECT_ID(N'[__EFMigrationsHistory]');
+2021-10-07 00:15:14.933 +03:00 [DBG] Closing connection to database 'BitirDb' on server '.'.
+2021-10-07 00:15:14.934 +03:00 [DBG] Closed connection to database 'BitirDb' on server '.'.
+2021-10-07 00:15:14.942 +03:00 [DBG] Creating DbCommand for 'ExecuteReader'.
+2021-10-07 00:15:14.942 +03:00 [DBG] Created DbCommand for 'ExecuteReader' (0ms).
+2021-10-07 00:15:14.943 +03:00 [DBG] Opening connection to database 'BitirDb' on server '.'.
+2021-10-07 00:15:14.944 +03:00 [DBG] Opened connection to database 'BitirDb' on server '.'.
+2021-10-07 00:15:14.945 +03:00 [DBG] Executing DbCommand [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [MigrationId], [ProductVersion]
+FROM [__EFMigrationsHistory]
+ORDER BY [MigrationId];
+2021-10-07 00:15:14.949 +03:00 [INF] Executed DbCommand (3ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [MigrationId], [ProductVersion]
+FROM [__EFMigrationsHistory]
+ORDER BY [MigrationId];
+2021-10-07 00:15:14.951 +03:00 [DBG] A data reader was disposed.
+2021-10-07 00:15:14.952 +03:00 [DBG] Closing connection to database 'BitirDb' on server '.'.
+2021-10-07 00:15:14.953 +03:00 [DBG] Closed connection to database 'BitirDb' on server '.'.
+2021-10-07 00:15:14.961 +03:00 [DBG] No migrations were found in assembly 'Bitir.Data'.
+2021-10-07 00:15:14.964 +03:00 [INF] No migrations were applied. The database is already up to date.
+2021-10-07 00:15:14.965 +03:00 [DBG] 'BitirMainContext' disposed.
+2021-10-07 00:15:14.997 +03:00 [DBG] Failed to locate the development https certificate at 'null'.
+2021-10-07 00:15:15.028 +03:00 [INF] Now listening on: http://localhost:5000
+2021-10-07 00:15:15.029 +03:00 [DBG] Loaded hosting startup assembly Bitir.Api
+2021-10-07 00:15:15.030 +03:00 [INF] Application started. Press Ctrl+C to shut down.
+2021-10-07 00:15:15.030 +03:00 [INF] Hosting environment: Development
+2021-10-07 00:15:15.031 +03:00 [INF] Content root path: C:\Users\leven\source\repos\Bitir\API\Bitir.Api
+2021-10-07 00:15:15.033 +03:00 [DBG] Hosting started
+2021-10-07 00:15:31.772 +03:00 [DBG] Connection id "0HMC91PN00M37" accepted.
+2021-10-07 00:15:31.775 +03:00 [DBG] Connection id "0HMC91PN00M37" started.
+2021-10-07 00:15:31.793 +03:00 [INF] Request starting HTTP/1.1 POST http://localhost:5000/AuthModule/AuthBase/Login application/json 36
+2021-10-07 00:15:31.797 +03:00 [DBG] Wildcard detected, all requests with hosts will be allowed.
+2021-10-07 00:15:31.819 +03:00 [DBG] 1 candidate(s) found for the request path '/AuthModule/AuthBase/Login'
+2021-10-07 00:15:31.823 +03:00 [DBG] Endpoint 'AuthModule.Controllers.AuthBaseController.Login (AuthModule)' with route pattern 'AuthModule/AuthBase/Login' is valid for the request path '/AuthModule/AuthBase/Login'
+2021-10-07 00:15:31.824 +03:00 [DBG] Request matched endpoint 'AuthModule.Controllers.AuthBaseController.Login (AuthModule)'
+2021-10-07 00:15:31.876 +03:00 [DBG] AuthenticationScheme: Bearer was not authenticated.
+2021-10-07 00:15:31.879 +03:00 [INF] Executing endpoint 'AuthModule.Controllers.AuthBaseController.Login (AuthModule)'
+2021-10-07 00:15:31.885 +03:00 [DBG] Registered model binder providers, in the following order: ["Microsoft.AspNetCore.Mvc.ModelBinding.Binders.BinderTypeModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.ServicesModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.BodyModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.HeaderModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.FloatingPointTypeModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.EnumTypeModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.SimpleTypeModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.CancellationTokenModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.ByteArrayModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.FormFileModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.FormCollectionModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.KeyValuePairModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.DictionaryModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.ArrayModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.CollectionModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.ComplexTypeModelBinderProvider"]
+2021-10-07 00:15:31.910 +03:00 [INF] Route matched with {module = "AuthModule", action = "Login", controller = "AuthBase"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Login(AuthModule.Dto.LoginDto) on controller AuthModule.Controllers.AuthBaseController (AuthModule).
+2021-10-07 00:15:31.912 +03:00 [DBG] Execution plan of authorization filters (in the following order): ["None"]
+2021-10-07 00:15:31.913 +03:00 [DBG] Execution plan of resource filters (in the following order): ["None"]
+2021-10-07 00:15:31.914 +03:00 [DBG] Execution plan of action filters (in the following order): ["Microsoft.AspNetCore.Mvc.Filters.ControllerActionFilter (Order: -2147483648)","Microsoft.AspNetCore.Mvc.ModelBinding.UnsupportedContentTypeFilter (Order: -3000)","Microsoft.AspNetCore.Mvc.Infrastructure.ModelStateInvalidFilter (Order: -2000)"]
+2021-10-07 00:15:31.916 +03:00 [DBG] Execution plan of exception filters (in the following order): ["None"]
+2021-10-07 00:15:31.917 +03:00 [DBG] Execution plan of result filters (in the following order): ["Microsoft.AspNetCore.Mvc.Infrastructure.ClientErrorResultFilter (Order: -2000)"]
+2021-10-07 00:15:31.918 +03:00 [DBG] Executing controller factory for controller AuthModule.Controllers.AuthBaseController (AuthModule)
+2021-10-07 00:15:31.921 +03:00 [INF] Entity Framework Core 3.1.14 initialized 'BitirMainContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: None
+2021-10-07 00:15:31.925 +03:00 [DBG] Executed controller factory for controller AuthModule.Controllers.AuthBaseController (AuthModule)
+2021-10-07 00:15:31.934 +03:00 [DBG] Attempting to bind parameter 'loginDto' of type 'AuthModule.Dto.LoginDto' ...
+2021-10-07 00:15:31.937 +03:00 [DBG] Attempting to bind parameter 'loginDto' of type 'AuthModule.Dto.LoginDto' using the name '' in request data ...
+2021-10-07 00:15:31.938 +03:00 [DBG] Selected input formatter 'Microsoft.AspNetCore.Mvc.Formatters.SystemTextJsonInputFormatter' for content type 'application/json'.
+2021-10-07 00:15:31.944 +03:00 [DBG] Connection id "0HMC91PN00M37", Request id "0HMC91PN00M37:00000001": started reading request body.
+2021-10-07 00:15:31.944 +03:00 [DBG] Connection id "0HMC91PN00M37", Request id "0HMC91PN00M37:00000001": done reading request body.
+2021-10-07 00:15:31.947 +03:00 [DBG] JSON input formatter succeeded, deserializing to type 'AuthModule.Dto.LoginDto'
+2021-10-07 00:15:31.948 +03:00 [DBG] Done attempting to bind parameter 'loginDto' of type 'AuthModule.Dto.LoginDto'.
+2021-10-07 00:15:31.949 +03:00 [DBG] Done attempting to bind parameter 'loginDto' of type 'AuthModule.Dto.LoginDto'.
+2021-10-07 00:15:31.950 +03:00 [DBG] Attempting to validate the bound parameter 'loginDto' of type 'AuthModule.Dto.LoginDto' ...
+2021-10-07 00:15:31.952 +03:00 [DBG] Done attempting to validate the bound parameter 'loginDto' of type 'AuthModule.Dto.LoginDto'.
+2021-10-07 00:15:32.096 +03:00 [DBG] queryContext => ShapedQueryCompilingExpressionVisitor.SingleOrDefaultAsync<UserAccount>(
+    asyncEnumerable: new QueryingEnumerable<UserAccount>(
+        (RelationalQueryContext)queryContext, 
+        RelationalCommandCache, 
+        null, 
+        null, 
+        Func<QueryContext, DbDataReader, ResultContext, int[], ResultCoordinator, UserAccount>, 
+        Bitir.Data.Contexts.BitirMainContext, 
+        null
+    ), 
+    cancellationToken: queryContext.CancellationToken)
+2021-10-07 00:15:32.118 +03:00 [DBG] Creating DbCommand for 'ExecuteReader'.
+2021-10-07 00:15:32.120 +03:00 [DBG] Created DbCommand for 'ExecuteReader' (1ms).
+2021-10-07 00:15:32.125 +03:00 [DBG] Opening connection to database 'BitirDb' on server '.'.
+2021-10-07 00:15:32.127 +03:00 [DBG] Opened connection to database 'BitirDb' on server '.'.
+2021-10-07 00:15:32.131 +03:00 [DBG] Executing DbCommand [Parameters=[@__loginDto_Username_0='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [u].[Id], [u].[AccountTypeId], [u].[Email], [u].[InsertDate], [u].[Name], [u].[PasswordHash], [u].[PasswordSalt], [u].[Phone], [u].[Status], [u].[Surname], [u].[UpdateDate], [u].[Username]
+FROM [auth].[UserAccount] AS [u]
+WHERE ([u].[Username] = @__loginDto_Username_0) OR ([u].[Email] = @__loginDto_Username_0)
+2021-10-07 00:15:32.164 +03:00 [INF] Executed DbCommand (36ms) [Parameters=[@__loginDto_Username_0='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [u].[Id], [u].[AccountTypeId], [u].[Email], [u].[InsertDate], [u].[Name], [u].[PasswordHash], [u].[PasswordSalt], [u].[Phone], [u].[Status], [u].[Surname], [u].[UpdateDate], [u].[Username]
+FROM [auth].[UserAccount] AS [u]
+WHERE ([u].[Username] = @__loginDto_Username_0) OR ([u].[Email] = @__loginDto_Username_0)
+2021-10-07 00:15:32.184 +03:00 [DBG] Context 'BitirMainContext' started tracking 'UserAccount' entity. Consider using 'DbContextOptionsBuilder.EnableSensitiveDataLogging' to see key values.
+2021-10-07 00:15:32.204 +03:00 [DBG] A data reader was disposed.
+2021-10-07 00:15:32.207 +03:00 [DBG] Closing connection to database 'BitirDb' on server '.'.
+2021-10-07 00:15:32.209 +03:00 [DBG] Closed connection to database 'BitirDb' on server '.'.
+2021-10-07 00:15:32.310 +03:00 [DBG] queryContext => ShapedQueryCompilingExpressionVisitor.SingleOrDefaultAsync<UserToken>(
+    asyncEnumerable: new QueryingEnumerable<UserToken>(
+        (RelationalQueryContext)queryContext, 
+        RelationalCommandCache, 
+        null, 
+        null, 
+        Func<QueryContext, DbDataReader, ResultContext, int[], ResultCoordinator, UserToken>, 
+        Bitir.Data.Contexts.BitirMainContext, 
+        null
+    ), 
+    cancellationToken: queryContext.CancellationToken)
+2021-10-07 00:15:32.314 +03:00 [DBG] Creating DbCommand for 'ExecuteReader'.
+2021-10-07 00:15:32.315 +03:00 [DBG] Created DbCommand for 'ExecuteReader' (1ms).
+2021-10-07 00:15:32.316 +03:00 [DBG] Opening connection to database 'BitirDb' on server '.'.
+2021-10-07 00:15:32.317 +03:00 [DBG] Opened connection to database 'BitirDb' on server '.'.
+2021-10-07 00:15:32.319 +03:00 [DBG] Executing DbCommand [Parameters=[@__entity_Id_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [u].[Id], [u].[InsertDate], [u].[RefreshToken], [u].[RefreshTokenExpirationDate], [u].[Status], [u].[UpdateDate], [u].[UserId]
+FROM [auth].[UserToken] AS [u]
+WHERE ([u].[Id] = @__entity_Id_0) AND ([u].[Status] <> 1)
+2021-10-07 00:15:32.323 +03:00 [INF] Executed DbCommand (4ms) [Parameters=[@__entity_Id_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [u].[Id], [u].[InsertDate], [u].[RefreshToken], [u].[RefreshTokenExpirationDate], [u].[Status], [u].[UpdateDate], [u].[UserId]
+FROM [auth].[UserToken] AS [u]
+WHERE ([u].[Id] = @__entity_Id_0) AND ([u].[Status] <> 1)
+2021-10-07 00:15:32.326 +03:00 [DBG] A data reader was disposed.
+2021-10-07 00:15:32.326 +03:00 [DBG] Closing connection to database 'BitirDb' on server '.'.
+2021-10-07 00:15:32.327 +03:00 [DBG] Closed connection to database 'BitirDb' on server '.'.
+2021-10-07 00:15:32.332 +03:00 [DBG] List of registered output formatters, in the following order: ["Microsoft.AspNetCore.Mvc.Formatters.HttpNoContentOutputFormatter","Microsoft.AspNetCore.Mvc.Formatters.StringOutputFormatter","Microsoft.AspNetCore.Mvc.Formatters.StreamOutputFormatter","Microsoft.AspNetCore.Mvc.Formatters.SystemTextJsonOutputFormatter"]
+2021-10-07 00:15:32.336 +03:00 [DBG] Attempting to select an output formatter based on Accept header '["Application/json"]'.
+2021-10-07 00:15:32.337 +03:00 [DBG] Selected output formatter 'Microsoft.AspNetCore.Mvc.Formatters.SystemTextJsonOutputFormatter' and content type 'application/json' to write the response.
+2021-10-07 00:15:32.338 +03:00 [INF] Executing ObjectResult, writing value of type 'Bitir.Data.Model.Dtos.ResponseWrapper`1[[AuthModule.Security.JWT.AccessToken, AuthModule, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2021-10-07 00:15:32.349 +03:00 [INF] Executed action AuthModule.Controllers.AuthBaseController.Login (AuthModule) in 428.4715ms
+2021-10-07 00:15:32.351 +03:00 [INF] Executed endpoint 'AuthModule.Controllers.AuthBaseController.Login (AuthModule)'
+2021-10-07 00:15:32.353 +03:00 [DBG] Connection id "0HMC91PN00M37" completed keep alive response.
+2021-10-07 00:15:32.355 +03:00 [DBG] 'BitirMainContext' disposed.
+2021-10-07 00:15:32.357 +03:00 [INF] Request finished in 565.2854ms 200 application/json; charset=utf-8
+2021-10-07 00:15:39.066 +03:00 [INF] Request starting HTTP/1.1 POST http://localhost:5000/ProductModule/Product/GetSystemProducts  0
+2021-10-07 00:15:39.068 +03:00 [DBG] 1 candidate(s) found for the request path '/ProductModule/Product/GetSystemProducts'
+2021-10-07 00:15:39.068 +03:00 [DBG] Endpoint 'ProductModule.Controllers.ProductController.GetSystemProducts (ProductModule)' with route pattern 'ProductModule/Product/GetSystemProducts' is valid for the request path '/ProductModule/Product/GetSystemProducts'
+2021-10-07 00:15:39.070 +03:00 [DBG] Request matched endpoint 'ProductModule.Controllers.ProductController.GetSystemProducts (ProductModule)'
+2021-10-07 00:15:39.111 +03:00 [INF] Successfully validated the token.
+2021-10-07 00:15:39.113 +03:00 [DBG] AuthenticationScheme: Bearer was successfully authenticated.
+2021-10-07 00:15:39.116 +03:00 [INF] Authorization was successful.
+2021-10-07 00:15:39.117 +03:00 [INF] Executing endpoint 'ProductModule.Controllers.ProductController.GetSystemProducts (ProductModule)'
+2021-10-07 00:15:39.120 +03:00 [INF] Route matched with {module = "ProductModule", action = "GetSystemProducts", controller = "Product"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetSystemProducts() on controller ProductModule.Controllers.ProductController (ProductModule).
+2021-10-07 00:15:39.123 +03:00 [DBG] Execution plan of authorization filters (in the following order): ["None"]
+2021-10-07 00:15:39.124 +03:00 [DBG] Execution plan of resource filters (in the following order): ["None"]
+2021-10-07 00:15:39.125 +03:00 [DBG] Execution plan of action filters (in the following order): ["Microsoft.AspNetCore.Mvc.Filters.ControllerActionFilter (Order: -2147483648)","Microsoft.AspNetCore.Mvc.ModelBinding.UnsupportedContentTypeFilter (Order: -3000)","Microsoft.AspNetCore.Mvc.Infrastructure.ModelStateInvalidFilter (Order: -2000)"]
+2021-10-07 00:15:39.126 +03:00 [DBG] Execution plan of exception filters (in the following order): ["None"]
+2021-10-07 00:15:39.127 +03:00 [DBG] Execution plan of result filters (in the following order): ["Microsoft.AspNetCore.Mvc.Infrastructure.ClientErrorResultFilter (Order: -2000)"]
+2021-10-07 00:15:39.128 +03:00 [DBG] Executing controller factory for controller ProductModule.Controllers.ProductController (ProductModule)
+2021-10-07 00:15:39.152 +03:00 [INF] Entity Framework Core 3.1.14 initialized 'BitirMainContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: None
+2021-10-07 00:15:39.153 +03:00 [DBG] Executed controller factory for controller ProductModule.Controllers.ProductController (ProductModule)
+2021-10-07 00:15:39.157 +03:00 [DBG] List of registered output formatters, in the following order: ["Microsoft.AspNetCore.Mvc.Formatters.HttpNoContentOutputFormatter","Microsoft.AspNetCore.Mvc.Formatters.StringOutputFormatter","Microsoft.AspNetCore.Mvc.Formatters.StreamOutputFormatter","Microsoft.AspNetCore.Mvc.Formatters.SystemTextJsonOutputFormatter"]
+2021-10-07 00:15:39.159 +03:00 [DBG] Attempting to select an output formatter based on Accept header '["Application/json"]'.
+2021-10-07 00:15:39.160 +03:00 [DBG] Selected output formatter 'Microsoft.AspNetCore.Mvc.Formatters.SystemTextJsonOutputFormatter' and content type 'application/json' to write the response.
+2021-10-07 00:15:39.161 +03:00 [INF] Executing ObjectResult, writing value of type 'Bitir.Data.Model.Dtos.ResponseWrapperListing`1[[ProductModule.Entities.Product, ProductModule, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2021-10-07 00:15:39.200 +03:00 [DBG] queryContext => new QueryingEnumerable<Product>(
+    (RelationalQueryContext)queryContext, 
+    RelationalCommandCache, 
+    null, 
+    null, 
+    Func<QueryContext, DbDataReader, ResultContext, int[], ResultCoordinator, Product>, 
+    Bitir.Data.Contexts.BitirMainContext, 
+    null
+)
+2021-10-07 00:15:39.207 +03:00 [DBG] Creating DbCommand for 'ExecuteReader'.
+2021-10-07 00:15:39.208 +03:00 [DBG] Created DbCommand for 'ExecuteReader' (0ms).
+2021-10-07 00:15:39.208 +03:00 [DBG] Opening connection to database 'BitirDb' on server '.'.
+2021-10-07 00:15:39.209 +03:00 [DBG] Opened connection to database 'BitirDb' on server '.'.
+2021-10-07 00:15:39.211 +03:00 [DBG] Executing DbCommand [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [p].[Id], [p0].[Name], [p1].[Quantity], [u].[Name]
+FROM [product].[Product_ProductQuantity] AS [p]
+INNER JOIN [product].[Product] AS [p0] ON [p].[ProductId] = [p0].[Id]
+INNER JOIN [product].[ProductQuantity] AS [p1] ON [p].[ProductQuantityId] = [p1].[Id]
+INNER JOIN [product].[Unit] AS [u] ON [p1].[UnitId] = [u].[Id]
+2021-10-07 00:15:39.215 +03:00 [INF] Executed DbCommand (4ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [p].[Id], [p0].[Name], [p1].[Quantity], [u].[Name]
+FROM [product].[Product_ProductQuantity] AS [p]
+INNER JOIN [product].[Product] AS [p0] ON [p].[ProductId] = [p0].[Id]
+INNER JOIN [product].[ProductQuantity] AS [p1] ON [p].[ProductQuantityId] = [p1].[Id]
+INNER JOIN [product].[Unit] AS [u] ON [p1].[UnitId] = [u].[Id]
+2021-10-07 00:15:39.220 +03:00 [INF] Executed action ProductModule.Controllers.ProductController.GetSystemProducts (ProductModule) in 91.7794ms
+2021-10-07 00:15:39.221 +03:00 [INF] Executed endpoint 'ProductModule.Controllers.ProductController.GetSystemProducts (ProductModule)'
+2021-10-07 00:15:39.222 +03:00 [DBG] Connection id "0HMC91PN00M37" completed keep alive response.
+2021-10-07 00:15:39.223 +03:00 [DBG] 'BitirMainContext' disposed.
+2021-10-07 00:15:39.224 +03:00 [INF] Request finished in 158.4692ms 200 application/json; charset=utf-8
+2021-10-07 00:20:40.802 +03:00 [INF] Starting web host
+2021-10-07 00:20:41.420 +03:00 [DBG] Hosting starting
+2021-10-07 00:20:41.460 +03:00 [INF] User profile is available. Using 'C:\Users\leven\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2021-10-07 00:20:41.474 +03:00 [DBG] Reading data from file 'C:\Users\leven\AppData\Local\ASP.NET\DataProtection-Keys\key-14642b65-a18c-49a2-99af-52420015a828.xml'.
+2021-10-07 00:20:41.488 +03:00 [DBG] Reading data from file 'C:\Users\leven\AppData\Local\ASP.NET\DataProtection-Keys\key-3aa2ae8c-81de-4273-8d4a-f52cc391033f.xml'.
+2021-10-07 00:20:41.489 +03:00 [DBG] Reading data from file 'C:\Users\leven\AppData\Local\ASP.NET\DataProtection-Keys\key-4d95ab8d-4041-43bb-8736-c55e7eebfed6.xml'.
+2021-10-07 00:20:41.493 +03:00 [DBG] Found key {14642b65-a18c-49a2-99af-52420015a828}.
+2021-10-07 00:20:41.497 +03:00 [DBG] Found key {3aa2ae8c-81de-4273-8d4a-f52cc391033f}.
+2021-10-07 00:20:41.498 +03:00 [DBG] Found key {4d95ab8d-4041-43bb-8736-c55e7eebfed6}.
+2021-10-07 00:20:41.503 +03:00 [DBG] Considering key {3aa2ae8c-81de-4273-8d4a-f52cc391033f} with expiration date 2021-10-31 07:22:50Z as default key.
+2021-10-07 00:20:41.509 +03:00 [DBG] Forwarded activator type request from Microsoft.AspNetCore.DataProtection.XmlEncryption.DpapiXmlDecryptor, Microsoft.AspNetCore.DataProtection, Version=3.1.16.0, Culture=neutral, PublicKeyToken=adb9793829ddae60 to Microsoft.AspNetCore.DataProtection.XmlEncryption.DpapiXmlDecryptor, Microsoft.AspNetCore.DataProtection, Culture=neutral, PublicKeyToken=adb9793829ddae60
+2021-10-07 00:20:41.512 +03:00 [DBG] Decrypting secret element using Windows DPAPI.
+2021-10-07 00:20:41.514 +03:00 [DBG] Forwarded activator type request from Microsoft.AspNetCore.DataProtection.AuthenticatedEncryption.ConfigurationModel.AuthenticatedEncryptorDescriptorDeserializer, Microsoft.AspNetCore.DataProtection, Version=3.1.16.0, Culture=neutral, PublicKeyToken=adb9793829ddae60 to Microsoft.AspNetCore.DataProtection.AuthenticatedEncryption.ConfigurationModel.AuthenticatedEncryptorDescriptorDeserializer, Microsoft.AspNetCore.DataProtection, Culture=neutral, PublicKeyToken=adb9793829ddae60
+2021-10-07 00:20:41.518 +03:00 [DBG] Opening CNG algorithm 'AES' from provider 'null' with chaining mode CBC.
+2021-10-07 00:20:41.521 +03:00 [DBG] Opening CNG algorithm 'SHA256' from provider 'null' with HMAC.
+2021-10-07 00:20:41.525 +03:00 [DBG] Using key {3aa2ae8c-81de-4273-8d4a-f52cc391033f} as the default key.
+2021-10-07 00:20:41.527 +03:00 [DBG] Key ring with default key {3aa2ae8c-81de-4273-8d4a-f52cc391033f} was loaded during application startup.
+2021-10-07 00:20:41.773 +03:00 [DBG] An 'IServiceProvider' was created for internal use by Entity Framework.
+2021-10-07 00:20:42.305 +03:00 [DBG] The property 'UnitId' on entity type 'Unit' was created in shadow state because there are no eligible CLR members with a matching name.
+2021-10-07 00:20:42.327 +03:00 [WRN] No type was specified for the decimal column 'Price' on entity type 'ProductPrice'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values using 'HasColumnType()'.
+2021-10-07 00:20:42.328 +03:00 [WRN] No type was specified for the decimal column 'Quantity' on entity type 'ProductStock'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values using 'HasColumnType()'.
+2021-10-07 00:20:42.352 +03:00 [INF] Entity Framework Core 3.1.14 initialized 'BitirMainContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: None
+2021-10-07 00:20:42.376 +03:00 [DBG] Opening connection to database 'BitirDb' on server '.'.
+2021-10-07 00:20:42.542 +03:00 [DBG] Opened connection to database 'BitirDb' on server '.'.
+2021-10-07 00:20:42.548 +03:00 [DBG] Creating DbCommand for 'ExecuteNonQuery'.
+2021-10-07 00:20:42.554 +03:00 [DBG] Created DbCommand for 'ExecuteNonQuery' (2ms).
+2021-10-07 00:20:42.561 +03:00 [DBG] Executing DbCommand [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT 1
+2021-10-07 00:20:42.580 +03:00 [INF] Executed DbCommand (21ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT 1
+2021-10-07 00:20:42.584 +03:00 [DBG] Closing connection to database 'BitirDb' on server '.'.
+2021-10-07 00:20:42.587 +03:00 [DBG] Closed connection to database 'BitirDb' on server '.'.
+2021-10-07 00:20:42.590 +03:00 [DBG] Creating DbCommand for 'ExecuteScalar'.
+2021-10-07 00:20:42.591 +03:00 [DBG] Created DbCommand for 'ExecuteScalar' (0ms).
+2021-10-07 00:20:42.591 +03:00 [DBG] Opening connection to database 'BitirDb' on server '.'.
+2021-10-07 00:20:42.593 +03:00 [DBG] Opened connection to database 'BitirDb' on server '.'.
+2021-10-07 00:20:42.594 +03:00 [DBG] Executing DbCommand [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+
+IF EXISTS
+    (SELECT *
+     FROM [sys].[objects] o
+     WHERE [o].[type] = 'U'
+     AND [o].[is_ms_shipped] = 0
+     AND NOT EXISTS (SELECT *
+         FROM [sys].[extended_properties] AS [ep]
+         WHERE [ep].[major_id] = [o].[object_id]
+             AND [ep].[minor_id] = 0
+             AND [ep].[class] = 1
+             AND [ep].[name] = N'microsoft_database_tools_support'
+    )
+)
+SELECT 1 ELSE SELECT 0
+2021-10-07 00:20:42.608 +03:00 [INF] Executed DbCommand (14ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+
+IF EXISTS
+    (SELECT *
+     FROM [sys].[objects] o
+     WHERE [o].[type] = 'U'
+     AND [o].[is_ms_shipped] = 0
+     AND NOT EXISTS (SELECT *
+         FROM [sys].[extended_properties] AS [ep]
+         WHERE [ep].[major_id] = [o].[object_id]
+             AND [ep].[minor_id] = 0
+             AND [ep].[class] = 1
+             AND [ep].[name] = N'microsoft_database_tools_support'
+    )
+)
+SELECT 1 ELSE SELECT 0
+2021-10-07 00:20:42.610 +03:00 [DBG] Closing connection to database 'BitirDb' on server '.'.
+2021-10-07 00:20:42.611 +03:00 [DBG] Closed connection to database 'BitirDb' on server '.'.
+2021-10-07 00:20:42.615 +03:00 [DBG] Migrating using database 'BitirDb' on server '.'.
+2021-10-07 00:20:42.616 +03:00 [DBG] Opening connection to database 'BitirDb' on server '.'.
+2021-10-07 00:20:42.616 +03:00 [DBG] Opened connection to database 'BitirDb' on server '.'.
+2021-10-07 00:20:42.617 +03:00 [DBG] Creating DbCommand for 'ExecuteNonQuery'.
+2021-10-07 00:20:42.618 +03:00 [DBG] Created DbCommand for 'ExecuteNonQuery' (0ms).
+2021-10-07 00:20:42.620 +03:00 [DBG] Executing DbCommand [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT 1
+2021-10-07 00:20:42.624 +03:00 [INF] Executed DbCommand (4ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT 1
+2021-10-07 00:20:42.625 +03:00 [DBG] Closing connection to database 'BitirDb' on server '.'.
+2021-10-07 00:20:42.626 +03:00 [DBG] Closed connection to database 'BitirDb' on server '.'.
+2021-10-07 00:20:42.628 +03:00 [DBG] Creating DbCommand for 'ExecuteScalar'.
+2021-10-07 00:20:42.629 +03:00 [DBG] Created DbCommand for 'ExecuteScalar' (0ms).
+2021-10-07 00:20:42.630 +03:00 [DBG] Opening connection to database 'BitirDb' on server '.'.
+2021-10-07 00:20:42.631 +03:00 [DBG] Opened connection to database 'BitirDb' on server '.'.
+2021-10-07 00:20:42.632 +03:00 [DBG] Executing DbCommand [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT OBJECT_ID(N'[__EFMigrationsHistory]');
+2021-10-07 00:20:42.635 +03:00 [INF] Executed DbCommand (3ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT OBJECT_ID(N'[__EFMigrationsHistory]');
+2021-10-07 00:20:42.636 +03:00 [DBG] Closing connection to database 'BitirDb' on server '.'.
+2021-10-07 00:20:42.637 +03:00 [DBG] Closed connection to database 'BitirDb' on server '.'.
+2021-10-07 00:20:42.639 +03:00 [DBG] Opening connection to database 'BitirDb' on server '.'.
+2021-10-07 00:20:42.639 +03:00 [DBG] Opened connection to database 'BitirDb' on server '.'.
+2021-10-07 00:20:42.640 +03:00 [DBG] Creating DbCommand for 'ExecuteNonQuery'.
+2021-10-07 00:20:42.641 +03:00 [DBG] Created DbCommand for 'ExecuteNonQuery' (0ms).
+2021-10-07 00:20:42.642 +03:00 [DBG] Executing DbCommand [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT 1
+2021-10-07 00:20:42.644 +03:00 [INF] Executed DbCommand (3ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT 1
+2021-10-07 00:20:42.646 +03:00 [DBG] Closing connection to database 'BitirDb' on server '.'.
+2021-10-07 00:20:42.647 +03:00 [DBG] Closed connection to database 'BitirDb' on server '.'.
+2021-10-07 00:20:42.648 +03:00 [DBG] Creating DbCommand for 'ExecuteScalar'.
+2021-10-07 00:20:42.648 +03:00 [DBG] Created DbCommand for 'ExecuteScalar' (0ms).
+2021-10-07 00:20:42.650 +03:00 [DBG] Opening connection to database 'BitirDb' on server '.'.
+2021-10-07 00:20:42.651 +03:00 [DBG] Opened connection to database 'BitirDb' on server '.'.
+2021-10-07 00:20:42.652 +03:00 [DBG] Executing DbCommand [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT OBJECT_ID(N'[__EFMigrationsHistory]');
+2021-10-07 00:20:42.654 +03:00 [INF] Executed DbCommand (3ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT OBJECT_ID(N'[__EFMigrationsHistory]');
+2021-10-07 00:20:42.655 +03:00 [DBG] Closing connection to database 'BitirDb' on server '.'.
+2021-10-07 00:20:42.656 +03:00 [DBG] Closed connection to database 'BitirDb' on server '.'.
+2021-10-07 00:20:42.663 +03:00 [DBG] Creating DbCommand for 'ExecuteReader'.
+2021-10-07 00:20:42.664 +03:00 [DBG] Created DbCommand for 'ExecuteReader' (0ms).
+2021-10-07 00:20:42.665 +03:00 [DBG] Opening connection to database 'BitirDb' on server '.'.
+2021-10-07 00:20:42.666 +03:00 [DBG] Opened connection to database 'BitirDb' on server '.'.
+2021-10-07 00:20:42.667 +03:00 [DBG] Executing DbCommand [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [MigrationId], [ProductVersion]
+FROM [__EFMigrationsHistory]
+ORDER BY [MigrationId];
+2021-10-07 00:20:42.670 +03:00 [INF] Executed DbCommand (3ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [MigrationId], [ProductVersion]
+FROM [__EFMigrationsHistory]
+ORDER BY [MigrationId];
+2021-10-07 00:20:42.673 +03:00 [DBG] A data reader was disposed.
+2021-10-07 00:20:42.673 +03:00 [DBG] Closing connection to database 'BitirDb' on server '.'.
+2021-10-07 00:20:42.674 +03:00 [DBG] Closed connection to database 'BitirDb' on server '.'.
+2021-10-07 00:20:42.681 +03:00 [DBG] No migrations were found in assembly 'Bitir.Data'.
+2021-10-07 00:20:42.685 +03:00 [INF] No migrations were applied. The database is already up to date.
+2021-10-07 00:20:42.686 +03:00 [DBG] 'BitirMainContext' disposed.
+2021-10-07 00:20:42.717 +03:00 [DBG] Failed to locate the development https certificate at 'null'.
+2021-10-07 00:20:42.741 +03:00 [INF] Now listening on: http://localhost:5000
+2021-10-07 00:20:42.742 +03:00 [DBG] Loaded hosting startup assembly Bitir.Api
+2021-10-07 00:20:42.743 +03:00 [INF] Application started. Press Ctrl+C to shut down.
+2021-10-07 00:20:42.743 +03:00 [INF] Hosting environment: Development
+2021-10-07 00:20:42.744 +03:00 [INF] Content root path: C:\Users\leven\source\repos\Bitir\API\Bitir.Api
+2021-10-07 00:20:42.745 +03:00 [DBG] Hosting started
+2021-10-07 00:20:55.734 +03:00 [DBG] Connection id "0HMC91SNHI30S" accepted.
+2021-10-07 00:20:55.736 +03:00 [DBG] Connection id "0HMC91SNHI30S" started.
+2021-10-07 00:20:55.755 +03:00 [INF] Request starting HTTP/1.1 POST http://localhost:5000/AuthModule/AuthBase/Login application/json 36
+2021-10-07 00:20:55.758 +03:00 [DBG] Wildcard detected, all requests with hosts will be allowed.
+2021-10-07 00:20:55.778 +03:00 [DBG] 1 candidate(s) found for the request path '/AuthModule/AuthBase/Login'
+2021-10-07 00:20:55.781 +03:00 [DBG] Endpoint 'AuthModule.Controllers.AuthBaseController.Login (AuthModule)' with route pattern 'AuthModule/AuthBase/Login' is valid for the request path '/AuthModule/AuthBase/Login'
+2021-10-07 00:20:55.783 +03:00 [DBG] Request matched endpoint 'AuthModule.Controllers.AuthBaseController.Login (AuthModule)'
+2021-10-07 00:20:55.833 +03:00 [DBG] AuthenticationScheme: Bearer was not authenticated.
+2021-10-07 00:20:55.836 +03:00 [INF] Executing endpoint 'AuthModule.Controllers.AuthBaseController.Login (AuthModule)'
+2021-10-07 00:20:55.842 +03:00 [DBG] Registered model binder providers, in the following order: ["Microsoft.AspNetCore.Mvc.ModelBinding.Binders.BinderTypeModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.ServicesModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.BodyModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.HeaderModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.FloatingPointTypeModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.EnumTypeModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.SimpleTypeModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.CancellationTokenModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.ByteArrayModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.FormFileModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.FormCollectionModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.KeyValuePairModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.DictionaryModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.ArrayModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.CollectionModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.ComplexTypeModelBinderProvider"]
+2021-10-07 00:20:55.866 +03:00 [INF] Route matched with {module = "AuthModule", action = "Login", controller = "AuthBase"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Login(AuthModule.Dto.LoginDto) on controller AuthModule.Controllers.AuthBaseController (AuthModule).
+2021-10-07 00:20:55.867 +03:00 [DBG] Execution plan of authorization filters (in the following order): ["None"]
+2021-10-07 00:20:55.868 +03:00 [DBG] Execution plan of resource filters (in the following order): ["None"]
+2021-10-07 00:20:55.870 +03:00 [DBG] Execution plan of action filters (in the following order): ["Microsoft.AspNetCore.Mvc.Filters.ControllerActionFilter (Order: -2147483648)","Microsoft.AspNetCore.Mvc.ModelBinding.UnsupportedContentTypeFilter (Order: -3000)","Microsoft.AspNetCore.Mvc.Infrastructure.ModelStateInvalidFilter (Order: -2000)"]
+2021-10-07 00:20:55.872 +03:00 [DBG] Execution plan of exception filters (in the following order): ["None"]
+2021-10-07 00:20:55.873 +03:00 [DBG] Execution plan of result filters (in the following order): ["Microsoft.AspNetCore.Mvc.Infrastructure.ClientErrorResultFilter (Order: -2000)"]
+2021-10-07 00:20:55.875 +03:00 [DBG] Executing controller factory for controller AuthModule.Controllers.AuthBaseController (AuthModule)
+2021-10-07 00:20:55.878 +03:00 [INF] Entity Framework Core 3.1.14 initialized 'BitirMainContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: None
+2021-10-07 00:20:55.881 +03:00 [DBG] Executed controller factory for controller AuthModule.Controllers.AuthBaseController (AuthModule)
+2021-10-07 00:20:55.890 +03:00 [DBG] Attempting to bind parameter 'loginDto' of type 'AuthModule.Dto.LoginDto' ...
+2021-10-07 00:20:55.893 +03:00 [DBG] Attempting to bind parameter 'loginDto' of type 'AuthModule.Dto.LoginDto' using the name '' in request data ...
+2021-10-07 00:20:55.895 +03:00 [DBG] Selected input formatter 'Microsoft.AspNetCore.Mvc.Formatters.SystemTextJsonInputFormatter' for content type 'application/json'.
+2021-10-07 00:20:55.900 +03:00 [DBG] Connection id "0HMC91SNHI30S", Request id "0HMC91SNHI30S:00000001": started reading request body.
+2021-10-07 00:20:55.901 +03:00 [DBG] Connection id "0HMC91SNHI30S", Request id "0HMC91SNHI30S:00000001": done reading request body.
+2021-10-07 00:20:55.903 +03:00 [DBG] JSON input formatter succeeded, deserializing to type 'AuthModule.Dto.LoginDto'
+2021-10-07 00:20:55.904 +03:00 [DBG] Done attempting to bind parameter 'loginDto' of type 'AuthModule.Dto.LoginDto'.
+2021-10-07 00:20:55.905 +03:00 [DBG] Done attempting to bind parameter 'loginDto' of type 'AuthModule.Dto.LoginDto'.
+2021-10-07 00:20:55.906 +03:00 [DBG] Attempting to validate the bound parameter 'loginDto' of type 'AuthModule.Dto.LoginDto' ...
+2021-10-07 00:20:55.909 +03:00 [DBG] Done attempting to validate the bound parameter 'loginDto' of type 'AuthModule.Dto.LoginDto'.
+2021-10-07 00:20:56.054 +03:00 [DBG] queryContext => ShapedQueryCompilingExpressionVisitor.SingleOrDefaultAsync<UserAccount>(
+    asyncEnumerable: new QueryingEnumerable<UserAccount>(
+        (RelationalQueryContext)queryContext, 
+        RelationalCommandCache, 
+        null, 
+        null, 
+        Func<QueryContext, DbDataReader, ResultContext, int[], ResultCoordinator, UserAccount>, 
+        Bitir.Data.Contexts.BitirMainContext, 
+        null
+    ), 
+    cancellationToken: queryContext.CancellationToken)
+2021-10-07 00:20:56.077 +03:00 [DBG] Creating DbCommand for 'ExecuteReader'.
+2021-10-07 00:20:56.079 +03:00 [DBG] Created DbCommand for 'ExecuteReader' (1ms).
+2021-10-07 00:20:56.084 +03:00 [DBG] Opening connection to database 'BitirDb' on server '.'.
+2021-10-07 00:20:56.086 +03:00 [DBG] Opened connection to database 'BitirDb' on server '.'.
+2021-10-07 00:20:56.090 +03:00 [DBG] Executing DbCommand [Parameters=[@__loginDto_Username_0='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [u].[Id], [u].[AccountTypeId], [u].[Email], [u].[InsertDate], [u].[Name], [u].[PasswordHash], [u].[PasswordSalt], [u].[Phone], [u].[Status], [u].[Surname], [u].[UpdateDate], [u].[Username]
+FROM [auth].[UserAccount] AS [u]
+WHERE ([u].[Username] = @__loginDto_Username_0) OR ([u].[Email] = @__loginDto_Username_0)
+2021-10-07 00:20:56.124 +03:00 [INF] Executed DbCommand (37ms) [Parameters=[@__loginDto_Username_0='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [u].[Id], [u].[AccountTypeId], [u].[Email], [u].[InsertDate], [u].[Name], [u].[PasswordHash], [u].[PasswordSalt], [u].[Phone], [u].[Status], [u].[Surname], [u].[UpdateDate], [u].[Username]
+FROM [auth].[UserAccount] AS [u]
+WHERE ([u].[Username] = @__loginDto_Username_0) OR ([u].[Email] = @__loginDto_Username_0)
+2021-10-07 00:20:56.142 +03:00 [DBG] Context 'BitirMainContext' started tracking 'UserAccount' entity. Consider using 'DbContextOptionsBuilder.EnableSensitiveDataLogging' to see key values.
+2021-10-07 00:20:56.164 +03:00 [DBG] A data reader was disposed.
+2021-10-07 00:20:56.166 +03:00 [DBG] Closing connection to database 'BitirDb' on server '.'.
+2021-10-07 00:20:56.168 +03:00 [DBG] Closed connection to database 'BitirDb' on server '.'.
+2021-10-07 00:20:56.268 +03:00 [DBG] queryContext => ShapedQueryCompilingExpressionVisitor.SingleOrDefaultAsync<UserToken>(
+    asyncEnumerable: new QueryingEnumerable<UserToken>(
+        (RelationalQueryContext)queryContext, 
+        RelationalCommandCache, 
+        null, 
+        null, 
+        Func<QueryContext, DbDataReader, ResultContext, int[], ResultCoordinator, UserToken>, 
+        Bitir.Data.Contexts.BitirMainContext, 
+        null
+    ), 
+    cancellationToken: queryContext.CancellationToken)
+2021-10-07 00:20:56.272 +03:00 [DBG] Creating DbCommand for 'ExecuteReader'.
+2021-10-07 00:20:56.273 +03:00 [DBG] Created DbCommand for 'ExecuteReader' (1ms).
+2021-10-07 00:20:56.274 +03:00 [DBG] Opening connection to database 'BitirDb' on server '.'.
+2021-10-07 00:20:56.275 +03:00 [DBG] Opened connection to database 'BitirDb' on server '.'.
+2021-10-07 00:20:56.276 +03:00 [DBG] Executing DbCommand [Parameters=[@__entity_Id_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [u].[Id], [u].[InsertDate], [u].[RefreshToken], [u].[RefreshTokenExpirationDate], [u].[Status], [u].[UpdateDate], [u].[UserId]
+FROM [auth].[UserToken] AS [u]
+WHERE ([u].[Id] = @__entity_Id_0) AND ([u].[Status] <> 1)
+2021-10-07 00:20:56.280 +03:00 [INF] Executed DbCommand (4ms) [Parameters=[@__entity_Id_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [u].[Id], [u].[InsertDate], [u].[RefreshToken], [u].[RefreshTokenExpirationDate], [u].[Status], [u].[UpdateDate], [u].[UserId]
+FROM [auth].[UserToken] AS [u]
+WHERE ([u].[Id] = @__entity_Id_0) AND ([u].[Status] <> 1)
+2021-10-07 00:20:56.282 +03:00 [DBG] A data reader was disposed.
+2021-10-07 00:20:56.283 +03:00 [DBG] Closing connection to database 'BitirDb' on server '.'.
+2021-10-07 00:20:56.284 +03:00 [DBG] Closed connection to database 'BitirDb' on server '.'.
+2021-10-07 00:20:56.288 +03:00 [DBG] List of registered output formatters, in the following order: ["Microsoft.AspNetCore.Mvc.Formatters.HttpNoContentOutputFormatter","Microsoft.AspNetCore.Mvc.Formatters.StringOutputFormatter","Microsoft.AspNetCore.Mvc.Formatters.StreamOutputFormatter","Microsoft.AspNetCore.Mvc.Formatters.SystemTextJsonOutputFormatter"]
+2021-10-07 00:20:56.292 +03:00 [DBG] Attempting to select an output formatter based on Accept header '["Application/json"]'.
+2021-10-07 00:20:56.293 +03:00 [DBG] Selected output formatter 'Microsoft.AspNetCore.Mvc.Formatters.SystemTextJsonOutputFormatter' and content type 'application/json' to write the response.
+2021-10-07 00:20:56.295 +03:00 [INF] Executing ObjectResult, writing value of type 'Bitir.Data.Model.Dtos.ResponseWrapper`1[[AuthModule.Security.JWT.AccessToken, AuthModule, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2021-10-07 00:20:56.305 +03:00 [INF] Executed action AuthModule.Controllers.AuthBaseController.Login (AuthModule) in 428.261ms
+2021-10-07 00:20:56.307 +03:00 [INF] Executed endpoint 'AuthModule.Controllers.AuthBaseController.Login (AuthModule)'
+2021-10-07 00:20:56.309 +03:00 [DBG] Connection id "0HMC91SNHI30S" completed keep alive response.
+2021-10-07 00:20:56.310 +03:00 [DBG] 'BitirMainContext' disposed.
+2021-10-07 00:20:56.312 +03:00 [INF] Request finished in 559.2976ms 200 application/json; charset=utf-8
+2021-10-07 00:21:01.529 +03:00 [INF] Request starting HTTP/1.1 POST http://localhost:5000/ProductModule/Product/GetSystemProducts  0
+2021-10-07 00:21:01.531 +03:00 [DBG] 1 candidate(s) found for the request path '/ProductModule/Product/GetSystemProducts'
+2021-10-07 00:21:01.532 +03:00 [DBG] Endpoint 'ProductModule.Controllers.ProductController.GetSystemProducts (ProductModule)' with route pattern 'ProductModule/Product/GetSystemProducts' is valid for the request path '/ProductModule/Product/GetSystemProducts'
+2021-10-07 00:21:01.533 +03:00 [DBG] Request matched endpoint 'ProductModule.Controllers.ProductController.GetSystemProducts (ProductModule)'
+2021-10-07 00:21:01.574 +03:00 [INF] Successfully validated the token.
+2021-10-07 00:21:01.577 +03:00 [DBG] AuthenticationScheme: Bearer was successfully authenticated.
+2021-10-07 00:21:01.579 +03:00 [INF] Authorization was successful.
+2021-10-07 00:21:01.580 +03:00 [INF] Executing endpoint 'ProductModule.Controllers.ProductController.GetSystemProducts (ProductModule)'
+2021-10-07 00:21:01.584 +03:00 [INF] Route matched with {module = "ProductModule", action = "GetSystemProducts", controller = "Product"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetSystemProducts() on controller ProductModule.Controllers.ProductController (ProductModule).
+2021-10-07 00:21:01.585 +03:00 [DBG] Execution plan of authorization filters (in the following order): ["None"]
+2021-10-07 00:21:01.586 +03:00 [DBG] Execution plan of resource filters (in the following order): ["None"]
+2021-10-07 00:21:01.587 +03:00 [DBG] Execution plan of action filters (in the following order): ["Microsoft.AspNetCore.Mvc.Filters.ControllerActionFilter (Order: -2147483648)","Microsoft.AspNetCore.Mvc.ModelBinding.UnsupportedContentTypeFilter (Order: -3000)","Microsoft.AspNetCore.Mvc.Infrastructure.ModelStateInvalidFilter (Order: -2000)"]
+2021-10-07 00:21:01.589 +03:00 [DBG] Execution plan of exception filters (in the following order): ["None"]
+2021-10-07 00:21:01.590 +03:00 [DBG] Execution plan of result filters (in the following order): ["Microsoft.AspNetCore.Mvc.Infrastructure.ClientErrorResultFilter (Order: -2000)"]
+2021-10-07 00:21:01.591 +03:00 [DBG] Executing controller factory for controller ProductModule.Controllers.ProductController (ProductModule)
+2021-10-07 00:21:01.615 +03:00 [INF] Entity Framework Core 3.1.14 initialized 'BitirMainContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: None
+2021-10-07 00:21:01.616 +03:00 [DBG] Executed controller factory for controller ProductModule.Controllers.ProductController (ProductModule)
+2021-10-07 00:21:01.619 +03:00 [DBG] List of registered output formatters, in the following order: ["Microsoft.AspNetCore.Mvc.Formatters.HttpNoContentOutputFormatter","Microsoft.AspNetCore.Mvc.Formatters.StringOutputFormatter","Microsoft.AspNetCore.Mvc.Formatters.StreamOutputFormatter","Microsoft.AspNetCore.Mvc.Formatters.SystemTextJsonOutputFormatter"]
+2021-10-07 00:21:01.622 +03:00 [DBG] Attempting to select an output formatter based on Accept header '["Application/json"]'.
+2021-10-07 00:21:01.624 +03:00 [DBG] Selected output formatter 'Microsoft.AspNetCore.Mvc.Formatters.SystemTextJsonOutputFormatter' and content type 'application/json' to write the response.
+2021-10-07 00:21:01.625 +03:00 [INF] Executing ObjectResult, writing value of type 'Bitir.Data.Model.Dtos.ResponseWrapperListing`1[[ProductModule.Entities.Product, ProductModule, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2021-10-07 00:21:01.667 +03:00 [DBG] queryContext => new QueryingEnumerable<Product>(
+    (RelationalQueryContext)queryContext, 
+    RelationalCommandCache, 
+    null, 
+    null, 
+    Func<QueryContext, DbDataReader, ResultContext, int[], ResultCoordinator, Product>, 
+    Bitir.Data.Contexts.BitirMainContext, 
+    null
+)
+2021-10-07 00:21:01.671 +03:00 [DBG] Creating DbCommand for 'ExecuteReader'.
+2021-10-07 00:21:01.671 +03:00 [DBG] Created DbCommand for 'ExecuteReader' (0ms).
+2021-10-07 00:21:01.672 +03:00 [DBG] Opening connection to database 'BitirDb' on server '.'.
+2021-10-07 00:21:01.673 +03:00 [DBG] Opened connection to database 'BitirDb' on server '.'.
+2021-10-07 00:21:01.674 +03:00 [DBG] Executing DbCommand [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [p].[Id], [p0].[Name], [p1].[Quantity], [u].[Name]
+FROM [product].[Product_ProductQuantity] AS [p]
+INNER JOIN [product].[Product] AS [p0] ON [p].[ProductId] = [p0].[Id]
+INNER JOIN [product].[ProductQuantity] AS [p1] ON [p].[ProductQuantityId] = [p1].[Id]
+INNER JOIN [product].[Unit] AS [u] ON [p1].[UnitId] = [u].[Id]
+2021-10-07 00:21:01.678 +03:00 [INF] Executed DbCommand (4ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [p].[Id], [p0].[Name], [p1].[Quantity], [u].[Name]
+FROM [product].[Product_ProductQuantity] AS [p]
+INNER JOIN [product].[Product] AS [p0] ON [p].[ProductId] = [p0].[Id]
+INNER JOIN [product].[ProductQuantity] AS [p1] ON [p].[ProductQuantityId] = [p1].[Id]
+INNER JOIN [product].[Unit] AS [u] ON [p1].[UnitId] = [u].[Id]
+2021-10-07 00:21:01.684 +03:00 [INF] Executed action ProductModule.Controllers.ProductController.GetSystemProducts (ProductModule) in 93.3459ms
+2021-10-07 00:21:01.685 +03:00 [INF] Executed endpoint 'ProductModule.Controllers.ProductController.GetSystemProducts (ProductModule)'
+2021-10-07 00:21:01.686 +03:00 [DBG] Connection id "0HMC91SNHI30S" completed keep alive response.
+2021-10-07 00:21:01.687 +03:00 [DBG] 'BitirMainContext' disposed.
+2021-10-07 00:21:01.688 +03:00 [INF] Request finished in 158.9355ms 200 application/json; charset=utf-8
+2021-10-07 00:22:04.501 +03:00 [DBG] Connection id "0HMC91SNHI30S" received FIN.
+2021-10-07 00:22:04.504 +03:00 [DBG] Connection id "0HMC91SNHI30S" sending FIN because: "The client closed the connection."
+2021-10-07 00:22:04.506 +03:00 [DBG] Connection id "0HMC91SNHI30S" disconnecting.
+2021-10-07 00:22:04.508 +03:00 [DBG] Connection id "0HMC91SNHI30S" stopped.
+2021-10-07 00:24:01.102 +03:00 [INF] Starting web host
+2021-10-07 00:24:01.722 +03:00 [DBG] Hosting starting
+2021-10-07 00:24:01.763 +03:00 [INF] User profile is available. Using 'C:\Users\leven\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2021-10-07 00:24:01.775 +03:00 [DBG] Reading data from file 'C:\Users\leven\AppData\Local\ASP.NET\DataProtection-Keys\key-14642b65-a18c-49a2-99af-52420015a828.xml'.
+2021-10-07 00:24:01.788 +03:00 [DBG] Reading data from file 'C:\Users\leven\AppData\Local\ASP.NET\DataProtection-Keys\key-3aa2ae8c-81de-4273-8d4a-f52cc391033f.xml'.
+2021-10-07 00:24:01.789 +03:00 [DBG] Reading data from file 'C:\Users\leven\AppData\Local\ASP.NET\DataProtection-Keys\key-4d95ab8d-4041-43bb-8736-c55e7eebfed6.xml'.
+2021-10-07 00:24:01.793 +03:00 [DBG] Found key {14642b65-a18c-49a2-99af-52420015a828}.
+2021-10-07 00:24:01.797 +03:00 [DBG] Found key {3aa2ae8c-81de-4273-8d4a-f52cc391033f}.
+2021-10-07 00:24:01.797 +03:00 [DBG] Found key {4d95ab8d-4041-43bb-8736-c55e7eebfed6}.
+2021-10-07 00:24:01.802 +03:00 [DBG] Considering key {3aa2ae8c-81de-4273-8d4a-f52cc391033f} with expiration date 2021-10-31 07:22:50Z as default key.
+2021-10-07 00:24:01.808 +03:00 [DBG] Forwarded activator type request from Microsoft.AspNetCore.DataProtection.XmlEncryption.DpapiXmlDecryptor, Microsoft.AspNetCore.DataProtection, Version=3.1.16.0, Culture=neutral, PublicKeyToken=adb9793829ddae60 to Microsoft.AspNetCore.DataProtection.XmlEncryption.DpapiXmlDecryptor, Microsoft.AspNetCore.DataProtection, Culture=neutral, PublicKeyToken=adb9793829ddae60
+2021-10-07 00:24:01.811 +03:00 [DBG] Decrypting secret element using Windows DPAPI.
+2021-10-07 00:24:01.812 +03:00 [DBG] Forwarded activator type request from Microsoft.AspNetCore.DataProtection.AuthenticatedEncryption.ConfigurationModel.AuthenticatedEncryptorDescriptorDeserializer, Microsoft.AspNetCore.DataProtection, Version=3.1.16.0, Culture=neutral, PublicKeyToken=adb9793829ddae60 to Microsoft.AspNetCore.DataProtection.AuthenticatedEncryption.ConfigurationModel.AuthenticatedEncryptorDescriptorDeserializer, Microsoft.AspNetCore.DataProtection, Culture=neutral, PublicKeyToken=adb9793829ddae60
+2021-10-07 00:24:01.816 +03:00 [DBG] Opening CNG algorithm 'AES' from provider 'null' with chaining mode CBC.
+2021-10-07 00:24:01.818 +03:00 [DBG] Opening CNG algorithm 'SHA256' from provider 'null' with HMAC.
+2021-10-07 00:24:01.821 +03:00 [DBG] Using key {3aa2ae8c-81de-4273-8d4a-f52cc391033f} as the default key.
+2021-10-07 00:24:01.822 +03:00 [DBG] Key ring with default key {3aa2ae8c-81de-4273-8d4a-f52cc391033f} was loaded during application startup.
+2021-10-07 00:24:02.051 +03:00 [DBG] An 'IServiceProvider' was created for internal use by Entity Framework.
+2021-10-07 00:24:02.583 +03:00 [DBG] The property 'UnitId' on entity type 'Unit' was created in shadow state because there are no eligible CLR members with a matching name.
+2021-10-07 00:24:02.602 +03:00 [WRN] No type was specified for the decimal column 'Price' on entity type 'ProductPrice'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values using 'HasColumnType()'.
+2021-10-07 00:24:02.603 +03:00 [WRN] No type was specified for the decimal column 'Quantity' on entity type 'ProductStock'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values using 'HasColumnType()'.
+2021-10-07 00:24:02.628 +03:00 [INF] Entity Framework Core 3.1.14 initialized 'BitirMainContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: None
+2021-10-07 00:24:02.653 +03:00 [DBG] Opening connection to database 'BitirDb' on server '.'.
+2021-10-07 00:24:02.816 +03:00 [DBG] Opened connection to database 'BitirDb' on server '.'.
+2021-10-07 00:24:02.821 +03:00 [DBG] Creating DbCommand for 'ExecuteNonQuery'.
+2021-10-07 00:24:02.829 +03:00 [DBG] Created DbCommand for 'ExecuteNonQuery' (4ms).
+2021-10-07 00:24:02.837 +03:00 [DBG] Executing DbCommand [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT 1
+2021-10-07 00:24:02.864 +03:00 [INF] Executed DbCommand (26ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT 1
+2021-10-07 00:24:02.868 +03:00 [DBG] Closing connection to database 'BitirDb' on server '.'.
+2021-10-07 00:24:02.872 +03:00 [DBG] Closed connection to database 'BitirDb' on server '.'.
+2021-10-07 00:24:02.875 +03:00 [DBG] Creating DbCommand for 'ExecuteScalar'.
+2021-10-07 00:24:02.875 +03:00 [DBG] Created DbCommand for 'ExecuteScalar' (0ms).
+2021-10-07 00:24:02.877 +03:00 [DBG] Opening connection to database 'BitirDb' on server '.'.
+2021-10-07 00:24:02.879 +03:00 [DBG] Opened connection to database 'BitirDb' on server '.'.
+2021-10-07 00:24:02.880 +03:00 [DBG] Executing DbCommand [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+
+IF EXISTS
+    (SELECT *
+     FROM [sys].[objects] o
+     WHERE [o].[type] = 'U'
+     AND [o].[is_ms_shipped] = 0
+     AND NOT EXISTS (SELECT *
+         FROM [sys].[extended_properties] AS [ep]
+         WHERE [ep].[major_id] = [o].[object_id]
+             AND [ep].[minor_id] = 0
+             AND [ep].[class] = 1
+             AND [ep].[name] = N'microsoft_database_tools_support'
+    )
+)
+SELECT 1 ELSE SELECT 0
+2021-10-07 00:24:02.902 +03:00 [INF] Executed DbCommand (22ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+
+IF EXISTS
+    (SELECT *
+     FROM [sys].[objects] o
+     WHERE [o].[type] = 'U'
+     AND [o].[is_ms_shipped] = 0
+     AND NOT EXISTS (SELECT *
+         FROM [sys].[extended_properties] AS [ep]
+         WHERE [ep].[major_id] = [o].[object_id]
+             AND [ep].[minor_id] = 0
+             AND [ep].[class] = 1
+             AND [ep].[name] = N'microsoft_database_tools_support'
+    )
+)
+SELECT 1 ELSE SELECT 0
+2021-10-07 00:24:02.911 +03:00 [DBG] Closing connection to database 'BitirDb' on server '.'.
+2021-10-07 00:24:02.916 +03:00 [DBG] Closed connection to database 'BitirDb' on server '.'.
+2021-10-07 00:24:02.921 +03:00 [DBG] Migrating using database 'BitirDb' on server '.'.
+2021-10-07 00:24:02.923 +03:00 [DBG] Opening connection to database 'BitirDb' on server '.'.
+2021-10-07 00:24:02.926 +03:00 [DBG] Opened connection to database 'BitirDb' on server '.'.
+2021-10-07 00:24:02.930 +03:00 [DBG] Creating DbCommand for 'ExecuteNonQuery'.
+2021-10-07 00:24:02.932 +03:00 [DBG] Created DbCommand for 'ExecuteNonQuery' (2ms).
+2021-10-07 00:24:02.934 +03:00 [DBG] Executing DbCommand [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT 1
+2021-10-07 00:24:02.939 +03:00 [INF] Executed DbCommand (5ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT 1
+2021-10-07 00:24:02.941 +03:00 [DBG] Closing connection to database 'BitirDb' on server '.'.
+2021-10-07 00:24:02.942 +03:00 [DBG] Closed connection to database 'BitirDb' on server '.'.
+2021-10-07 00:24:02.945 +03:00 [DBG] Creating DbCommand for 'ExecuteScalar'.
+2021-10-07 00:24:02.946 +03:00 [DBG] Created DbCommand for 'ExecuteScalar' (1ms).
+2021-10-07 00:24:02.948 +03:00 [DBG] Opening connection to database 'BitirDb' on server '.'.
+2021-10-07 00:24:02.949 +03:00 [DBG] Opened connection to database 'BitirDb' on server '.'.
+2021-10-07 00:24:02.949 +03:00 [DBG] Executing DbCommand [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT OBJECT_ID(N'[__EFMigrationsHistory]');
+2021-10-07 00:24:02.955 +03:00 [INF] Executed DbCommand (5ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT OBJECT_ID(N'[__EFMigrationsHistory]');
+2021-10-07 00:24:02.957 +03:00 [DBG] Closing connection to database 'BitirDb' on server '.'.
+2021-10-07 00:24:02.958 +03:00 [DBG] Closed connection to database 'BitirDb' on server '.'.
+2021-10-07 00:24:02.960 +03:00 [DBG] Opening connection to database 'BitirDb' on server '.'.
+2021-10-07 00:24:02.960 +03:00 [DBG] Opened connection to database 'BitirDb' on server '.'.
+2021-10-07 00:24:02.961 +03:00 [DBG] Creating DbCommand for 'ExecuteNonQuery'.
+2021-10-07 00:24:02.962 +03:00 [DBG] Created DbCommand for 'ExecuteNonQuery' (0ms).
+2021-10-07 00:24:02.963 +03:00 [DBG] Executing DbCommand [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT 1
+2021-10-07 00:24:02.966 +03:00 [INF] Executed DbCommand (3ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT 1
+2021-10-07 00:24:02.967 +03:00 [DBG] Closing connection to database 'BitirDb' on server '.'.
+2021-10-07 00:24:02.968 +03:00 [DBG] Closed connection to database 'BitirDb' on server '.'.
+2021-10-07 00:24:02.969 +03:00 [DBG] Creating DbCommand for 'ExecuteScalar'.
+2021-10-07 00:24:02.970 +03:00 [DBG] Created DbCommand for 'ExecuteScalar' (0ms).
+2021-10-07 00:24:02.971 +03:00 [DBG] Opening connection to database 'BitirDb' on server '.'.
+2021-10-07 00:24:02.972 +03:00 [DBG] Opened connection to database 'BitirDb' on server '.'.
+2021-10-07 00:24:02.973 +03:00 [DBG] Executing DbCommand [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT OBJECT_ID(N'[__EFMigrationsHistory]');
+2021-10-07 00:24:02.976 +03:00 [INF] Executed DbCommand (3ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT OBJECT_ID(N'[__EFMigrationsHistory]');
+2021-10-07 00:24:02.978 +03:00 [DBG] Closing connection to database 'BitirDb' on server '.'.
+2021-10-07 00:24:02.979 +03:00 [DBG] Closed connection to database 'BitirDb' on server '.'.
+2021-10-07 00:24:02.987 +03:00 [DBG] Creating DbCommand for 'ExecuteReader'.
+2021-10-07 00:24:02.988 +03:00 [DBG] Created DbCommand for 'ExecuteReader' (0ms).
+2021-10-07 00:24:02.989 +03:00 [DBG] Opening connection to database 'BitirDb' on server '.'.
+2021-10-07 00:24:02.990 +03:00 [DBG] Opened connection to database 'BitirDb' on server '.'.
+2021-10-07 00:24:02.991 +03:00 [DBG] Executing DbCommand [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [MigrationId], [ProductVersion]
+FROM [__EFMigrationsHistory]
+ORDER BY [MigrationId];
+2021-10-07 00:24:02.994 +03:00 [INF] Executed DbCommand (3ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [MigrationId], [ProductVersion]
+FROM [__EFMigrationsHistory]
+ORDER BY [MigrationId];
+2021-10-07 00:24:02.997 +03:00 [DBG] A data reader was disposed.
+2021-10-07 00:24:02.998 +03:00 [DBG] Closing connection to database 'BitirDb' on server '.'.
+2021-10-07 00:24:02.999 +03:00 [DBG] Closed connection to database 'BitirDb' on server '.'.
+2021-10-07 00:24:03.006 +03:00 [DBG] No migrations were found in assembly 'Bitir.Data'.
+2021-10-07 00:24:03.009 +03:00 [INF] No migrations were applied. The database is already up to date.
+2021-10-07 00:24:03.011 +03:00 [DBG] 'BitirMainContext' disposed.
+2021-10-07 00:24:03.045 +03:00 [DBG] Failed to locate the development https certificate at 'null'.
+2021-10-07 00:24:03.068 +03:00 [INF] Now listening on: http://localhost:5000
+2021-10-07 00:24:03.069 +03:00 [DBG] Loaded hosting startup assembly Bitir.Api
+2021-10-07 00:24:03.070 +03:00 [INF] Application started. Press Ctrl+C to shut down.
+2021-10-07 00:24:03.070 +03:00 [INF] Hosting environment: Development
+2021-10-07 00:24:03.071 +03:00 [INF] Content root path: C:\Users\leven\source\repos\Bitir\API\Bitir.Api
+2021-10-07 00:24:03.072 +03:00 [DBG] Hosting started

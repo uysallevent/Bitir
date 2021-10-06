@@ -5,6 +5,7 @@ using Bitir.Mobile.Validators;
 using Bitir.Mobile.Validators.Rules;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Internals;
@@ -12,7 +13,7 @@ using Xamarin.Forms.Internals;
 namespace Bitir.Mobile.ViewModels
 {
     [Preserve(AllMembers = true)]
-    public class ProductAddPageViewModel : LoginViewModel
+    public class ProductAddPageViewModel : BaseViewModel
     {
         #region Constructor
 
@@ -28,7 +29,7 @@ namespace Bitir.Mobile.ViewModels
         #endregion
 
         #region Properties
-        public IList<ProductResponse> SystemProducts
+        public ObservableCollection<ProductResponse> SystemProducts
         {
             get
             {
@@ -46,7 +47,23 @@ namespace Bitir.Mobile.ViewModels
             }
         }
 
-        public ValidatableObject<int?> Id
+        public ValidatableObject<object> SelectedProduct
+        {
+            get
+            {
+                return _selectedProduct;
+            }
+            set
+            {
+                if (this._selectedProduct == value)
+                {
+                    return;
+                }
+                this.SetProperty(ref this._selectedProduct, value);
+            }
+        }
+
+        public ValidatableObject<object> Id
         {
             get
             {
@@ -64,25 +81,7 @@ namespace Bitir.Mobile.ViewModels
             }
         }
 
-        public ValidatableObject<decimal?> Quantity
-        {
-            get
-            {
-                return this._quantity;
-            }
-
-            set
-            {
-                if (this._quantity == value)
-                {
-                    return;
-                }
-
-                this.SetProperty(ref this._quantity, value);
-            }
-        }
-
-        public ValidatableObject<decimal?> Price
+        public ValidatableObject<object> Price
         {
             get
             {
@@ -102,10 +101,10 @@ namespace Bitir.Mobile.ViewModels
         #endregion
 
         #region Fields
-        private IList<ProductResponse> _systemProducts;
-        private ValidatableObject<int?> _id;
-        private ValidatableObject<decimal?> _quantity;
-        private ValidatableObject<decimal?> _price;
+        private ObservableCollection<ProductResponse> _systemProducts;
+        private ValidatableObject<object> _id;
+        private ValidatableObject<object> _price;
+        private ValidatableObject<object> _selectedProduct;
         #endregion
 
         #region Comments
@@ -116,25 +115,25 @@ namespace Bitir.Mobile.ViewModels
         #region Methods
         private void InitializeProperties()
         {
-            this.Id = new ValidatableObject<int?>();
-            this.Quantity = new ValidatableObject<decimal?>();
-            this.Price = new ValidatableObject<decimal?>();
+            this.Id = new ValidatableObject<object>();
+            this.Price = new ValidatableObject<object>();
+            this.SelectedProduct = new ValidatableObject<object>();
         }
 
         private void AddValidationRules()
         {
-            this.Id.Validations.Add(new IsNotNullOrEmptyRule<int?> { ValidationMessage = "Lütfen bir ürün seçin" });
-            this.Quantity.Validations.Add(new IsNotNullOrEmptyRule<decimal?> { ValidationMessage = "Lütfen miktar bilgisi girin" });
-            this.Price.Validations.Add(new IsNotNullOrEmptyRule<decimal?> { ValidationMessage = "Lütfen fiyat bilgisi girin" });
+            this.Id.Validations.Add(new IsNotNullOrEmptyRule<object> { ValidationMessage = "Lütfen bir ürün seçin" });
+            this.Price.Validations.Add(new IsNotNullOrEmptyRule<object> { ValidationMessage = "Lütfen fiyat bilgisi girin" });
+            this.SelectedProduct.Validations.Add(new IsNotNullOrEmptyRule<object> { ValidationMessage = "Lütfen bir ürün seçin" });
 
         }
 
-        private bool AreFieldsValid()   
+        private bool AreFieldsValid()
         {
-            bool isId = this.Id.Validate();
-            bool isQuantity = this.Quantity.Validate();
-            bool isPrice = this.Price.Validate();
-            return isId && isQuantity && isPrice;
+            bool isId = Id.Validate();
+            bool isPrice = Price.Validate();
+            bool isProductSelect = SelectedProduct.Validate();
+            return isId && isPrice && isProductSelect;
         }
 
         private void SubmitClicked(object obj)
