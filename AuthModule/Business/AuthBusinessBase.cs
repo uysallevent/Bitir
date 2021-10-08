@@ -1,8 +1,6 @@
 ﻿using AuthModule.Dto;
 using AuthModule.Dtos;
-using AuthModule.Entities;
 using AuthModule.Interfaces;
-using AuthModule.Security.Hashing;
 using AuthModule.Security.JWT;
 using AuthModule.Validations;
 using BaseModule.Business;
@@ -11,9 +9,11 @@ using Core.Aspects.Autofac.Validation;
 using Core.DataAccess;
 using Core.DataAccess.EntityFramework.Interfaces;
 using Core.Exceptions;
-using Core.Utilities.Results;
+using Core.Security.Hashing;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
+using Module.Shared.Entities.AuthModuleEntities;
+using Module.Shared.Entities.SalesModuleEntities;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -24,6 +24,8 @@ namespace AuthModule.Business
     {
         private IRepository<UserAccount> _userAccountRepository;
         private IRepository<UserToken> _userTokenRepository;
+        private IRepository<Store> _storeRepository;
+        private IRepository<Store_UserAccount> _storeUserAccoutRepository;
         private IUnitOfWork _uow;
         private readonly ITokenHelper _tokenHelper;
         private readonly IConfiguration _configuration;
@@ -32,6 +34,8 @@ namespace AuthModule.Business
         public AuthBusinessBase(
             IRepository<UserAccount> userAccountRepository,
             IRepository<UserToken> userTokenRepository,
+            IRepository<Store> storeRepository,
+            IRepository<Store_UserAccount> storeUserAccoutRepository,
             IUnitOfWork uow,
             ITokenHelper tokenHelper,
             IConfiguration configuration,
@@ -39,6 +43,8 @@ namespace AuthModule.Business
         {
             _userAccountRepository = userAccountRepository;
             _userTokenRepository = userTokenRepository;
+            _storeRepository = storeRepository;
+            _storeUserAccoutRepository = storeUserAccoutRepository;
             _uow = uow;
             _tokenHelper = tokenHelper;
             _configuration = configuration;
@@ -57,13 +63,33 @@ namespace AuthModule.Business
             var userCheck = await _userAccountRepository.GetAsync(x => (x.Username == entity.Username) || (x.Email == entity.Email));
             if (userCheck != null)
             {
-                throw new BadRequestException("This username already exists in the system");
+                throw new BadRequestException("This username or email already exists in the system");
             }
             byte[] passwordHash, passwordSalt;
             HashingHelper.CreatePasswordHash(entity.Password, out passwordHash, out passwordSalt);
             entity.PasswordHash = passwordHash;
             entity.PasswordSalt = passwordSalt;
-            await _userAccountRepository.AddAsync(entity);
+
+            var store = new Store
+            {
+                Name = "Bitir Dükkan"
+            };
+            //await _storeRepository.AddAsync(store);
+            await _storeUserAccoutRepository.AddAsync(
+                new Store_UserAccount
+                {
+                    StoreId = store.Id,
+                    UserId = entity.Id,
+                    Id = 1,
+                    InsertDate = DateTime.Now,
+                    Status = Core.Enums.Status.Active,
+                    UpdateDate = DateTime.Now,
+                    Store = store,
+                    UserAccount = entity
+                });
+           // await _userAccountRepository.AddAsync(entity);
+
+
             var result = await _uow.SaveChangesAsync();
             if (result < 1)
             {

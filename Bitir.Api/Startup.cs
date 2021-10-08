@@ -40,6 +40,7 @@ namespace ModulerApi
             services.AddModule<BaseModule.Startup>("BaseModule",Configuration);
             services.AddModule<AuthModule.Startup>("AuthModule", Configuration);
             services.AddModule<ProductModule.Startup>("ProductModule", Configuration);
+            services.AddModule<SalesModule.Startup>("SalesModule", Configuration);
             services.AddDataServices(Configuration);
         }
 

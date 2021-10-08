@@ -1,7 +1,7 @@
 ﻿using BaseModule.Controllers;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using ProductModule.Entities;
+using Module.Shared.Entities.ProductModuleEntities;
 using ProductModule.Interfaces;
 using System.Threading.Tasks;
 
@@ -10,18 +10,20 @@ namespace ProductModule.Controllers
     [ApiController]
     public class ProductController : ActionBaseController<Product>
     {
-        private readonly IProductBusinessBase<Product> _productBusinessBase;
+        private readonly IProductService<Product> _productService;
         private readonly ILogger<ProductController> _logger;
-        public ProductController(IProductBusinessBase<Product> productBusinessBase, ILogger<ProductController> logger) : base(productBusinessBase, logger)
+        public ProductController(
+            ILogger<ProductController> logger,
+            IProductService<Product> productService) : base(productService, logger)
         {
-            _productBusinessBase = productBusinessBase;
             _logger = logger;
+            _productService = productService;
         }
 
         [HttpPost("GetSystemProducts")]
         public async Task<IActionResult> GetSystemProducts()
         {
-            var result = await _productBusinessBase.GetSystemProducts();
+            var result = await _productService.GetSystemProducts();
             return Ok(result);
         }
     }

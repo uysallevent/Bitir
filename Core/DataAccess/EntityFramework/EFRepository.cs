@@ -151,5 +151,26 @@ namespace Core.DataAccess.EntityFramework
                 updateDateProp.SetValue(entity, safeValue, null);
             }
         }
+
+
+        void test2(TEntity entity, Status status)
+        {
+            foreach (var item in entity.GetType().GetProperties())
+            {
+                var propertyInstance = item.GetValue(entity, null);
+                var mainObjectsProperties = item.PropertyType.GetProperties();
+                foreach (var property in mainObjectsProperties)
+                {
+                    // get the actual instance of this 2nd level property
+                    var leafInstance = property.GetValue(propertyInstance, null);
+                    InsertInitializer(entity, status);
+
+                }
+                if (mainObjectsProperties.Any())
+                    continue;
+
+                InsertInitializer(entity, status);
+            }
+        }
     }
 }

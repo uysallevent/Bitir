@@ -4,14 +4,13 @@ using Core.DataAccess;
 using Core.DataAccess.EntityFramework.Interfaces;
 using Core.Entities;
 using Core.Utilities.ExpressionGenerator;
-using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
 namespace BaseModule.Business
 {
-    public class BusinessBase<T> : ControllerBase, IBusinessBase<T>
+    public class BusinessBase<T> : IBusinessBase<T>
     where T : class, IEntity, new()
     {
         private IRepository<T> _repositoryBase;
@@ -36,7 +35,6 @@ namespace BaseModule.Business
             await _uow.SaveChangesAsync();
             return new ResponseWrapper<IEnumerable<T>>(entities);
         }
-
 
         public virtual async Task<ResponseWrapper<T>> GetAsync(T entity)
         {

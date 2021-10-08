@@ -11,7 +11,7 @@ namespace ModulerApi
         {
             Log.Logger = new LoggerConfiguration()
              .WriteTo.Console()
-             .WriteTo.File("log.txt", rollingInterval: RollingInterval.Day)
+             .WriteTo.File("logs\\log.txt", rollingInterval: RollingInterval.Day)
              .MinimumLevel.Debug()
              .CreateLogger();
             try

@@ -2,38 +2,45 @@
 using Bitir.Data.Model.Dtos;
 using Core.DataAccess;
 using Core.DataAccess.EntityFramework.Interfaces;
-using ProductModule.Entities;
+using Module.Shared.Entities.ProductModuleEntities;
+using ProductModule.Dtos;
 using ProductModule.Interfaces;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
 namespace ProductModule.Business
 {
-    public class ProductBusinessBase : BusinessBase<Product>, IProductBusinessBase<Product>
+    public class ProductBusinessBase : BusinessBase<Product>, IProductService<Product>
     {
         private IRepository<Product> _productRepository;
-        private IRepository<Product_ProductQuantity> _product_ProductQuantityRepository;
+        private IRepository<ProductQuantity> _productQuantityRepository;
         private IUnitOfWork _uow;
         public ProductBusinessBase(
             IUnitOfWork uow,
             IRepository<Product> productRepository,
-            IRepository<Product_ProductQuantity> product_ProductQuantityRepository) : base(productRepository, uow)
+            IRepository<ProductQuantity> productQuantityRepository) : base(productRepository, uow)
         {
             _productRepository = productRepository;
-            _product_ProductQuantityRepository = product_ProductQuantityRepository;
+            _productQuantityRepository = productQuantityRepository;
             _uow = uow;
         }
 
         public async Task<ResponseWrapperListing<Product>> GetSystemProducts()
         {
-            var products = _product_ProductQuantityRepository.GetAll().Select(x =>
-            new Product
-            {
-                Id = x.Id,
-                Name = $"{x.Product.Name} - {x.ProductQuantity.Quantity} {x.ProductQuantity.Unit.Name}"
-            });
+
+            var products = _productQuantityRepository.GetAll().Select(x =>
+                new Product
+                {
+                    Id = x.Id,
+                    Name = $"{x.Product.Name} - {x.Quantity} {x.Unit.Name}"
+                });
             return new ResponseWrapperListing<Product>(products);
+        }
+
+        public async Task<bool> AddProductToVendor(AddProductToVendorRequest addProductToVendorRequest)
+        {
+
+            return true;
         }
     }
 }

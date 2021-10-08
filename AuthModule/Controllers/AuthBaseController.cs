@@ -1,13 +1,10 @@
-﻿using AuthModule.Business;
-using AuthModule.Dto;
-using AuthModule.Entities;
+﻿using AuthModule.Dto;
 using AuthModule.Interfaces;
 using BaseModule.Controllers;
-using Core.Exceptions;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using System;
+using Module.Shared.Entities.AuthModuleEntities;
 using System.Threading.Tasks;
 
 namespace AuthModule.Controllers

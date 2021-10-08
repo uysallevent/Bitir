@@ -14,6 +14,11 @@
   <ItemGroup>
     <ProjectReference Include="..\AuthModule\AuthModule.csproj" />
     <ProjectReference Include="..\ProductModule\ProductModule.csproj" />
+    <ProjectReference Include="..\SalesModule\SalesModule.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="EntityConfigurations\" />
   </ItemGroup>
 
 </Project>

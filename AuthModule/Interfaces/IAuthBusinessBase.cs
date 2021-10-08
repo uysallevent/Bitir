@@ -1,10 +1,9 @@
 ﻿using AuthModule.Dto;
-using AuthModule.Entities;
 using AuthModule.Security.JWT;
 using BaseModule.Interfaces;
 using Bitir.Data.Model.Dtos;
 using Core.Entities;
-using Core.Utilities.Results;
+using Module.Shared.Entities.AuthModuleEntities;
 using System.Threading.Tasks;
 
 namespace AuthModule.Interfaces

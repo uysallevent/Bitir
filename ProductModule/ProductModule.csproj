@@ -15,10 +15,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\AuthModule\AuthModule.csproj" />
     <ProjectReference Include="..\BaseModule\BaseModule.csproj" />
     <ProjectReference Include="..\Bitir.Api.Module.Shared\Module.Shared.csproj" />
     <ProjectReference Include="..\Core\Core.csproj" />
     <ProjectReference Include="..\Module.Shared\Module.Shared.csproj" />
+    <ProjectReference Include="..\SalesModule\SalesModule.csproj" />
   </ItemGroup>
 
 </Project>

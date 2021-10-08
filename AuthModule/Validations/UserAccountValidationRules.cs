@@ -1,5 +1,5 @@
-﻿using AuthModule.Entities;
-using FluentValidation;
+﻿using FluentValidation;
+using Module.Shared.Entities.AuthModuleEntities;
 
 namespace AuthModule.Validations
 {
