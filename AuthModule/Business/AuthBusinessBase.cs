@@ -63,7 +63,7 @@ namespace AuthModule.Business
             var userCheck = await _userAccountRepository.GetAsync(x => (x.Username == entity.Username) || (x.Email == entity.Email));
             if (userCheck != null)
             {
-                throw new BadRequestException("This username or email already exists in the system");
+                throw new BadRequestException("Bu kullanıcı adı/e-posta sistemde kayıtlı");
             }
             byte[] passwordHash, passwordSalt;
             HashingHelper.CreatePasswordHash(entity.Password, out passwordHash, out passwordSalt);
@@ -90,7 +90,7 @@ namespace AuthModule.Business
             var result = await _uow.SaveChangesAsync();
             if (result < 1)
             {
-                throw new BadRequestException("User could not be insert");
+                throw new BadRequestException("Kullanıcı kayıt edilemedi");
             }
             AccessToken accessToken = await CreateToken(entity);
             return new ResponseWrapper<AccessToken>(accessToken);
@@ -114,13 +114,13 @@ namespace AuthModule.Business
             if (entity == null)
             {
                 _logger.LogError("Username could not be found");
-                throw new BadRequestException("Username could not be found");
+                throw new BadRequestException("Kullanıcı adı bulunamadı");
             }
 
             if (!HashingHelper.VerifyPasswordHash(loginDto.Password.Trim(), entity.PasswordHash, entity.PasswordSalt))
             {
                 _logger.LogError("Incorrect password");
-                throw new BadRequestException("Incorrect password !!");
+                throw new BadRequestException("Kullanıcı adı/şifre hatalı");
             }
 
             AccessToken accessToken = await CreateToken(entity);

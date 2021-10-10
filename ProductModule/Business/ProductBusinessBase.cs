@@ -2,6 +2,7 @@
 using Bitir.Data.Model.Dtos;
 using Core.DataAccess;
 using Core.DataAccess.EntityFramework.Interfaces;
+using Core.Exceptions;
 using Microsoft.AspNetCore.Http;
 using Module.Shared.Entities.ProductModuleEntities;
 using ProductModule.Dtos;
@@ -18,7 +19,7 @@ namespace ProductModule.Business
         private IRepository<Product> _productRepository;
         private IRepository<Product_Store> _productStoreRepository;
         private IRepository<ProductQuantity> _productQuantityRepository;
-        private IRepository<ProductStorePrice> _productStorePriceRepository;
+        private IRepository<ProductStock> _productStockRepository;
         private IUnitOfWork _uow;
         private readonly IHttpContextAccessor _httpContextAccessor;
 
@@ -28,12 +29,12 @@ namespace ProductModule.Business
             IRepository<Product_Store> productStoreRepository,
             IRepository<ProductQuantity> productQuantityRepository,
             IHttpContextAccessor httpContextAccessor,
-            IRepository<ProductStorePrice> productStorePriceRepository) : base(productRepository, uow)
+            IRepository<ProductStock> productStockRepository) : base(productRepository, uow)
         {
             _productRepository = productRepository;
             _productStoreRepository = productStoreRepository;
             _productQuantityRepository = productQuantityRepository;
-            _productStorePriceRepository = productStorePriceRepository;
+            _productStockRepository = productStockRepository;
             _uow = uow;
             _httpContextAccessor = httpContextAccessor;
         }
@@ -50,10 +51,14 @@ namespace ProductModule.Business
             return new ResponseWrapperListing<Product>(products);
         }
 
-        public async Task<bool> AddProductToVendor(AddProductToVendorRequest request)
+        public async Task<ResponseWrapper<Product_Store>> AddProductToVendor(AddProductToVendorRequest request)
         {
             var claims = _httpContextAccessor.HttpContext.User.Claims;
             int.TryParse(claims.FirstOrDefault(x => x.Type == "Store")?.Value, out int storeId);
+            if (storeId < 1)
+            {
+                throw new ClaimExpection("Claims could not find");
+            }
 
             var productStore = new Product_Store
             {
@@ -68,13 +73,24 @@ namespace ProductModule.Business
                         InsertDate=DateTime.Now,
                         UpdateDate=DateTime.Now
                     }
-                }
+                },
+
             };
             await _productStoreRepository.AddAsync(productStore);
+            await _productStockRepository.AddAsync(new ProductStock
+            {
+                ProductStore = productStore,
+                Quantity = request.Quantity
+            });
 
             var result = await _uow.SaveChangesAsync();
+            if (result < 1)
+            {
+                throw new BadRequestException("Ürün bilgileri eklenemedi");
+            }
 
-            return true;
+            return new ResponseWrapper<Product_Store>(productStore);
         }
+
     }
 }
