@@ -22,6 +22,7 @@ namespace Module.Shared.Entities.AuthModuleEntities
         public AccountTypeEnum AccountTypeId { get; set; }
         [JsonIgnore]
         public IEnumerable<UserToken> UserTokens { get; set; }
+        [JsonIgnore]
         public IEnumerable<Store_UserAccount> Store_UserAccounts { get; set; }
     }
 }

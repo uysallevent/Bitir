@@ -20,6 +20,7 @@ namespace Module.Shared.Entities.AuthModuleEntities.Configuration
             builder.Property(x => x.Status).IsRequired();
             builder.Property(x => x.InsertDate).HasColumnType("datetime").HasDefaultValueSql("getdate()").IsRequired();
             builder.Property(x => x.UpdateDate).HasColumnType("datetime").IsRequired();
+            builder.HasMany(x => x.Store_UserAccounts).WithOne(x => x.UserAccount).HasForeignKey(x=>x.UserId);
 
             byte[] passwordHash, passwordSalt;
             HashingHelper.CreatePasswordHash("1234", out passwordHash, out passwordSalt);

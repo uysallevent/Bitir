@@ -9,7 +9,7 @@ namespace Module.Shared.Entities.SalesModuleEntities
     public class Store:BaseEntity
     {
         public string Name { get; set; }
-        public IEnumerable<ProductStore> ProductStores { get; set; }
+        public IEnumerable<Product_Store> ProductStores { get; set; }
         public IEnumerable<Store_UserAccount> Store_UserAccounts { get; set; }
         public IEnumerable<Carrier_Store> Carrier_Stores { get; set; }
 

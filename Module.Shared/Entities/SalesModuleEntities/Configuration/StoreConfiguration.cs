@@ -15,6 +15,9 @@ namespace Module.Shared.Entities.SalesModuleEntities.Configuration
             builder.Property(x => x.Status).IsRequired();
             builder.Property(x => x.InsertDate).HasColumnType("datetime").HasDefaultValueSql("getdate()").IsRequired();
             builder.Property(x => x.UpdateDate).HasColumnType("datetime").IsRequired();
+            builder.HasMany(x => x.Store_UserAccounts).WithOne(x => x.Store).HasForeignKey(x => x.StoreId);
+            builder.HasMany(x => x.Carrier_Stores).WithOne(x => x.Store).HasForeignKey(x => x.StoreId);
+            builder.HasMany(x => x.ProductStores).WithOne(x => x.Store).HasForeignKey(x => x.StoreId);
         }
     }
 }

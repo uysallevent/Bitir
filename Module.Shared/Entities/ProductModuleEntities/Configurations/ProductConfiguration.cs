@@ -24,7 +24,7 @@ namespace Module.Shared.Entities.ProductModuleEntities.Configuration
                 new Product
                 {
                     Id=1,
-                    Name="Süt 1 LT",
+                    Name="Süt",
                     CategoryId=1,
                     Description="Günlük İnek Sütü",
                     Status=Core.Enums.Status.Active,

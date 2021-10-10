@@ -75,6 +75,7 @@ namespace AuthModule.Security.JWT
             claims.AddName((!string.IsNullOrEmpty(user.Name) ? user.Name : string.Empty));
             claims.AddSurname((!string.IsNullOrEmpty(user.Surname) ? user.Surname : string.Empty));
             claims.AddRoles(operationClaims.Select(c => c.Name).ToArray());
+            claims.Add(new Claim("Store", operationClaims.FirstOrDefault().StoreId.ToString()));
             return claims;
         }
     }

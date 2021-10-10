@@ -15,6 +15,7 @@ namespace Module.Shared.Entities.ProductModuleEntities.Configuration
             builder.Property(x => x.Status).IsRequired();
             builder.Property(x => x.InsertDate).HasColumnType("datetime").HasDefaultValueSql("getdate()").IsRequired();
             builder.Property(x => x.UpdateDate).HasColumnType("datetime").IsRequired();
+            builder.HasMany(x => x.Products).WithOne(x => x.Category).HasForeignKey(x => x.CategoryId);
             builder.HasData(new Category[]{
                 new Category
                 {

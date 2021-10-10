@@ -11,7 +11,7 @@ namespace Module.Shared.Entities.ProductModuleEntities
         public int Quantity { get; set; }
 
         [ForeignKey("ProductStoreId")]
-        public ProductStore ProductStore { get; set; }
+        public Product_Store ProductStore { get; set; }
         [ForeignKey("CarrierId")]
         public Carrier Carrier { get; set; }
     }

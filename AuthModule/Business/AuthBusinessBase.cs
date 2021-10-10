@@ -69,26 +69,23 @@ namespace AuthModule.Business
             HashingHelper.CreatePasswordHash(entity.Password, out passwordHash, out passwordSalt);
             entity.PasswordHash = passwordHash;
             entity.PasswordSalt = passwordSalt;
-
-            var store = new Store
+            await _userAccountRepository.AddAsync(entity);
+            if (entity.AccountTypeId == Module.Shared.AccountTypeEnum.vendor)
             {
-                Name = "Bitir Dükkan"
-            };
-            //await _storeRepository.AddAsync(store);
-            await _storeUserAccoutRepository.AddAsync(
-                new Store_UserAccount
+                var store = new Store
                 {
-                    StoreId = store.Id,
-                    UserId = entity.Id,
-                    Id = 1,
-                    InsertDate = DateTime.Now,
-                    Status = Core.Enums.Status.Active,
-                    UpdateDate = DateTime.Now,
-                    Store = store,
-                    UserAccount = entity
-                });
-           // await _userAccountRepository.AddAsync(entity);
-
+                    Name = "Bitir Dükkanım"
+                };
+                await _storeRepository.AddAsync(store);
+                await _storeUserAccoutRepository.AddAsync(
+                    new Store_UserAccount
+                    {
+                        StoreId = store.Id,
+                        UserId = entity.Id,
+                        Store = store,
+                        UserAccount = entity
+                    });
+            }
 
             var result = await _uow.SaveChangesAsync();
             if (result < 1)
@@ -132,12 +129,14 @@ namespace AuthModule.Business
 
         private async Task<AccessToken> CreateToken(UserAccount entity)
         {
+            var userStore = await _storeUserAccoutRepository.GetAsync(x => x.UserId == entity.Id);
             var accessToken = CreateAccessToken(entity, new List<OperationClaim> {
                 new OperationClaim {
                     Id = entity.Id,
                     Name = entity.Username,
                     Email = entity.Email,
-                    Phone=entity.Phone
+                    Phone=entity.Phone,
+                    StoreId=userStore?.StoreId
                 } });
             var sqlServerDatetime = DateTime.Now;
             int.TryParse(_configuration.GetSection("TokenOptions.RefreshTokenExpiration").Value, out int expirationDate);

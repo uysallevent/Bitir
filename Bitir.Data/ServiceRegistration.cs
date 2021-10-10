@@ -26,9 +26,9 @@ namespace Bitir.Data
             #region ProductModule
             serviceCollection.AddScoped<IRepository<Category>, EFRepository<Category, BitirMainContext>>();
             serviceCollection.AddScoped<IRepository<Product>, EFRepository<Product, BitirMainContext>>();
-            serviceCollection.AddScoped<IRepository<ProductPrice>, EFRepository<ProductPrice, BitirMainContext>>();
+            serviceCollection.AddScoped<IRepository<ProductStorePrice>, EFRepository<ProductStorePrice, BitirMainContext>>();
             serviceCollection.AddScoped<IRepository<ProductStock>, EFRepository<ProductStock, BitirMainContext>>();
-            serviceCollection.AddScoped<IRepository<ProductStore>, EFRepository<ProductStore, BitirMainContext>>();
+            serviceCollection.AddScoped<IRepository<Product_Store>, EFRepository<Product_Store, BitirMainContext>>();
             serviceCollection.AddScoped<IRepository<ProductQuantity>, EFRepository<ProductQuantity, BitirMainContext>>();
             serviceCollection.AddScoped<IRepository<Unit>, EFRepository<Unit, BitirMainContext>>();
             #endregion

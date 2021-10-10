@@ -14,7 +14,7 @@ namespace Module.Shared.Entities.ProductModuleEntities
         [ForeignKey("CategoryId")]
         public Category Category { get; set; }
 
-        public IEnumerable<ProductStore> ProductStores { get; set; }
+        public IEnumerable<Product_Store> ProductStores { get; set; }
 
         public IEnumerable<ProductQuantity> ProductQuantity { get; set; }
     }

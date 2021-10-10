@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Module.Shared.Entities.ProductModuleEntities;
+using ProductModule.Dtos;
 using ProductModule.Interfaces;
 using System.Threading.Tasks;
 
@@ -24,6 +25,13 @@ namespace ProductModule.Controllers
         public async Task<IActionResult> GetSystemProducts()
         {
             var result = await _productService.GetSystemProducts();
+            return Ok(result);
+        }
+
+        [HttpPost("AddProductToStore")]
+        public async Task<IActionResult> AddProductToStore([FromBody] AddProductToVendorRequest request)
+        {
+            var result = await _productService.AddProductToVendor(request);
             return Ok(result);
         }
     }

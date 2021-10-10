@@ -20,8 +20,8 @@ namespace Bitir.Data.Contexts
         public DbSet<Product> Product { get; set; }
         public DbSet<Category> Category { get; set; }
         public DbSet<Unit> Unit { get; set; }
-        public DbSet<ProductStore> ProductStore { get; set; }
-        public DbSet<ProductPrice> ProductPrice { get; set; }
+        public DbSet<Product_Store> ProductStore { get; set; }
+        public DbSet<ProductStorePrice> ProductPrice { get; set; }
         public DbSet<ProductStock> ProductStock { get; set; }
         public DbSet<Carrier_Store> Carrier_Store { get; set; }
         public DbSet<Carrier> Carrier { get; set; }

@@ -1,11 +1,13 @@
 ﻿using Core.Entities;
 using Module.Shared.Entities.SalesModuleEntities;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
 
 namespace Module.Shared.Entities.ProductModuleEntities
 {
-    public class ProductStore : BaseEntity
+    public class Product_Store : BaseEntity
     {
         public int ProductId { get; set; }
         public int StoreId { get; set; }
@@ -16,9 +18,15 @@ namespace Module.Shared.Entities.ProductModuleEntities
         [ForeignKey("StoreId")]
         public Store Store { get; set; }
 
-        public IEnumerable<ProductPrice> ProductPrices { get; set; }
+        public IEnumerable<ProductStorePrice> ProductStorePrices { get; set; }
 
-        public IEnumerable<ProductStock> ProductStocks { get; set; }
+        [JsonIgnore]
+        [NotMapped]
+        public override DateTime? InsertDate { get => base.InsertDate; set => base.InsertDate = value; }
+
+        [JsonIgnore]
+        [NotMapped]
+        public override DateTime? UpdateDate { get => base.UpdateDate; set => base.UpdateDate = value; }
 
     }
 }

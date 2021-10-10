@@ -38,12 +38,17 @@ namespace AuthModule
                 };
                 options.Events = new JwtBearerEvents
                 {
+                    OnTokenValidated = context =>
+                    {
+                        //var serviceProvider = services.BuildServiceProvider();
+                        //var service = serviceProvider.GetService<IClaimAccessor>();
+                        return Task.CompletedTask;
+                    },
                     OnAuthenticationFailed = context =>
                     {
                         if (context.Exception.GetType() == typeof(SecurityTokenExpiredException))
                         {
-                            //var serviceProvider = services.BuildServiceProvider();
-                            //var service = serviceProvider.GetService<AuthBusinessBase>();
+
                             //_ = service.RefreshTokenLogin(1, "zvyZ8g8oa4beUzeJFRhJXKasw4WgZzFENWSiL1XohyA=");
                         }
                         return Task.CompletedTask;
@@ -52,6 +57,7 @@ namespace AuthModule
             });
             services.AddSingleton<ITokenHelper, JwtHelper>();
             services.AddScoped<IAuthBusinessBase<UserAccount>, AuthBusinessBase>();
+            services.AddHttpContextAccessor();
 
         }
 

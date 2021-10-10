@@ -55,6 +55,7 @@ namespace Core.DataAccess.EntityFramework
 
         public async Task AddRangeAsync(IEnumerable<TEntity> entities)
         {
+            entities.ToList().ForEach(x => InsertInitializer(x, Status.Active));
             await _dbSet.AddRangeAsync(entities);
         }
 
@@ -114,63 +115,80 @@ namespace Core.DataAccess.EntityFramework
         }
         #endregion
 
-        private static void InsertInitializer(TEntity entity, Status status)
-        {
-            var insertDateProp = entity.GetType().GetProperty("InsertDate");
-            if (insertDateProp != null)
-            {
-                Type t = Nullable.GetUnderlyingType(insertDateProp.PropertyType) ?? insertDateProp.PropertyType;
-                object safeValue = Convert.ChangeType(DateTime.Now, t);
-                insertDateProp.SetValue(entity, safeValue, null);
-            }
-
-            var updateDateProp = entity.GetType().GetProperty("UpdateDate");
-            if (entity.GetType().GetProperties().Any(x => x.Name == "UpdateDate"))
-            {
-                Type t = Nullable.GetUnderlyingType(updateDateProp.PropertyType) ?? updateDateProp.PropertyType;
-                object safeValue = Convert.ChangeType(DateTime.Now, t);
-                updateDateProp.SetValue(entity, safeValue, null);
-            }
-
-            var statusProp = entity.GetType().GetProperty("Status");
-            if (entity.GetType().GetProperties().Any(x => x.Name == "Status"))
-            {
-                Type t = Nullable.GetUnderlyingType(statusProp.PropertyType) ?? statusProp.PropertyType;
-                object safeValue = Convert.ChangeType(status, t);
-                statusProp.SetValue(entity, safeValue, null);
-            }
-        }
-
-        private static void UpdateInitializer(TEntity entity)
-        {
-            var updateDateProp = entity.GetType().GetProperty("UpdateDate");
-            if (entity.GetType().GetProperties().Any(x => x.Name == "UpdateDate"))
-            {
-                Type t = Nullable.GetUnderlyingType(updateDateProp.PropertyType) ?? updateDateProp.PropertyType;
-                object safeValue = Convert.ChangeType(DateTime.Now, t);
-                updateDateProp.SetValue(entity, safeValue, null);
-            }
-        }
-
-
-        void test2(TEntity entity, Status status)
+        #region Initializer
+        private void InsertInitializer(TEntity entity, Status status)
         {
             foreach (var item in entity.GetType().GetProperties())
             {
-                var propertyInstance = item.GetValue(entity, null);
+                PropertyValueInitializer(entity, item, status);
+                //2nd level properties
                 var mainObjectsProperties = item.PropertyType.GetProperties();
                 foreach (var property in mainObjectsProperties)
                 {
-                    // get the actual instance of this 2nd level property
-                    var leafInstance = property.GetValue(propertyInstance, null);
-                    InsertInitializer(entity, status);
+                    var propertyInstance = item.GetValue(entity, null);
+                    if (property.Name == "InsertDate" && propertyInstance != null)
+                    {
+                        Type t = Nullable.GetUnderlyingType(property.PropertyType) ?? property.PropertyType;
+                        object safeValue = Convert.ChangeType(DateTime.Now, t);
+                        property.SetValue(propertyInstance, safeValue, null);
+                    }
+
+                    if (property.Name == "UpdateDate" && propertyInstance != null)
+                    {
+                        Type t = Nullable.GetUnderlyingType(property.PropertyType) ?? property.PropertyType;
+                        object safeValue = Convert.ChangeType(DateTime.Now, t);
+                        property.SetValue(propertyInstance, safeValue, null);
+                    }
+
+                    if (property.Name == "Status" && propertyInstance != null)
+                    {
+                        Type t = Nullable.GetUnderlyingType(property.PropertyType) ?? property.PropertyType;
+                        object safeValue = Convert.ChangeType(status, t);
+                        property.SetValue(propertyInstance, safeValue, null);
+                    }
 
                 }
-                if (mainObjectsProperties.Any())
-                    continue;
-
-                InsertInitializer(entity, status);
             }
         }
+
+        private void UpdateInitializer(TEntity entity)
+        {
+            var updateDateProp = entity.GetType().GetProperty("UpdateDate");
+            if (entity.GetType().GetProperties().Any(x => x.Name == "UpdateDate"))
+            {
+                Type t = Nullable.GetUnderlyingType(updateDateProp.PropertyType) ?? updateDateProp.PropertyType;
+                object safeValue = Convert.ChangeType(DateTime.Now, t);
+                updateDateProp.SetValue(entity, safeValue, null);
+            }
+        }
+
+
+        private void PropertyValueInitializer(TEntity entity, PropertyInfo item, Status status)
+        {
+            var propertyInstance = item.GetValue(entity, null);
+            if (item.Name == "InsertDate" && propertyInstance == null)
+            {
+                Type t = Nullable.GetUnderlyingType(item.PropertyType) ?? item.PropertyType;
+                object safeValue = Convert.ChangeType(DateTime.Now, t);
+                item.SetValue(entity, safeValue, null);
+            }
+
+            if (item.Name == "UpdateDate" && propertyInstance == null)
+            {
+                Type t = Nullable.GetUnderlyingType(item.PropertyType) ?? item.PropertyType;
+                object safeValue = Convert.ChangeType(DateTime.Now, t);
+                item.SetValue(entity, safeValue, null);
+            }
+
+            if (item.Name == "Status" && propertyInstance == null)
+            {
+                Type t = Nullable.GetUnderlyingType(item.PropertyType) ?? item.PropertyType;
+                object safeValue = Convert.ChangeType(status, t);
+                item.SetValue(entity, safeValue, null);
+            }
+
+        }
+        #endregion
+
     }
 }
