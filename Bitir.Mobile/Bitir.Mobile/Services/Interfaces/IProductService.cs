@@ -7,5 +7,6 @@ namespace Bitir.Mobile.Services.Interfaces
     public interface IProductService
     {
         Task<ResponseWrapperListing<ProductResponse>> GetSystemProducts();
+        Task<ResponseWrapper<bool>> AddProductToStore(AddProductToVendorRequest request);
     }
 }

@@ -11,22 +11,22 @@
     BackgroundColor="{DynamicResource Gray-Bg}"
     BarBackgroundColor="{DynamicResource Gray-Bg}"
     NavigationPage.HasNavigationBar="False">
-    <local:DashboardPage Title="Dashboard">
-        <local:DashboardPage.IconImageSource>
+    <local:StoreProductListPage Title="Dashboard">
+        <local:StoreProductListPage.IconImageSource>
             <FontImageSource
                 FontFamily="FontIcons"
                 Glyph="{StaticResource Calendar}"
                 Size="16" />
-        </local:DashboardPage.IconImageSource>
-    </local:DashboardPage>
-    <local:DashboardPage Title="Siparisler">
-        <local:DashboardPage.IconImageSource>
+        </local:StoreProductListPage.IconImageSource>
+    </local:StoreProductListPage>
+    <local:LoginPage Title="Siparisler">
+        <local:LoginPage.IconImageSource>
             <FontImageSource
                 FontFamily="FontIcons"
                 Glyph="{StaticResource AlbumsIcon}"
                 Size="16" />
-        </local:DashboardPage.IconImageSource>
-    </local:DashboardPage>
+        </local:LoginPage.IconImageSource>
+    </local:LoginPage>
     <local:SettingsPage Title="Settings">
         <local:SettingsPage.IconImageSource>
             <FontImageSource

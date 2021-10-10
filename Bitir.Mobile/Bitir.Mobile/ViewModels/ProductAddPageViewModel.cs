@@ -20,7 +20,7 @@ namespace Bitir.Mobile.ViewModels
             this.InitializeProperties();
             this.AddValidationRules();
             this.BackButtonCommand = new Command(async () => await BackButtonClicked());
-            this.SubmitCommand = new Command(this.SubmitClicked);
+            this.SubmitCommand = new Command(async () => await SubmitClicked());
             Task.Run(async () => await GetSystemProducts());
         }
 
@@ -45,7 +45,7 @@ namespace Bitir.Mobile.ViewModels
             }
         }
 
-        public ValidatableObject<object> SelectedProduct
+        public ValidatableObject<ProductResponse> SelectedProduct
         {
             get
             {
@@ -96,13 +96,33 @@ namespace Bitir.Mobile.ViewModels
                 this.SetProperty(ref this._price, value);
             }
         }
+
+        public ValidatableObject<object> Quantity
+        {
+            get
+            {
+                return this._quantity;
+            }
+
+            set
+            {
+                if (this._quantity == value)
+                {
+                    return;
+                }
+
+                this.SetProperty(ref this._quantity, value);
+            }
+        }
+
         #endregion
 
         #region Fields
         private ObservableCollection<ProductResponse> _systemProducts;
         private ValidatableObject<object> _id;
         private ValidatableObject<object> _price;
-        private ValidatableObject<object> _selectedProduct;
+        private ValidatableObject<object> _quantity;
+        private ValidatableObject<ProductResponse> _selectedProduct;
         #endregion
 
         #region Comments
@@ -115,30 +135,59 @@ namespace Bitir.Mobile.ViewModels
         {
             this.Id = new ValidatableObject<object>();
             this.Price = new ValidatableObject<object>();
-            this.SelectedProduct = new ValidatableObject<object>();
+            this.Quantity = new ValidatableObject<object>();
+            this.SelectedProduct = new ValidatableObject<ProductResponse>();
         }
 
         private void AddValidationRules()
         {
             this.Id.Validations.Add(new IsNotNullOrEmptyRule<object> { ValidationMessage = "Lütfen bir ürün seçin" });
             this.Price.Validations.Add(new IsNotNullOrEmptyRule<object> { ValidationMessage = "Lütfen fiyat bilgisi girin" });
-            this.SelectedProduct.Validations.Add(new IsNotNullOrEmptyRule<object> { ValidationMessage = "Lütfen bir ürün seçin" });
-
+            this.Quantity.Validations.Add(new IsNotNullOrEmptyRule<object> { ValidationMessage = "Lütfen ürün stok bilgisi girin" });
+            this.SelectedProduct.Validations.Add(new IsNotNullOrEmptyRule<ProductResponse> { ValidationMessage = "Lütfen bir ürün seçin" });
         }
 
         private bool AreFieldsValid()
         {
-            bool isId = Id.Validate();
             bool isPrice = Price.Validate();
             bool isProductSelect = SelectedProduct.Validate();
-            return isId && isPrice && isProductSelect;
+            bool isQuantity = Quantity.Validate();
+            return isPrice && isQuantity && isProductSelect;
         }
 
-        private void SubmitClicked(object obj)
+        private async Task SubmitClicked()
         {
             if (this.AreFieldsValid())
             {
+                IsBusy = true;
+                try
+                {
+                    var result = await productService.AddProductToStore(
+                        new AddProductToVendorRequest
+                        {
+                            ProductId = SelectedProduct.Value.Id,
+                            Price = decimal.Parse(this.Price.Value.ToString()),
+                            Quantity = int.Parse(this.Quantity.Value.ToString())
+                        });
+                    if (result != null)
+                    {
+                        SendNotification(new ExceptionTransfer { NotificationMessage = "Ürün başarı ile eklendi" });
+                        await App.Current.MainPage.Navigation.PopModalAsync(true);
+                    }
+                }
+                catch (BadRequestException ex)
+                {
+                    SendNotification(new ExceptionTransfer { ex = ex, NotificationMessage = ex.Message });
 
+                }
+                catch (InternalServerErrorException ex)
+                {
+                    SendNotification(new ExceptionTransfer { ex = ex, NotificationMessage = "Servis hatası !!" });
+                }
+                finally
+                {
+                    IsBusy = false;
+                }
             }
         }
 

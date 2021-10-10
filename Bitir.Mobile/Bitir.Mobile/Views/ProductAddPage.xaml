@@ -138,14 +138,14 @@
                 <!--  Price  -->
                 <StackLayout>
                     <Label
-                    Margin="0,24,0,4"
+                    Margin="0,10,0,4"
                     FontFamily="Montserrat-Medium"
                     FontSize="12"
                     HeightRequest="18"
                     Text="Ürün Birim Fiyatı"
                     TextColor="{DynamicResource Gray-800}" />
                     <border:SfBorder BorderColor="{Binding Source={x:Reference ProductQuantityEntry}, Path=IsFocused, Converter={StaticResource ColorConverter}, ConverterParameter=0}" Style="{StaticResource DataFormBorderlessEntryBorderStyle}">
-                        <Grid>
+                        <Grid ColumnDefinitions="*, Auto">
                             <controls:BorderlessEntry
                         x:Name="ProductPriceEntry"
                         Margin="12,0"

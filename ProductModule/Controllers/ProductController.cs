@@ -28,10 +28,17 @@ namespace ProductModule.Controllers
             return Ok(result);
         }
 
+        [HttpPost("GetStoreProducts")]
+        public async Task<IActionResult> GetStoreProducts()
+        {
+            var result = await _productService.GetStoreProducts();
+            return Ok(result);
+        }
+
         [HttpPost("AddProductToStore")]
         public async Task<IActionResult> AddProductToStore([FromBody] AddProductToVendorRequest request)
         {
-            var result = await _productService.AddProductToVendor(request);
+            var result = await _productService.AddProductToStore(request);
             return Ok(result);
         }
     }

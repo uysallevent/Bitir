@@ -39,19 +39,18 @@ namespace ProductModule.Business
             _httpContextAccessor = httpContextAccessor;
         }
 
-        public async Task<ResponseWrapperListing<Product>> GetSystemProducts()
+        public Task<ResponseWrapperListing<Product>> GetSystemProducts()
         {
-
             var products = _productQuantityRepository.GetAll().Select(x =>
                 new Product
                 {
-                    Id = x.Id,
+                    Id = x.Product.Id,
                     Name = $"{x.Product.Name} - {String.Format("{0:0.##}", x.Quantity)} {x.Unit.Name}"
                 });
-            return new ResponseWrapperListing<Product>(products);
+            return Task.FromResult(new ResponseWrapperListing<Product>(products));
         }
 
-        public async Task<ResponseWrapper<Product_Store>> AddProductToVendor(AddProductToVendorRequest request)
+        public async Task<ResponseWrapper<bool>> AddProductToStore(AddProductToVendorRequest request)
         {
             var claims = _httpContextAccessor.HttpContext.User.Claims;
             int.TryParse(claims.FirstOrDefault(x => x.Type == "Store")?.Value, out int storeId);
@@ -89,7 +88,25 @@ namespace ProductModule.Business
                 throw new BadRequestException("Ürün bilgileri eklenemedi");
             }
 
-            return new ResponseWrapper<Product_Store>(productStore);
+            return new ResponseWrapper<bool>(true);
+        }
+
+        public Task<ResponseWrapperListing<StoreProductResponse>> GetStoreProducts()
+        {
+            var claims = _httpContextAccessor.HttpContext.User.Claims;
+            int.TryParse(claims.FirstOrDefault(x => x.Type == "Store")?.Value, out int storeId);
+            if (storeId < 1)
+            {
+                throw new ClaimExpection("Claims could not find");
+            }
+
+            var productList =  _productStoreRepository
+                .GetAll()
+                .Join(_productRepository.GetAll(),x=>x.ProductId,y=>y.Id,(x,y)=>new {Name=y.Name, Id=y.Id,StoreId=x.StoreId })
+                .Where(x => x.StoreId == storeId)
+                .Select(x=>new StoreProductResponse {Name=x.Name,StoreId=x.StoreId });
+
+            return Task.FromResult(new ResponseWrapperListing<StoreProductResponse>(productList));
         }
 
     }

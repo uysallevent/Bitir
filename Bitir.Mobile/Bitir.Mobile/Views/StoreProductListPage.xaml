@@ -1,0 +1,183 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="Bitir.Mobile.Views.StoreProductListPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:behaviors="clr-namespace:Bitir.Mobile.Behaviors"
+    xmlns:border="clr-namespace:Syncfusion.XForms.Border;assembly=Syncfusion.Core.XForms"
+    xmlns:buttons="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms"
+    xmlns:controls="clr-namespace:Bitir.Mobile.Controls"
+    xmlns:viewModel="clr-namespace:Bitir.Mobile.ViewModels"
+    x:Name="songsPlayList"
+    BackgroundColor="{DynamicResource Gray-Bg}"
+    NavigationPage.HasNavigationBar="False">
+
+    <ContentPage.BindingContext>
+        <viewModel:SongsPlayListViewModel />
+    </ContentPage.BindingContext>
+
+    <ContentPage.Content>
+        <Grid
+            ColumnSpacing="0"
+            RowDefinitions="Auto, *"
+            RowSpacing="0">
+
+            <StackLayout
+                x:Name="TitleView"
+                Grid.Row="0"
+                Padding="8"
+                BackgroundColor="{DynamicResource Gray-Bg}"
+                HorizontalOptions="FillAndExpand"
+                Orientation="Horizontal"
+                Spacing="0">
+
+                <StackLayout
+                    x:Name="TitleLayout"
+                    HorizontalOptions="FillAndExpand"
+                    IsVisible="True"
+                    Orientation="Horizontal"
+                    Spacing="0"
+                    VerticalOptions="FillAndExpand">
+
+                    <!--  Back button command  -->
+                    <buttons:SfButton
+                        x:Name="backButton"
+                        Command="{Binding BackButtonCommand}"
+                        CommandParameter="{x:Reference backButton}"
+                        Style="{StaticResource IconButtonStyle}"
+                        Text="{StaticResource Back}" />
+
+                    <!--  Songs page Title  -->
+                    <Label
+                        Margin="16,0"
+                        FontFamily="Montserrat-Medium"
+                        HorizontalOptions="FillAndExpand"
+                        Style="{StaticResource TitleLabelStyle}"
+                        Text="Songs"
+                        VerticalOptions="Center"
+                        VerticalTextAlignment="Center" />
+
+                </StackLayout>
+
+                <StackLayout
+                    x:Name="Search"
+                    HorizontalOptions="EndAndExpand"
+                    IsVisible="False"
+                    Orientation="Horizontal"
+                    Spacing="0">
+
+                    <!--  Back to title layout  -->
+                    <buttons:SfButton
+                        x:Name="BackToTitle"
+                        Style="{StaticResource IconButtonStyle}"
+                        Text="{StaticResource Back}">
+                        <buttons:SfButton.Behaviors>
+                            <behaviors:SearchBarAnimationBehavior AnimationType="shrink" />
+                        </buttons:SfButton.Behaviors>
+                    </buttons:SfButton>
+
+                    <!--  Rounded Search Entry  -->
+                    <border:SfBorder Style="{DynamicResource ThemeBorderStyle}">
+
+                        <controls:BorderlessEntry
+                            x:Name="SearchEntry"
+                            BindingContext="{x:Reference SongsPageList}"
+                            HorizontalOptions="FillAndExpand"
+                            Placeholder="Search here"
+                            Style="{StaticResource BorderlessEntryStyle}"
+                            Text="{Binding SearchText, Mode=TwoWay}" />
+                    </border:SfBorder>
+
+                </StackLayout>
+
+                <!--  Search Button  -->
+                <buttons:SfButton
+                    x:Name="SearchButton"
+                    IsVisible="True"
+                    Style="{StaticResource IconButtonStyle}"
+                    Text="{StaticResource Search}">
+                    <buttons:SfButton.Behaviors>
+                        <behaviors:SearchBarAnimationBehavior AnimationType="expand" />
+                    </buttons:SfButton.Behaviors>
+                </buttons:SfButton>
+
+            </StackLayout>
+
+            <StackLayout Grid.Row="1" Spacing="0">
+                <!--  Seperator  -->
+                <BoxView Style="{StaticResource HorizontalSeparatorStyle}" />
+
+                <controls:SearchableSongsPlayList
+                    x:Name="SongsPageList"
+                    AllowSwiping="True"
+                    AutoFitMode="Height"
+                    FocusBorderThickness="0"
+                    IsScrollBarVisible="false"
+                    ItemSpacing="0"
+                    ItemsSource="{Binding SongsPageList}"
+                    RowSpacing="0"
+                    SearchText="{Binding SearchText}"
+                    SelectionBackgroundColor="{DynamicResource Gray-200}"
+                    TapCommand="{Binding ItemSelectedCommand}"
+                    VerticalOptions="FillAndExpand">
+
+                    <controls:SearchableSongsPlayList.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <StackLayout>
+                                    <Grid
+                                        ColumnDefinitions="Auto, *"
+                                        ColumnSpacing="0"
+                                        RowSpacing="0">
+
+                                        <StackLayout
+                                            Grid.Column="0"
+                                            HorizontalOptions="FillAndExpand"
+                                            Spacing="0"
+                                            VerticalOptions="FillAndExpand">
+                                            <!--  Name of the Song  -->
+                                            <Label
+                                                Margin="16,13,0,0"
+                                                FontFamily="Montserrat-Medium"
+                                                FontSize="16"
+                                                HeightRequest="24"
+                                                LineHeight="{OnPlatform Android=1.5,
+                                                                        Default=-1}"
+                                                Text="{Binding SongName}"
+                                                TextColor="{DynamicResource Gray-900}" />
+
+                                            <!--  Composer of the song  -->
+                                            <Label
+                                                Margin="16,0,0,12"
+                                                FontFamily="Montserrat-Medium"
+                                                FontSize="14"
+                                                HeightRequest="21"
+                                                LineHeight="{OnPlatform Android=1.25,
+                                                                        Default=-1}"
+                                                Text="{Binding Composer}"
+                                                TextColor="{DynamicResource Gray-700}" />
+                                        </StackLayout>
+
+                                        <!--  Menu button  -->
+                                        <buttons:SfButton
+                                            x:Name="MenuButton"
+                                            Grid.Column="1"
+                                            Margin="16,0"
+                                            Command="{Binding Path=BindingContext.MenuCommand, Source={x:Reference songsPlayList}}"
+                                            CornerRadius="4"
+                                            HorizontalOptions="End"
+                                            Style="{StaticResource IconButtonStyle}"
+                                            Text="{StaticResource More}" />
+
+                                    </Grid>
+                                    <!--  Seperator  -->
+                                    <BoxView Style="{StaticResource HorizontalSeparatorStyle}" />
+                                </StackLayout>
+                            </ViewCell>
+                        </DataTemplate>
+                    </controls:SearchableSongsPlayList.ItemTemplate>
+                </controls:SearchableSongsPlayList>
+            </StackLayout>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

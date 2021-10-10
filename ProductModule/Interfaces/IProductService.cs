@@ -10,6 +10,7 @@ namespace ProductModule.Interfaces
     public interface IProductService<T> : IBusinessBase<T> where T : class, IEntity, new()
     {
         Task<ResponseWrapperListing<T>> GetSystemProducts();
-        Task<ResponseWrapper<Product_Store>> AddProductToVendor(AddProductToVendorRequest request);
+        Task<ResponseWrapper<bool>> AddProductToStore(AddProductToVendorRequest request);
+        Task<ResponseWrapperListing<StoreProductResponse>> GetStoreProducts();
     }
 }

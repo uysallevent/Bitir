@@ -19,8 +19,7 @@ namespace Bitir.Mobile.Services
         public async Task<ResponseWrapper<AuthResponse>> LoginCheckAsync(AuthLoginRequest request)
         {
             var restClientRequest = await GetRestClient(Method.POST, loginCheckPath);
-            var jsonRequest = JsonConvert.SerializeObject(request);
-            restClientRequest.Item2.AddParameter("application/json", jsonRequest, ParameterType.RequestBody);
+            restClientRequest.Item2.AddJsonBody(request);
             var restResponse = await restClientRequest.Item1.ExecuteAsync<ResponseWrapper<AuthResponse>>(restClientRequest.Item2);
             return ResponseHandler(restResponse);
         }
