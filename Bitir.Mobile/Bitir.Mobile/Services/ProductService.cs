@@ -1,6 +1,6 @@
 ﻿using Bitir.Data.Model.Dtos;
-using Bitir.Mobile.Models.Product;
 using Bitir.Mobile.Services.Interfaces;
+using ProductModule.Dtos;
 using RestSharp;
 using System.Threading.Tasks;
 
@@ -11,14 +11,14 @@ namespace Bitir.Mobile.Services
         private const string getSystemProductsPath = "ProductModule/Product/GetSystemProducts";
         private const string addProductToStorePath = "ProductModule/Product/AddProductToStore";
 
-        public async Task<ResponseWrapperListing<ProductResponse>> GetSystemProducts()
+        public async Task<ResponseWrapperListing<SystemProductResponse>> GetSystemProducts()
         {
             var restClientRequest = await GetRestClient(Method.POST, getSystemProductsPath);
-            var restResponse = await restClientRequest.Item1.ExecuteAsync<ResponseWrapperListing<ProductResponse>>(restClientRequest.Item2);
+            var restResponse = await restClientRequest.Item1.ExecuteAsync<ResponseWrapperListing<SystemProductResponse>>(restClientRequest.Item2);
             return ResponseHandler(restResponse);
         }
 
-        public async Task<ResponseWrapper<bool>> AddProductToStore(AddProductToVendorRequest request)
+        public async Task<ResponseWrapper<bool>> AddProductToStore(AddProductToStoreRequest request)
         {
             var restClientRequest = await GetRestClient(Method.POST, addProductToStorePath);
             restClientRequest.Item2.AddParameter("accept","application/json");

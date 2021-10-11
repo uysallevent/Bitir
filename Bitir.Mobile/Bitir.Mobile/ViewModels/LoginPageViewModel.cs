@@ -1,6 +1,6 @@
-﻿using Bitir.Mobile.Exceptions;
+﻿using AuthModule.Dto;
+using Bitir.Mobile.Exceptions;
 using Bitir.Mobile.Helper;
-using Bitir.Mobile.Models;
 using Bitir.Mobile.Models.Common;
 using Bitir.Mobile.Validators;
 using Bitir.Mobile.Validators.Rules;
@@ -141,7 +141,7 @@ namespace Bitir.Mobile.ViewModels
                 IsBusy = true;
                 try
                 {
-                    var result = await authService.LoginCheckAsync(new Models.Auth.AuthLoginRequest
+                    var result = await authService.LoginCheckAsync(new LoginDto
                     {
                         Username = Email.Value,
                         Password = password.Value

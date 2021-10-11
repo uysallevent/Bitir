@@ -36,7 +36,7 @@ namespace ProductModule.Controllers
         }
 
         [HttpPost("AddProductToStore")]
-        public async Task<IActionResult> AddProductToStore([FromBody] AddProductToVendorRequest request)
+        public async Task<IActionResult> AddProductToStore([FromBody] AddProductToStoreRequest request)
         {
             var result = await _productService.AddProductToStore(request);
             return Ok(result);

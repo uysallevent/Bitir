@@ -1,6 +1,6 @@
-﻿namespace Bitir.Mobile.Models.Product
+﻿namespace ProductModule.Dtos
 {
-    public class ProductResponse
+    public class SystemProductResponse
     {
         public int Id { get; set; }
         public string Name { get; set; }

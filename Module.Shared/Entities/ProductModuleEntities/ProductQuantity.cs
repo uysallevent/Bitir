@@ -15,5 +15,7 @@ namespace Module.Shared.Entities.ProductModuleEntities
 
         [ForeignKey("UnitId")]
         public Unit Unit { get; set; }
+
+        public IEnumerable<Product_Store> Product_Stores { get; set; }
     }
 }

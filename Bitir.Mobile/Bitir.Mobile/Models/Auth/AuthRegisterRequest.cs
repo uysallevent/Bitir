@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Module.Shared;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -13,6 +14,6 @@ namespace Bitir.Mobile.Models.Auth
         public string Surname { get; set; }
         public string Phone { get; set; }
         public string Email { get; set; }
-        public int? AccountTypeId { get; set; }
+        public AccountTypeEnum? AccountTypeId { get; set; }
     }
 }

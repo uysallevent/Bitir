@@ -5,6 +5,7 @@ using Bitir.Mobile.Models.Common;
 using Bitir.Mobile.Validators;
 using Bitir.Mobile.Validators.Rules;
 using Bitir.Mobile.Views;
+using Module.Shared;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -26,8 +27,6 @@ namespace Bitir.Mobile.ViewModels
 
         private ValidatableObject<bool> vendor;
 
-        private IList<AccountTypeResponse> accountTypes;
-
         private bool signUpButtonStatus;
 
         #endregion
@@ -41,7 +40,6 @@ namespace Bitir.Mobile.ViewModels
             this.LoginCommand = new Command(this.LoginClicked);
             this.SignUpCommand = new Command(async (obj) => await SignUpClicked(obj));
             this.BackButtonCommand = new Command(this.BackButtonClicked);
-            Task.Run(async () => await GetAccountTypes());
         }
         #endregion
 
@@ -118,23 +116,6 @@ namespace Bitir.Mobile.ViewModels
             }
         }
 
-        public IList<AccountTypeResponse> AccountTypes
-        {
-            get
-            {
-                return this.accountTypes;
-            }
-
-            set
-            {
-                if (this.vendor == value)
-                {
-                    return;
-                }
-
-                this.SetProperty(ref this.accountTypes, value);
-            }
-        }
 
         public bool SignUpButtonStatus
         {
@@ -192,7 +173,7 @@ namespace Bitir.Mobile.ViewModels
             this.Password.Item2.Validations.Add(new IsNotNullOrEmptyRule<string> { ValidationMessage = "Şifre Tekrarı Zorunludur!" });
         }
 
-        
+
         private async void LoginClicked(object obj)
         {
             await Application.Current.MainPage.Navigation.PushModalAsync(new LoginPage(), true);
@@ -205,8 +186,7 @@ namespace Bitir.Mobile.ViewModels
                 IsBusy = true;
                 try
                 {
-                    var accountType = (this.Customer.Value) ? this.AccountTypes.FirstOrDefault(x => x.Name == "Customer").Id
-                                           : this.AccountTypes.FirstOrDefault(x => x.Name == "Vendor").Id;
+                    var accountType = (this.Customer.Value) ? AccountTypeEnum.customer : AccountTypeEnum.vendor;
 
                     var result = await authService.RegisterAsync(new AuthRegisterRequest
                     {
@@ -239,32 +219,6 @@ namespace Bitir.Mobile.ViewModels
                 {
                     IsBusy = false;
                 }
-            }
-        }
-
-        private async Task GetAccountTypes()
-        {
-            IsBusy = true;
-            try
-            {
-                var result = await authService.GetAccoutTypesAsync();
-                if (result != null && result.List.Any())
-                {
-                    AccountTypes = result.List.ToList();
-                }
-            }
-            catch (BadRequestException ex)
-            {
-                SendNotification(new ExceptionTransfer { ex = ex, NotificationMessage = ex.Message });
-
-            }
-            catch (InternalServerErrorException ex)
-            {
-                SendNotification(new ExceptionTransfer { ex = ex, NotificationMessage = "Servis hatası !!" });
-            }
-            finally
-            {
-                IsBusy = false;
             }
         }
 

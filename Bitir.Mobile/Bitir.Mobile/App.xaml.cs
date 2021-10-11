@@ -1,4 +1,5 @@
-    using Bitir.Mobile.Models;
+using AuthModule.Security.JWT;
+using Bitir.Mobile.Models;
 using Bitir.Mobile.Models.Auth;
 using Bitir.Mobile.Models.Common;
 using Bitir.Mobile.Services;
@@ -41,7 +42,7 @@ namespace Bitir.Mobile
             MainPage = new LoginPage();
         }
 
-        public static AuthResponse authResponse;
+        public static AccessToken authResponse;
 
         protected override void OnStart()
         {

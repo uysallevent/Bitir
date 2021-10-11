@@ -4,9 +4,9 @@ using System.Text;
 
 namespace ProductModule.Dtos
 {
-    public class AddProductToVendorRequest
+    public class AddProductToStoreRequest
     {
-        public int ProductId { get; set; }
+        public int ProductQuantityId { get; set; }
         public decimal Price { get; set; }
         public int Quantity { get; set; }
     }

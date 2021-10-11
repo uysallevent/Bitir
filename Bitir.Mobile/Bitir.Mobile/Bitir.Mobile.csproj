@@ -16,6 +16,14 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Include="..\..\AuthModule\Dtos\LoginDto.cs" Link="Models\Auth\LoginDto.cs" />
+    <Compile Include="..\..\AuthModule\Utility\JWT\AccessToken.cs" Link="Models\Auth\AccessToken.cs" />
+    <Compile Include="..\..\Module.Shared\Enums\AccountTypeEnum.cs" Link="Enums\AccountTypeEnum.cs" />
+    <Compile Include="..\..\ProductModule\Dtos\AddProductToStoreRequest.cs" Link="Models\Product\AddProductToStoreRequest.cs" />
+    <Compile Include="..\..\ProductModule\Dtos\SystemProductResponse.cs" Link="Models\Product\SystemProductResponse.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <EmbeddedResource Include="Data\navigation.json" />
     <EmbeddedResource Include="Data\profile.json" />
     <EmbeddedResource Include="Resources\Fonts\Montserrat-Bold.ttf" />
@@ -152,5 +160,9 @@
     <EmbeddedResource Update="Views\StoreProductListPage.xaml">
       <Generator>MSBuild:Compile</Generator>
     </EmbeddedResource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Enums\" />
   </ItemGroup>
 </Project>

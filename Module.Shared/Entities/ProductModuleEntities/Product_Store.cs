@@ -9,11 +9,11 @@ namespace Module.Shared.Entities.ProductModuleEntities
 {
     public class Product_Store : BaseEntity
     {
-        public int ProductId { get; set; }
+        public int ProductQuantityId { get; set; }
         public int StoreId { get; set; }
 
-        [ForeignKey("ProductId")]
-        public Product Product { get; set; }
+        [ForeignKey("ProductQuantityId")]
+        public ProductQuantity ProductQuantity { get; set; }
 
         [ForeignKey("StoreId")]
         public Store Store { get; set; }

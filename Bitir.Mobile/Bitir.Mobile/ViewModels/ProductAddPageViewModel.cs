@@ -1,8 +1,8 @@
 ﻿using Bitir.Mobile.Exceptions;
 using Bitir.Mobile.Models.Common;
-using Bitir.Mobile.Models.Product;
 using Bitir.Mobile.Validators;
 using Bitir.Mobile.Validators.Rules;
+using ProductModule.Dtos;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using Xamarin.Forms;
@@ -27,7 +27,7 @@ namespace Bitir.Mobile.ViewModels
         #endregion
 
         #region Properties
-        public ObservableCollection<ProductResponse> SystemProducts
+        public ObservableCollection<SystemProductResponse> SystemProducts
         {
             get
             {
@@ -45,7 +45,7 @@ namespace Bitir.Mobile.ViewModels
             }
         }
 
-        public ValidatableObject<ProductResponse> SelectedProduct
+        public ValidatableObject<SystemProductResponse> SelectedProduct
         {
             get
             {
@@ -118,11 +118,11 @@ namespace Bitir.Mobile.ViewModels
         #endregion
 
         #region Fields
-        private ObservableCollection<ProductResponse> _systemProducts;
+        private ObservableCollection<SystemProductResponse> _systemProducts;
         private ValidatableObject<object> _id;
         private ValidatableObject<object> _price;
         private ValidatableObject<object> _quantity;
-        private ValidatableObject<ProductResponse> _selectedProduct;
+        private ValidatableObject<SystemProductResponse> _selectedProduct;
         #endregion
 
         #region Comments
@@ -136,7 +136,7 @@ namespace Bitir.Mobile.ViewModels
             this.Id = new ValidatableObject<object>();
             this.Price = new ValidatableObject<object>();
             this.Quantity = new ValidatableObject<object>();
-            this.SelectedProduct = new ValidatableObject<ProductResponse>();
+            this.SelectedProduct = new ValidatableObject<SystemProductResponse>();
         }
 
         private void AddValidationRules()
@@ -144,7 +144,7 @@ namespace Bitir.Mobile.ViewModels
             this.Id.Validations.Add(new IsNotNullOrEmptyRule<object> { ValidationMessage = "Lütfen bir ürün seçin" });
             this.Price.Validations.Add(new IsNotNullOrEmptyRule<object> { ValidationMessage = "Lütfen fiyat bilgisi girin" });
             this.Quantity.Validations.Add(new IsNotNullOrEmptyRule<object> { ValidationMessage = "Lütfen ürün stok bilgisi girin" });
-            this.SelectedProduct.Validations.Add(new IsNotNullOrEmptyRule<ProductResponse> { ValidationMessage = "Lütfen bir ürün seçin" });
+            this.SelectedProduct.Validations.Add(new IsNotNullOrEmptyRule<SystemProductResponse> { ValidationMessage = "Lütfen bir ürün seçin" });
         }
 
         private bool AreFieldsValid()
@@ -163,9 +163,9 @@ namespace Bitir.Mobile.ViewModels
                 try
                 {
                     var result = await productService.AddProductToStore(
-                        new AddProductToVendorRequest
+                        new AddProductToStoreRequest
                         {
-                            ProductId = SelectedProduct.Value.Id,
+                            ProductQuantityId = SelectedProduct.Value.Id,
                             Price = decimal.Parse(this.Price.Value.ToString()),
                             Quantity = int.Parse(this.Quantity.Value.ToString())
                         });
@@ -197,7 +197,7 @@ namespace Bitir.Mobile.ViewModels
             try
             {
                 var result = await productService.GetSystemProducts();
-                SystemProducts = new ObservableCollection<ProductResponse>(result.List);
+                SystemProducts = new ObservableCollection<SystemProductResponse>(result.List);
             }
             catch (BadRequestException ex)
             {
