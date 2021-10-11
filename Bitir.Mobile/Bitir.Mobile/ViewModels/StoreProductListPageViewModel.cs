@@ -1,40 +1,37 @@
-﻿using Bitir.Mobile.Models;
+﻿using Bitir.Mobile.Exceptions;
+using Bitir.Mobile.Models;
+using Bitir.Mobile.Models.Common;
+using ProductModule.Dtos;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Runtime.Serialization;
+using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Internals;
 
 namespace Bitir.Mobile.ViewModels
 {
-    /// <summary>
-    /// ViewModel for the Songs play list page.
-    /// </summary>
     [Preserve(AllMembers = true)]
-    public class SongsPlayListViewModel : BaseViewModel
+    public class StoreProductListPageViewModel : BaseViewModel
     {
         #region Fields
 
         private Command<object> itemSelectedCommand;
 
         private Command<object> menuCommand;
+        private ObservableCollection<StoreProductResponse> storeProducts;
 
         #endregion
 
         #region Constructor
-
-        /// <summary>
-        /// Initializes a new instance for the <see cref="SongsPlayListViewModel"/> class.
-        /// </summary>
-        public SongsPlayListViewModel()
+        public StoreProductListPageViewModel()
         {
+            Task.Run(async () => await GetStoreProducts());
         }
         #endregion
 
         #region Properties
 
-        /// <summary>
-        /// Gets the command that will be executed when an item is selected.
-        /// </summary>
         public Command<object> ItemSelectedCommand
         {
             get
@@ -43,9 +40,7 @@ namespace Bitir.Mobile.ViewModels
             }
         }
 
-        /// <summary>
-        /// Gets the command that will be executed when an more button is selected.
-        /// </summary>
+
         public Command<object> MenuCommand
         {
             get
@@ -54,28 +49,62 @@ namespace Bitir.Mobile.ViewModels
             }
         }
 
-        /// <summary>
-        /// Gets or sets a collection of values to be displayed in the Songs play list page.
-        /// </summary>
-        public ObservableCollection<Song> SongsPageList { get; set; }
+        public ObservableCollection<StoreProductResponse> StoreProducts
+        {
+            get
+            {
+                return this.storeProducts;
+            }
+
+            set
+            {
+                if (this.storeProducts == value)
+                {
+                    return;
+                }
+
+                this.SetProperty(ref this.storeProducts, value);
+            }
+        }
 
         #endregion
 
         #region Methods
+        private void InitializeProperties()
+        {
+        }
 
-        /// <summary>
-        /// Invoked when an item is selected from the Songs play list.
-        /// </summary>
-        /// <param name="selectedItem">Selected item from the list view.</param>
+        private async Task GetStoreProducts()
+        {
+            IsBusy = true;
+            try
+            {
+                var result = await productService.GetStoreProducts();
+                if (result != null && result.List.Any())
+                {
+                    StoreProducts = new ObservableCollection<StoreProductResponse>(result.List);
+                }
+            }
+            catch (BadRequestException ex)
+            {
+                SendNotification(new ExceptionTransfer { ex = ex, NotificationMessage = ex.Message });
+
+            }
+            catch (InternalServerErrorException ex)
+            {
+                SendNotification(new ExceptionTransfer { ex = ex, NotificationMessage = "Servis hatası !!" });
+            }
+            finally
+            {
+                IsBusy = false;
+            }
+        }
+
         private void NavigateToNextPage(object selectedItem)
         {
             // Do something
         }
 
-        /// <summary>
-        /// Invoked when an more button is selected from the Songs play list.
-        /// </summary>
-        /// <param name="selectedItem">Selected item from the list view.</param>
         private void MoreButtonClicked(object selectedItem)
         {
             // Do something

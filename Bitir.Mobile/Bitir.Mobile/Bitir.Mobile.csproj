@@ -6,8 +6,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="Data\navigation.json" />
-    <None Remove="Data\profile.json" />
     <None Remove="Resources\Fonts\Montserrat-Bold.ttf" />
     <None Remove="Resources\Fonts\Montserrat-Medium.ttf" />
     <None Remove="Resources\Fonts\Montserrat-Regular.ttf" />
@@ -20,12 +18,11 @@
     <Compile Include="..\..\AuthModule\Utility\JWT\AccessToken.cs" Link="Models\Auth\AccessToken.cs" />
     <Compile Include="..\..\Module.Shared\Enums\AccountTypeEnum.cs" Link="Enums\AccountTypeEnum.cs" />
     <Compile Include="..\..\ProductModule\Dtos\AddProductToStoreRequest.cs" Link="Models\Product\AddProductToStoreRequest.cs" />
+    <Compile Include="..\..\ProductModule\Dtos\StoreProductResponse.cs" Link="Models\Product\StoreProductResponse.cs" />
     <Compile Include="..\..\ProductModule\Dtos\SystemProductResponse.cs" Link="Models\Product\SystemProductResponse.cs" />
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Include="Data\navigation.json" />
-    <EmbeddedResource Include="Data\profile.json" />
     <EmbeddedResource Include="Resources\Fonts\Montserrat-Bold.ttf" />
     <EmbeddedResource Include="Resources\Fonts\Montserrat-Medium.ttf" />
     <EmbeddedResource Include="Resources\Fonts\Montserrat-Regular.ttf" />

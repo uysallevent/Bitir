@@ -13,7 +13,7 @@
     NavigationPage.HasNavigationBar="False">
 
     <ContentPage.BindingContext>
-        <viewModel:SongsPlayListViewModel />
+        <viewModel:StoreProductListPageViewModel />
     </ContentPage.BindingContext>
 
     <ContentPage.Content>
@@ -114,7 +114,7 @@
                     FocusBorderThickness="0"
                     IsScrollBarVisible="false"
                     ItemSpacing="0"
-                    ItemsSource="{Binding SongsPageList}"
+                    ItemsSource="{Binding StoreProducts}"
                     RowSpacing="0"
                     SearchText="{Binding SearchText}"
                     SelectionBackgroundColor="{DynamicResource Gray-200}"
@@ -143,7 +143,7 @@
                                                 HeightRequest="24"
                                                 LineHeight="{OnPlatform Android=1.5,
                                                                         Default=-1}"
-                                                Text="{Binding SongName}"
+                                                Text="{Binding Name}"
                                                 TextColor="{DynamicResource Gray-900}" />
 
                                             <!--  Composer of the song  -->
@@ -154,7 +154,7 @@
                                                 HeightRequest="21"
                                                 LineHeight="{OnPlatform Android=1.25,
                                                                         Default=-1}"
-                                                Text="{Binding Composer}"
+                                                Text="{Binding Price}"
                                                 TextColor="{DynamicResource Gray-700}" />
                                         </StackLayout>
 

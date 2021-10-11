@@ -9,12 +9,20 @@ namespace Bitir.Mobile.Services
     public class ProductService : BaseService, IProductService
     {
         private const string getSystemProductsPath = "ProductModule/Product/GetSystemProducts";
+        private const string getStoreProductsPath = "ProductModule/Product/GetStoreProducts";
         private const string addProductToStorePath = "ProductModule/Product/AddProductToStore";
 
         public async Task<ResponseWrapperListing<SystemProductResponse>> GetSystemProducts()
         {
             var restClientRequest = await GetRestClient(Method.POST, getSystemProductsPath);
             var restResponse = await restClientRequest.Item1.ExecuteAsync<ResponseWrapperListing<SystemProductResponse>>(restClientRequest.Item2);
+            return ResponseHandler(restResponse);
+        }
+
+        public async Task<ResponseWrapperListing<StoreProductResponse>> GetStoreProducts()
+        {
+            var restClientRequest = await GetRestClient(Method.POST, getStoreProductsPath);
+            var restResponse = await restClientRequest.Item1.ExecuteAsync<ResponseWrapperListing<StoreProductResponse>>(restClientRequest.Item2);
             return ResponseHandler(restResponse);
         }
 

@@ -1,4 +1,4 @@
-﻿using Bitir.Mobile.DataService;
+﻿
 using Xamarin.Forms;
 using Xamarin.Forms.Internals;
 using Xamarin.Forms.Xaml;
@@ -18,7 +18,6 @@ namespace Bitir.Mobile.Views
         public StoreProductListPage()
         {
             this.InitializeComponent();
-            this.BindingContext = SongsPlayListDataService.Instance.SongsPlayListViewModel;
         }
     }
 }
