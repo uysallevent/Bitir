@@ -11,6 +11,6 @@ namespace ProductModule.Interfaces
     {
         Task<ResponseWrapperListing<SystemProductResponse>> GetSystemProducts();
         Task<ResponseWrapper<bool>> AddProductToStore(AddProductToStoreRequest request);
-        Task<ResponseWrapperListing<StoreProductResponse>> GetStoreProducts();
+        Task<ResponseWrapperListing<StoreProductViewModel>> GetStoreProducts();
     }
 }

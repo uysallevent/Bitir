@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<pages:PopupPage
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="Bitir.Mobile.Views.StoreProductListPopupView"
+    xmlns:pages="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup"
+    xmlns:border="clr-namespace:Syncfusion.XForms.Border;assembly=Syncfusion.Core.XForms"
+    xmlns:buttons="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms"
+    xmlns:viewModel="clr-namespace:Bitir.Mobile.ViewModels"
+    xmlns:converter="clr-namespace:Bitir.Mobile.Converters"
+    xmlns:control="clr-namespace:Bitir.Mobile.Controls" >
+
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converter:BooleanToColorConverter x:Key="ColorConverter" />
+            <converter:InverseBoolConverter x:Key="InverseBoolConverter" />
+            <converter:NameValidationConverter x:Key="FirstValidationErrorConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <Frame CornerRadius="8" BackgroundColor="Black" Opacity="0.8" VerticalOptions="Center">
+        <Grid BackgroundColor="Transparent"  VerticalOptions="Center" >
+            <StackLayout Orientation="Vertical" HorizontalOptions="CenterAndExpand" Spacing="5" Margin="5">
+                <buttons:SfButton
+                            Command="{Binding ProfileUpdateCommand}"
+                            HorizontalOptions="Fill"
+                            Style="{StaticResource GradientButtonStyle}"
+                            Text="KAYDET" />
+
+                <buttons:SfButton
+                        HorizontalOptions="Fill"
+                        Style="{StaticResource GradientButtonStyle}"
+                        Clicked="SfButton_Clicked"
+                        Text="KAPAT" />
+            </StackLayout>
+        </Grid>
+    </Frame>
+</pages:PopupPage>

@@ -3,6 +3,9 @@ using AuthModule.Interfaces;
 using AuthModule.Security.JWT;
 using BaseModule.Business;
 using BaseModule.Interfaces;
+using Bitir.Data.Contexts;
+using Core.DataAccess;
+using Core.DataAccess.EntityFramework;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -58,6 +61,8 @@ namespace AuthModule
             services.AddSingleton<ITokenHelper, JwtHelper>();
             services.AddScoped<IAuthBusinessBase<UserAccount>, AuthBusinessBase>();
             services.AddHttpContextAccessor();
+            services.AddScoped<IRepository<UserAccount>, EFRepository<UserAccount, BitirMainContext>>();
+            services.AddScoped<IRepository<UserToken>, EFRepository<UserToken, BitirMainContext>>();
 
         }
 

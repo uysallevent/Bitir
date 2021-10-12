@@ -23,4 +23,8 @@
     <ProjectReference Include="..\SalesModule\SalesModule.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Procedures\" />
+  </ItemGroup>
+
 </Project>

@@ -1,7 +1,10 @@
 ﻿using Bitir.Mobile.Exceptions;
 using Bitir.Mobile.Models;
 using Bitir.Mobile.Models.Common;
+using Bitir.Mobile.Views;
+using Module.Shared.Entities.ProductModuleEntities;
 using ProductModule.Dtos;
+using Rg.Plugins.Popup.Services;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Runtime.Serialization;
@@ -19,7 +22,7 @@ namespace Bitir.Mobile.ViewModels
         private Command<object> itemSelectedCommand;
 
         private Command<object> menuCommand;
-        private ObservableCollection<StoreProductResponse> storeProducts;
+        private ObservableCollection<StoreProductViewModel> storeProducts;
 
         #endregion
 
@@ -27,6 +30,13 @@ namespace Bitir.Mobile.ViewModels
         public StoreProductListPageViewModel()
         {
             Task.Run(async () => await GetStoreProducts());
+            MessagingCenter.Subscribe<ProductAddPageViewModel, bool>(this, "UpdateProductList", async (s, b) =>
+             {
+                 if (b)
+                 {
+                     await GetStoreProducts();
+                 }
+             });
         }
         #endregion
 
@@ -41,15 +51,15 @@ namespace Bitir.Mobile.ViewModels
         }
 
 
-        public Command<object> MenuCommand
+        public Command<object> AddProductCommand
         {
             get
             {
-                return this.menuCommand ?? (this.menuCommand = new Command<object>(this.MoreButtonClicked));
+                return this.menuCommand ?? (this.menuCommand = new Command<object>(this.AddButtonClicked));
             }
         }
 
-        public ObservableCollection<StoreProductResponse> StoreProducts
+        public ObservableCollection<StoreProductViewModel> StoreProducts
         {
             get
             {
@@ -82,7 +92,7 @@ namespace Bitir.Mobile.ViewModels
                 var result = await productService.GetStoreProducts();
                 if (result != null && result.List.Any())
                 {
-                    StoreProducts = new ObservableCollection<StoreProductResponse>(result.List);
+                    StoreProducts = new ObservableCollection<StoreProductViewModel>(result.List);
                 }
             }
             catch (BadRequestException ex)
@@ -102,12 +112,12 @@ namespace Bitir.Mobile.ViewModels
 
         private void NavigateToNextPage(object selectedItem)
         {
-            // Do something
+            PopupNavigation.Instance.PushAsync(new StoreProductListPopupView());
         }
 
-        private void MoreButtonClicked(object selectedItem)
+        private void AddButtonClicked(object selectedItem)
         {
-            // Do something
+            App.Current.MainPage.Navigation.PushModalAsync(new ProductAddPage());
         }
 
         #endregion

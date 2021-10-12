@@ -173,6 +173,7 @@ namespace Bitir.Mobile.ViewModels
                     {
                         SendNotification(new ExceptionTransfer { NotificationMessage = "Ürün başarı ile eklendi" });
                         await App.Current.MainPage.Navigation.PopModalAsync(true);
+                        MessagingCenter.Send(this, "UpdateProductList", true);
                     }
                 }
                 catch (BadRequestException ex)

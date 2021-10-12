@@ -5,6 +5,10 @@ using Module.Shared.Entities.ProductModuleEntities;
 using Module.Shared.Entities.ProductModuleEntities.Configuration;
 using Module.Shared.Entities.SalesModuleEntities;
 using Module.Shared.Entities.SalesModuleEntities.Configuration;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.Threading.Tasks;
 
 namespace Bitir.Data.Contexts
 {
@@ -27,6 +31,8 @@ namespace Bitir.Data.Contexts
         public DbSet<Carrier> Carrier { get; set; }
         public DbSet<Store> Store { get; set; }
         public DbSet<Store_UserAccount> Store_UserAccount { get; set; }
+        [NotMapped]
+        public DbSet<StoreProductViewModel> StoreProductViewModel { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -34,5 +40,7 @@ namespace Bitir.Data.Contexts
             new ProductModuleEntitiesBaseConfiguration().Configure(modelBuilder);
             new SalesModuleEntitiesBaseConfiguration().Configure(modelBuilder);
         }
+
+
     }
 }

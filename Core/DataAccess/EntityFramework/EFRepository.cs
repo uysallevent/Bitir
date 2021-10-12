@@ -113,6 +113,11 @@ namespace Core.DataAccess.EntityFramework
                 }
             }
         }
+
+        public async Task<List<TEntity>> RunProcedure(string procDeclaration, params object[] param)
+        {
+            return await _dbContext.Set<TEntity>().FromSqlRaw(procDeclaration, param).ToListAsync();
+        }
         #endregion
 
         #region Initializer
@@ -161,7 +166,6 @@ namespace Core.DataAccess.EntityFramework
                 updateDateProp.SetValue(entity, safeValue, null);
             }
         }
-
 
         private void PropertyValueInitializer(TEntity entity, PropertyInfo item, Status status)
         {

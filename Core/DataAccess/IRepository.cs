@@ -18,5 +18,6 @@ namespace Core.DataAccess
         void Update(T entity);
         void Delete(T entity);
         void Delete(int id);
+        Task<List<T>> RunProcedure(string procDeclaration, params object[] param);
     }
 }

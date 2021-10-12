@@ -69,5 +69,10 @@ namespace Core.DataAccess.Dapper
         {
             throw new NotImplementedException();
         }
+
+        public Task<List<T>> RunProcedure(string procDeclaration, params object[] param)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

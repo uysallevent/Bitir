@@ -19,7 +19,7 @@ namespace Bitir.Mobile.Services
     public abstract class BaseService : RestClient
     {
         private const string rootUrl = "192.168.1.73";
-        private const int port = 45455;
+        private const int port = 45456;
         protected RestClient restClient;
         protected UriBuilder uriBuilder;
 
@@ -33,7 +33,7 @@ namespace Bitir.Mobile.Services
                 restClient = new RestClient(uriBuilder.Uri);
                 restClient.Timeout = 30000;
             }
-            if (Connectivity.NetworkAccess != NetworkAccess.Internet)
+            if (Connectivity.NetworkAccess != Xamarin.Essentials.NetworkAccess.Internet)
                 throw new ServiceException("İnternet bağlantınızı kontrol edin");
 
             var current = Plugin.Connectivity.CrossConnectivity.Current;

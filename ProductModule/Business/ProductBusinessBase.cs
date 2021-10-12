@@ -1,4 +1,5 @@
 ﻿using BaseModule.Business;
+using Bitir.Data.Interfaces;
 using Bitir.Data.Model.Dtos;
 using Core.DataAccess;
 using Core.DataAccess.EntityFramework.Interfaces;
@@ -25,7 +26,7 @@ namespace ProductModule.Business
         private IRepository<Unit> _unitRepository;
         private IUnitOfWork _uow;
         private readonly IHttpContextAccessor _httpContextAccessor;
-
+        private readonly IExecuteProcedure<StoreProductViewModel> _executeProcedure;
         public ProductBusinessBase(
             IUnitOfWork uow,
             IRepository<Product> productRepository,
@@ -34,6 +35,7 @@ namespace ProductModule.Business
             IRepository<ProductStorePrice> productStorePriceRepository,
              IRepository<Unit> unitRepository,
             IHttpContextAccessor httpContextAccessor,
+            IExecuteProcedure<StoreProductViewModel> executeProcedure,
             IRepository<ProductStock> productStockRepository) : base(productRepository, uow)
         {
             _productRepository = productRepository;
@@ -44,6 +46,7 @@ namespace ProductModule.Business
             _unitRepository = unitRepository;
             _uow = uow;
             _httpContextAccessor = httpContextAccessor;
+            _executeProcedure = executeProcedure;
         }
 
         public Task<ResponseWrapperListing<SystemProductResponse>> GetSystemProducts()
@@ -67,7 +70,7 @@ namespace ProductModule.Business
             }
 
             var productStoreCheck = await _productStoreRepository.GetAsync(x => x.ProductQuantityId == request.ProductQuantityId && x.StoreId == storeId);
-            if(productStoreCheck!=null)
+            if (productStoreCheck != null)
             {
                 throw new BadRequestException("Bu ürün listenizde kayıtlı");
             }
@@ -103,7 +106,7 @@ namespace ProductModule.Business
             return new ResponseWrapper<bool>(true);
         }
 
-        public Task<ResponseWrapperListing<StoreProductResponse>> GetStoreProducts()
+        public async Task<ResponseWrapperListing<StoreProductViewModel>> GetStoreProducts()
         {
             var claims = _httpContextAccessor.HttpContext.User.Claims;
             int.TryParse(claims.FirstOrDefault(x => x.Type == "Store")?.Value, out int storeId);
@@ -112,17 +115,10 @@ namespace ProductModule.Business
                 throw new ClaimExpection("Claims could not find");
             }
 
-            var productList = _productStoreRepository
-                .GetAll()
-                .Join(_productRepository.GetAll().Where(x => x.Status == Status.Active), x => x.ProductQuantityId, y => y.Id, (x, y) => new { Name = y.Name, ProductId = y.Id, StoreId = x.StoreId, ProductStoreId = x.Id })
-                .Join(_productQuantityRepository.GetAll(), x => x.ProductId, y => y.ProductId, (x, y) => new { Name = x.Name, Quantity = y.Quantity, ProductId = x.ProductId, StoreId = x.StoreId, ProductStoreId = x.ProductStoreId, UnitId = y.UnitId })
-                .Join(_unitRepository.GetAll(), x => x.UnitId, y => y.Id, (x, y) => new { Name = x.Name, Quantity = x.Quantity, UnitName = y.Name, UnitAbbrevation = y.Abbreviation, ProductId = x.ProductId, StoreId = x.StoreId, ProductStoreId = x.ProductStoreId })
-                .Join(_productStorePriceRepository.GetAll().Where(x => x.Status == Status.Active), x => x.ProductStoreId, y => y.ProductStoreId, (x, y) => new { Name = x.Name, Quantity = x.Quantity, UnitName = x.Name, UnitAbbrevation = x.UnitAbbrevation, Price = y.Price, ProductId = x.ProductId, StoreId = x.StoreId, ProductStoreId = x.ProductStoreId })
-                .Join(_productStockRepository.GetAll().Where(x => x.Status == Status.Active), x => x.ProductStoreId, y => y.ProductStoreId, (x, y) => new { Name = x.Name, Quantity = x.Quantity, StockQuantity = y.Quantity, UnitName = x.Name, UnitAbbrevation = x.UnitAbbrevation, Price = x.Price, ProductId = x.ProductId, StoreId = x.StoreId, ProductStoreId = x.ProductStoreId })
-                .Where(x => x.StoreId == storeId)
-                .Select(x => new StoreProductResponse { Name = $"{x.Name} {String.Format("{0:0.##}", x.Quantity)} {x.UnitAbbrevation}", StoreId = x.StoreId, Price = x.Price, Quantity = x.StockQuantity, ProductStoreId = x.ProductStoreId });
+            var result = await _executeProcedure.ExecuteProc("EXEC product.GetStoreProducts {0}", new object[] { storeId });
 
-            return Task.FromResult(new ResponseWrapperListing<StoreProductResponse>(productList));
+
+            return new ResponseWrapperListing<StoreProductViewModel>(result);
         }
 
     }

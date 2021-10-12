@@ -1,5 +1,6 @@
 ﻿using Bitir.Data.Model.Dtos;
 using Bitir.Mobile.Services.Interfaces;
+using Module.Shared.Entities.ProductModuleEntities;
 using ProductModule.Dtos;
 using RestSharp;
 using System.Threading.Tasks;
@@ -19,10 +20,10 @@ namespace Bitir.Mobile.Services
             return ResponseHandler(restResponse);
         }
 
-        public async Task<ResponseWrapperListing<StoreProductResponse>> GetStoreProducts()
+        public async Task<ResponseWrapperListing<StoreProductViewModel>> GetStoreProducts()
         {
             var restClientRequest = await GetRestClient(Method.POST, getStoreProductsPath);
-            var restResponse = await restClientRequest.Item1.ExecuteAsync<ResponseWrapperListing<StoreProductResponse>>(restClientRequest.Item2);
+            var restResponse = await restClientRequest.Item1.ExecuteAsync<ResponseWrapperListing<StoreProductViewModel>>(restClientRequest.Item2);
             return ResponseHandler(restResponse);
         }
 

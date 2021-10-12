@@ -8,7 +8,7 @@
     xmlns:buttons="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms"
     xmlns:controls="clr-namespace:Bitir.Mobile.Controls"
     xmlns:viewModel="clr-namespace:Bitir.Mobile.ViewModels"
-    x:Name="songsPlayList"
+    x:Name="storeProductPage"
     BackgroundColor="{DynamicResource Gray-Bg}"
     NavigationPage.HasNavigationBar="False">
 
@@ -53,7 +53,7 @@
                         FontFamily="Montserrat-Medium"
                         HorizontalOptions="FillAndExpand"
                         Style="{StaticResource TitleLabelStyle}"
-                        Text="Songs"
+                        Text="Ürünlerim"
                         VerticalOptions="Center"
                         VerticalTextAlignment="Center" />
 
@@ -101,6 +101,14 @@
                     </buttons:SfButton.Behaviors>
                 </buttons:SfButton>
 
+                <!--  Add Button  -->
+                <buttons:SfButton
+                    x:Name="AddProductButton"
+                    IsVisible="True"
+                    Style="{StaticResource IconButtonStyle}"
+                    Command="{Binding AddProductCommand}"
+                    Text="{StaticResource Add}">
+                </buttons:SfButton>
             </StackLayout>
 
             <StackLayout Grid.Row="1" Spacing="0">
@@ -137,16 +145,17 @@
                                             VerticalOptions="FillAndExpand">
                                             <!--  Name of the Song  -->
                                             <Label
-                                                Margin="16,13,0,0"
+                                                Margin="16,13,0,12"
                                                 FontFamily="Montserrat-Medium"
-                                                FontSize="16"
+                                                FontSize="20"
+                                                FontAttributes="Bold"
                                                 HeightRequest="24"
                                                 LineHeight="{OnPlatform Android=1.5,
                                                                         Default=-1}"
-                                                Text="{Binding Name}"
+                                                Text="{Binding FullName}"
                                                 TextColor="{DynamicResource Gray-900}" />
 
-                                            <!--  Composer of the song  -->
+                                            <!--  Quantity  -->
                                             <Label
                                                 Margin="16,0,0,12"
                                                 FontFamily="Montserrat-Medium"
@@ -154,20 +163,20 @@
                                                 HeightRequest="21"
                                                 LineHeight="{OnPlatform Android=1.25,
                                                                         Default=-1}"
-                                                Text="{Binding Price}"
+                                                Text="{Binding Stock,StringFormat='Toplam Ürün Miktarı : {0} adet'}"
+                                                TextColor="{DynamicResource Gray-700}" />
+
+                                            <!--  Price  -->
+                                            <Label
+                                                Margin="16,0,0,12"
+                                                FontFamily="Montserrat-Medium"
+                                                FontSize="14"
+                                                HeightRequest="21"
+                                                LineHeight="{OnPlatform Android=1.25,
+                                                                        Default=-1}"
+                                                Text="{Binding Price,StringFormat='Ürün Birim Fiyatı       : {0} TL'}"
                                                 TextColor="{DynamicResource Gray-700}" />
                                         </StackLayout>
-
-                                        <!--  Menu button  -->
-                                        <buttons:SfButton
-                                            x:Name="MenuButton"
-                                            Grid.Column="1"
-                                            Margin="16,0"
-                                            Command="{Binding Path=BindingContext.MenuCommand, Source={x:Reference songsPlayList}}"
-                                            CornerRadius="4"
-                                            HorizontalOptions="End"
-                                            Style="{StaticResource IconButtonStyle}"
-                                            Text="{StaticResource More}" />
 
                                     </Grid>
                                     <!--  Seperator  -->

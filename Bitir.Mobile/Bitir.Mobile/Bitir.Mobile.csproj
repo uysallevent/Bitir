@@ -16,9 +16,9 @@
   <ItemGroup>
     <Compile Include="..\..\AuthModule\Dtos\LoginDto.cs" Link="Models\Auth\LoginDto.cs" />
     <Compile Include="..\..\AuthModule\Utility\JWT\AccessToken.cs" Link="Models\Auth\AccessToken.cs" />
+    <Compile Include="..\..\Module.Shared\Entities\ProductModuleEntities\StoreProductViewModel.cs" Link="Models\Product\StoreProductViewModel.cs" />
     <Compile Include="..\..\Module.Shared\Enums\AccountTypeEnum.cs" Link="Enums\AccountTypeEnum.cs" />
     <Compile Include="..\..\ProductModule\Dtos\AddProductToStoreRequest.cs" Link="Models\Product\AddProductToStoreRequest.cs" />
-    <Compile Include="..\..\ProductModule\Dtos\StoreProductResponse.cs" Link="Models\Product\StoreProductResponse.cs" />
     <Compile Include="..\..\ProductModule\Dtos\SystemProductResponse.cs" Link="Models\Product\SystemProductResponse.cs" />
   </ItemGroup>
 
@@ -52,9 +52,13 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\Bitir.Data.Model\Bitir.Data.Model.csproj" />
+    <ProjectReference Include="..\..\Core\Core.csproj" />
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="Views\StoreProductListPopupView.xaml.cs">
+      <DependentUpon>StoreProductListPopupView.xaml</DependentUpon>
+    </Compile>
     <Compile Update="Views\ProfilePopupView.xaml.cs">
       <DependentUpon>ProfilePopupView.xaml</DependentUpon>
     </Compile>
