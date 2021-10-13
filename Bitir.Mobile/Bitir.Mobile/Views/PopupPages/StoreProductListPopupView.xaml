@@ -11,6 +11,7 @@
     xmlns:control="clr-namespace:Bitir.Mobile.Controls" >
 
 
+
     <ContentPage.Resources>
         <ResourceDictionary>
             <converter:BooleanToColorConverter x:Key="ColorConverter" />
@@ -23,10 +24,20 @@
         <Grid BackgroundColor="Transparent"  VerticalOptions="Center" >
             <StackLayout Orientation="Vertical" HorizontalOptions="CenterAndExpand" Spacing="5" Margin="5">
                 <buttons:SfButton
+                            Command="{Binding ProductSettingClickedCommand}"
+                            HorizontalOptions="Fill"
+                            Style="{StaticResource GradientButtonStyle}"
+                            Text="Ürün İşlemleri" />
+                <buttons:SfButton
                             Command="{Binding ProfileUpdateCommand}"
                             HorizontalOptions="Fill"
                             Style="{StaticResource GradientButtonStyle}"
-                            Text="KAYDET" />
+                            Text="Stok İşlemleri" />
+                <buttons:SfButton
+                            Command="{Binding ProfileUpdateCommand}"
+                            HorizontalOptions="Fill"
+                            Style="{StaticResource GradientButtonStyle}"
+                            Text="Fiyat İşlemleri" />
 
                 <buttons:SfButton
                         HorizontalOptions="Fill"

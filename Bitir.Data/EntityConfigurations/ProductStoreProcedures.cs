@@ -21,7 +21,8 @@ namespace Bitir.Data.EntityConfigurations
                         pu.Name as Unit,
                         pu.Abbreviation,
                         pp.Price as Price,
-                        pstck.Quantity as Stock
+                        pstck.Quantity as Stock,
+						pstr.Status
                         FROM product.ProductQuantity Pq
                         INNER JOIN product.ProductStore pstr on pstr.ProductQuantityId=pq.Id
                         INNER JOIN product.Product p on p.Id=pq.ProductId

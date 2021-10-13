@@ -150,19 +150,12 @@ namespace Bitir.Mobile.ViewModels
                     if (result != null)
                     {
                         App.authResponse = result.Result;
-
-                        Application.Current.MainPage = new NavigationPage(new MainNavPage());
-                        //Application.Current.MainPage = new AppShell();
-
-                        //await Application.Current.MainPage.Navigation.PushModalAsync(new ProductAddPage(), true);
-
-                        //await Application.Current.MainPage.Navigation.PushModalAsync(new DashboardPage(), true);
+                        await Application.Current.MainPage.Navigation.PushModalAsync(new MainNavPage(), true);
                     }
                 }
                 catch (BadRequestException ex)
                 {
                     SendNotification(new ExceptionTransfer { ex = ex, NotificationMessage = ex.Message });
-
                 }
                 catch (InternalServerErrorException ex)
                 {

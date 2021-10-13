@@ -202,7 +202,7 @@ namespace Bitir.Mobile.ViewModels
                     {
                         App.authResponse = result.Result;
                         await Application.Current.MainPage.Navigation.PopModalAsync();
-                        Application.Current.MainPage = new NavigationPage(new ProductAddPage());
+                        await Application.Current.MainPage.Navigation.PushModalAsync(new MainNavPage(), true);
                         SendNotification(new ExceptionTransfer { NotificationMessage = "Hesap Oluşturma Başarılı" });
                     }
                 }

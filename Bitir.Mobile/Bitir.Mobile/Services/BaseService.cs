@@ -19,7 +19,7 @@ namespace Bitir.Mobile.Services
     public abstract class BaseService : RestClient
     {
         private const string rootUrl = "192.168.1.73";
-        private const int port = 45456;
+        private const int port = 45455;
         protected RestClient restClient;
         protected UriBuilder uriBuilder;
 

@@ -1,6 +1,6 @@
 ﻿using Core.Entities;
+using Core.Enums;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Module.Shared.Entities.ProductModuleEntities
 {
@@ -16,5 +16,6 @@ namespace Module.Shared.Entities.ProductModuleEntities
         public string Unit { get; set; }
         public string Abbreviation { get; set; }
         public decimal Price { get; set; }
+        public Status Status { get; set; }
     }
 }

@@ -4,6 +4,7 @@
     {
         Deleted,
         Active,
+        Pasive,
         Readonly
     }
 }

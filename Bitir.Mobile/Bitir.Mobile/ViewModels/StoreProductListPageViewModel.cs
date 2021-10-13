@@ -112,7 +112,11 @@ namespace Bitir.Mobile.ViewModels
 
         private void NavigateToNextPage(object selectedItem)
         {
-            PopupNavigation.Instance.PushAsync(new StoreProductListPopupView());
+            var item = (selectedItem as Syncfusion.ListView.XForms.ItemTappedEventArgs).ItemData as StoreProductViewModel;
+            if (item != null)
+            {
+                PopupNavigation.Instance.PushAsync(new StoreProductListPopupView(item));
+            }
         }
 
         private void AddButtonClicked(object selectedItem)

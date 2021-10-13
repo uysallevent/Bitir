@@ -47,7 +47,7 @@
                         Style="{StaticResource IconButtonStyle}"
                         Text="{StaticResource Back}" />
 
-                    <!--  Songs page Title  -->
+                    <!--  Page Title  -->
                     <Label
                         Margin="16,0"
                         FontFamily="Montserrat-Medium"
@@ -143,7 +143,7 @@
                                             HorizontalOptions="FillAndExpand"
                                             Spacing="0"
                                             VerticalOptions="FillAndExpand">
-                                            <!--  Name of the Song  -->
+                                            <!--  Product Full Name -->
                                             <Label
                                                 Margin="16,13,0,12"
                                                 FontFamily="Montserrat-Medium"
