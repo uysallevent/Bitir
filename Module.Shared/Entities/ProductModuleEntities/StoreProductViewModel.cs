@@ -1,5 +1,6 @@
 ﻿using Core.Entities;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Module.Shared.Entities.ProductModuleEntities
 {
