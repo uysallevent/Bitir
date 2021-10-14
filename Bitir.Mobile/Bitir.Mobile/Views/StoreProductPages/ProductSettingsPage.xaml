@@ -7,7 +7,7 @@
     xmlns:buttons="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms"
     xmlns:controls="clr-namespace:Bitir.Mobile.Controls"
     xmlns:viewModel="clr-namespace:Bitir.Mobile.ViewModels"
-    x:Name="profilePage"
+    x:Name="ProductSetting"
     BackgroundColor="{DynamicResource Gray-100}"
     NavigationPage.HasNavigationBar="False">
 
@@ -19,7 +19,7 @@
                     <controls:TitleView.LeadingView>
                         <buttons:SfButton
                             x:Name="backButton"
-                            Command="{Binding BackButtonCommand}"
+                            Command="{Binding BindingContext.BackButtonCommand, Source={x:Reference ProductSetting}}"
                             CommandParameter="{x:Reference backButton}"
                             Style="{StaticResource IconButtonStyle}"
                             Text="{StaticResource Back}" />
@@ -91,15 +91,15 @@
                 <!--  Grid for Night mode label and switch  -->
                 <Grid BackgroundColor="{DynamicResource Gray-Bg}" ColumnDefinitions="*, Auto">
 
-                    <!--  Night mode label  -->
+                    <!--  Remove the product from selling label  -->
                     <Label
                         Margin="16,12"
                         FontFamily="Montserrat-Medium"
                         HorizontalOptions="Start"
                         Style="{StaticResource TitleLabelStyle}"
-                        Text="Night Mode" />
+                        Text="Ürünü Satışa Kapat" />
 
-                    <!--  Night mode switch  -->
+                    <!--  Remove the product from selling switch  -->
                     <buttons:SfSwitch
                         Grid.Column="1"
                         Margin="8,0"

@@ -2,9 +2,9 @@
 {
     public enum Status
     {
-        Deleted,
-        Active,
+        Active = 1,
         Pasive,
-        Readonly
+        Readonly,
+        Deleted
     }
 }

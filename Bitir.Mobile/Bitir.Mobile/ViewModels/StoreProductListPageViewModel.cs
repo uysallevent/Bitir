@@ -20,7 +20,6 @@ namespace Bitir.Mobile.ViewModels
         #region Fields
 
         private Command<object> itemSelectedCommand;
-
         private Command<object> menuCommand;
         private ObservableCollection<StoreProductViewModel> storeProducts;
 
@@ -30,6 +29,7 @@ namespace Bitir.Mobile.ViewModels
         public StoreProductListPageViewModel()
         {
             Task.Run(async () => await GetStoreProducts());
+            RefreshCommand = new Command(async () => await GetStoreProducts());
             MessagingCenter.Subscribe<ProductAddPageViewModel, bool>(this, "UpdateProductList", async (s, b) =>
              {
                  if (b)
@@ -41,6 +41,7 @@ namespace Bitir.Mobile.ViewModels
         #endregion
 
         #region Properties
+        public Command RefreshCommand { get; set; }
 
         public Command<object> ItemSelectedCommand
         {
@@ -49,7 +50,6 @@ namespace Bitir.Mobile.ViewModels
                 return this.itemSelectedCommand ?? (this.itemSelectedCommand = new Command<object>(this.NavigateToNextPage));
             }
         }
-
 
         public Command<object> AddProductCommand
         {
@@ -80,10 +80,6 @@ namespace Bitir.Mobile.ViewModels
         #endregion
 
         #region Methods
-        private void InitializeProperties()
-        {
-        }
-
         private async Task GetStoreProducts()
         {
             IsBusy = true;

@@ -8,6 +8,7 @@
     xmlns:buttons="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms"
     xmlns:controls="clr-namespace:Bitir.Mobile.Controls"
     xmlns:viewModel="clr-namespace:Bitir.Mobile.ViewModels"
+    xmlns:local="clr-namespace:Bitir.Mobile.Views"
     x:Name="storeProductPage"
     BackgroundColor="{DynamicResource Gray-Bg}"
     NavigationPage.HasNavigationBar="False">
@@ -81,7 +82,7 @@
 
                         <controls:BorderlessEntry
                             x:Name="SearchEntry"
-                            BindingContext="{x:Reference SongsPageList}"
+                            BindingContext="{x:Reference StoreProductList}"
                             HorizontalOptions="FillAndExpand"
                             Placeholder="Search here"
                             Style="{StaticResource BorderlessEntryStyle}"
@@ -114,22 +115,19 @@
             <StackLayout Grid.Row="1" Spacing="0">
                 <!--  Seperator  -->
                 <BoxView Style="{StaticResource HorizontalSeparatorStyle}" />
-
-                <controls:SearchableSongsPlayList
-                    x:Name="SongsPageList"
-                    AllowSwiping="True"
-                    AutoFitMode="Height"
-                    FocusBorderThickness="0"
-                    IsScrollBarVisible="false"
-                    ItemSpacing="0"
-                    ItemsSource="{Binding StoreProducts}"
-                    RowSpacing="0"
-                    SearchText="{Binding SearchText}"
-                    SelectionBackgroundColor="{DynamicResource Gray-200}"
-                    TapCommand="{Binding ItemSelectedCommand}"
-                    VerticalOptions="FillAndExpand">
-
-                    <controls:SearchableSongsPlayList.ItemTemplate>
+                <controls:SearchableProductList x:Name="StoreProductList"
+                                                        AllowSwiping="True"
+                                                        AutoFitMode="Height"
+                                                        FocusBorderThickness="0"
+                                                        IsScrollBarVisible="false"
+                                                        ItemSpacing="0"
+                                                        ItemsSource="{Binding StoreProducts}"
+                                                        RowSpacing="0"
+                                                        SearchText="{Binding SearchText}"
+                                                        SelectionBackgroundColor="{DynamicResource Gray-200}"
+                                                        TapCommand="{Binding ItemSelectedCommand}"
+                                                        VerticalOptions="FillAndExpand">
+                    <controls:SearchableProductList.ItemTemplate>
                         <DataTemplate>
                             <ViewCell>
                                 <StackLayout>
@@ -184,9 +182,10 @@
                                 </StackLayout>
                             </ViewCell>
                         </DataTemplate>
-                    </controls:SearchableSongsPlayList.ItemTemplate>
-                </controls:SearchableSongsPlayList>
+                    </controls:SearchableProductList.ItemTemplate>
+                </controls:SearchableProductList>
             </StackLayout>
+            <local:LoaderView/>
         </Grid>
     </ContentPage.Content>
 </ContentPage>

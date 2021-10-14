@@ -16,23 +16,12 @@ namespace Bitir.Mobile.ViewModels
     public class ProductSettingsPageViewModel : BaseViewModel
     {
         #region Fields
-
-        private static ProductSettingsPageViewModel profileViewModel;
-
         private StoreProductViewModel storeProductViewModel;
         private string profileImage;
 
         private string productName;
 
         private bool status;
-
-        private Command editCommand;
-
-        private Command nightModeCommand;
-
-        private Command textSizeCommand;
-
-        private Command settingsCommand;
 
         #endregion
 
@@ -41,6 +30,7 @@ namespace Bitir.Mobile.ViewModels
         public ProductSettingsPageViewModel()
         {
             StoreProductViewModel = new StoreProductViewModel();
+            BackButtonCommand = new Command(async()=> await BackButtonClicked());
         }
 
         #endregion
@@ -119,23 +109,14 @@ namespace Bitir.Mobile.ViewModels
 
         #region Command
 
-        /// <summary>
-        /// Gets the command that is executed when the edit button is clicked.
-        /// </summary>
-        public Command BackButtonCommand
-        {
-            get
-            {
-                return this.editCommand ?? (this.editCommand = new Command(async () => await this.BackButtonClicked()));
-            }
-        }
+        public Command BackButtonCommand { get; set; }
         #endregion
 
         #region Methods
 
         private async Task BackButtonClicked()
         {
-          await  App.Current.MainPage.Navigation.PopModalAsync(true);
+            await App.Current.MainPage.Navigation.PopModalAsync(true);
         }
 
 
