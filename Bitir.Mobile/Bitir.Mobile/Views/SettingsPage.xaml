@@ -114,6 +114,28 @@
                 <!--  Separator  -->
                 <BoxView Grid.Row="5" Style="{StaticResource HorizontalSeparatorStyle}" />
 
+                <controls:TapAnimationGrid
+                    Grid.Row="5"
+                    Padding="16,0,4,0"
+                    BackgroundColor="{DynamicResource Gray-Bg}"
+                    Command="{Binding BindingContext.ManageCarrierCommand, Source={x:Reference settings}}"
+                    HeightRequest="48">
+                    <Label
+                        FontFamily="Montserrat-Medium"
+                        HorizontalOptions="Start"
+                        Style="{StaticResource TitleLabelStyle}"
+                        Text="Araç Yönetimi"
+                        VerticalOptions="Center"
+                        VerticalTextAlignment="Center" />
+                    <buttons:SfButton
+                        Command="{Binding BindingContext.ManageCarrierCommand, Source={x:Reference settings}}"
+                        FontSize="16"
+                        HorizontalOptions="End"
+                        Style="{StaticResource IconButtonStyle}"
+                        Text="{StaticResource Next}" />
+                </controls:TapAnimationGrid>
+
+
                 <!--  Separator  -->
                 <BoxView
                     Grid.Row="6"

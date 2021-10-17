@@ -1,20 +1,18 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage
-    x:Class="Bitir.Mobile.Views.ProductAddPage"
+    x:Class="Bitir.Mobile.Views.CarrierAddPage"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:border="clr-namespace:Syncfusion.XForms.Border;assembly=Syncfusion.Core.XForms"
     xmlns:buttons="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms"
-    xmlns:combobox="clr-namespace:Syncfusion.XForms.ComboBox;assembly=Syncfusion.SfComboBox.XForms"
     xmlns:controls="clr-namespace:Bitir.Mobile.Controls"
     xmlns:converter="clr-namespace:Bitir.Mobile.Converters"
     xmlns:behaviour="clr-namespace:Bitir.Mobile.Behaviors"
-    xmlns:inputLayout="clr-namespace:Syncfusion.XForms.TextInputLayout;assembly=Syncfusion.Core.XForms"
     xmlns:viewModel="clr-namespace:Bitir.Mobile.ViewModels"
     xmlns:local="clr-namespace:Bitir.Mobile.Views"
-    Title="Yeni Ürün Ekle"
+    Title="Taşıyıcı Ekle"
     BackgroundColor="{DynamicResource Gray-100}"
-    x:Name="ProductAdd"
+    x:Name="CarrierAdd"
     NavigationPage.HasNavigationBar="False">
 
     <ContentPage.Resources>
@@ -26,7 +24,7 @@
     </ContentPage.Resources>
 
     <ContentPage.BindingContext>
-        <viewModel:ProductAddPageViewModel />
+        <viewModel:CarrierAddPageViewModel />
     </ContentPage.BindingContext>
 
     <ContentPage.ControlTemplate>
@@ -37,7 +35,7 @@
                     <controls:TitleView.LeadingView>
                         <buttons:SfButton
                             x:Name="backButton"
-                            Command="{Binding BindingContext.BackButtonCommand, Source={x:Reference ProductAdd}}"
+                            Command="{Binding BindingContext.BackButtonCommand, Source={x:Reference CarrierAdd}}"
                             CommandParameter="{x:Reference backButton}"
                             Style="{StaticResource IconButtonStyle}"
                             Text="{StaticResource Back}" />
@@ -54,53 +52,14 @@
                 Padding="16,24"
                 BackgroundColor="{DynamicResource Gray-100}"
                 Spacing="0">
-                    <!--  Product -->
+                    <!--  Vehicle Plate  -->
                     <StackLayout>
                         <Label
                     Margin="0,24,0,4"
                     FontFamily="Montserrat-Medium"
                     FontSize="12"
                     HeightRequest="18"
-                    Text="Ürün"
-                    TextColor="{DynamicResource Gray-800}" />
-
-                        <inputLayout:SfTextInputLayout Style="{DynamicResource TextInputLayoutStyle}">
-                            <combobox:SfComboBox
-                        x:Name="ProductPicker"
-                        DataSource="{Binding SystemProducts}"
-                        DisplayMemberPath="Name"
-                        SelectedValuePath="Id"
-                        SelectedItem="{Binding SelectedProduct.Value,Mode=TwoWay}"
-                        Style="{StaticResource TextInputLayoutComboBoxStyle}"
-                        VerticalOptions="CenterAndExpand"
-                        Watermark="Ürün Seçin">
-                                <combobox:SfComboBox.ItemTemplate>
-                                    <DataTemplate>
-                                        <Label Text="{Binding Name}" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
-                                    </DataTemplate>
-                                </combobox:SfComboBox.ItemTemplate>
-                            </combobox:SfComboBox>
-                        </inputLayout:SfTextInputLayout>
-                        <!--  Label to display error message  -->
-                        <Label
-                                x:Name="ProductPickerValidationLabel"
-                                Margin="15,-3,0,0"
-                                IsVisible="{Binding SelectedProduct.IsValid, Converter={StaticResource InverseBoolConverter}}"
-                                Style="{StaticResource SimpleLabelStyle}"
-                                Text="{Binding SelectedProduct.Errors, Converter={StaticResource FirstValidationErrorConverter}}"
-                                TextColor="{DynamicResource Red}"
-                                VerticalOptions="FillAndExpand" />
-                    </StackLayout>
-
-
-                    <!--  Quantity  -->
-                    <StackLayout>
-                        <Label
-                    Margin="0,24,0,4"
-                    FontFamily="Montserrat-Medium"
-                    FontSize="12"
-                    HeightRequest="18"
-                    Text="Ürün Satış Stoğu"
+                    Text="Araç Plakası"
                     TextColor="{DynamicResource Gray-800}" />
                         <border:SfBorder 
                     BorderColor="{Binding Source={x:Reference ProductQuantityEntry}, Path=IsFocused, Converter={StaticResource ColorConverter}, ConverterParameter=0}" Style="{StaticResource DataFormBorderlessEntryBorderStyle}">
@@ -110,7 +69,7 @@
                         Margin="12,0"
                         HeightRequest="40"
                         Keyboard="Numeric"
-                        Placeholder="Adet"
+                        Placeholder="Plaka"
                         Text="{Binding Quantity.Value}"
                         Style="{StaticResource BorderlessEntryStyle}">
                                     <Entry.Behaviors>
@@ -137,14 +96,14 @@
                     </StackLayout>
 
 
-                    <!--  Price  -->
+                    <!--  Vehicle Capacity  -->
                     <StackLayout>
                         <Label
                     Margin="0,10,0,4"
                     FontFamily="Montserrat-Medium"
                     FontSize="12"
                     HeightRequest="18"
-                    Text="Ürün Birim Fiyatı"
+                    Text="Araç Kapasitesi"
                     TextColor="{DynamicResource Gray-800}" />
                         <border:SfBorder BorderColor="{Binding Source={x:Reference ProductQuantityEntry}, Path=IsFocused, Converter={StaticResource ColorConverter}, ConverterParameter=0}" Style="{StaticResource DataFormBorderlessEntryBorderStyle}">
                             <Grid ColumnDefinitions="*, Auto">
@@ -153,7 +112,7 @@
                         Margin="12,0"
                         HeightRequest="40"
                         Keyboard="Numeric"
-                        Placeholder="Fiyat (TL)"
+                        Placeholder="Kapasite (Kg)"
                         Text="{Binding Price.Value}"
                         Style="{StaticResource BorderlessEntryStyle}">
                                 </controls:BorderlessEntry>

@@ -12,8 +12,8 @@ namespace Bitir.Mobile.Views
         public ProductSettingsPage(Module.Shared.Entities.ProductModuleEntities.StoreProductViewModel storeProductViewModel)
         {
             this.InitializeComponent();
-            BindingContext = productSettingsPageViewModel = new ProductSettingsPageViewModel();
-            (BindingContext as ProductSettingsPageViewModel).StoreProductViewModel = storeProductViewModel;
+            BindingContext = productSettingsPageViewModel = new ProductSettingsPageViewModel(storeProductViewModel);
+            //(BindingContext as ProductSettingsPageViewModel).StoreProductViewModel = storeProductViewModel;
         }
     }
 }

@@ -44,7 +44,7 @@ namespace Core.DataAccess.EntityFramework
 
         public async Task<TEntity> GetAsync(Expression<Func<TEntity, bool>> predicate)
         {
-            return await _dbSet.Where(predicate).FirstOrDefaultAsync();
+            return await _dbSet.Where(predicate).AsNoTracking().FirstOrDefaultAsync();
         }
 
         public async Task AddAsync(TEntity entity)

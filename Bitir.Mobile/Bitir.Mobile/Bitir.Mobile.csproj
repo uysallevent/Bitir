@@ -20,6 +20,7 @@
     <Compile Include="..\..\Module.Shared\Enums\AccountTypeEnum.cs" Link="Enums\AccountTypeEnum.cs" />
     <Compile Include="..\..\ProductModule\Dtos\AddProductToStoreRequest.cs" Link="Models\Product\AddProductToStoreRequest.cs" />
     <Compile Include="..\..\ProductModule\Dtos\SystemProductResponse.cs" Link="Models\Product\SystemProductResponse.cs" />
+    <Compile Include="..\..\ProductModule\Dtos\UpdateProductStoreRequest.cs" Link="Models\Product\UpdateProductStoreRequest.cs" />
   </ItemGroup>
 
   <ItemGroup>
@@ -57,6 +58,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="Views\CarrierPages\CarrierListPage.xaml.cs">
+      <DependentUpon>CarrierListPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\CarrierPages\CarrierAddPage.xaml.cs">
+      <DependentUpon>CarrierAddPage.xaml</DependentUpon>
+    </Compile>
     <Compile Update="Views\PopupPages\StoreProductListPopupView.xaml.cs">
       <DependentUpon>StoreProductListPopupView.xaml</DependentUpon>
     </Compile>
@@ -126,8 +133,17 @@
     <EmbeddedResource Update="Themes\LightTheme.xaml">
       <Generator>MSBuild:Compile</Generator>
     </EmbeddedResource>
+    <EmbeddedResource Update="Views\CarrierPages\CarrierListPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\CarrierPages\CarrierAddPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
     <EmbeddedResource Update="Views\ContactEmailEntry.xaml">
       <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\Dashboard.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Views\EmailEntry.xaml">
       <Generator>MSBuild:Compile</Generator>

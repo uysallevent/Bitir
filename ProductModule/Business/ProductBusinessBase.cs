@@ -90,6 +90,7 @@ namespace ProductModule.Business
                         }
                     }
             };
+
             await _productStoreRepository.AddAsync(productStore);
             await _productStockRepository.AddAsync(new ProductStock
             {
@@ -106,6 +107,53 @@ namespace ProductModule.Business
             return new ResponseWrapper<bool>(true);
         }
 
+        public async Task<ResponseWrapper<bool>> StoreProductUpdate(UpdateProductStoreRequest request)
+        {
+            var claims = _httpContextAccessor.HttpContext.User.Claims;
+            int.TryParse(claims.FirstOrDefault(x => x.Type == "Store")?.Value, out int storeId);
+            if (storeId < 1)
+            {
+                throw new ClaimExpection("Claims could not find");
+            }
+
+            var productStoreCheck = await _productStoreRepository.GetAsync(x => x.ProductQuantityId == request.ProductQuantityId && x.StoreId == storeId);
+            if (productStoreCheck == null)
+            {
+                throw new BadRequestException("Bu ürün listenizde bulunamadı");
+            }
+
+            _productStoreRepository.Update(new Product_Store
+            {
+                Id = request.ProductStoreId,
+                ProductQuantityId = request.ProductQuantityId,
+                StoreId = storeId,
+                Status = request.Status
+            });
+
+            _productStorePriceRepository.Update(new ProductStorePrice
+            {
+                Id = request.ProductPriceId,
+                Price = request.Price,
+                ProductStoreId = request.ProductStoreId
+            });
+
+            _productStockRepository.Update(new ProductStock
+            {
+                Id = request.ProductStockId,
+                ProductStoreId = request.ProductStoreId,
+                Quantity = request.Quantity
+            });
+
+            var result = await _uow.SaveChangesAsync();
+            if (result < 1)
+            {
+                throw new BadRequestException("Ürün bilgileri güncellenemedi");
+            }
+
+            return new ResponseWrapper<bool>(true);
+
+        }
+
         public async Task<ResponseWrapperListing<StoreProductViewModel>> GetStoreProducts()
         {
             var claims = _httpContextAccessor.HttpContext.User.Claims;
@@ -120,6 +168,7 @@ namespace ProductModule.Business
 
             return new ResponseWrapperListing<StoreProductViewModel>(result);
         }
+
 
     }
 }

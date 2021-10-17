@@ -169,7 +169,7 @@ namespace Bitir.Mobile.ViewModels
                             Price = decimal.Parse(this.Price.Value.ToString()),
                             Quantity = int.Parse(this.Quantity.Value.ToString())
                         });
-                    if (result != null)
+                    if (result.Result)
                     {
                         SendNotification(new ExceptionTransfer { NotificationMessage = "Ürün başarı ile eklendi" });
                         await App.Current.MainPage.Navigation.PopModalAsync(true);

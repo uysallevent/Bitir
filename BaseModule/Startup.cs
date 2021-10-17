@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.OpenApi.Models;
+using Module.Shared.MappingProfiles;
 using Newtonsoft.Json;
 
 namespace ModulerApi.BaseModule
@@ -46,6 +47,7 @@ namespace ModulerApi.BaseModule
             {
                 options.JsonSerializerOptions.IgnoreNullValues = true;
             });
+            services.AddAutoMapper(typeof(Mapping));
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

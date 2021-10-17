@@ -17,17 +17,25 @@ namespace Bitir.Mobile.ViewModels
         public SettingsViewModel()
         {
             this.ManageProductCommand = new Command(async () => await ManageProductButtonClicked());
+            this.ManageCarrierCommand = new Command(async () => await ManageCarrierButtonClicked());
             this.BackButtonCommand = new Command(async () => await BackButtonClicked());
         }
 
         public Command ManageProductCommand { get; set; }
+        public Command ManageCarrierCommand { get; set; }
         public Command BackButtonCommand { get; set; }
 
 
         private async Task ManageProductButtonClicked()
         {
-            await Application.Current.MainPage.Navigation.PushModalAsync(new ProductAddPage());
+            await Application.Current.MainPage.Navigation.PushModalAsync(new StoreProductListPage());
         }
+
+        private async Task ManageCarrierButtonClicked()
+        {
+            await Application.Current.MainPage.Navigation.PushModalAsync(new CarrierListPage());
+        }
+
 
         private async Task BackButtonClicked()
         {

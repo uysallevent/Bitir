@@ -29,7 +29,7 @@ namespace Bitir.Mobile.ViewModels
         public StoreProductListPageViewModel()
         {
             Task.Run(async () => await GetStoreProducts());
-            RefreshCommand = new Command(async () => await GetStoreProducts());
+            BackButtonCommand = new Command(async () => await BackButtonClicked());
             MessagingCenter.Subscribe<ProductAddPageViewModel, bool>(this, "UpdateProductList", async (s, b) =>
              {
                  if (b)
@@ -37,11 +37,19 @@ namespace Bitir.Mobile.ViewModels
                      await GetStoreProducts();
                  }
              });
+
+            MessagingCenter.Subscribe<ProductSettingsPageViewModel, bool>(this, "UpdateProductList", async (s, b) =>
+            {
+                if (b)
+                {
+                    await GetStoreProducts();
+                }
+            });
         }
         #endregion
 
         #region Properties
-        public Command RefreshCommand { get; set; }
+        public Command BackButtonCommand { get; set; }
 
         public Command<object> ItemSelectedCommand
         {
@@ -111,13 +119,18 @@ namespace Bitir.Mobile.ViewModels
             var item = (selectedItem as Syncfusion.ListView.XForms.ItemTappedEventArgs).ItemData as StoreProductViewModel;
             if (item != null)
             {
-                PopupNavigation.Instance.PushAsync(new StoreProductListPopupView(item));
+                App.Current.MainPage.Navigation.PushModalAsync(new ProductSettingsPage(item));
             }
         }
 
         private void AddButtonClicked(object selectedItem)
         {
             App.Current.MainPage.Navigation.PushModalAsync(new ProductAddPage());
+        }
+
+        public async Task BackButtonClicked()
+        {
+            await App.Current.MainPage.Navigation.PopModalAsync(true);
         }
 
         #endregion

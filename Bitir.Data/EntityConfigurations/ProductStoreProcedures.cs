@@ -15,7 +15,9 @@ namespace Bitir.Data.EntityConfigurations
                         as
                         SELECT 
                         pq.Id,
-                        pstr.StoreId,
+                        pstr.Id as ProductStoreId,
+						pstck.Id as ProductStockId,
+						pp.Id as ProductPriceId,
                         p.Name,
                         pq.Quantity,
                         pu.Name as Unit,

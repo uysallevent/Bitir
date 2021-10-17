@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage
-    x:Class="Bitir.Mobile.Views.StoreProductListPage"
+    x:Class="Bitir.Mobile.Views.CarrierListPage"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:converter="clr-namespace:Bitir.Mobile.Converters"
@@ -10,7 +10,7 @@
     xmlns:controls="clr-namespace:Bitir.Mobile.Controls"
     xmlns:viewModel="clr-namespace:Bitir.Mobile.ViewModels"
     xmlns:local="clr-namespace:Bitir.Mobile.Views"
-    x:Name="storeProductPage"
+    x:Name="CarrierList"
     BackgroundColor="{DynamicResource Gray-Bg}"
     NavigationPage.HasNavigationBar="False">
 
@@ -22,7 +22,7 @@
     </ContentPage.Resources>
     
     <ContentPage.BindingContext>
-        <viewModel:StoreProductListPageViewModel />
+        <viewModel:CarrierListPageViewModel />
     </ContentPage.BindingContext>
 
     <ContentPage.Content>
@@ -62,7 +62,7 @@
                         FontFamily="Montserrat-Medium"
                         HorizontalOptions="FillAndExpand"
                         Style="{StaticResource TitleLabelStyle}"
-                        Text="Ürünlerim"
+                        Text="Araçlarım"
                         VerticalOptions="Center"
                         VerticalTextAlignment="Center" />
 
@@ -115,7 +115,7 @@
                     x:Name="AddProductButton"
                     IsVisible="True"
                     Style="{StaticResource IconButtonStyle}"
-                    Command="{Binding AddProductCommand}"
+                    Command="{Binding GotoNewCarrierAddPageCommand}"
                     Text="{StaticResource Add}">
                 </buttons:SfButton>
             </StackLayout>

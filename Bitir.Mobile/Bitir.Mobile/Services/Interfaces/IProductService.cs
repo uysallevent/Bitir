@@ -10,5 +10,6 @@ namespace Bitir.Mobile.Services.Interfaces
         Task<ResponseWrapperListing<SystemProductResponse>> GetSystemProducts();
         Task<ResponseWrapper<bool>> AddProductToStore(AddProductToStoreRequest request);
         Task<ResponseWrapperListing<StoreProductViewModel>> GetStoreProducts();
+        Task<ResponseWrapper<bool>> StoreProductUpdate(UpdateProductStoreRequest request);
     }
 }
