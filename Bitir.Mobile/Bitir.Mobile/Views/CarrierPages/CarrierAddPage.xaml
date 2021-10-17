@@ -31,7 +31,7 @@
         <ControlTemplate>
             <StackLayout BackgroundColor="{DynamicResource Gray-Bg}" Spacing="0">
                 <!--  Title View  -->
-                <controls:TitleView Title="Yeni Ürün Ekle">
+                <controls:TitleView Title="Yeni Araç Ekle">
                     <controls:TitleView.LeadingView>
                         <buttons:SfButton
                             x:Name="backButton"
@@ -62,35 +62,35 @@
                     Text="Araç Plakası"
                     TextColor="{DynamicResource Gray-800}" />
                         <border:SfBorder 
-                    BorderColor="{Binding Source={x:Reference ProductQuantityEntry}, Path=IsFocused, Converter={StaticResource ColorConverter}, ConverterParameter=0}" Style="{StaticResource DataFormBorderlessEntryBorderStyle}">
+                    BorderColor="{Binding Source={x:Reference CarrierPlateEntry}, Path=IsFocused, Converter={StaticResource ColorConverter}, ConverterParameter=0}" Style="{StaticResource DataFormBorderlessEntryBorderStyle}">
                             <Grid ColumnDefinitions="*, Auto">
                                 <controls:BorderlessEntry
-                        x:Name="ProductQuantityEntry"
+                        x:Name="CarrierPlateEntry"
                         Margin="12,0"
                         HeightRequest="40"
                         Keyboard="Numeric"
                         Placeholder="Plaka"
-                        Text="{Binding Quantity.Value}"
+                        Text="{Binding Plate.Value}"
                         Style="{StaticResource BorderlessEntryStyle}">
                                     <Entry.Behaviors>
-                                        <behaviour:EntryLineValidationBehaviour IsValid="{Binding Quantity.IsValid}" />
+                                        <behaviour:EntryLineValidationBehaviour IsValid="{Binding Plate.IsValid}" />
                                     </Entry.Behaviors>
                                 </controls:BorderlessEntry>
                                 <!--  Label to display error icon  -->
                                 <Label
                                         Grid.Column="1"
-                                        IsVisible="{Binding Path=IsVisible, Source={x:Reference QuantityValidationLabel}}"
+                                        IsVisible="{Binding Path=IsVisible, Source={x:Reference CarrierPlateValidationLabel}}"
                                         Style="{StaticResource ErrorIconLabelStyle}"
                                         Text="{StaticResource Error}" />
                             </Grid>
                         </border:SfBorder>
                         <!--  Label to display error message  -->
                         <Label
-                                x:Name="QuantityValidationLabel"
+                                x:Name="CarrierPlateValidationLabel"
                                 Margin="15,-3,0,0"
-                                IsVisible="{Binding Quantity.IsValid, Converter={StaticResource InverseBoolConverter}}"
+                                IsVisible="{Binding Plate.IsValid, Converter={StaticResource InverseBoolConverter}}"
                                 Style="{StaticResource SimpleLabelStyle}"
-                                Text="{Binding Quantity.Errors, Converter={StaticResource FirstValidationErrorConverter}}"
+                                Text="{Binding Plate.Errors, Converter={StaticResource FirstValidationErrorConverter}}"
                                 TextColor="{DynamicResource Red}"
                                 VerticalOptions="FillAndExpand" />
                     </StackLayout>
@@ -105,33 +105,19 @@
                     HeightRequest="18"
                     Text="Araç Kapasitesi"
                     TextColor="{DynamicResource Gray-800}" />
-                        <border:SfBorder BorderColor="{Binding Source={x:Reference ProductQuantityEntry}, Path=IsFocused, Converter={StaticResource ColorConverter}, ConverterParameter=0}" Style="{StaticResource DataFormBorderlessEntryBorderStyle}">
+                        <border:SfBorder BorderColor="{Binding Source={x:Reference CarrierCapacityEntry}, Path=IsFocused, Converter={StaticResource ColorConverter}, ConverterParameter=0}" Style="{StaticResource DataFormBorderlessEntryBorderStyle}">
                             <Grid ColumnDefinitions="*, Auto">
                                 <controls:BorderlessEntry
-                        x:Name="ProductPriceEntry"
+                        x:Name="CarrierCapacityEntry"
                         Margin="12,0"
                         HeightRequest="40"
                         Keyboard="Numeric"
                         Placeholder="Kapasite (Kg)"
-                        Text="{Binding Price.Value}"
+                        Text="{Binding Capacity}"
                         Style="{StaticResource BorderlessEntryStyle}">
                                 </controls:BorderlessEntry>
-                                <Label
-                                        Grid.Column="1"
-                                        IsVisible="{Binding Path=IsVisible, Source={x:Reference PriceValidationLabel}}"
-                                        Style="{StaticResource ErrorIconLabelStyle}"
-                                        Text="{StaticResource Error}" />
                             </Grid>
                         </border:SfBorder>
-                        <!--  Label to display error message  -->
-                        <Label
-                                x:Name="PriceValidationLabel"
-                                Margin="15,-3,0,0"
-                                IsVisible="{Binding Price.IsValid, Converter={StaticResource InverseBoolConverter}}"
-                                Style="{StaticResource SimpleLabelStyle}"
-                                Text="{Binding Price.Errors, Converter={StaticResource FirstValidationErrorConverter}}"
-                                TextColor="{DynamicResource Red}"
-                                VerticalOptions="FillAndExpand" />
                     </StackLayout>
                     <!--  Submit Button  -->
                     <buttons:SfButton

@@ -21,6 +21,7 @@
     <Compile Include="..\..\ProductModule\Dtos\AddProductToStoreRequest.cs" Link="Models\Product\AddProductToStoreRequest.cs" />
     <Compile Include="..\..\ProductModule\Dtos\SystemProductResponse.cs" Link="Models\Product\SystemProductResponse.cs" />
     <Compile Include="..\..\ProductModule\Dtos\UpdateProductStoreRequest.cs" Link="Models\Product\UpdateProductStoreRequest.cs" />
+    <Compile Include="..\..\SalesModule\Dtos\AddCarrierToStoreRequest.cs" Link="Models\Carrier\AddCarrierToStoreRequest.cs" />
   </ItemGroup>
 
   <ItemGroup>
@@ -185,5 +186,6 @@
 
   <ItemGroup>
     <Folder Include="Enums\" />
+    <Folder Include="Models\Carrier\" />
   </ItemGroup>
 </Project>

@@ -1,10 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using Bitir.Data.Model.Dtos;
+using SalesModule.Dtos;
+using System.Threading.Tasks;
 
 namespace Bitir.Mobile.Services.Interfaces
 {
     public interface ICarrierService
     {
+        Task<ResponseWrapper<bool>> AddCarrierToStore(AddCarrierToStoreRequest request);
     }
 }

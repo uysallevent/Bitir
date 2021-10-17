@@ -18,6 +18,7 @@ namespace Bitir.Mobile.ViewModels
     {
         public IAuthService authService => DependencyService.Get<IAuthService>();
         public IProductService productService => DependencyService.Get<IProductService>();
+        public ICarrierService carrierService => DependencyService.Get<ICarrierService>();
 
         bool isBusy = false;
         public bool IsBusy

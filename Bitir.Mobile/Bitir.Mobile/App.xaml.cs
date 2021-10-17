@@ -10,6 +10,7 @@ using System;
 using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using CarrierService = Bitir.Mobile.Services.CarrierService;
 
 [assembly: ExportFont("Montserrat-Bold.ttf", Alias = "Montserrat-Bold")]
 [assembly: ExportFont("Montserrat-Medium.ttf", Alias = "Montserrat-Medium")]
@@ -28,6 +29,7 @@ namespace Bitir.Mobile
             InitializeComponent();
             DependencyService.Register<AuthService>();
             DependencyService.Register<ProductService>();
+            DependencyService.Register<CarrierService>();
             MessagingCenter.Subscribe<BaseViewModel, ExceptionTransfer>(this, "infomessage", (s, e) =>
                {
                    if (!string.IsNullOrEmpty(e.NotificationMessage))
