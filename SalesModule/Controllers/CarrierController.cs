@@ -3,6 +3,8 @@ using BaseModule.Controllers;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Module.Shared.Entities.SalesModuleEntities;
+using SalesModule.Dtos;
+using System.Threading.Tasks;
 
 namespace AuthModule.Controllers
 {
@@ -16,6 +18,20 @@ namespace AuthModule.Controllers
         {
             _carrierBusinessBase = carrierBusinessBase;
             _logger = logger;
+        }
+
+        [HttpPost("AddCarrierToStore")]
+        public async Task<IActionResult> AddCarrierToStore([FromBody] AddCarrierToStoreRequest request)
+        {
+            var result = await _carrierBusinessBase.AddCarrierToStore(request);
+            return Ok(result);
+        }
+
+        [HttpPost("GetStoreCarriers")]
+        public async Task<IActionResult> GetStoreCarriers()
+        {
+            var result = await _carrierBusinessBase.GetStoreCarriers();
+            return Ok(result);
         }
     }
 }

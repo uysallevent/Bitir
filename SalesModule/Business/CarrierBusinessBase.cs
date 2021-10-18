@@ -5,10 +5,12 @@ using Core.DataAccess;
 using Core.DataAccess.EntityFramework.Interfaces;
 using Core.Exceptions;
 using Microsoft.AspNetCore.Http;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using Module.Shared.Entities.SalesModuleEntities;
 using SalesModule.Dtos;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -18,6 +20,7 @@ namespace AuthModule.Business
     public class CarrierBusinessBase : BusinessBase<Carrier>, ICarrierBusinessBase<Carrier>
     {
         private IRepository<Carrier> _carrierRepository;
+        private IRepository<Carrier_Store> _carrierStoreRepository;
         private IUnitOfWork _uow;
         private readonly IConfiguration _configuration;
         private readonly ILogger _logger;
@@ -28,12 +31,14 @@ namespace AuthModule.Business
             IConfiguration configuration,
             ILoggerFactory logger,
             IRepository<Carrier> carrierRepository,
+            IRepository<Carrier_Store> carrierStoreRepository,
             IHttpContextAccessor httpContextAccessor) : base(carrierRepository, uow)
         {
             _uow = uow;
             _configuration = configuration;
             _logger = logger.CreateLogger<CarrierBusinessBase>();
             _carrierRepository = carrierRepository;
+            _carrierStoreRepository = carrierStoreRepository;
             _httpContextAccessor = httpContextAccessor;
         }
 
@@ -55,6 +60,9 @@ namespace AuthModule.Business
                     new Carrier_Store
                     {
                         StoreId=storeId,
+                        Status=Core.Enums.Status.Active,
+                        InsertDate=DateTime.Now,
+                        UpdateDate=DateTime.Now
                     }
                 }
             });
@@ -67,6 +75,25 @@ namespace AuthModule.Business
 
 
             return new ResponseWrapper<bool>(true);
+        }
+
+        public async Task<ResponseWrapperListing<StoreCarrier>> GetStoreCarriers()
+        {
+            var claims = _httpContextAccessor.HttpContext.User.Claims;
+            int.TryParse(claims.FirstOrDefault(x => x.Type == "Store")?.Value, out int storeId);
+            if (storeId < 1)
+            {
+                throw new ClaimExpection("Claims could not find");
+            }
+
+            var result = await _carrierRepository.GetAll().Join(_carrierStoreRepository.GetAll().Where(x => x.StoreId == storeId), x => x.Id, y => y.CarrierId, (x, y) => new { x.Id, x.Plate, x.Capacity, y.Status }).Select(x => new StoreCarrier { Id = x.Id, Plate = x.Plate, Capacity = x.Capacity, Status = x.Status }).ToListAsync();
+
+            if (result == null || !result.Any())
+            {
+                throw new BadRequestException("Araç bilgileri bulunamadı");
+            }
+
+            return new ResponseWrapperListing<StoreCarrier>(result);
         }
     }
 }

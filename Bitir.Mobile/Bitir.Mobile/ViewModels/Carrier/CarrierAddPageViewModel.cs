@@ -14,7 +14,7 @@ namespace Bitir.Mobile.ViewModels
         {
             InitializeProperties();
             BackButtonCommand = new Command(async () => await BackButtonClicked());
-            SubmitButtonCommand = new Command(async () => await SubmitButtobClicked());
+            SubmitButtonCommand = new Command(async () => await SubmitButtonClicked());
         }
         #endregion
 
@@ -73,6 +73,7 @@ namespace Bitir.Mobile.ViewModels
         private void InitializeProperties()
         {
             this.Plate = new ValidatableObject<string>();
+            IsBusy = false;
         }
 
         public bool AreFieldsValid()
@@ -81,7 +82,7 @@ namespace Bitir.Mobile.ViewModels
             return isPlate;
         }
 
-        public async Task SubmitButtobClicked()
+        public async Task SubmitButtonClicked()
         {
             if (AreFieldsValid())
             {
@@ -90,7 +91,7 @@ namespace Bitir.Mobile.ViewModels
                 {
                     var result =await carrierService.AddCarrierToStore(new AddCarrierToStoreRequest
                     {
-                        Plate=this.Plate.Value,
+                        Plate=this.Plate.Value.ToUpperInvariant(),
                         Capacity=int.Parse(this.Capacity.ToString())
                     });
 

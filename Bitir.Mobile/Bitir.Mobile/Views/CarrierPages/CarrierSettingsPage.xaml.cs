@@ -6,10 +6,10 @@ namespace Bitir.Mobile.Views
 {
     [Preserve(AllMembers = true)]
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class ProductSettingsPage
+    public partial class CarrierSettingsPage
     {
         private readonly CarrierSettingsPageViewModel productSettingsPageViewModel;
-        public ProductSettingsPage(Module.Shared.Entities.ProductModuleEntities.StoreProductViewModel storeProductViewModel)
+        public CarrierSettingsPage(Module.Shared.Entities.ProductModuleEntities.StoreProductViewModel storeProductViewModel)
         {
             this.InitializeComponent();
             BindingContext = productSettingsPageViewModel = new ProductSettingsPageViewModel(storeProductViewModel);

@@ -1,0 +1,224 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="Bitir.Mobile.Views.CarrierSettingsPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:border="clr-namespace:Syncfusion.XForms.Border;assembly=Syncfusion.Core.XForms"
+    xmlns:buttons="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms"
+    xmlns:controls="clr-namespace:Bitir.Mobile.Controls"
+    xmlns:viewModel="clr-namespace:Bitir.Mobile.ViewModels"
+    xmlns:behaviour="clr-namespace:Bitir.Mobile.Behaviors"
+    xmlns:converter="clr-namespace:Bitir.Mobile.Converters"
+    x:Name="ProductSetting"
+    BackgroundColor="{DynamicResource Gray-100}"
+    NavigationPage.HasNavigationBar="False">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converter:BooleanToColorConverter x:Key="ColorConverter" />
+            <converter:InverseBoolConverter x:Key="InverseBoolConverter" />
+            <converter:NameValidationConverter x:Key="FirstValidationErrorConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <ContentPage.ControlTemplate>
+        <ControlTemplate>
+            <StackLayout Spacing="0">
+                <!--  Title View  -->
+                <controls:TitleView Title="Ürün Detay">
+                    <controls:TitleView.LeadingView>
+                        <buttons:SfButton
+                            x:Name="backButton"
+                            Command="{Binding BindingContext.BackButtonCommand, Source={x:Reference ProductSetting}}"
+                            CommandParameter="{x:Reference backButton}"
+                            Style="{StaticResource IconButtonStyle}"
+                            Text="{StaticResource Back}" />
+                    </controls:TitleView.LeadingView>
+                </controls:TitleView>
+                <ContentPresenter />
+            </StackLayout>
+        </ControlTemplate>
+    </ContentPage.ControlTemplate>
+
+    <ContentPage.Content>
+        <ScrollView>
+
+            <StackLayout BackgroundColor="{DynamicResource Gray-100}" Spacing="0">
+
+                <Grid
+                    Margin="0,16,0,0"
+                    Padding="16,8"
+                    BackgroundColor="{DynamicResource Gray-Bg}"
+                    ColumnDefinitions="Auto, *, Auto"
+                    ColumnSpacing="8"
+                    HeightRequest="48">
+
+                    <!--  Rounded Profile Image  -->
+                    <border:SfBorder
+                        Grid.RowSpan="2"
+                        BackgroundColor="{DynamicResource Gray-200}"
+                        BorderWidth="0"
+                        CornerRadius="24"
+                        Style="{StaticResource ProfileBorderStyle}">
+                        <Image HeightRequest="48" WidthRequest="48" Source="milkbottle.png"/>
+                    </border:SfBorder>
+
+                    <!--  Product Name  -->
+                    <Label
+                        Grid.RowSpan="2"
+                        Grid.Column="1"
+                        FontFamily="Montserrat-SemiBold"
+                        FontSize="14"
+                        HorizontalOptions="CenterAndExpand"
+                        LineBreakMode="TailTruncation"
+                        LineHeight="{OnPlatform Default=-1,
+                                                Android=1.25}"
+                        MaxLines="2"
+                        Text="{Binding ProductName}"
+                        TextColor="{DynamicResource Gray-900}"
+                        VerticalTextAlignment="Center" />
+                </Grid>
+
+                <BoxView Style="{StaticResource HorizontalSeparatorStyle}" />
+
+                <BoxView BackgroundColor="{DynamicResource Gray-100}" HeightRequest="16" />
+
+                <!-- Remove the product from selling switch  -->
+                <Grid BackgroundColor="{DynamicResource Gray-Bg}" ColumnDefinitions="*, Auto">
+
+                    <!--  Remove the product from selling label  -->
+                    <Label
+                        Margin="16,12"
+                        FontFamily="Montserrat-Medium"
+                        HorizontalOptions="Start"
+                        Style="{StaticResource TitleLabelStyle}"
+                        Text="Ürünü Satışa Kapat" />
+
+                    <!--  Remove the product from selling switch  -->
+                    <buttons:SfSwitch
+                        Grid.Column="1"
+                        Margin="8,0"
+                        AllowIndeterminateState="False"
+                        HeightRequest="28"
+                        IsOn="{Binding Status}"
+                        VisualType="Cupertino">
+                    </buttons:SfSwitch>
+                </Grid>
+
+                <BoxView Style="{StaticResource HorizontalSeparatorStyle}" />
+
+                <Grid
+                    x:Name="TextSizeGrid"
+                    BackgroundColor="{DynamicResource Gray-Bg}"
+                    ColumnDefinitions="*, Auto">
+
+                    <Grid.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding TextSizeCommand}" CommandParameter="{x:Reference TextSizeGrid}" />
+                    </Grid.GestureRecognizers>
+
+                    <StackLayout>
+                        <Label Margin="16,12"
+                               FontFamily="Montserrat-Medium" 
+                               HorizontalOptions="Start"
+                               Style="{StaticResource TitleLabelStyle}"
+                               Text="Ürün Miktarı"/>
+                        <border:SfBorder 
+                    BorderColor="{Binding Source={x:Reference ProductQuantityEntry}, Path=IsFocused, Converter={StaticResource ColorConverter}, ConverterParameter=0}" Style="{StaticResource DataFormBorderlessEntryBorderStyle}">
+                            <Grid ColumnDefinitions="*, Auto">
+                                <controls:BorderlessEntry  x:Name="ProductQuantityEntry"
+                                                           Margin="12,0"
+                                                           HeightRequest="40"
+                                                           Keyboard="Numeric"
+                                                           Placeholder="Adet"
+                                                           Text="{Binding Quantity.Value}"
+                                                           Style="{StaticResource BorderlessEntryStyle}">
+                                    <Entry.Behaviors>
+                                        <behaviour:EntryLineValidationBehaviour IsValid="{Binding Quantity.IsValid}" />
+                                    </Entry.Behaviors>
+                                </controls:BorderlessEntry>
+                                <!--  Label to display error icon  -->
+                                <Label
+                                        Grid.Column="1"
+                                        IsVisible="{Binding Path=IsVisible, Source={x:Reference QuantityValidationLabel}}"
+                                        Style="{StaticResource ErrorIconLabelStyle}"
+                                        Text="{StaticResource Error}" />
+                            </Grid>
+                        </border:SfBorder>
+                        <!--  Label to display error message  -->
+                        <Label
+                                x:Name="QuantityValidationLabel"
+                                Margin="15,-3,0,0"
+                                IsVisible="{Binding Quantity.IsValid, Converter={StaticResource InverseBoolConverter}}"
+                                Style="{StaticResource SimpleLabelStyle}"
+                                Text="{Binding Quantity.Errors, Converter={StaticResource FirstValidationErrorConverter}}"
+                                TextColor="{DynamicResource Red}"
+                                VerticalOptions="FillAndExpand" />
+                    </StackLayout>
+                </Grid>
+
+                <BoxView Style="{StaticResource HorizontalSeparatorStyle}" />
+
+                <Grid
+                    x:Name="SettingsGrid"
+                    BackgroundColor="{DynamicResource Gray-Bg}"
+                    ColumnDefinitions="*, Auto">
+
+                    <Grid.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding SettingsCommand}" CommandParameter="{x:Reference SettingsGrid}" />
+                    </Grid.GestureRecognizers>
+
+                    <StackLayout>
+                        <Label Margin="16,12"
+                               FontFamily="Montserrat-Medium" 
+                               HorizontalOptions="Start"
+                               Style="{StaticResource TitleLabelStyle}"
+                               Text="Ürün Fiyatı"/>
+                        <border:SfBorder 
+                    BorderColor="{Binding Source={x:Reference ProductPriceEntry}, Path=IsFocused, Converter={StaticResource ColorConverter}, ConverterParameter=0}" Style="{StaticResource DataFormBorderlessEntryBorderStyle}">
+                        <Grid ColumnDefinitions="*, Auto">
+                            <controls:BorderlessEntry  x:Name="ProductPriceEntry"
+                                                           Margin="12,0"
+                                                           HeightRequest="40"
+                                                           Keyboard="Numeric"
+                                                           Placeholder="Fiyat (TL)"
+                                                           Text="{Binding Price.Value}"
+                                                           Style="{StaticResource BorderlessEntryStyle}">
+                                <Entry.Behaviors>
+                                        <behaviour:EntryLineValidationBehaviour IsValid="{Binding Price.IsValid}" />
+                                </Entry.Behaviors>
+                            </controls:BorderlessEntry>
+                            <!--  Label to display error icon  -->
+                            <Label
+                                        Grid.Column="1"
+                                        IsVisible="{Binding Path=IsVisible, Source={x:Reference PriceValidationLabel}}"
+                                        Style="{StaticResource ErrorIconLabelStyle}"
+                                        Text="{StaticResource Error}" />
+                        </Grid>
+                        </border:SfBorder>
+                        <!--  Label to display error message  -->
+                        <Label
+                                x:Name="PriceValidationLabel"
+                                Margin="15,-3,0,0"
+                                IsVisible="{Binding Price.IsValid, Converter={StaticResource InverseBoolConverter}}"
+                                Style="{StaticResource SimpleLabelStyle}"
+                                Text="{Binding Price.Errors, Converter={StaticResource FirstValidationErrorConverter}}"
+                                TextColor="{DynamicResource Red}"
+                                VerticalOptions="FillAndExpand" />
+                    </StackLayout>
+                </Grid>
+
+                <BoxView Style="{StaticResource HorizontalSeparatorStyle}" />
+
+                <!--  Submit Button  -->
+                <buttons:SfButton
+                    Margin="0,24,0,0"
+                    Command="{Binding SubmitButtonCommand}"
+                    Style="{StaticResource GradientButtonStyle}"
+                    Text="KAYDET"
+                    WidthRequest="200" />
+
+            </StackLayout>
+
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

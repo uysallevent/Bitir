@@ -29,63 +29,66 @@
 
     <ContentPage.ControlTemplate>
         <ControlTemplate>
-            <StackLayout BackgroundColor="{DynamicResource Gray-Bg}" Spacing="0">
-                <!--  Title View  -->
-                <controls:TitleView Title="Yeni Araç Ekle">
-                    <controls:TitleView.LeadingView>
-                        <buttons:SfButton
+            <Grid>
+                <StackLayout BackgroundColor="{DynamicResource Gray-Bg}" Spacing="0">
+                    <!--  Title View  -->
+                    <controls:TitleView Title="Yeni Araç Ekle">
+                        <controls:TitleView.LeadingView>
+                            <buttons:SfButton
                             x:Name="backButton"
                             Command="{Binding BindingContext.BackButtonCommand, Source={x:Reference CarrierAdd}}"
                             CommandParameter="{x:Reference backButton}"
                             Style="{StaticResource IconButtonStyle}"
                             Text="{StaticResource Back}" />
-                    </controls:TitleView.LeadingView>
-                </controls:TitleView>
-                <ContentPresenter />
-            </StackLayout>
+                        </controls:TitleView.LeadingView>
+                    </controls:TitleView>
+                    <ContentPresenter />
+                </StackLayout>
+                <local:LoaderView IsVisible="{Binding BindingContext.IsBusy, Source={x:Reference CarrierAdd}}"/>
+            </Grid>
         </ControlTemplate>
     </ContentPage.ControlTemplate>
     <ContentPage.Content>
-        <Grid>
-            <ScrollView>
-                <StackLayout
+        <ScrollView>
+            <StackLayout
+                VerticalOptions="FillAndExpand"
                 Padding="16,24"
                 BackgroundColor="{DynamicResource Gray-100}"
                 Spacing="0">
-                    <!--  Vehicle Plate  -->
-                    <StackLayout>
-                        <Label
+                <!--  Vehicle Plate  -->
+                <StackLayout>
+                    <Label
                     Margin="0,24,0,4"
                     FontFamily="Montserrat-Medium"
                     FontSize="12"
                     HeightRequest="18"
                     Text="Araç Plakası"
                     TextColor="{DynamicResource Gray-800}" />
-                        <border:SfBorder 
+                    <border:SfBorder 
                     BorderColor="{Binding Source={x:Reference CarrierPlateEntry}, Path=IsFocused, Converter={StaticResource ColorConverter}, ConverterParameter=0}" Style="{StaticResource DataFormBorderlessEntryBorderStyle}">
-                            <Grid ColumnDefinitions="*, Auto">
-                                <controls:BorderlessEntry
+                        <Grid ColumnDefinitions="*, Auto">
+                            <controls:BorderlessEntry
                         x:Name="CarrierPlateEntry"
                         Margin="12,0"
                         HeightRequest="40"
-                        Keyboard="Numeric"
+                        Keyboard="Default"
                         Placeholder="Plaka"
                         Text="{Binding Plate.Value}"
                         Style="{StaticResource BorderlessEntryStyle}">
-                                    <Entry.Behaviors>
-                                        <behaviour:EntryLineValidationBehaviour IsValid="{Binding Plate.IsValid}" />
-                                    </Entry.Behaviors>
-                                </controls:BorderlessEntry>
-                                <!--  Label to display error icon  -->
-                                <Label
+                                <Entry.Behaviors>
+                                    <behaviour:EntryLineValidationBehaviour IsValid="{Binding Plate.IsValid}" />
+                                </Entry.Behaviors>
+                            </controls:BorderlessEntry>
+                            <!--  Label to display error icon  -->
+                            <Label
                                         Grid.Column="1"
                                         IsVisible="{Binding Path=IsVisible, Source={x:Reference CarrierPlateValidationLabel}}"
                                         Style="{StaticResource ErrorIconLabelStyle}"
                                         Text="{StaticResource Error}" />
-                            </Grid>
-                        </border:SfBorder>
-                        <!--  Label to display error message  -->
-                        <Label
+                        </Grid>
+                    </border:SfBorder>
+                    <!--  Label to display error message  -->
+                    <Label
                                 x:Name="CarrierPlateValidationLabel"
                                 Margin="15,-3,0,0"
                                 IsVisible="{Binding Plate.IsValid, Converter={StaticResource InverseBoolConverter}}"
@@ -93,21 +96,19 @@
                                 Text="{Binding Plate.Errors, Converter={StaticResource FirstValidationErrorConverter}}"
                                 TextColor="{DynamicResource Red}"
                                 VerticalOptions="FillAndExpand" />
-                    </StackLayout>
-
-
-                    <!--  Vehicle Capacity  -->
-                    <StackLayout>
-                        <Label
+                </StackLayout>
+                <!--  Vehicle Capacity  -->
+                <StackLayout>
+                    <Label
                     Margin="0,10,0,4"
                     FontFamily="Montserrat-Medium"
                     FontSize="12"
                     HeightRequest="18"
                     Text="Araç Kapasitesi"
                     TextColor="{DynamicResource Gray-800}" />
-                        <border:SfBorder BorderColor="{Binding Source={x:Reference CarrierCapacityEntry}, Path=IsFocused, Converter={StaticResource ColorConverter}, ConverterParameter=0}" Style="{StaticResource DataFormBorderlessEntryBorderStyle}">
-                            <Grid ColumnDefinitions="*, Auto">
-                                <controls:BorderlessEntry
+                    <border:SfBorder BorderColor="{Binding Source={x:Reference CarrierCapacityEntry}, Path=IsFocused, Converter={StaticResource ColorConverter}, ConverterParameter=0}" Style="{StaticResource DataFormBorderlessEntryBorderStyle}">
+                        <Grid ColumnDefinitions="*, Auto">
+                            <controls:BorderlessEntry
                         x:Name="CarrierCapacityEntry"
                         Margin="12,0"
                         HeightRequest="40"
@@ -115,20 +116,19 @@
                         Placeholder="Kapasite (Kg)"
                         Text="{Binding Capacity}"
                         Style="{StaticResource BorderlessEntryStyle}">
-                                </controls:BorderlessEntry>
-                            </Grid>
-                        </border:SfBorder>
-                    </StackLayout>
-                    <!--  Submit Button  -->
-                    <buttons:SfButton
+                            </controls:BorderlessEntry>
+                        </Grid>
+                    </border:SfBorder>
+                </StackLayout>
+                <!--  Submit Button  -->
+                <buttons:SfButton
                     Margin="0,24,0,0"
-                    Command="{Binding SubmitCommand}"
+                    Command="{Binding SubmitButtonCommand}"
                     Style="{StaticResource GradientButtonStyle}"
                     Text="EKLE"
                     WidthRequest="200" />
-                </StackLayout>
-            </ScrollView>
-            <local:LoaderView/>
-        </Grid>
+            </StackLayout>
+        </ScrollView>
     </ContentPage.Content>
+
 </ContentPage>

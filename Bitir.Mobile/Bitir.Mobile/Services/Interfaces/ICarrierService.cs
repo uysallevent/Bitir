@@ -7,5 +7,6 @@ namespace Bitir.Mobile.Services.Interfaces
     public interface ICarrierService
     {
         Task<ResponseWrapper<bool>> AddCarrierToStore(AddCarrierToStoreRequest request);
+        Task<ResponseWrapperListing<StoreCarrier>> GetStoreCarriers();
     }
 }

@@ -38,7 +38,7 @@ namespace Bitir.Mobile.ViewModels
                  }
              });
 
-            MessagingCenter.Subscribe<ProductSettingsPageViewModel, bool>(this, "UpdateProductList", async (s, b) =>
+            MessagingCenter.Subscribe<CarrierSettingsPageViewModel, bool>(this, "UpdateProductList", async (s, b) =>
             {
                 if (b)
                 {

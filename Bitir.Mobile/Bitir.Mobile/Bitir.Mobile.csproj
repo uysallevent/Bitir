@@ -22,6 +22,7 @@
     <Compile Include="..\..\ProductModule\Dtos\SystemProductResponse.cs" Link="Models\Product\SystemProductResponse.cs" />
     <Compile Include="..\..\ProductModule\Dtos\UpdateProductStoreRequest.cs" Link="Models\Product\UpdateProductStoreRequest.cs" />
     <Compile Include="..\..\SalesModule\Dtos\AddCarrierToStoreRequest.cs" Link="Models\Carrier\AddCarrierToStoreRequest.cs" />
+    <Compile Include="..\..\SalesModule\Dtos\StoreCarrier.cs" Link="Models\Carrier\StoreCarrier.cs" />
   </ItemGroup>
 
   <ItemGroup>
@@ -64,6 +65,9 @@
     </Compile>
     <Compile Update="Views\CarrierPages\CarrierAddPage.xaml.cs">
       <DependentUpon>CarrierAddPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\CarrierPages\CarrierSettingsPage.xaml.cs">
+      <DependentUpon>CarrierSettingsPage.xaml</DependentUpon>
     </Compile>
     <Compile Update="Views\PopupPages\StoreProductListPopupView.xaml.cs">
       <DependentUpon>StoreProductListPopupView.xaml</DependentUpon>
@@ -138,6 +142,9 @@
       <Generator>MSBuild:Compile</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Views\CarrierPages\CarrierAddPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\CarrierPages\CarrierSettingsPage.xaml">
       <Generator>MSBuild:Compile</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Views\ContactEmailEntry.xaml">
