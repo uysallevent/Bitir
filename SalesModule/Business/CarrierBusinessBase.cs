@@ -77,6 +77,41 @@ namespace AuthModule.Business
             return new ResponseWrapper<bool>(true);
         }
 
+        public async Task<ResponseWrapper<bool>> UpdateStoreCarrier(UpdateCarrierToStoreRequest request)
+        {
+            var claims = _httpContextAccessor.HttpContext.User.Claims;
+            int.TryParse(claims.FirstOrDefault(x => x.Type == "Store")?.Value, out int storeId);
+            if (storeId < 1)
+            {
+                throw new ClaimExpection("Claims could not find");
+            }
+
+            await _carrierRepository.AddAsync(new Carrier
+            {
+                Capacity = request.Capacity,
+                Plate = request.Plate,
+                Carrier_Stores = new List<Carrier_Store>
+                {
+                    new Carrier_Store
+                    {
+                        StoreId=storeId,
+                        Status=Core.Enums.Status.Active,
+                        InsertDate=DateTime.Now,
+                        UpdateDate=DateTime.Now
+                    }
+                }
+            });
+
+            var result = await _uow.SaveChangesAsync();
+            if (result < 1)
+            {
+                throw new BadRequestException("Araç bilgileri eklenemedi");
+            }
+
+
+            return new ResponseWrapper<bool>(true);
+        }
+
         public async Task<ResponseWrapperListing<StoreCarrier>> GetStoreCarriers()
         {
             var claims = _httpContextAccessor.HttpContext.User.Claims;

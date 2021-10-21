@@ -2,12 +2,10 @@
 using Bitir.Mobile.Models.Common;
 using Bitir.Mobile.Validators;
 using Bitir.Mobile.Validators.Rules;
-using Core.Enums;
 using Module.Shared.Entities.ProductModuleEntities;
 using ProductModule.Dtos;
-using System.Reflection;
+using SalesModule.Dtos;
 using System.Runtime.Serialization;
-using System.Runtime.Serialization.Json;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Internals;
@@ -22,9 +20,7 @@ namespace Bitir.Mobile.ViewModels
     public class CarrierSettingsPageViewModel : BaseViewModel
     {
         #region Fields
-        private StoreProductViewModel storeProductViewModel;
-
-        private string profileImage;
+        private StoreCarrier storeCarrier;
 
         private ValidatableObject<string> plate;
 
@@ -35,67 +31,34 @@ namespace Bitir.Mobile.ViewModels
 
         #region Constructor
 
-        public CarrierSettingsPageViewModel(StoreProductViewModel storeProductViewModel)
+        public CarrierSettingsPageViewModel(StoreCarrier storeCarrier)
         {
             InitializeProperties();
             this.AddValidationRules();
             SubmitButtonCommand = new Command(async () => await SubmitButtonClicked());
+            RemoveButtonCommand = new Command(async () => await RemoveButtonClicked());
             BackButtonCommand = new Command(async () => await BackButtonClicked());
-            this.StoreProductViewModel = storeProductViewModel;
-            Status = storeProductViewModel.Status != Core.Enums.Status.Pasive;
-            ProductName = storeProductViewModel.FullName;
-            Price.Value = storeProductViewModel.Price;
-            Quantity.Value = storeProductViewModel.Stock;
+            this.StoreCarrier = storeCarrier;
+            this.Plate.Value = storeCarrier.Plate;
+            this.capacity = storeCarrier.Capacity;
         }
 
         #endregion
 
         #region Public properties
 
-        private void InitializeProperties()
-        {
-            this.plate = new ValidatableObject<string>();
-        }
-
-        private void AddValidationRules()
-        {
-            this.plate.Validations.Add(new IsNotNullOrEmptyRule<string> { ValidationMessage = "Lütfen plaka  bilgisi girin" });
-        }
-
-        private bool AreFieldsValid()
-        {
-            bool isPlate = plate.Validate();
-            return isPlate;
-        }
-
-        public StoreProductViewModel StoreProductViewModel
+        public StoreCarrier StoreCarrier
         {
             get
             {
-                return this.storeProductViewModel;
+                return this.storeCarrier;
             }
 
             set
             {
-                if (this.storeProductViewModel != value)
+                if (this.storeCarrier != value)
                 {
-                    this.SetProperty(ref this.storeProductViewModel, value);
-                }
-            }
-        }
-
-        public string ProfileImage
-        {
-            get
-            {
-                return App.ImageServerPath + this.profileImage;
-            }
-
-            set
-            {
-                if (this.profileImage != value)
-                {
-                    this.SetProperty(ref this.profileImage, value);
+                    this.SetProperty(ref this.storeCarrier, value);
                 }
             }
         }
@@ -149,15 +112,33 @@ namespace Bitir.Mobile.ViewModels
                 this.SetProperty(ref this.capacity, value);
             }
         }
+
         #endregion
 
         #region Command
 
         public Command SubmitButtonCommand { get; set; }
+        public Command RemoveButtonCommand { get; set; }
         public Command BackButtonCommand { get; set; }
         #endregion
 
         #region Methods
+
+        private void InitializeProperties()
+        {
+            this.plate = new ValidatableObject<string>();
+        }
+
+        private void AddValidationRules()
+        {
+            this.plate.Validations.Add(new IsNotNullOrEmptyRule<string> { ValidationMessage = "Lütfen plaka bilgisi girin" });
+        }
+
+        private bool AreFieldsValid()
+        {
+            bool isPlate = plate.Validate();
+            return isPlate;
+        }
 
         private async Task BackButtonClicked()
         {
@@ -171,22 +152,9 @@ namespace Bitir.Mobile.ViewModels
                 IsBusy = true;
                 try
                 {
-                    var result = await productService.StoreProductUpdate(new UpdateProductStoreRequest
+                    if (this.AreFieldsValid())
                     {
-                        Price = decimal.Parse(this.Price.Value.ToString()),
-                        Quantity = int.Parse(this.Quantity.Value.ToString()),
-                        ProductPriceId = StoreProductViewModel.ProductPriceId,
-                        ProductQuantityId = StoreProductViewModel.ProductPriceId,
-                        ProductStockId = StoreProductViewModel.ProductStockId,
-                        ProductStoreId = StoreProductViewModel.ProductStoreId,
-                        Status=this.status?Core.Enums.Status.Active:Core.Enums.Status.Pasive
-                    });
 
-                    if (result.Result)
-                    {
-                        SendNotification(new ExceptionTransfer { NotificationMessage = "Ürün bilgileri başarı ile güncellendi" });
-                        await App.Current.MainPage.Navigation.PopModalAsync(true);
-                        MessagingCenter.Send(this, "UpdateProductList", true);
                     }
                 }
                 catch (BadRequestException ex)
@@ -206,6 +174,10 @@ namespace Bitir.Mobile.ViewModels
             }
         }
 
+        private async Task RemoveButtonClicked()
+        {
+
+        }
 
         #endregion
     }

@@ -34,7 +34,7 @@ namespace Bitir.Mobile.ViewModels
         {
             get
             {
-                return this.itemSelectedCommand ?? (this.itemSelectedCommand = new Command<object>(this.NavigateToNextPage));
+                return this.itemSelectedCommand ?? (this.itemSelectedCommand = new Command<object>(async (s) => await this.NavigateToNextPage(s)));
             }
         }
         #endregion
@@ -98,12 +98,12 @@ namespace Bitir.Mobile.ViewModels
             }
         }
 
-        private void NavigateToNextPage(object selectedItem)
+        private async Task NavigateToNextPage(object selectedItem)
         {
             var item = (selectedItem as Syncfusion.ListView.XForms.ItemTappedEventArgs).ItemData as StoreCarrier;
             if (item != null)
             {
-                //App.Current.MainPage.Navigation.PushModalAsync(new ProductSettingsPage(item));
+                await App.Current.MainPage.Navigation.PushModalAsync(new CarrierSettingsPage(item));
             }
         }
 
