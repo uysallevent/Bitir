@@ -158,12 +158,27 @@ namespace Core.DataAccess.EntityFramework
 
         private void UpdateInitializer(TEntity entity)
         {
-            var updateDateProp = entity.GetType().GetProperty("UpdateDate");
-            if (entity.GetType().GetProperties().Any(x => x.Name == "UpdateDate"))
+            foreach (var item in entity.GetType().GetProperties())
             {
-                Type t = Nullable.GetUnderlyingType(updateDateProp.PropertyType) ?? updateDateProp.PropertyType;
-                object safeValue = Convert.ChangeType(DateTime.Now, t);
-                updateDateProp.SetValue(entity, safeValue, null);
+                if (item.Name == "UpdateDate")
+                {
+                    Type t = Nullable.GetUnderlyingType(item.PropertyType) ?? item.PropertyType;
+                    object safeValue = Convert.ChangeType(DateTime.Now, t);
+                    item.SetValue(entity, safeValue, null);
+                }
+
+                //2nd level properties
+                var mainObjectsProperties = item.PropertyType.GetProperties();
+                foreach (var property in mainObjectsProperties)
+                {
+                    var propertyInstance = item.GetValue(entity, null);
+                    if (property.Name == "UpdateDate" && propertyInstance != null)
+                    {
+                        Type t = Nullable.GetUnderlyingType(property.PropertyType) ?? property.PropertyType;
+                        object safeValue = Convert.ChangeType(DateTime.Now, t);
+                        property.SetValue(propertyInstance, safeValue, null);
+                    }
+                }
             }
         }
 

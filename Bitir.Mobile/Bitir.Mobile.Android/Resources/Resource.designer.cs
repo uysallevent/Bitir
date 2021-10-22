@@ -17756,7 +17756,10 @@ namespace Bitir.Mobile.Droid
 			public const int tooltip_frame_light = 2131165379;
 			
 			// aapt resource value: 0x7F0700C4
-			public const int xamarin_logo = 2131165380;
+			public const int transfer = 2131165380;
+			
+			// aapt resource value: 0x7F0700C5
+			public const int xamarin_logo = 2131165381;
 			
 			static Drawable()
 			{

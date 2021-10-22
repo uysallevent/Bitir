@@ -27,6 +27,13 @@ namespace AuthModule.Controllers
             return Ok(result);
         }
 
+        [HttpPost("UpdateStoreCarrier")]
+        public async Task<IActionResult> UpdateStoreCarrier([FromBody] UpdateCarrierToStoreRequest request)
+        {
+            var result = await _carrierBusinessBase.UpdateStoreCarrier(request);
+            return Ok(result);
+        }
+
         [HttpPost("GetStoreCarriers")]
         public async Task<IActionResult> GetStoreCarriers()
         {

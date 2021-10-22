@@ -86,28 +86,26 @@ namespace AuthModule.Business
                 throw new ClaimExpection("Claims could not find");
             }
 
-            await _carrierRepository.AddAsync(new Carrier
+            _carrierStoreRepository.Update(new Carrier_Store
             {
-                Capacity = request.Capacity,
+                Id = request.CarrierStoreId,
+                CarrierId = request.CarrierId,
+                StoreId = storeId,
+                Status = request.Status
+            });
+
+            _carrierRepository.Update(new Carrier
+            {
+                Id = request.CarrierId,
                 Plate = request.Plate,
-                Carrier_Stores = new List<Carrier_Store>
-                {
-                    new Carrier_Store
-                    {
-                        StoreId=storeId,
-                        Status=Core.Enums.Status.Active,
-                        InsertDate=DateTime.Now,
-                        UpdateDate=DateTime.Now
-                    }
-                }
+                Capacity = request.Capacity,
             });
 
             var result = await _uow.SaveChangesAsync();
             if (result < 1)
             {
-                throw new BadRequestException("Araç bilgileri eklenemedi");
+                throw new BadRequestException("Araç bilgileri güncellenemedi");
             }
-
 
             return new ResponseWrapper<bool>(true);
         }
@@ -121,7 +119,7 @@ namespace AuthModule.Business
                 throw new ClaimExpection("Claims could not find");
             }
 
-            var result = await _carrierRepository.GetAll().Join(_carrierStoreRepository.GetAll().Where(x => x.StoreId == storeId), x => x.Id, y => y.CarrierId, (x, y) => new { x.Id, x.Plate, x.Capacity, y.Status }).Select(x => new StoreCarrier { Id = x.Id, Plate = x.Plate, Capacity = x.Capacity, Status = x.Status }).ToListAsync();
+            var result = await _carrierRepository.GetAll().Join(_carrierStoreRepository.GetAll().Where(x => x.StoreId == storeId), x => x.Id, y => y.CarrierId, (x, y) => new { carrierId = x.Id, x.Plate, x.Capacity, carrierStoreId = y.Id, y.Status }).Select(x => new StoreCarrier { CarrierId = x.carrierId, CarrierStoreId = x.carrierStoreId, Plate = x.Plate, Capacity = x.Capacity, Status = x.Status }).ToListAsync();
 
             if (result == null || !result.Any())
             {

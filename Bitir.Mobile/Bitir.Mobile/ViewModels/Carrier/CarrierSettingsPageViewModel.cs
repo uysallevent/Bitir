@@ -152,10 +152,22 @@ namespace Bitir.Mobile.ViewModels
                 IsBusy = true;
                 try
                 {
-                    if (this.AreFieldsValid())
+                    var result = await carrierService.UpdateStoreCarrier(new UpdateCarrierToStoreRequest
                     {
+                        CarrierId = StoreCarrier.CarrierId,
+                        CarrierStoreId = StoreCarrier.CarrierStoreId,
+                        Capacity = int.Parse(this.Capacity.ToString()),
+                        Plate = this.Plate.Value,
+                        Status = StoreCarrier.Status
+                    });
 
+                    if (result != null && result.Result)
+                    {
+                        SendNotification(new ExceptionTransfer { NotificationMessage = "Araç başarı ile güncellendi" });
+                        await App.Current.MainPage.Navigation.PopModalAsync(true);
+                        MessagingCenter.Send(this, "UpdateCarrierList", true);
                     }
+
                 }
                 catch (BadRequestException ex)
                 {

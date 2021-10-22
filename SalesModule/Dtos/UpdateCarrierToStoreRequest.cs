@@ -1,4 +1,6 @@
-﻿namespace SalesModule.Dtos
+﻿using Core.Enums;
+
+namespace SalesModule.Dtos
 {
     public class UpdateCarrierToStoreRequest
     {
@@ -7,5 +9,6 @@
         public int? StoreId { get; set; }
         public string Plate { get; set; }
         public int? Capacity { get; set; }
+        public Status? Status { get; set; }
     }
 }

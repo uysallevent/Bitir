@@ -113,11 +113,20 @@
 
                     <!--  Add Button  -->
                     <buttons:SfButton
-                        x:Name="AddProductButton"
+                        x:Name="AddCarrierButton"
                         IsVisible="True"
                         Style="{StaticResource IconButtonStyle}"
                         Command="{Binding GotoNewCarrierAddPageCommand}"
                         Text="{StaticResource Add}">
+                    </buttons:SfButton>
+
+                    <!--  Transfer Button  -->
+                    <buttons:SfButton
+                        x:Name="TransferButton"
+                        IsVisible="True"
+                        BackgroundImage="transfer.png"
+                        Style="{StaticResource IconButtonStyle}"
+                        Command="{Binding GotoNewCarrierAddPageCommand}">
                     </buttons:SfButton>
                 </StackLayout>
 

@@ -11,5 +11,7 @@ namespace AuthModule.Interfaces
     {
         Task<ResponseWrapper<bool>> AddCarrierToStore(AddCarrierToStoreRequest request);
         Task<ResponseWrapperListing<StoreCarrier>> GetStoreCarriers();
+
+        Task<ResponseWrapper<bool>> UpdateStoreCarrier(UpdateCarrierToStoreRequest request);
     }
 }

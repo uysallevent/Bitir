@@ -21,7 +21,15 @@ namespace Bitir.Mobile.ViewModels
                     await GetStoreCarriers();
                 }
             });
+            MessagingCenter.Subscribe<CarrierSettingsPageViewModel, bool>(this, "UpdateCarrierList", async (s, b) =>
+            {
+                if (b)
+                {
+                    await GetStoreCarriers();
+                }
+            });
             this.GotoNewCarrierAddPageCommand = new Command(async () => await GotoNewCarrierAddPageClicked());
+            BackButtonCommand = new Command(async () => await BackButtonClicked());
             Task.Run(async () => await GetStoreCarriers());
         }
         #endregion
@@ -37,6 +45,8 @@ namespace Bitir.Mobile.ViewModels
                 return this.itemSelectedCommand ?? (this.itemSelectedCommand = new Command<object>(async (s) => await this.NavigateToNextPage(s)));
             }
         }
+
+        public Command BackButtonCommand { get; set; }
         #endregion
 
         #region Fields
@@ -110,6 +120,11 @@ namespace Bitir.Mobile.ViewModels
         public async Task GotoNewCarrierAddPageClicked()
         {
             await App.Current.MainPage.Navigation.PushModalAsync(new CarrierAddPage());
+        }
+
+        private async Task BackButtonClicked()
+        {
+            await App.Current.MainPage.Navigation.PopModalAsync(true);
         }
 
         #endregion
