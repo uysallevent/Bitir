@@ -40,7 +40,7 @@ namespace Bitir.Mobile.ViewModels
         private async Task ProductSettings()
         {
             await PopupNavigation.Instance.PopAsync();
-            await App.Current.MainPage.Navigation.PushModalAsync(new ProductSettingsPage(StoreProductViewModel));
+            //await App.Current.MainPage.Navigation.PushModalAsync(new ProductSettingsPage(StoreProductViewModel));
         }
         #endregion
 

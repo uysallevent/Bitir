@@ -19,6 +19,8 @@
     <Compile Include="..\..\Module.Shared\Entities\ProductModuleEntities\StoreProductViewModel.cs" Link="Models\Product\StoreProductViewModel.cs" />
     <Compile Include="..\..\Module.Shared\Enums\AccountTypeEnum.cs" Link="Enums\AccountTypeEnum.cs" />
     <Compile Include="..\..\ProductModule\Dtos\AddProductToStoreRequest.cs" Link="Models\Product\AddProductToStoreRequest.cs" />
+    <Compile Include="..\..\ProductModule\Dtos\StoreProdByCarrierRequest.cs" Link="Models\Product\StoreProdByCarrierRequest.cs" />
+    <Compile Include="..\..\ProductModule\Dtos\StoreProdByCarrierResponse.cs" Link="Models\Product\StoreProdByCarrierResponse.cs" />
     <Compile Include="..\..\ProductModule\Dtos\SystemProductResponse.cs" Link="Models\Product\SystemProductResponse.cs" />
     <Compile Include="..\..\ProductModule\Dtos\UpdateProductStoreRequest.cs" Link="Models\Product\UpdateProductStoreRequest.cs" />
     <Compile Include="..\..\SalesModule\Dtos\AddCarrierToStoreRequest.cs" Link="Models\Carrier\AddCarrierToStoreRequest.cs" />

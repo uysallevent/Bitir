@@ -6,7 +6,7 @@ namespace ProductModule.Dtos
     {
         public int CarrierId { get; set; }
         public int ProductStockId { get; set; }
-        public int Quantity { get; set; }
+        public int ProductStock { get; set; }
         public string Plate { get; set; }
         public Status? Status { get; set; }
     }

@@ -5,6 +5,9 @@ using Bitir.Mobile.Validators.Rules;
 using Core.Enums;
 using Module.Shared.Entities.ProductModuleEntities;
 using ProductModule.Dtos;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Linq;
 using System.Reflection;
 using System.Runtime.Serialization;
 using System.Runtime.Serialization.Json;
@@ -24,6 +27,8 @@ namespace Bitir.Mobile.ViewModels
         #region Fields
         private StoreProductViewModel storeProductViewModel;
 
+        private IList<StoreProductViewModel> storeProductStock;
+
         private string profileImage;
 
         private string productName;
@@ -38,41 +43,23 @@ namespace Bitir.Mobile.ViewModels
 
         #region Constructor
 
-        public ProductSettingsPageViewModel(StoreProductViewModel storeProductViewModel)
+        public ProductSettingsPageViewModel(List<StoreProductViewModel> storeProductStocks)
         {
             InitializeProperties();
             this.AddValidationRules();
             SubmitButtonCommand = new Command(async () => await SubmitButtonClicked());
             BackButtonCommand = new Command(async () => await BackButtonClicked());
-            this.StoreProductViewModel = storeProductViewModel;
-            Status = storeProductViewModel.Status != Core.Enums.Status.Pasive;
-            ProductName = storeProductViewModel.FullName;
-            Price.Value = storeProductViewModel.Price;
-            Quantity.Value = storeProductViewModel.Stock;
+            StoreProductStock = new ObservableCollection<StoreProductViewModel>(storeProductStocks);
+            this.StoreProductViewModel = storeProductStocks.FirstOrDefault();
+            Status = this.storeProductViewModel.Status != Core.Enums.Status.Pasive;
+            ProductName = this.storeProductViewModel.FullName;
+            Price.Value = this.storeProductViewModel.Price;
+            Quantity.Value = storeProductStocks.FirstOrDefault(x => x.Position == "DEPO")?.Stock ?? 0;
         }
 
         #endregion
 
-        #region Public properties
-
-        private void InitializeProperties()
-        {
-            this.Price = new ValidatableObject<object>();
-            this.Quantity = new ValidatableObject<object>();
-        }
-
-        private void AddValidationRules()
-        {
-            this.Price.Validations.Add(new IsNotNullOrEmptyRule<object> { ValidationMessage = "Lütfen fiyat bilgisi girin" });
-            this.Quantity.Validations.Add(new IsNotNullOrEmptyRule<object> { ValidationMessage = "Lütfen ürün stok bilgisi girin" });
-        }
-
-        private bool AreFieldsValid()
-        {
-            bool isPrice = Price.Validate();
-            bool isQuantity = Quantity.Validate();
-            return isPrice && isQuantity;
-        }
+        #region  Properties
 
         public StoreProductViewModel StoreProductViewModel
         {
@@ -86,6 +73,21 @@ namespace Bitir.Mobile.ViewModels
                 if (this.storeProductViewModel != value)
                 {
                     this.SetProperty(ref this.storeProductViewModel, value);
+                }
+            }
+        }
+
+        public IList<StoreProductViewModel> StoreProductStock
+        {
+            get
+            {
+                return this.storeProductStock;
+            }
+            set
+            {
+                if (this.storeProductStock != value)
+                {
+                    this.SetProperty(ref this.storeProductStock, value);
                 }
             }
         }
@@ -182,6 +184,24 @@ namespace Bitir.Mobile.ViewModels
         #endregion
 
         #region Methods
+        private void InitializeProperties()
+        {
+            this.Price = new ValidatableObject<object>();
+            this.Quantity = new ValidatableObject<object>();
+        }
+
+        private void AddValidationRules()
+        {
+            this.Price.Validations.Add(new IsNotNullOrEmptyRule<object> { ValidationMessage = "Lütfen fiyat bilgisi girin" });
+            this.Quantity.Validations.Add(new IsNotNullOrEmptyRule<object> { ValidationMessage = "Lütfen ürün stok bilgisi girin" });
+        }
+
+        private bool AreFieldsValid()
+        {
+            bool isPrice = Price.Validate();
+            bool isQuantity = Quantity.Validate();
+            return isPrice && isQuantity;
+        }
 
         private async Task BackButtonClicked()
         {
@@ -203,7 +223,7 @@ namespace Bitir.Mobile.ViewModels
                         ProductQuantityId = StoreProductViewModel.ProductPriceId,
                         ProductStockId = StoreProductViewModel.ProductStockId,
                         ProductStoreId = StoreProductViewModel.ProductStoreId,
-                        Status=this.status?Core.Enums.Status.Active:Core.Enums.Status.Pasive
+                        Status = this.status ? Core.Enums.Status.Active : Core.Enums.Status.Pasive
                     });
 
                     if (result.Result)

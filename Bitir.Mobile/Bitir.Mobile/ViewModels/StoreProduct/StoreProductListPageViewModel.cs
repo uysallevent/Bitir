@@ -5,6 +5,7 @@ using Bitir.Mobile.Views;
 using Module.Shared.Entities.ProductModuleEntities;
 using ProductModule.Dtos;
 using Rg.Plugins.Popup.Services;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Runtime.Serialization;
@@ -22,6 +23,7 @@ namespace Bitir.Mobile.ViewModels
         private Command<object> itemSelectedCommand;
         private Command<object> menuCommand;
         private ObservableCollection<StoreProductViewModel> storeProducts;
+        private IList<IGrouping<int, StoreProductViewModel>> productStockList;
 
         #endregion
 
@@ -85,6 +87,22 @@ namespace Bitir.Mobile.ViewModels
             }
         }
 
+        public IList<IGrouping<int,StoreProductViewModel>> ProductStockList
+        {
+            get
+            {
+                return this.productStockList;
+            }
+            set
+            {
+                if (this.productStockList == value)
+                {
+                    return;
+                }
+                this.SetProperty(ref this.productStockList, value);
+            }
+        }
+
         #endregion
 
         #region Methods
@@ -96,7 +114,8 @@ namespace Bitir.Mobile.ViewModels
                 var result = await productService.GetStoreProducts();
                 if (result != null && result.List.Any())
                 {
-                    var groupByStoreProdId = result.List.GroupBy(x => x.ProductStoreId).Select(x => new StoreProductViewModel
+                    ProductStockList = result.List.GroupBy(x => x.ProductStoreId).ToList();
+                    var groupByStoreProdId = ProductStockList.Select(x => new StoreProductViewModel
                     {
                         ProductStoreId=x.Key,
                         Abbreviation=x.FirstOrDefault(y=>y.ProductStoreId==x.Key).Abbreviation,
@@ -134,7 +153,8 @@ namespace Bitir.Mobile.ViewModels
             var item = (selectedItem as Syncfusion.ListView.XForms.ItemTappedEventArgs).ItemData as StoreProductViewModel;
             if (item != null)
             {
-                App.Current.MainPage.Navigation.PushModalAsync(new ProductSettingsPage(item));
+                var productStock = ProductStockList.FirstOrDefault(x => x.Key == item.ProductStockId).ToList();
+                App.Current.MainPage.Navigation.PushModalAsync(new ProductSettingsPage(productStock));
             }
         }
 

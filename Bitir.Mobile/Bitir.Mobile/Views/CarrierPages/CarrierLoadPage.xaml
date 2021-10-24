@@ -214,6 +214,7 @@
                     Text="EKLE"
                     WidthRequest="200" />
 
+                    <!--  Grid  -->
                     <StackLayout>
                         <sfgrid:SfDataGrid x:Name="dataGrid"
                            AutoGenerateColumns="False"

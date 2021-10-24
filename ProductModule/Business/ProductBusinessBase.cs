@@ -130,6 +130,46 @@ namespace ProductModule.Business
                 throw new BadRequestException("Bu ürün listenizde bulunamadı");
             }
 
+            var productStockResult = _productStockRepository.GetAll(x => x.Status == Status.Active && x.ProductStoreId == request.ProductStoreId).AsNoTracking();
+            if (request.CarrierId == null && productStockResult.Any(x => x.CarrierId == null))
+            {
+                var productInStore = productStockResult.FirstOrDefault(x => x.CarrierId == null);
+                _productStockRepository.Update(new ProductStock
+                {
+                    Id = productInStore.Id,
+                    ProductStoreId = request.ProductStoreId,
+                    Quantity = (request.Quantity != 0) ? (request.Quantity + productInStore.Quantity) : 0
+                });
+            }
+            else if (request.CarrierId == null && !productStockResult.Any(x => x.CarrierId == null))
+            {
+                await _productStockRepository.AddAsync(new ProductStock
+                {
+                    ProductStoreId = request.ProductStoreId,
+                    Quantity = request.Quantity
+                });
+            }
+            else if (request.CarrierId != null && productStockResult.Any(x => x.CarrierId == request.CarrierId))
+            {
+                var productInVehicle = productStockResult.FirstOrDefault(x => x.CarrierId == request.CarrierId);
+                _productStockRepository.Update(new ProductStock
+                {
+                    Id = productInVehicle.Id,
+                    ProductStoreId = request.ProductStoreId,
+                    Quantity = (request.Quantity + productInVehicle.Quantity),
+                    CarrierId = request.CarrierId
+                });
+            }
+            else if (request.CarrierId != null && !productStockResult.Any(x => x.CarrierId == request.CarrierId))
+            {
+                await _productStockRepository.AddAsync(new ProductStock
+                {
+                    ProductStoreId = request.ProductStoreId,
+                    Quantity = request.Quantity,
+                    CarrierId = request.CarrierId
+                });
+            }
+
             _productStoreRepository.Update(new Product_Store
             {
                 Id = request.ProductStoreId,
@@ -137,19 +177,11 @@ namespace ProductModule.Business
                 StoreId = storeId,
                 Status = request.Status
             });
-
             _productStorePriceRepository.Update(new ProductStorePrice
             {
                 Id = request.ProductPriceId,
                 Price = request.Price,
                 ProductStoreId = request.ProductStoreId
-            });
-
-            _productStockRepository.Update(new ProductStock
-            {
-                Id = request.ProductStockId,
-                ProductStoreId = request.ProductStoreId,
-                Quantity = request.Quantity
             });
 
             var result = await _uow.SaveChangesAsync();
@@ -186,9 +218,17 @@ namespace ProductModule.Business
             }
 
             var result = await _executeStoreProdByCarrierProcedure.ExecuteProc("EXEC product.GetStoreProductsByCarrier {0}", new object[] { request.CarrierId });
+            if (result != null && result.Any())
+            {
+                return new ResponseWrapperListing<StoreProdByCarrierResponse>(result.Select(x => new StoreProdByCarrierResponse
+                {
+                    CarrierId = request.CarrierId,
+                    Plate = x.Plate,
+                    ProductStock = x.ProductStock
+                }));
+            }
 
-
-            return new ResponseWrapperListing<StoreProdByCarrierResponse>();
+            return new ResponseWrapperListing<StoreProdByCarrierResponse>(null);
         }
 
     }

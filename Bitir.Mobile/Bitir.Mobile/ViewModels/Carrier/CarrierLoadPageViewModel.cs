@@ -3,6 +3,7 @@ using Bitir.Mobile.Models.Common;
 using Bitir.Mobile.Validators;
 using Bitir.Mobile.Validators.Rules;
 using Module.Shared.Entities.ProductModuleEntities;
+using ProductModule.Dtos;
 using SalesModule.Dtos;
 using System;
 using System.Collections.Generic;
@@ -18,7 +19,7 @@ namespace Bitir.Mobile.ViewModels
         #region Constructurer
         public CarrierLoadPageViewModel()
         {
-            Task.Run(async () => await GetStoreProducts());
+            Initialize();
         }
 
         #endregion
@@ -28,6 +29,11 @@ namespace Bitir.Mobile.ViewModels
         {
             get
             {
+                if (_selectedCarrier.Value != null && CarrierId != _selectedCarrier.Value.CarrierId)
+                {
+                    CarrierId = _selectedCarrier.Value.CarrierId;
+                    Task.Run(async () => await GetStoreProductsByCarrier(CarrierId));
+                }
                 return _selectedCarrier;
             }
             set
@@ -56,7 +62,7 @@ namespace Bitir.Mobile.ViewModels
             }
         }
 
-        public ObservableCollection<StoreProductViewModel> StoreProducts
+        public ObservableCollection<StoreProdByCarrierResponse> StoreProducts
         {
             get
             {
@@ -71,12 +77,29 @@ namespace Bitir.Mobile.ViewModels
                 this.SetProperty(ref this._storeProducts, value);
             }
         }
+
+        public int CarrierId
+        {
+            get
+            {
+                return carrierId;
+            }
+            set
+            {
+                if (this.carrierId == value)
+                {
+                    return;
+                }
+                this.SetProperty(ref this.carrierId, value);
+            }
+        }
         #endregion
 
         #region Fields
         private ValidatableObject<StoreCarrier> _selectedCarrier;
         private ValidatableObject<StoreProductViewModel> _selectedProduct;
-        private ObservableCollection<StoreProductViewModel> _storeProducts;
+        private ObservableCollection<StoreProdByCarrierResponse> _storeProducts;
+        private int carrierId;
         #endregion
 
         #region Commands
@@ -101,15 +124,19 @@ namespace Bitir.Mobile.ViewModels
             return isCarrierSelect;
         }
 
-        private async Task GetStoreProducts()
+        private async Task GetStoreProductsByCarrier(int carrierId)
         {
             IsBusy = true;
             try
             {
-                var result = await productService.GetStoreProducts();
+                var result = await productService.GetStoreProductsByCarrier(new StoreProdByCarrierRequest
+                {
+                    CarrierId = carrierId
+                });
+
                 if (result != null && result.List.Any())
                 {
-                    StoreProducts = new ObservableCollection<StoreProductViewModel>(result.List);
+                    StoreProducts = new ObservableCollection<StoreProdByCarrierResponse>(result.List);
                 }
             }
             catch (BadRequestException ex)

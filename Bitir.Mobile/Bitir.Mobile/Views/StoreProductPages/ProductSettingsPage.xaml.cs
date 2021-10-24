@@ -1,5 +1,6 @@
 ﻿using Bitir.Mobile.ViewModels;
 using Module.Shared.Entities.ProductModuleEntities;
+using System.Collections.Generic;
 using Xamarin.Forms.Internals;
 using Xamarin.Forms.Xaml;
 
@@ -10,10 +11,10 @@ namespace Bitir.Mobile.Views
     public partial class ProductSettingsPage
     {
         private readonly ProductSettingsPageViewModel productSettingsPageViewModel;
-        public ProductSettingsPage(StoreProductViewModel storeProductViewModel)
+        public ProductSettingsPage(List<StoreProductViewModel> storeProductStocks)
         {
             this.InitializeComponent();
-            BindingContext = productSettingsPageViewModel = new ProductSettingsPageViewModel(storeProductViewModel);
+            BindingContext = productSettingsPageViewModel = new ProductSettingsPageViewModel(storeProductStocks);
         }
     }
 }
