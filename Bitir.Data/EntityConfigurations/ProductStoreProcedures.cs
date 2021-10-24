@@ -24,14 +24,16 @@ namespace Bitir.Data.EntityConfigurations
                         pu.Abbreviation,
                         pp.Price as Price,
                         pstck.Quantity as Stock,
+                        ISNULL(c.Plate,'DEPO') AS Position,
 						pstr.Status
                         FROM product.ProductQuantity Pq
-                        INNER JOIN product.ProductStore pstr on pstr.ProductQuantityId=pq.Id
-                        INNER JOIN product.Product p on p.Id=pq.ProductId
-                        INNER JOIN product.Unit pu on pu.Id=pq.UnitId
-                        INNER JOIN product.ProductStock pstck on pstck.ProductStoreId=pstr.Id
-                        INNER JOIN product.ProductPrice pp on pp.ProductStoreId=pstr.Id
-                        WHERE StoreId=@storeId";
+                        LEFT JOIN product.ProductStore pstr on pstr.ProductQuantityId=pq.Id
+                        LEFT JOIN product.Product p on p.Id=pq.ProductId
+                        LEFT JOIN product.Unit pu on pu.Id=pq.UnitId
+                        LEFT JOIN product.ProductStock pstck on pstck.ProductStoreId=pstr.Id
+                        LEFT JOIN sales.carrier c on c.Id = pstck.CarrierId
+                        LEFT JOIN product.ProductPrice pp on pp.ProductStoreId=pstr.Id
+                        WHERE StoreId=@storeId AND pstr.Status = 1 AND pstck.Status = 1";
             migrationBuilder.Sql(sp);
         }
     }

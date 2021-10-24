@@ -6,7 +6,9 @@ using Core.DataAccess.EntityFramework.Interfaces;
 using Core.Enums;
 using Core.Exceptions;
 using Microsoft.AspNetCore.Http;
+using Microsoft.EntityFrameworkCore;
 using Module.Shared.Entities.ProductModuleEntities;
+using Module.Shared.Entities.SalesModuleEntities;
 using ProductModule.Dtos;
 using ProductModule.Interfaces;
 using System;
@@ -23,19 +25,23 @@ namespace ProductModule.Business
         private IRepository<ProductQuantity> _productQuantityRepository;
         private IRepository<ProductStorePrice> _productStorePriceRepository;
         private IRepository<ProductStock> _productStockRepository;
+        private IRepository<Carrier> _carrierRepository;
         private IRepository<Unit> _unitRepository;
         private IUnitOfWork _uow;
         private readonly IHttpContextAccessor _httpContextAccessor;
-        private readonly IExecuteProcedure<StoreProductViewModel> _executeProcedure;
+        private readonly IExecuteProcedure<StoreProductViewModel> _executeStoreProductProcedure;
+        private readonly IExecuteProcedure<StoreProductByCarrierViewModel> _executeStoreProdByCarrierProcedure;
         public ProductBusinessBase(
             IUnitOfWork uow,
             IRepository<Product> productRepository,
             IRepository<Product_Store> productStoreRepository,
             IRepository<ProductQuantity> productQuantityRepository,
             IRepository<ProductStorePrice> productStorePriceRepository,
-             IRepository<Unit> unitRepository,
+            IRepository<Carrier> carrierRepository,
+            IRepository<Unit> unitRepository,
             IHttpContextAccessor httpContextAccessor,
-            IExecuteProcedure<StoreProductViewModel> executeProcedure,
+            IExecuteProcedure<StoreProductViewModel> executeStoreProductProcedure,
+            IExecuteProcedure<StoreProductByCarrierViewModel> executeStoreProdByCarrierProcedure,
             IRepository<ProductStock> productStockRepository) : base(productRepository, uow)
         {
             _productRepository = productRepository;
@@ -43,10 +49,12 @@ namespace ProductModule.Business
             _productQuantityRepository = productQuantityRepository;
             _productStockRepository = productStockRepository;
             _productStorePriceRepository = productStorePriceRepository;
+            _carrierRepository = carrierRepository;
             _unitRepository = unitRepository;
             _uow = uow;
             _httpContextAccessor = httpContextAccessor;
-            _executeProcedure = executeProcedure;
+            _executeStoreProductProcedure = executeStoreProductProcedure;
+            _executeStoreProdByCarrierProcedure = executeStoreProdByCarrierProcedure;
         }
 
         public Task<ResponseWrapperListing<SystemProductResponse>> GetSystemProducts()
@@ -163,12 +171,25 @@ namespace ProductModule.Business
                 throw new ClaimExpection("Claims could not find");
             }
 
-            var result = await _executeProcedure.ExecuteProc("EXEC product.GetStoreProducts {0}", new object[] { storeId });
-
+            var result = await _executeStoreProductProcedure.ExecuteProc("EXEC product.GetStoreProducts {0}", new object[] { storeId });
 
             return new ResponseWrapperListing<StoreProductViewModel>(result);
         }
 
+        public async Task<ResponseWrapperListing<StoreProdByCarrierResponse>> GetStoreProductsByCarrier(StoreProdByCarrierRequest request)
+        {
+            var claims = _httpContextAccessor.HttpContext.User.Claims;
+            int.TryParse(claims.FirstOrDefault(x => x.Type == "Store")?.Value, out int storeId);
+            if (storeId < 1)
+            {
+                throw new ClaimExpection("Claims could not find");
+            }
+
+            var result = await _executeStoreProdByCarrierProcedure.ExecuteProc("EXEC product.GetStoreProductsByCarrier {0}", new object[] { request.CarrierId });
+
+
+            return new ResponseWrapperListing<StoreProdByCarrierResponse>();
+        }
 
     }
 }

@@ -14,5 +14,6 @@ namespace ProductModule.Interfaces
 
         Task<ResponseWrapper<bool>> StoreProductUpdate(UpdateProductStoreRequest request);
         Task<ResponseWrapperListing<StoreProductViewModel>> GetStoreProducts();
+        Task<ResponseWrapperListing<StoreProdByCarrierResponse>> GetStoreProductsByCarrier(StoreProdByCarrierRequest request);
     }
 }

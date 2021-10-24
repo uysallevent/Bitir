@@ -42,6 +42,7 @@ namespace AuthModule.Business
             _httpContextAccessor = httpContextAccessor;
         }
 
+
         public async Task<ResponseWrapper<bool>> AddCarrierToStore(AddCarrierToStoreRequest request)
         {
             var claims = _httpContextAccessor.HttpContext.User.Claims;

@@ -119,15 +119,15 @@
                         Command="{Binding GotoNewCarrierAddPageCommand}"
                         Text="{StaticResource Add}">
                     </buttons:SfButton>
-
-                    <!--  Transfer Button  -->
-                    <buttons:SfButton
+                        <!--  Transfer Button  -->
+                        <buttons:SfButton
                         x:Name="TransferButton"
                         IsVisible="True"
+                        Padding="70"
                         BackgroundImage="transfer.png"
                         Style="{StaticResource IconButtonStyle}"
-                        Command="{Binding GotoNewCarrierAddPageCommand}">
-                    </buttons:SfButton>
+                        Command="{Binding CarrierLoadPageCommand}">
+                        </buttons:SfButton>
                 </StackLayout>
 
                 <StackLayout Grid.Row="1" Spacing="0">

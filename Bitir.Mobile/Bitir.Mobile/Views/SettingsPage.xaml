@@ -20,14 +20,7 @@
 
                 <!--  Title View  -->
                 <controls:TitleView Title="Settings">
-                    <controls:TitleView.LeadingView>
-                        <buttons:SfButton
-                            x:Name="backButton"
-                            Command="{Binding BindingContext.BackButtonCommand, Source={x:Reference settings}}"
-                            CommandParameter="{x:Reference backButton}"
-                            Style="{StaticResource IconButtonStyle}"
-                            Text="{StaticResource Back}" />
-                    </controls:TitleView.LeadingView>
+
                 </controls:TitleView>
 
                 <BoxView

@@ -4,6 +4,7 @@ using Core.DataAccess;
 using Core.DataAccess.EntityFramework.Interfaces;
 using Core.Entities;
 using Core.Utilities.ExpressionGenerator;
+using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -56,7 +57,7 @@ namespace BaseModule.Business
         public virtual async Task<ResponseWrapperListing<T>> GetAllAsync(T entity = null)
         {
             var filter = entity != null ? ExpressionGenerator<T, T>.Generate(entity) : null;
-            var result = _repositoryBase.GetAll(filter);
+            var result =await _repositoryBase.GetAll(filter).ToListAsync();
             if (result != null && result.Any())
             {
                 return new ResponseWrapperListing<T>(result);

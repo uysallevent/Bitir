@@ -29,6 +29,7 @@ namespace Bitir.Mobile.ViewModels
                 }
             });
             this.GotoNewCarrierAddPageCommand = new Command(async () => await GotoNewCarrierAddPageClicked());
+            CarrierLoadPageCommand = new Command(async () => await CarrierLoadButtonClicked());
             BackButtonCommand = new Command(async () => await BackButtonClicked());
             Task.Run(async () => await GetStoreCarriers());
         }
@@ -46,6 +47,8 @@ namespace Bitir.Mobile.ViewModels
             }
         }
 
+        public Command CarrierLoadPageCommand { get; set; }
+
         public Command BackButtonCommand { get; set; }
         #endregion
 
@@ -56,7 +59,7 @@ namespace Bitir.Mobile.ViewModels
 
         #endregion
 
-        #region Property
+        #region Properties
 
         public ObservableCollection<StoreCarrier> Carriers
         {
@@ -120,6 +123,11 @@ namespace Bitir.Mobile.ViewModels
         public async Task GotoNewCarrierAddPageClicked()
         {
             await App.Current.MainPage.Navigation.PushModalAsync(new CarrierAddPage());
+        }
+
+        private async Task CarrierLoadButtonClicked()
+        {
+            await App.Current.MainPage.Navigation.PushModalAsync(new CarrierLoadPage());
         }
 
         private async Task BackButtonClicked()

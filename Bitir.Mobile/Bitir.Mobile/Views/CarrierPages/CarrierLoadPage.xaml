@@ -1,0 +1,283 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="Bitir.Mobile.Views.CarrierLoadPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:sfgrid="clr-namespace:Syncfusion.SfDataGrid.XForms;assembly=Syncfusion.SfDataGrid.XForms"
+    xmlns:border="clr-namespace:Syncfusion.XForms.Border;assembly=Syncfusion.Core.XForms"
+    xmlns:buttons="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms"
+    xmlns:combobox="clr-namespace:Syncfusion.XForms.ComboBox;assembly=Syncfusion.SfComboBox.XForms"
+    xmlns:controls="clr-namespace:Bitir.Mobile.Controls"
+    xmlns:converter="clr-namespace:Bitir.Mobile.Converters"
+    xmlns:behaviour="clr-namespace:Bitir.Mobile.Behaviors"
+    xmlns:inputLayout="clr-namespace:Syncfusion.XForms.TextInputLayout;assembly=Syncfusion.Core.XForms"
+    xmlns:viewModel="clr-namespace:Bitir.Mobile.ViewModels"
+    xmlns:local="clr-namespace:Bitir.Mobile.Views"
+    Title="Araç Yükleme"
+    BackgroundColor="{DynamicResource Gray-100}"
+    x:Name="CarrierLoad"
+    NavigationPage.HasNavigationBar="False">
+
+
+    <ContentPage.BindingContext>
+        <viewModel:CarrierLoadPageViewModel/>
+    </ContentPage.BindingContext>
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converter:BooleanToColorConverter x:Key="ColorConverter" />
+            <converter:InverseBoolConverter x:Key="InverseBoolConverter" />
+            <converter:NameValidationConverter x:Key="FirstValidationErrorConverter" />
+        </ResourceDictionary>
+
+        <ResourceDictionary>
+            <OnPlatform x:Key="opacity"
+                      x:TypeArguments="x:Double">
+                <On Platform="iOS,Android,macOS" Value="87" />
+                <On Platform="UWP,WPF" Value="80" />
+            </OnPlatform>
+
+            <OnPlatform x:Key="padding"
+                   x:TypeArguments="Thickness">
+                <On Platform="iOS" Value="8, 12, 8, 12" />
+                <On Platform="Android" Value="8,10,8,10"/>
+                <On Platform="UWP,macOS,WPF" Value="8" />
+            </OnPlatform>
+
+            <OnPlatform x:Key="textSize"
+                  x:TypeArguments="x:Double">
+                <On Platform="iOS,UWP,WPF" Value="14" />
+                <On Platform="Android,macOS" Value="13" />
+            </OnPlatform>
+
+            <OnPlatform x:Key="font"
+                  x:TypeArguments="x:String">
+                <On Platform="Android" Value="Roboto-Regular" />
+                <On Platform="iOS" Value="SFProText-Regular" />
+                <On Platform="UWP,WPF" Value="SegoeUI" />
+            </OnPlatform>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <ContentPage.ControlTemplate>
+        <ControlTemplate>
+            <Grid>
+                <StackLayout BackgroundColor="{DynamicResource Gray-Bg}" Spacing="0">
+                    <!--  Title View  -->
+                    <controls:TitleView Title="Araç Yükleme">
+                        <controls:TitleView.LeadingView>
+                            <buttons:SfButton
+                            x:Name="backButton"
+                            Command="{Binding BindingContext.BackButtonCommand, Source={x:Reference CarrierLoad}}"
+                            CommandParameter="{x:Reference backButton}"
+                            Style="{StaticResource IconButtonStyle}"
+                            Text="{StaticResource Back}" />
+                        </controls:TitleView.LeadingView>
+                    </controls:TitleView>
+                    <ContentPresenter />
+                </StackLayout>
+                <local:LoaderView IsVisible="{Binding BindingContext.IsBusy, Source={x:Reference CarrierLoad}}"/>
+            </Grid>
+        </ControlTemplate>
+    </ContentPage.ControlTemplate>
+    <ContentPage.Content>
+        <Grid>
+            <ScrollView>
+                <StackLayout
+                Padding="16,24"
+                BackgroundColor="{DynamicResource Gray-100}"
+                Spacing="0">
+                    <!--  Select Carrier -->
+                    <StackLayout>
+                        <Label
+                    Margin="0,0,0,4"
+                    FontFamily="Montserrat-Medium"
+                    FontSize="12"
+                    HeightRequest="18"
+                    Text="Araç"
+                    TextColor="{DynamicResource Gray-800}" />
+
+                        <inputLayout:SfTextInputLayout Style="{DynamicResource TextInputLayoutStyle}">
+                            <combobox:SfComboBox
+                        x:Name="CarrierPicker"
+                        DataSource="{Binding Carriers}"
+                        DisplayMemberPath="Plate"
+                        SelectedValuePath="Id"
+                        SelectedItem="{Binding SelectedCarrier.Value,Mode=TwoWay}"
+                        Style="{StaticResource TextInputLayoutComboBoxStyle}"
+                        VerticalOptions="CenterAndExpand"
+                        Watermark="Araç Seçin">
+                                <combobox:SfComboBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <Label Text="{Binding Plate}" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
+                                    </DataTemplate>
+                                </combobox:SfComboBox.ItemTemplate>
+                            </combobox:SfComboBox>
+                        </inputLayout:SfTextInputLayout>
+                        <!--  Label to display error message  -->
+                        <Label
+                                x:Name="CarrierPickerValidationLabel"
+                                Margin="15,-3,0,0"
+                                IsVisible="{Binding SelectedCarrier.IsValid, Converter={StaticResource InverseBoolConverter}}"
+                                Style="{StaticResource SimpleLabelStyle}"
+                                Text="{Binding SelectedCarrier.Errors, Converter={StaticResource FirstValidationErrorConverter}}"
+                                TextColor="{DynamicResource Red}"
+                                VerticalOptions="FillAndExpand" />
+                    </StackLayout>
+
+                    <!--  Select Product -->
+                    <StackLayout>
+                        <Label
+                    Margin="0,0,0,4"
+                    FontFamily="Montserrat-Medium"
+                    FontSize="12"
+                    HeightRequest="18"
+                    Text="Ürün"
+                    TextColor="{DynamicResource Gray-800}" />
+
+                        <inputLayout:SfTextInputLayout Style="{DynamicResource TextInputLayoutStyle}">
+                            <combobox:SfComboBox
+                        x:Name="ProductPicker"
+                        DataSource="{Binding StoreProducts}"
+                        DisplayMemberPath="FullNameWithCapacity"
+                        SelectedValuePath="Id"
+                        SelectedItem="{Binding SelectedProduct.Value,Mode=TwoWay}"
+                        Style="{StaticResource TextInputLayoutComboBoxStyle}"
+                        VerticalOptions="CenterAndExpand"
+                        Watermark="Ürün Seçin">
+                                <combobox:SfComboBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <Label Text="{Binding FullNameWithCapacity}" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
+                                    </DataTemplate>
+                                </combobox:SfComboBox.ItemTemplate>
+                            </combobox:SfComboBox>
+                        </inputLayout:SfTextInputLayout>
+                        <!--  Label to display error message  -->
+                        <Label
+                                x:Name="ProductPickerValidationLabel"
+                                Margin="15,-3,0,0"
+                                IsVisible="{Binding SelectedProduct.IsValid, Converter={StaticResource InverseBoolConverter}}"
+                                Style="{StaticResource SimpleLabelStyle}"
+                                Text="{Binding SelectedProduct.Errors, Converter={StaticResource FirstValidationErrorConverter}}"
+                                TextColor="{DynamicResource Red}"
+                                VerticalOptions="FillAndExpand" />
+                    </StackLayout>
+
+                    <!--  Quantity  -->
+                    <StackLayout>
+                        <Label
+                    Margin="0,0,0,4"
+                    FontFamily="Montserrat-Medium"
+                    FontSize="12"
+                    HeightRequest="18"
+                    Text="Araca Yüklenen Miktar"
+                    TextColor="{DynamicResource Gray-800}" />
+                        <border:SfBorder 
+                    BorderColor="{Binding Source={x:Reference ProductQuantityEntry}, Path=IsFocused, Converter={StaticResource ColorConverter}, ConverterParameter=0}" Style="{StaticResource DataFormBorderlessEntryBorderStyle}">
+                            <Grid ColumnDefinitions="*, Auto">
+                                <controls:BorderlessEntry
+                        x:Name="ProductQuantityEntry"
+                        Margin="12,0"
+                        HeightRequest="40"
+                        Keyboard="Numeric"
+                        Placeholder="Adet"
+                        Text="{Binding Quantity.Value}"
+                        Style="{StaticResource BorderlessEntryStyle}">
+                                    <Entry.Behaviors>
+                                        <behaviour:EntryLineValidationBehaviour IsValid="{Binding Quantity.IsValid}" />
+                                    </Entry.Behaviors>
+                                </controls:BorderlessEntry>
+                                <!--  Label to display error icon  -->
+                                <Label
+                                        Grid.Column="1"
+                                        IsVisible="{Binding Path=IsVisible, Source={x:Reference QuantityValidationLabel}}"
+                                        Style="{StaticResource ErrorIconLabelStyle}"
+                                        Text="{StaticResource Error}" />
+                            </Grid>
+                        </border:SfBorder>
+                        <!--  Label to display error message  -->
+                        <Label
+                                x:Name="QuantityValidationLabel"
+                                Margin="15,-3,0,0"
+                                IsVisible="{Binding Quantity.IsValid, Converter={StaticResource InverseBoolConverter}}"
+                                Style="{StaticResource SimpleLabelStyle}"
+                                Text="{Binding Quantity.Errors, Converter={StaticResource FirstValidationErrorConverter}}"
+                                TextColor="{DynamicResource Red}"
+                                VerticalOptions="FillAndExpand" />
+                    </StackLayout>
+
+                    <!--  Submit Button  -->
+                    <buttons:SfButton
+                    Margin="0,0,0,0"
+                    Command="{Binding SubmitCommand}"
+                    Style="{StaticResource GradientButtonStyle}"
+                    Text="EKLE"
+                    WidthRequest="200" />
+
+                    <StackLayout>
+                        <sfgrid:SfDataGrid x:Name="dataGrid"
+                           AutoGenerateColumns="False"
+                           ColumnSizer="Star"
+                           ItemsSource="{Binding StoreProducts}"
+                           HeaderRowHeight="52"
+                           RowHeight="48"
+                           SelectionMode="Single"
+                           Opacity="{StaticResource opacity}"
+                           VerticalOverScrollMode="None">
+                            <sfgrid:SfDataGrid.Columns x:TypeArguments="sfgrid:Columns">
+                                <sfgrid:GridTextColumn HeaderFontAttribute="Bold"
+                                       ColumnSizer="Star"
+                                       HeaderText="Name"
+                                       HeaderTextAlignment="Start"
+                                       LineBreakMode="WordWrap"
+                                       LoadUIView="False"
+                                       MappingName="FullName"
+                                       TextAlignment="Start"
+                                       Padding="{StaticResource padding}"
+                                       HeaderCellTextSize="{StaticResource textSize}"
+                                       CellTextSize="{StaticResource textSize}"
+                                       HeaderFont="{StaticResource font}"
+                                       RecordFont="{StaticResource font}">
+                                </sfgrid:GridTextColumn>
+
+                                <sfgrid:GridTextColumn HeaderFontAttribute="Bold"
+                                       ColumnSizer="Auto"
+                                       HeaderText="Miktar"
+                                       HeaderTextAlignment="Start"
+                                       LineBreakMode="WordWrap"
+                                       LoadUIView="False"
+                                       MappingName="Stock"
+                                       TextAlignment="Start"
+                                       Padding="{StaticResource padding}"
+                                       HeaderCellTextSize="{StaticResource textSize}"
+                                       CellTextSize="{StaticResource textSize}"
+                                       HeaderFont="{StaticResource font}"
+                                       RecordFont="{StaticResource font}">
+                                </sfgrid:GridTextColumn>
+
+                                <sfgrid:GridTemplateColumn HeaderCellTextSize="16"
+                                           ColumnSizer="Auto"
+                                           HeaderFontAttribute="Bold"
+                                           HeaderText="#"
+                                           MappingName="Id"
+                                           HeaderFont="{StaticResource font}">
+                                    <sfgrid:GridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <Frame WidthRequest="50" HeightRequest="40" CornerRadius="3" BackgroundColor="Transparent" Margin="0" Padding="0">
+                                                <buttons:SfButton
+                                                Command="{Binding SubmitCommand}"
+                                                Style="{StaticResource GradientButtonStyle}"
+                                                Text="Sil"/>
+                                            </Frame>
+                                        </DataTemplate>
+                                    </sfgrid:GridTemplateColumn.CellTemplate>
+                                </sfgrid:GridTemplateColumn>
+                            </sfgrid:SfDataGrid.Columns>
+                        </sfgrid:SfDataGrid>
+                    </StackLayout>
+                </StackLayout>
+            </ScrollView>
+            <local:LoaderView/>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

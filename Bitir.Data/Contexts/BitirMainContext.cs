@@ -33,6 +33,8 @@ namespace Bitir.Data.Contexts
         public DbSet<Store_UserAccount> Store_UserAccount { get; set; }
         [NotMapped]
         public DbSet<StoreProductViewModel> StoreProductViewModel { get; set; }
+        [NotMapped]
+        public DbSet<StoreProductByCarrierViewModel> StoreProductByCarrierViewModel { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

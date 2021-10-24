@@ -1,5 +1,7 @@
 using AuthModule.Business;
 using AuthModule.Interfaces;
+using BaseModule.Business;
+using BaseModule.Interfaces;
 using Bitir.Data.Contexts;
 using Core.DataAccess;
 using Core.DataAccess.EntityFramework;

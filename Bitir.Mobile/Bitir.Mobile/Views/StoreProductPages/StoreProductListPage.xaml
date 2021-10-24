@@ -185,7 +185,7 @@
                                                 HeightRequest="21"
                                                 LineHeight="{OnPlatform Android=1.25,
                                                                         Default=-1}"
-                                                Text="{Binding Price,StringFormat='Ürün Birim Fiyatı       : {0} TL'}"
+                                                Text="{Binding Price,StringFormat='Ürün Birim Fiyatı        : {0} TL'}"
                                                 TextColor="{DynamicResource Gray-700}" />
                                             </StackLayout>
 

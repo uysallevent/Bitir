@@ -96,7 +96,22 @@ namespace Bitir.Mobile.ViewModels
                 var result = await productService.GetStoreProducts();
                 if (result != null && result.List.Any())
                 {
-                    StoreProducts = new ObservableCollection<StoreProductViewModel>(result.List);
+                    var groupByStoreProdId = result.List.GroupBy(x => x.ProductStoreId).Select(x => new StoreProductViewModel
+                    {
+                        ProductStoreId=x.Key,
+                        Abbreviation=x.FirstOrDefault(y=>y.ProductStoreId==x.Key).Abbreviation,
+                        Id= x.FirstOrDefault(y => y.ProductStoreId == x.Key).Id,
+                        Name= x.FirstOrDefault(y => y.ProductStoreId == x.Key).Name,
+                        Position= x.FirstOrDefault(y => y.ProductStoreId == x.Key).Position,
+                        Price= x.FirstOrDefault(y => y.ProductStoreId == x.Key).Price,
+                        ProductPriceId= x.FirstOrDefault(y => y.ProductStoreId == x.Key).ProductPriceId,
+                        ProductStockId= x.FirstOrDefault(y => y.ProductStoreId == x.Key).ProductStockId,
+                        Quantity= x.FirstOrDefault(y => y.ProductStoreId == x.Key).Quantity,
+                        Status= x.FirstOrDefault(y => y.ProductStoreId == x.Key).Status,
+                        Stock= x.Where(y => y.ProductStoreId == x.Key).Sum(y=>y.Stock),
+                        Unit= x.FirstOrDefault(y => y.ProductStoreId == x.Key).Unit
+                    });
+                    StoreProducts = new ObservableCollection<StoreProductViewModel>(groupByStoreProdId);
                 }
             }
             catch (BadRequestException ex)

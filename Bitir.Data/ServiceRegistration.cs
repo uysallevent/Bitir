@@ -18,6 +18,7 @@ namespace Bitir.Data
             serviceCollection.AddDbContext<BitirMainContext>(options => options.UseSqlServer(connectionString), ServiceLifetime.Scoped);
             serviceCollection.AddScoped<IUnitOfWork, UnitOfWork<BitirMainContext>>();
             serviceCollection.AddScoped<IExecuteProcedure<StoreProductViewModel>, ExecuteProcedure<StoreProductViewModel>>();
+            serviceCollection.AddScoped<IExecuteProcedure<StoreProductByCarrierViewModel>, ExecuteProcedure<StoreProductByCarrierViewModel>>();
         }
     }
 }
