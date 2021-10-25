@@ -6,6 +6,7 @@ namespace Module.Shared.Entities.ProductModuleEntities
     public class StoreProductByCarrierViewModel : IEntity
     {
         [Key]
+        public int ProductStockId { get; set; }
         public int ProductStoreId { get; set; }
         public string ProductName { get; set; }
         public string UnitName { get; set; }

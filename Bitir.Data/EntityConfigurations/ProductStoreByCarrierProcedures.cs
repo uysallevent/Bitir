@@ -14,6 +14,7 @@ namespace Bitir.Data.EntityConfigurations
                         @CarrierId INT
                         AS
                         SELECT 
+						ps.Id AS ProductStockId,
                         ps2.Id AS ProductStoreId,
                         p.Name ProductName,
                         pq.Quantity,

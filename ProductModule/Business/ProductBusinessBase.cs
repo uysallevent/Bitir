@@ -124,64 +124,80 @@ namespace ProductModule.Business
                 throw new ClaimExpection("Claims could not find");
             }
 
-            var productStoreCheck = await _productStoreRepository.GetAsync(x => x.ProductQuantityId == request.ProductQuantityId && x.StoreId == storeId);
-            if (productStoreCheck == null)
+            var productStockResult = await _productStockRepository.GetAsync(x => x.Status == Status.Active && x.Id == request.ProductStockId);
+            if (productStockResult == null)
             {
-                throw new BadRequestException("Bu ürün listenizde bulunamadı");
+                throw new BadRequestException("Ürün stok bilgisi bulunamadı");
+            }
+
+            _productStockRepository.Update(new ProductStock
+            {
+                Id = productStockResult.Id,
+                ProductStoreId = request.ProductStoreId,
+                Quantity = request.Quantity,
+                CarrierId = request.CarrierId,
+                Status = request.Status
+            });
+
+            if (request.ProductPriceId > 0)
+            {
+                _productStorePriceRepository.Update(new ProductStorePrice
+                {
+                    Id = request.ProductPriceId,
+                    Price = request.Price,
+                    ProductStoreId = request.ProductStoreId,
+                    Status = request.Status
+                });
+            }
+
+
+            var result = await _uow.SaveChangesAsync();
+            if (result < 1)
+            {
+                throw new BadRequestException("Ürün bilgileri güncellenemedi");
+            }
+
+            return new ResponseWrapper<bool>(true);
+
+        }
+
+        public async Task<ResponseWrapper<bool>> StoreProductRemoveFromCarrier(UpdateProductStoreRequest request)
+        {
+            var claims = _httpContextAccessor.HttpContext.User.Claims;
+            int.TryParse(claims.FirstOrDefault(x => x.Type == "Store")?.Value, out int storeId);
+            if (storeId < 1)
+            {
+                throw new ClaimExpection("Claims could not find");
             }
 
             var productStockResult = _productStockRepository.GetAll(x => x.Status == Status.Active && x.ProductStoreId == request.ProductStoreId).AsNoTracking();
-            if (request.CarrierId == null && productStockResult.Any(x => x.CarrierId == null))
+            if (productStockResult == null || !productStockResult.Any())
             {
-                var productInStore = productStockResult.FirstOrDefault(x => x.CarrierId == null);
-                _productStockRepository.Update(new ProductStock
-                {
-                    Id = productInStore.Id,
-                    ProductStoreId = request.ProductStoreId,
-                    Quantity = (request.Quantity != 0) ? (request.Quantity + productInStore.Quantity) : 0
-                });
-            }
-            else if (request.CarrierId == null && !productStockResult.Any(x => x.CarrierId == null))
-            {
-                await _productStockRepository.AddAsync(new ProductStock
-                {
-                    ProductStoreId = request.ProductStoreId,
-                    Quantity = request.Quantity
-                });
-            }
-            else if (request.CarrierId != null && productStockResult.Any(x => x.CarrierId == request.CarrierId))
-            {
-                var productInVehicle = productStockResult.FirstOrDefault(x => x.CarrierId == request.CarrierId);
-                _productStockRepository.Update(new ProductStock
-                {
-                    Id = productInVehicle.Id,
-                    ProductStoreId = request.ProductStoreId,
-                    Quantity = (request.Quantity + productInVehicle.Quantity),
-                    CarrierId = request.CarrierId
-                });
-            }
-            else if (request.CarrierId != null && !productStockResult.Any(x => x.CarrierId == request.CarrierId))
-            {
-                await _productStockRepository.AddAsync(new ProductStock
-                {
-                    ProductStoreId = request.ProductStoreId,
-                    Quantity = request.Quantity,
-                    CarrierId = request.CarrierId
-                });
+                throw new BadRequestException("Ürün stok bilgisi bulunamadı");
             }
 
-            _productStoreRepository.Update(new Product_Store
+            var removeItem = productStockResult.FirstOrDefault(x => x.Id == request.ProductStockId);
+            if (removeItem == null)
             {
-                Id = request.ProductStoreId,
-                ProductQuantityId = request.ProductQuantityId,
-                StoreId = storeId,
+                throw new BadRequestException("Ürün stok bilgisi bulunamadı");
+            }
+
+            _productStockRepository.Update(new ProductStock
+            {
+                Id = removeItem.Id,
+                ProductStoreId = removeItem.ProductStoreId,
+                Quantity = 0,
+                CarrierId = removeItem.CarrierId,
                 Status = request.Status
             });
-            _productStorePriceRepository.Update(new ProductStorePrice
+
+            var storeItem = productStockResult.FirstOrDefault(x => x.CarrierId == null);
+
+            _productStockRepository.Update(new ProductStock
             {
-                Id = request.ProductPriceId,
-                Price = request.Price,
-                ProductStoreId = request.ProductStoreId
+                Id = storeItem.Id,
+                ProductStoreId = storeItem.ProductStoreId,
+                Quantity = storeItem.Quantity + removeItem.Quantity,
             });
 
             var result = await _uow.SaveChangesAsync();
@@ -222,8 +238,13 @@ namespace ProductModule.Business
             {
                 return new ResponseWrapperListing<StoreProdByCarrierResponse>(result.Select(x => new StoreProdByCarrierResponse
                 {
-                    CarrierId = request.CarrierId,
-                    Plate = x.Plate,
+                    ProductName = x.ProductName,
+                    Abbreviation = x.Abbreviation,
+                    Quantity = x.Quantity,
+                    UnitName = x.UnitName,
+                    Capacity = x.Capacity,
+                    ProductStoreId = x.ProductStoreId,
+                    ProductStockId = x.ProductStockId,
                     ProductStock = x.ProductStock
                 }));
             }

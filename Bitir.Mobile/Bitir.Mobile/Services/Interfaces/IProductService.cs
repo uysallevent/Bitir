@@ -12,5 +12,6 @@ namespace Bitir.Mobile.Services.Interfaces
         Task<ResponseWrapperListing<StoreProductViewModel>> GetStoreProducts();
         Task<ResponseWrapperListing<StoreProdByCarrierResponse>> GetStoreProductsByCarrier(StoreProdByCarrierRequest request);
         Task<ResponseWrapper<bool>> StoreProductUpdate(UpdateProductStoreRequest request);
+        Task<ResponseWrapper<bool>> StoreProductRemoveFromCarrier(UpdateProductStoreRequest request);
     }
 }

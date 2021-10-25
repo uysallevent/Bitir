@@ -13,7 +13,8 @@ namespace Bitir.Mobile.Services
         private const string getStoreProductsPath = "ProductModule/Product/GetStoreProducts";
         private const string getStoreProductsByCarrierPath = "ProductModule/Product/GetStoreProductsByCarrier";
         private const string addProductToStorePath = "ProductModule/Product/AddProductToStore";
-        private const string updateStoreProdcutPath = "ProductModule/Product/StoreProductUpdate";
+        private const string updateStoreProductPath = "ProductModule/Product/StoreProductUpdate";
+        private const string removeProductFromCarrierPath = "ProductModule/Product/StoreProductRemoveFromCarrier";
 
         public async Task<ResponseWrapperListing<SystemProductResponse>> GetSystemProducts()
         {
@@ -49,7 +50,16 @@ namespace Bitir.Mobile.Services
 
         public async Task<ResponseWrapper<bool>> StoreProductUpdate(UpdateProductStoreRequest request)
         {
-            var restClientRequest = await GetRestClient(Method.POST, updateStoreProdcutPath);
+            var restClientRequest = await GetRestClient(Method.POST, updateStoreProductPath);
+            restClientRequest.Item2.AddParameter("accept", "application/json");
+            restClientRequest.Item2.AddJsonBody(request);
+            var restResponse = await restClientRequest.Item1.ExecuteAsync<ResponseWrapper<bool>>(restClientRequest.Item2);
+            return ResponseHandler(restResponse);
+        }
+
+        public async Task<ResponseWrapper<bool>> StoreProductRemoveFromCarrier(UpdateProductStoreRequest request)
+        {
+            var restClientRequest = await GetRestClient(Method.POST, removeProductFromCarrierPath);
             restClientRequest.Item2.AddParameter("accept", "application/json");
             restClientRequest.Item2.AddJsonBody(request);
             var restResponse = await restClientRequest.Item1.ExecuteAsync<ResponseWrapper<bool>>(restClientRequest.Item2);

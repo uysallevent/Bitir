@@ -5,12 +5,10 @@ using Bitir.Mobile.Validators.Rules;
 using Module.Shared.Entities.ProductModuleEntities;
 using ProductModule.Dtos;
 using SalesModule.Dtos;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
+using Xamarin.Forms;
 
 namespace Bitir.Mobile.ViewModels
 {
@@ -100,10 +98,17 @@ namespace Bitir.Mobile.ViewModels
         private ValidatableObject<StoreProductViewModel> _selectedProduct;
         private ObservableCollection<StoreProdByCarrierResponse> _storeProducts;
         private int carrierId;
+        private Command<object> removeProductFromCarrierCommand;
         #endregion
 
         #region Commands
-
+        public Command<object> RemoveProductFromCarrierCommand
+        {
+            get
+            {
+                return this.removeProductFromCarrierCommand ?? (this.removeProductFromCarrierCommand = new Command<object>(async (s) => await this.RemoveProductClicked(s)));
+            }
+        }
         #endregion
 
         #region Methods
@@ -133,7 +138,7 @@ namespace Bitir.Mobile.ViewModels
                 {
                     CarrierId = carrierId
                 });
-
+                StoreProducts = null;
                 if (result != null && result.List.Any())
                 {
                     StoreProducts = new ObservableCollection<StoreProdByCarrierResponse>(result.List);
@@ -154,6 +159,43 @@ namespace Bitir.Mobile.ViewModels
             }
         }
 
+        private async Task RemoveProductClicked(object product)
+        {
+            var item = product as StoreProdByCarrierResponse;
+
+            IsBusy = true;
+            try
+            {
+                var result = await productService.StoreProductRemoveFromCarrier(new UpdateProductStoreRequest
+                {
+                    Status = Core.Enums.Status.Pasive,
+                    ProductStockId=item.ProductStockId,
+                    ProductStoreId=item.ProductStoreId,
+                    Quantity=item.ProductStock,
+                    CarrierId=this.CarrierId
+                });
+
+                if (result.Result)
+                {
+                    SendNotification(new ExceptionTransfer { NotificationMessage = "Ürün bilgileri başarı ile güncellendi" });
+                    await App.Current.MainPage.Navigation.PopModalAsync(true);
+                    MessagingCenter.Send(this, "UpdateProductList", true);
+                }
+            }
+            catch (BadRequestException ex)
+            {
+                SendNotification(new ExceptionTransfer { ex = ex, NotificationMessage = ex.Message });
+
+            }
+            catch (InternalServerErrorException ex)
+            {
+                SendNotification(new ExceptionTransfer { ex = ex, NotificationMessage = "Servis hatası !!" });
+            }
+            finally
+            {
+                IsBusy = false;
+            }
+        }
 
         #endregion
 

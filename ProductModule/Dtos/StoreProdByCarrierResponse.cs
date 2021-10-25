@@ -4,10 +4,14 @@ namespace ProductModule.Dtos
 {
     public class StoreProdByCarrierResponse
     {
-        public int CarrierId { get; set; }
         public int ProductStockId { get; set; }
+        public int ProductStoreId { get; set; }
+        public string ProductName { get; set; }
+        public string UnitName { get; set; }
+        public string Abbreviation { get; set; }
+        public int Capacity { get; set; }
         public int ProductStock { get; set; }
-        public string Plate { get; set; }
-        public Status? Status { get; set; }
+        public decimal Quantity { get; set; }
+        public string FullName { get { return $"{ProductName} {Quantity} {Abbreviation}"; } }
     }
 }

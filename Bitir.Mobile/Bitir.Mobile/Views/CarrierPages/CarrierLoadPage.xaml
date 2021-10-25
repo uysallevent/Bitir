@@ -222,7 +222,7 @@
                            ItemsSource="{Binding StoreProducts}"
                            HeaderRowHeight="52"
                            RowHeight="48"
-                           SelectionMode="Single"
+                           SelectionMode="None"
                            Opacity="{StaticResource opacity}"
                            VerticalOverScrollMode="None">
                             <sfgrid:SfDataGrid.Columns x:TypeArguments="sfgrid:Columns">
@@ -247,7 +247,7 @@
                                        HeaderTextAlignment="Start"
                                        LineBreakMode="WordWrap"
                                        LoadUIView="False"
-                                       MappingName="Stock"
+                                       MappingName="ProductStock"
                                        TextAlignment="Start"
                                        Padding="{StaticResource padding}"
                                        HeaderCellTextSize="{StaticResource textSize}"
@@ -266,7 +266,8 @@
                                         <DataTemplate>
                                             <Frame WidthRequest="50" HeightRequest="40" CornerRadius="3" BackgroundColor="Transparent" Margin="0" Padding="0">
                                                 <buttons:SfButton
-                                                Command="{Binding SubmitCommand}"
+                                                Command="{Binding Source={x:Reference dataGrid}, Path=BindingContext.RemoveProductFromCarrierCommand}"
+                                                CommandParameter="{Binding .}"
                                                 Style="{StaticResource GradientButtonStyle}"
                                                 Text="Sil"/>
                                             </Frame>
