@@ -12,6 +12,7 @@ namespace Bitir.Mobile.Services
         private const string getSystemProductsPath = "ProductModule/Product/GetSystemProducts";
         private const string getStoreProductsPath = "ProductModule/Product/GetStoreProducts";
         private const string getStoreProductsByCarrierPath = "ProductModule/Product/GetStoreProductsByCarrier";
+        private const string getStoreProductsByStorePath = "ProductModule/Product/GetStoreProductsByStore";
         private const string addProductToStorePath = "ProductModule/Product/AddProductToStore";
         private const string updateStoreProductPath = "ProductModule/Product/StoreProductUpdate";
         private const string removeProductFromCarrierPath = "ProductModule/Product/StoreProductRemoveFromCarrier";
@@ -35,6 +36,13 @@ namespace Bitir.Mobile.Services
             var restClientRequest = await GetRestClient(Method.POST, getStoreProductsByCarrierPath);
             restClientRequest.Item2.AddParameter("accept", "application/json");
             restClientRequest.Item2.AddJsonBody(request);
+            var restResponse = await restClientRequest.Item1.ExecuteAsync<ResponseWrapperListing<StoreProdByCarrierResponse>>(restClientRequest.Item2);
+            return ResponseHandler(restResponse);
+        }
+
+        public async Task<ResponseWrapperListing<StoreProdByCarrierResponse>> getStoreProductsByStore()
+        {
+            var restClientRequest = await GetRestClient(Method.POST, getStoreProductsByStorePath);
             var restResponse = await restClientRequest.Item1.ExecuteAsync<ResponseWrapperListing<StoreProdByCarrierResponse>>(restClientRequest.Item2);
             return ResponseHandler(restResponse);
         }

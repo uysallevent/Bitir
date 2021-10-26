@@ -31,6 +31,7 @@ namespace ProductModule.Business
         private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly IExecuteProcedure<StoreProductViewModel> _executeStoreProductProcedure;
         private readonly IExecuteProcedure<StoreProductByCarrierViewModel> _executeStoreProdByCarrierProcedure;
+        private readonly IExecuteProcedure<StoreProductByStoreViewModel> _executeStoreProdByStoreProcedure;
         public ProductBusinessBase(
             IUnitOfWork uow,
             IRepository<Product> productRepository,
@@ -42,6 +43,7 @@ namespace ProductModule.Business
             IHttpContextAccessor httpContextAccessor,
             IExecuteProcedure<StoreProductViewModel> executeStoreProductProcedure,
             IExecuteProcedure<StoreProductByCarrierViewModel> executeStoreProdByCarrierProcedure,
+            IExecuteProcedure<StoreProductByStoreViewModel> executeStoreProdByStoreProcedure,
             IRepository<ProductStock> productStockRepository) : base(productRepository, uow)
         {
             _productRepository = productRepository;
@@ -55,6 +57,7 @@ namespace ProductModule.Business
             _httpContextAccessor = httpContextAccessor;
             _executeStoreProductProcedure = executeStoreProductProcedure;
             _executeStoreProdByCarrierProcedure = executeStoreProdByCarrierProcedure;
+            _executeStoreProdByStoreProcedure = executeStoreProdByStoreProcedure;
         }
 
         public Task<ResponseWrapperListing<SystemProductResponse>> GetSystemProducts()
@@ -233,7 +236,7 @@ namespace ProductModule.Business
                 throw new ClaimExpection("Claims could not find");
             }
 
-            var result = await _executeStoreProdByCarrierProcedure.ExecuteProc("EXEC product.GetStoreProductsByCarrier {0}", new object[] { request.CarrierId });
+            var result = await _executeStoreProdByCarrierProcedure.ExecuteProc("EXEC product.GetStoreProductsByCarrier {0},{1}", new object[] { request.CarrierId, storeId });
             if (result != null && result.Any())
             {
                 return new ResponseWrapperListing<StoreProdByCarrierResponse>(result.Select(x => new StoreProdByCarrierResponse
@@ -244,6 +247,33 @@ namespace ProductModule.Business
                     UnitName = x.UnitName,
                     Capacity = x.Capacity,
                     ProductStoreId = x.ProductStoreId,
+                    ProductStockId = x.ProductStockId,
+                    ProductStock = x.ProductStock
+                }));
+            }
+
+            return new ResponseWrapperListing<StoreProdByCarrierResponse>(null);
+        }
+
+        public async Task<ResponseWrapperListing<StoreProdByCarrierResponse>> GetStoreProductsByStore()
+        {
+            var claims = _httpContextAccessor.HttpContext.User.Claims;
+            int.TryParse(claims.FirstOrDefault(x => x.Type == "Store")?.Value, out int storeId);
+            if (storeId < 1)
+            {
+                throw new ClaimExpection("Claims could not find");
+            }
+
+            var result = await _executeStoreProdByStoreProcedure.ExecuteProc("EXEC product.GetStoreProductsByStore {0}", new object[] { storeId });
+            if (result != null && result.Any())
+            {
+                return new ResponseWrapperListing<StoreProdByCarrierResponse>(result.Select(x => new StoreProdByCarrierResponse
+                {
+                    ProductName = x.ProductName,
+                    Abbreviation = x.Abbreviation,
+                    Quantity = x.Quantity,
+                    UnitName = x.UnitName,
+                    Capacity = x.Capacity??0,
                     ProductStockId = x.ProductStockId,
                     ProductStock = x.ProductStock
                 }));

@@ -18,6 +18,8 @@ namespace Bitir.Mobile.ViewModels
         public CarrierLoadPageViewModel()
         {
             Initialize();
+            Task.Run(async () => await GetStoreProductsByStore());
+
         }
 
         #endregion
@@ -60,6 +62,22 @@ namespace Bitir.Mobile.ViewModels
             }
         }
 
+        public ObservableCollection<StoreProdByCarrierResponse> StoreProductsInCarrier
+        {
+            get
+            {
+                return _storeProductsInCarrier;
+            }
+            set
+            {
+                if (this._storeProductsInCarrier == value)
+                {
+                    return;
+                }
+                this.SetProperty(ref this._storeProductsInCarrier, value);
+            }
+        }
+
         public ObservableCollection<StoreProdByCarrierResponse> StoreProducts
         {
             get
@@ -91,11 +109,13 @@ namespace Bitir.Mobile.ViewModels
                 this.SetProperty(ref this.carrierId, value);
             }
         }
+
         #endregion
 
         #region Fields
         private ValidatableObject<StoreCarrier> _selectedCarrier;
         private ValidatableObject<StoreProductViewModel> _selectedProduct;
+        private ObservableCollection<StoreProdByCarrierResponse> _storeProductsInCarrier;
         private ObservableCollection<StoreProdByCarrierResponse> _storeProducts;
         private int carrierId;
         private Command<object> removeProductFromCarrierCommand;
@@ -138,7 +158,34 @@ namespace Bitir.Mobile.ViewModels
                 {
                     CarrierId = carrierId
                 });
-                StoreProducts = null;
+                StoreProductsInCarrier = null;
+                if (result != null && result.List.Any())
+                {
+                    StoreProductsInCarrier = new ObservableCollection<StoreProdByCarrierResponse>(result.List);
+                }
+            }
+            catch (BadRequestException ex)
+            {
+                SendNotification(new ExceptionTransfer { ex = ex, NotificationMessage = ex.Message });
+
+            }
+            catch (InternalServerErrorException ex)
+            {
+                SendNotification(new ExceptionTransfer { ex = ex, NotificationMessage = "Servis hatası !!" });
+            }
+            finally
+            {
+                IsBusy = false;
+            }
+        }
+
+        private async Task GetStoreProductsByStore()
+        {
+            IsBusy = true;
+            try
+            {
+                var result = await productService.getStoreProductsByStore();
+                StoreProductsInCarrier = null;
                 if (result != null && result.List.Any())
                 {
                     StoreProducts = new ObservableCollection<StoreProdByCarrierResponse>(result.List);
@@ -169,10 +216,10 @@ namespace Bitir.Mobile.ViewModels
                 var result = await productService.StoreProductRemoveFromCarrier(new UpdateProductStoreRequest
                 {
                     Status = Core.Enums.Status.Pasive,
-                    ProductStockId=item.ProductStockId,
-                    ProductStoreId=item.ProductStoreId,
-                    Quantity=item.ProductStock,
-                    CarrierId=this.CarrierId
+                    ProductStockId = item.ProductStockId,
+                    ProductStoreId = item.ProductStoreId,
+                    Quantity = item.ProductStock,
+                    CarrierId = this.CarrierId
                 });
 
                 if (result.Result)

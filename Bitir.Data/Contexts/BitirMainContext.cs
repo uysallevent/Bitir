@@ -35,6 +35,8 @@ namespace Bitir.Data.Contexts
         public DbSet<StoreProductViewModel> StoreProductViewModel { get; set; }
         [NotMapped]
         public DbSet<StoreProductByCarrierViewModel> StoreProductByCarrierViewModel { get; set; }
+        [NotMapped]
+        public DbSet<StoreProductByStoreViewModel> StoreProductByStoreViewModel { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

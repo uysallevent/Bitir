@@ -13,5 +13,6 @@ namespace ProductModule.Dtos
         public int ProductStock { get; set; }
         public decimal Quantity { get; set; }
         public string FullName { get { return $"{ProductName} {Quantity} {Abbreviation}"; } }
+        public string FullNameWithCapacity { get { return $"{ProductName} {Quantity} {Abbreviation} (Toplam Stok: {ProductStock} adet)"; } }
     }
 }

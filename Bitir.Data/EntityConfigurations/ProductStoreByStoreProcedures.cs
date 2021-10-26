@@ -6,13 +6,12 @@ using System.Text;
 
 namespace Bitir.Data.EntityConfigurations
 {
-    public class ProductStoreByCarrierProcedures : Migration
+    public class ProductStoreByStoreProcedures : Migration
     {
         protected override void Up([NotNullAttribute] MigrationBuilder migrationBuilder)
         {
-            var sp = @"CREATE PROC product.GetStoreProductsByCarrier
-                        @CarrierId INT,
-						@StoreId INT
+            var sp = @"CREATE PROC product.GetStoreProductsByStore
+                        @StoreId INT
                         AS
                         SELECT 
 						ps.Id AS ProductStockId,
@@ -25,15 +24,15 @@ namespace Bitir.Data.EntityConfigurations
                         c.Plate,
                         c.Capacity
                         FROM product.ProductStock ps 
-                        INNER JOIN sales.Carrier c ON c.Id = ps.CarrierId 
-                        INNER JOIN product.ProductStore ps2 ON ps2.Id = ps.ProductStoreId 
-                        INNER JOIN product.ProductQuantity pq ON pq.Id = ps2.ProductQuantityId 
-                        INNER JOIN product.Product p on p.Id = pq.ProductId 
-                        INNER JOIN product.Unit u ON u.Id = pq.UnitId
-                        WHERE 
-						c.Id = @CarrierId AND
-						ps2.StoreId= @StoreId AND
-						ps.Status = 1 AND
+                        LEFT JOIN sales.Carrier c ON c.Id = ps.CarrierId 
+                        LEFT JOIN product.ProductStore ps2 ON ps2.Id = ps.ProductStoreId 
+                        LEFT JOIN product.ProductQuantity pq ON pq.Id = ps2.ProductQuantityId 
+                        LEFT JOIN product.Product p on p.Id = pq.ProductId 
+                        LEFT JOIN product.Unit u ON u.Id = pq.UnitId
+                        WHERE
+						ps.CarrierId IS NULL AND 
+						ps2.StoreId=@StoreId AND
+						ps.Status = 1 AND 
 						pq.Status=1";
             migrationBuilder.Sql(sp);
         }

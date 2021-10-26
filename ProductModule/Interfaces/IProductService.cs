@@ -15,5 +15,6 @@ namespace ProductModule.Interfaces
         Task<ResponseWrapper<bool>> StoreProductRemoveFromCarrier(UpdateProductStoreRequest request);
         Task<ResponseWrapperListing<StoreProductViewModel>> GetStoreProducts();
         Task<ResponseWrapperListing<StoreProdByCarrierResponse>> GetStoreProductsByCarrier(StoreProdByCarrierRequest request);
+        Task<ResponseWrapperListing<StoreProdByCarrierResponse>> GetStoreProductsByStore();
     }
 }

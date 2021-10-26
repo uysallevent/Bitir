@@ -42,6 +42,13 @@ namespace ProductModule.Controllers
             return Ok(result);
         }
 
+        [HttpPost("GetStoreProductsByStore")]
+        public async Task<IActionResult> GetStoreProductsByStore()
+        {
+            var result = await _productService.GetStoreProductsByStore();
+            return Ok(result);
+        }
+
         [HttpPost("AddProductToStore")]
         public async Task<IActionResult> AddProductToStore([FromBody] AddProductToStoreRequest request)
         {

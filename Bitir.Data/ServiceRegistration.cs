@@ -19,6 +19,7 @@ namespace Bitir.Data
             serviceCollection.AddScoped<IUnitOfWork, UnitOfWork<BitirMainContext>>();
             serviceCollection.AddScoped<IExecuteProcedure<StoreProductViewModel>, ExecuteProcedure<StoreProductViewModel>>();
             serviceCollection.AddScoped<IExecuteProcedure<StoreProductByCarrierViewModel>, ExecuteProcedure<StoreProductByCarrierViewModel>>();
+            serviceCollection.AddScoped<IExecuteProcedure<StoreProductByStoreViewModel>, ExecuteProcedure<StoreProductByStoreViewModel>>();
         }
     }
 }
