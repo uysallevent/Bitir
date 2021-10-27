@@ -153,7 +153,7 @@ namespace Bitir.Mobile.ViewModels
             var item = (selectedItem as Syncfusion.ListView.XForms.ItemTappedEventArgs).ItemData as StoreProductViewModel;
             if (item != null)
             {
-                var productStock = ProductStockList.FirstOrDefault(x => x.Key == item.ProductStockId).ToList();
+                var productStock = ProductStockList.FirstOrDefault(x => x.Key == item.ProductStoreId).ToList();
                 App.Current.MainPage.Navigation.PushModalAsync(new ProductSettingsPage(productStock));
             }
         }

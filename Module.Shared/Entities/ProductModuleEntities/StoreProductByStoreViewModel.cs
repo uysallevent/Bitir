@@ -7,6 +7,7 @@ namespace Module.Shared.Entities.ProductModuleEntities
     {
         [Key]
         public int ProductStockId { get; set; }
+        public int ProductStoreId { get; set; }
         public string ProductName { get; set; }
         public string UnitName { get; set; }
         public string Abbreviation { get; set; }

@@ -19,6 +19,7 @@ namespace Bitir.Mobile.ViewModels
         {
             Initialize();
             Task.Run(async () => await GetStoreProductsByStore());
+            SubmitCommand = new Command(async () => await SubmitButtonClicked());
 
         }
 
@@ -46,7 +47,7 @@ namespace Bitir.Mobile.ViewModels
             }
         }
 
-        public ValidatableObject<StoreProductViewModel> SelectedProduct
+        public ValidatableObject<StoreProdByCarrierResponse> SelectedProduct
         {
             get
             {
@@ -94,6 +95,22 @@ namespace Bitir.Mobile.ViewModels
             }
         }
 
+        public ValidatableObject<string> Quantity
+        {
+            get
+            {
+                return quantity;
+            }
+            set
+            {
+                if (this.quantity == value)
+                {
+                    return;
+                }
+                this.SetProperty(ref this.quantity, value);
+            }
+        }
+
         public int CarrierId
         {
             get
@@ -114,14 +131,16 @@ namespace Bitir.Mobile.ViewModels
 
         #region Fields
         private ValidatableObject<StoreCarrier> _selectedCarrier;
-        private ValidatableObject<StoreProductViewModel> _selectedProduct;
+        private ValidatableObject<StoreProdByCarrierResponse> _selectedProduct;
         private ObservableCollection<StoreProdByCarrierResponse> _storeProductsInCarrier;
         private ObservableCollection<StoreProdByCarrierResponse> _storeProducts;
+        private ValidatableObject<string> quantity;
         private int carrierId;
         private Command<object> removeProductFromCarrierCommand;
         #endregion
 
         #region Commands
+        public Command SubmitCommand { get; set; }
         public Command<object> RemoveProductFromCarrierCommand
         {
             get
@@ -134,19 +153,26 @@ namespace Bitir.Mobile.ViewModels
         #region Methods
         private void Initialize()
         {
+            Quantity = new ValidatableObject<string>();
             this.SelectedCarrier = new ValidatableObject<StoreCarrier>();
-            this.SelectedProduct = new ValidatableObject<StoreProductViewModel>();
+            this.SelectedProduct = new ValidatableObject<StoreProdByCarrierResponse>();
+            AddValidationRules();
         }
 
         private void AddValidationRules()
         {
             this.SelectedCarrier.Validations.Add(new IsNotNullOrEmptyRule<StoreCarrier> { ValidationMessage = "Lütfen bir araç seçin" });
+            this.SelectedProduct.Validations.Add(new IsNotNullOrEmptyRule<StoreProdByCarrierResponse> { ValidationMessage = "Lütfen bir ürün seçin" });
+            this.Quantity.Validations.Add(new IsNotNullOrEmptyRule<string> { ValidationMessage = "Lütfen bir miktar bilgisi girin" });
+            this.Quantity.Validations.Add(new ZeroCheck<string> { ValidationMessage = "Lütfen 0'dan farklı bir değer girin" });
         }
 
         private bool AreFieldsValid()
         {
             bool isCarrierSelect = SelectedCarrier.Validate();
-            return isCarrierSelect;
+            bool isProductSelect = SelectedProduct.Validate();
+            bool isQuantity = Quantity.Validate();
+            return isCarrierSelect && isProductSelect && isQuantity;
         }
 
         private async Task GetStoreProductsByCarrier(int carrierId)
@@ -241,6 +267,46 @@ namespace Bitir.Mobile.ViewModels
             finally
             {
                 IsBusy = false;
+            }
+        }
+
+        private async Task SubmitButtonClicked()
+        {
+            if (this.AreFieldsValid())
+            {
+                IsBusy = true;
+                try
+                {
+                    var result = await productService.AddOrUpdateProductInCarrier(new UpdateProductStoreRequest
+                    {
+                        CarrierId = this.CarrierId,
+                        Quantity = int.Parse(this.Quantity.Value.ToString()),
+                        ProductStoreId = this.SelectedProduct.Value.ProductStoreId
+                    });
+
+                    if (result.Result)
+                    {
+                        this.Quantity = new ValidatableObject<string>();
+                        this.SelectedProduct = new ValidatableObject<StoreProdByCarrierResponse>();
+                        await GetStoreProductsByStore();
+                        await GetStoreProductsByCarrier(this.carrierId);
+                        SendNotification(new ExceptionTransfer { NotificationMessage = "Araçta ürün güncellemesi gerçekleşti" });
+                    }
+                }
+                catch (BadRequestException ex)
+                {
+                    SendNotification(new ExceptionTransfer { ex = ex, NotificationMessage = ex.Message });
+
+                }
+                catch (InternalServerErrorException ex)
+                {
+                    SendNotification(new ExceptionTransfer { ex = ex, NotificationMessage = "Servis hatası !!" });
+                }
+                finally
+                {
+                    IsBusy = false;
+                }
+
             }
         }
 

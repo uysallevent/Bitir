@@ -14,6 +14,7 @@ namespace Bitir.Mobile.ViewModels
         #region Constructure
         public CarrierListPageViewModel()
         {
+            Initialize();
             MessagingCenter.Subscribe<CarrierAddPageViewModel, bool>(this, "UpdateCarrierList", async (s, b) =>
             {
                 if (b)
@@ -83,7 +84,7 @@ namespace Bitir.Mobile.ViewModels
 
         #region Methods
 
-        public void Initialize()
+        private  void Initialize()
         {
             Carriers = new ObservableCollection<StoreCarrier>();
         }

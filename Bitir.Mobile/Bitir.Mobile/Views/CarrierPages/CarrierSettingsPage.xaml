@@ -171,7 +171,7 @@
                             <Grid ColumnDefinitions="*, Auto">
                                 <buttons:SfButton
                                     Margin="20,0,20,0"
-                                    Command="{Binding SubmitButtonCommand}"
+                                    Command="{Binding RemoveButtonCommand}"
                                     Style="{StaticResource DataFormBorderlessEntryBorderStyle}"
                                     BackgroundColor="Red"
                                     Text="Sil"

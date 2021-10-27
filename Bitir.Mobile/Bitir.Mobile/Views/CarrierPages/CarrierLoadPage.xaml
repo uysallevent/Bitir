@@ -128,7 +128,7 @@
                     <!--  Select Product -->
                     <StackLayout>
                         <Label
-                    Margin="0,0,0,4"
+                    Margin="0,20,0,4"
                     FontFamily="Montserrat-Medium"
                     FontSize="12"
                     HeightRequest="18"
@@ -166,7 +166,7 @@
                     <!--  Quantity  -->
                     <StackLayout>
                         <Label
-                    Margin="0,0,0,4"
+                    Margin="0,20,0,4"
                     FontFamily="Montserrat-Medium"
                     FontSize="12"
                     HeightRequest="18"
@@ -181,6 +181,7 @@
                         HeightRequest="40"
                         Keyboard="Numeric"
                         Placeholder="Adet"
+                        Focused="ProductQuantityEntry_Focused"
                         Text="{Binding Quantity.Value}"
                         Style="{StaticResource BorderlessEntryStyle}">
                                     <Entry.Behaviors>
@@ -208,7 +209,7 @@
 
                     <!--  Submit Button  -->
                     <buttons:SfButton
-                    Margin="0,0,0,0"
+                    Margin="0,10,0,20"
                     Command="{Binding SubmitCommand}"
                     Style="{StaticResource GradientButtonStyle}"
                     Text="EKLE"

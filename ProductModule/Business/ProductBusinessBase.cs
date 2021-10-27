@@ -127,7 +127,7 @@ namespace ProductModule.Business
                 throw new ClaimExpection("Claims could not find");
             }
 
-            var productStockResult = await _productStockRepository.GetAsync(x => x.Status == Status.Active && x.Id == request.ProductStockId);
+            var productStockResult = await _productStockRepository.GetAsync(x => (x.Status == Status.Active || x.Status == Status.Pasive) && x.Id == request.ProductStockId);
             if (productStockResult == null)
             {
                 throw new BadRequestException("Ürün stok bilgisi bulunamadı");
@@ -135,7 +135,7 @@ namespace ProductModule.Business
 
             _productStockRepository.Update(new ProductStock
             {
-                Id = productStockResult.Id,
+                Id = request.ProductStockId ?? productStockResult.Id,
                 ProductStoreId = request.ProductStoreId,
                 Quantity = request.Quantity,
                 CarrierId = request.CarrierId,
@@ -158,6 +158,60 @@ namespace ProductModule.Business
             if (result < 1)
             {
                 throw new BadRequestException("Ürün bilgileri güncellenemedi");
+            }
+
+            return new ResponseWrapper<bool>(true);
+
+        }
+
+        public async Task<ResponseWrapper<bool>> StoreProductAddOrUpdateInCarrier(UpdateProductStoreRequest request)
+        {
+            var claims = _httpContextAccessor.HttpContext.User.Claims;
+            int.TryParse(claims.FirstOrDefault(x => x.Type == "Store")?.Value, out int storeId);
+            if (storeId < 1)
+            {
+                throw new ClaimExpection("Claims could not find");
+            }
+
+            var productStockResult = _productStockRepository.GetAll(x => x.Status == Status.Active && x.ProductStoreId == request.ProductStoreId).AsNoTracking();
+
+            var inStore = productStockResult.FirstOrDefault(x => x.CarrierId == null);
+            var inVehicle = productStockResult.FirstOrDefault(x => x.CarrierId == request.CarrierId);
+            if (inStore.Quantity - request.Quantity < 0)
+            {
+                throw new BadRequestException("Depo ürün stoğunuz yeterli değil");
+            }
+
+            if (inVehicle == null)
+            {
+                await _productStockRepository.AddAsync(new ProductStock
+                {
+                    ProductStoreId = request.ProductStoreId,
+                    Quantity = request.Quantity,
+                    CarrierId = request.CarrierId
+                });
+            }
+            else
+            {
+                _productStockRepository.Update(new ProductStock
+                {
+                    Id = inVehicle.Id,
+                    ProductStoreId = inVehicle.ProductStoreId,
+                    Quantity = inVehicle.Quantity + request.Quantity
+                });
+            }
+
+            _productStockRepository.Update(new ProductStock
+            {
+                Id = inStore.Id,
+                ProductStoreId = inStore.ProductStoreId,
+                Quantity = inStore.Quantity - request.Quantity
+            });
+
+            var result = await _uow.SaveChangesAsync();
+            if (result < 1)
+            {
+                throw new BadRequestException("Araçta ürün güncellemesi yapılamadı");
             }
 
             return new ResponseWrapper<bool>(true);
@@ -273,8 +327,9 @@ namespace ProductModule.Business
                     Abbreviation = x.Abbreviation,
                     Quantity = x.Quantity,
                     UnitName = x.UnitName,
-                    Capacity = x.Capacity??0,
+                    Capacity = x.Capacity ?? 0,
                     ProductStockId = x.ProductStockId,
+                    ProductStoreId = x.ProductStoreId,
                     ProductStock = x.ProductStock
                 }));
             }

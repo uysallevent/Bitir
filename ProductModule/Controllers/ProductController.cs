@@ -54,8 +54,15 @@ namespace ProductModule.Controllers
         {
             var result = await _productService.AddProductToStore(request);
             return Ok(result);
-        }        
-        
+        }
+
+        [HttpPost("AddOrUpdateProductInCarrier")]
+        public async Task<IActionResult> AddOrUpdateProductInCarrier([FromBody] UpdateProductStoreRequest request)
+        {
+            var result = await _productService.StoreProductAddOrUpdateInCarrier(request);
+            return Ok(result);
+        }
+
         [HttpPost("StoreProductUpdate")]
         public async Task<IActionResult> StoreProductUpdate([FromBody] UpdateProductStoreRequest request)
         {

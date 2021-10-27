@@ -100,6 +100,7 @@ namespace AuthModule.Business
                 Id = request.CarrierId,
                 Plate = request.Plate,
                 Capacity = request.Capacity,
+                Status = request.Status
             });
 
             var result = await _uow.SaveChangesAsync();
@@ -120,7 +121,7 @@ namespace AuthModule.Business
                 throw new ClaimExpection("Claims could not find");
             }
 
-            var result = await _carrierRepository.GetAll().Join(_carrierStoreRepository.GetAll().Where(x => x.StoreId == storeId), x => x.Id, y => y.CarrierId, (x, y) => new { carrierId = x.Id, x.Plate, x.Capacity, carrierStoreId = y.Id, y.Status }).Select(x => new StoreCarrier { CarrierId = x.carrierId, CarrierStoreId = x.carrierStoreId, Plate = x.Plate, Capacity = x.Capacity, Status = x.Status }).ToListAsync();
+            var result = await _carrierRepository.GetAll().Join(_carrierStoreRepository.GetAll().Where(x => x.StoreId == storeId && x.Status == Core.Enums.Status.Active), x => x.Id, y => y.CarrierId, (x, y) => new { carrierId = x.Id, x.Plate, x.Capacity, carrierStoreId = y.Id, y.Status }).Select(x => new StoreCarrier { CarrierId = x.carrierId, CarrierStoreId = x.carrierStoreId, Plate = x.Plate, Capacity = x.Capacity, Status = x.Status }).ToListAsync();
 
             if (result == null || !result.Any())
             {

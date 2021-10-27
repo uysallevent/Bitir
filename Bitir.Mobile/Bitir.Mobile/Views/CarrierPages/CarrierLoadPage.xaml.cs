@@ -1,4 +1,5 @@
-﻿using Xamarin.Forms;
+﻿using Bitir.Mobile.Controls;
+using Xamarin.Forms;
 using Xamarin.Forms.Internals;
 using Xamarin.Forms.Xaml;
 
@@ -11,6 +12,15 @@ namespace Bitir.Mobile.Views
         public CarrierLoadPage()
         {
             this.InitializeComponent();
+        }
+
+        private void ProductQuantityEntry_Focused(object sender, FocusEventArgs e)
+        {
+            var val = ((BorderlessEntry)sender).Text;
+            if (val == "0")
+            {
+                ((BorderlessEntry)sender).Text = string.Empty;
+            }
         }
     }
 }

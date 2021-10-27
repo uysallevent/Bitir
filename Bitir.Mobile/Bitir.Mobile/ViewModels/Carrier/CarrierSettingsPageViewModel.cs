@@ -188,9 +188,47 @@ namespace Bitir.Mobile.ViewModels
 
         private async Task RemoveButtonClicked()
         {
+            if (this.AreFieldsValid())
+            {
+                IsBusy = true;
+                try
+                {
+                    var question =await App.Current.MainPage.DisplayAlert("Uyarı","Aracı silmek istediğinize eminmisiniz ?","Evet","Hayır");
+                    if (!question)
+                    {
+                        return;
+                    }
 
+                    var result = await carrierService.UpdateStoreCarrier(new UpdateCarrierToStoreRequest
+                    {
+                        CarrierId = StoreCarrier.CarrierId,
+                        CarrierStoreId = StoreCarrier.CarrierStoreId,
+                        Status = Core.Enums.Status.Deleted
+                    });
+
+                    if (result != null && result.Result)
+                    {
+                        SendNotification(new ExceptionTransfer { NotificationMessage = "Araç başarı ile silindi" });
+                        await App.Current.MainPage.Navigation.PopModalAsync(true);
+                        MessagingCenter.Send(this, "UpdateCarrierList", true);
+                    }
+
+                }
+                catch (BadRequestException ex)
+                {
+                    SendNotification(new ExceptionTransfer { ex = ex, NotificationMessage = ex.Message });
+
+                }
+                catch (InternalServerErrorException ex)
+                {
+                    SendNotification(new ExceptionTransfer { ex = ex, NotificationMessage = "Servis hatası !!" });
+                }
+                finally
+                {
+                    IsBusy = false;
+                }
+            }
         }
-
         #endregion
     }
 }

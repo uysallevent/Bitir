@@ -10,7 +10,7 @@ namespace Bitir.Data.EntityConfigurations
     {
         protected override void Up([NotNullAttribute] MigrationBuilder migrationBuilder)
         {
-            var sp = @"CREATE proc product.GetStoreProducts
+            var sp = @"CREATE proc [product].[GetStoreProducts]
                         @storeId int
                         as
                         SELECT 
@@ -25,7 +25,7 @@ namespace Bitir.Data.EntityConfigurations
                         pp.Price as Price,
                         pstck.Quantity as Stock,
                         ISNULL(c.Plate,'DEPO') AS Position,
-						pstr.Status
+						pstck.Status
                         FROM product.ProductQuantity Pq
                         LEFT JOIN product.ProductStore pstr on pstr.ProductQuantityId=pq.Id
                         LEFT JOIN product.Product p on p.Id=pq.ProductId
@@ -33,7 +33,11 @@ namespace Bitir.Data.EntityConfigurations
                         LEFT JOIN product.ProductStock pstck on pstck.ProductStoreId=pstr.Id
                         LEFT JOIN sales.carrier c on c.Id = pstck.CarrierId
                         LEFT JOIN product.ProductPrice pp on pp.ProductStoreId=pstr.Id
-                        WHERE StoreId=@storeId AND pstr.Status = 1 AND pstck.Status = 1";
+                        WHERE 
+						StoreId=@storeId AND 
+						pstr.Status = 1 AND 
+						pstck.Status = 1 OR
+						pstck.Status = 2";
             migrationBuilder.Sql(sp);
         }
     }
