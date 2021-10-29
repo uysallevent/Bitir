@@ -49,6 +49,7 @@ namespace Bitir.Mobile.ViewModels
             this.AddValidationRules();
             SubmitButtonCommand = new Command(async () => await SubmitButtonClicked());
             BackButtonCommand = new Command(async () => await BackButtonClicked());
+            RemoveButtonCommand = new Command(async () => await RemoveButtonClicked());
             StoreProductStock = new ObservableCollection<StoreProductViewModel>(storeProductStocks);
             this.StoreProductViewModel = storeProductStocks.FirstOrDefault();
             Status = this.storeProductViewModel.Status != Core.Enums.Status.Pasive;
@@ -181,6 +182,8 @@ namespace Bitir.Mobile.ViewModels
 
         public Command SubmitButtonCommand { get; set; }
         public Command BackButtonCommand { get; set; }
+        public Command RemoveButtonCommand { get; set; }
+
         #endregion
 
         #region Methods
@@ -250,6 +253,41 @@ namespace Bitir.Mobile.ViewModels
             }
         }
 
+        private async Task RemoveButtonClicked()
+        {
+            IsBusy = true;
+            try
+            {
+                var question = await App.Current.MainPage.DisplayAlert("Uyarı", "Ürünü silmek istediğinize eminmisiniz ?", "Evet", "Hayır");
+                if (!question)
+                {
+                    return;
+                }
+
+                var result = await productService.StoreProductRemoveFromStore(storeProductViewModel.ProductStoreId);
+
+                if (result != null && result.Result)
+                {
+                    SendNotification(new ExceptionTransfer { NotificationMessage = "Ürün başarı ile silindi" });
+                    await App.Current.MainPage.Navigation.PopModalAsync(true);
+                    MessagingCenter.Send(this, "UpdateProductList", true);
+                }
+
+            }
+            catch (BadRequestException ex)
+            {
+                SendNotification(new ExceptionTransfer { ex = ex, NotificationMessage = ex.Message });
+
+            }
+            catch (InternalServerErrorException ex)
+            {
+                SendNotification(new ExceptionTransfer { ex = ex, NotificationMessage = "Servis hatası !!" });
+            }
+            finally
+            {
+                IsBusy = false;
+            }
+        }
 
         #endregion
     }

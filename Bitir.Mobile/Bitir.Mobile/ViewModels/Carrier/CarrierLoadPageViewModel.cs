@@ -241,7 +241,7 @@ namespace Bitir.Mobile.ViewModels
             {
                 var result = await productService.StoreProductRemoveFromCarrier(new UpdateProductStoreRequest
                 {
-                    Status = Core.Enums.Status.Pasive,
+                    Status = Core.Enums.Status.Deleted,
                     ProductStockId = item.ProductStockId,
                     ProductStoreId = item.ProductStoreId,
                     Quantity = item.ProductStock,

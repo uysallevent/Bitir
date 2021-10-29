@@ -76,5 +76,12 @@ namespace ProductModule.Controllers
             var result = await _productService.StoreProductRemoveFromCarrier(request);
             return Ok(result);
         }
+
+        [HttpDelete("StoreProductRemoveFromStore")]
+        public async Task<IActionResult> StoreProductRemoveFromStore([FromBody] int storeProductId)
+        {
+            var result = await _productService.StoreProductRemoveFromStore(storeProductId);
+            return Ok(result);
+        }
     }
 }

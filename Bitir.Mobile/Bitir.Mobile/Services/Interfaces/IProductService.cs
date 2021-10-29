@@ -15,5 +15,6 @@ namespace Bitir.Mobile.Services.Interfaces
         Task<ResponseWrapper<bool>> StoreProductUpdate(UpdateProductStoreRequest request);
         Task<ResponseWrapper<bool>> AddOrUpdateProductInCarrier(UpdateProductStoreRequest request);
         Task<ResponseWrapper<bool>> StoreProductRemoveFromCarrier(UpdateProductStoreRequest request);
+        Task<ResponseWrapper<bool>> StoreProductRemoveFromStore(int storeProductId);
     }
 }

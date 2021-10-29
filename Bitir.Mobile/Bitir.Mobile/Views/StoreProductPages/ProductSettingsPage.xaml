@@ -237,6 +237,31 @@
 
                 <BoxView Style="{StaticResource HorizontalSeparatorStyle}" />
 
+                <Grid
+                    BackgroundColor="{DynamicResource Gray-Bg}"
+                    ColumnDefinitions="*, Auto">
+
+                    <StackLayout>
+                        <Label Margin="16,12"
+                               FontFamily="Montserrat-Medium" 
+                               HorizontalOptions="Start"
+                               Style="{StaticResource TitleLabelStyle}"
+                               Text="Ürünü Sil"/>
+                        <border:SfBorder 
+                    BorderColor="{Binding Source={x:Reference ProductQuantityEntry}, Path=IsFocused, Converter={StaticResource ColorConverter}, ConverterParameter=0}" Style="{StaticResource DataFormBorderlessEntryBorderStyle}">
+                            <Grid ColumnDefinitions="*, Auto">
+                                <buttons:SfButton
+                                    Margin="20,0,20,0"
+                                    Command="{Binding RemoveButtonCommand}"
+                                    Style="{StaticResource DataFormBorderlessEntryBorderStyle}"
+                                    BackgroundColor="Red"
+                                    Text="Sil"
+                                    WidthRequest="200" />
+                            </Grid>
+                        </border:SfBorder>
+                    </StackLayout>
+                </Grid>
+
                 <!--  Submit Button  -->
                 <buttons:SfButton
                     Margin="0,24,0,0"

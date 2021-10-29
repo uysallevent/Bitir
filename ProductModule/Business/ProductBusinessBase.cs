@@ -20,13 +20,10 @@ namespace ProductModule.Business
 {
     public class ProductBusinessBase : BusinessBase<Product>, IProductService<Product>
     {
-        private IRepository<Product> _productRepository;
         private IRepository<Product_Store> _productStoreRepository;
         private IRepository<ProductQuantity> _productQuantityRepository;
         private IRepository<ProductStorePrice> _productStorePriceRepository;
         private IRepository<ProductStock> _productStockRepository;
-        private IRepository<Carrier> _carrierRepository;
-        private IRepository<Unit> _unitRepository;
         private IUnitOfWork _uow;
         private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly IExecuteProcedure<StoreProductViewModel> _executeStoreProductProcedure;
@@ -38,21 +35,16 @@ namespace ProductModule.Business
             IRepository<Product_Store> productStoreRepository,
             IRepository<ProductQuantity> productQuantityRepository,
             IRepository<ProductStorePrice> productStorePriceRepository,
-            IRepository<Carrier> carrierRepository,
-            IRepository<Unit> unitRepository,
             IHttpContextAccessor httpContextAccessor,
             IExecuteProcedure<StoreProductViewModel> executeStoreProductProcedure,
             IExecuteProcedure<StoreProductByCarrierViewModel> executeStoreProdByCarrierProcedure,
             IExecuteProcedure<StoreProductByStoreViewModel> executeStoreProdByStoreProcedure,
             IRepository<ProductStock> productStockRepository) : base(productRepository, uow)
         {
-            _productRepository = productRepository;
             _productStoreRepository = productStoreRepository;
             _productQuantityRepository = productQuantityRepository;
             _productStockRepository = productStockRepository;
             _productStorePriceRepository = productStorePriceRepository;
-            _carrierRepository = carrierRepository;
-            _unitRepository = unitRepository;
             _uow = uow;
             _httpContextAccessor = httpContextAccessor;
             _executeStoreProductProcedure = executeStoreProductProcedure;
@@ -80,7 +72,7 @@ namespace ProductModule.Business
                 throw new ClaimExpection("Claims could not find");
             }
 
-            var productStoreCheck = await _productStoreRepository.GetAsync(x => x.ProductQuantityId == request.ProductQuantityId && x.StoreId == storeId);
+            var productStoreCheck = await _productStoreRepository.GetAsync(x => x.ProductQuantityId == request.ProductQuantityId && x.StoreId == storeId && x.Status == Status.Active);
             if (productStoreCheck != null)
             {
                 throw new BadRequestException("Bu ürün listenizde kayıtlı");
@@ -261,6 +253,36 @@ namespace ProductModule.Business
             if (result < 1)
             {
                 throw new BadRequestException("Ürün bilgileri güncellenemedi");
+            }
+
+            return new ResponseWrapper<bool>(true);
+
+        }
+
+        public async Task<ResponseWrapper<bool>> StoreProductRemoveFromStore(int storeProductId)
+        {
+            var storeProduct = await _productStoreRepository.GetAsync(x => x.Id == storeProductId);
+            if (storeProduct == null)
+            {
+                throw new BadRequestException("Ürün bulunamadı");
+            }
+            var storeProductStocks = _productStockRepository.GetAll(x => x.ProductStoreId == storeProductId).AsNoTracking();
+            if (storeProductStocks != null && storeProductStocks.Any())
+            {
+                await storeProductStocks.ForEachAsync(x =>
+                {
+                    x.Status = Status.Deleted;
+                    _productStockRepository.Update(x);
+                });
+            }
+
+            storeProduct.Status = Status.Deleted;
+            _productStoreRepository.Update(storeProduct);
+
+            var result = await _uow.SaveChangesAsync();
+            if (result < 1)
+            {
+                throw new BadRequestException("Ürün başarı ile silindi");
             }
 
             return new ResponseWrapper<bool>(true);
