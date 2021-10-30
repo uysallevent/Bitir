@@ -1,5 +1,5 @@
 ﻿using BaseModule.Interfaces;
-using Bitir.Data.Model.Dtos;
+using Core.Wrappers;
 using Core.DataAccess;
 using Core.DataAccess.EntityFramework.Interfaces;
 using Core.Entities;

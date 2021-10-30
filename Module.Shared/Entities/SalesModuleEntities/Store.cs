@@ -12,6 +12,7 @@ namespace Module.Shared.Entities.SalesModuleEntities
         public IEnumerable<Product_Store> ProductStores { get; set; }
         public IEnumerable<Store_UserAccount> Store_UserAccounts { get; set; }
         public IEnumerable<Carrier_Store> Carrier_Stores { get; set; }
+        public IEnumerable<Order> Order { get; set; }
 
     }
 }

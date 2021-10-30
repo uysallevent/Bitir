@@ -1,4 +1,4 @@
-﻿using Bitir.Data.Model.Dtos;
+﻿using Core.Wrappers;
 using Core.Entities;
 using Core.Utilities.Results;
 using System.Collections.Generic;

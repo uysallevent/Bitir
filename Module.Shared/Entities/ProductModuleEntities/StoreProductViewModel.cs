@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Module.Shared.Entities.ProductModuleEntities
 {
-    public class StoreProductViewModel:IEntity
+    public class StoreProductViewModel: IProcedureEntity
     {
         public int Id { get; set; }
         public int ProductStoreId { get; set; }

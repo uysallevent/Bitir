@@ -11,6 +11,7 @@ namespace Module.Shared.Entities.SalesModuleEntities.Configuration
             new CarrierConfiguration().Configure(modelBuilder.Entity<Carrier>());
             new Store_UserAccountConfiguration().Configure(modelBuilder.Entity<Store_UserAccount>());
             new StoreConfiguration().Configure(modelBuilder.Entity<Store>());
+            new OrderConfiguration().Configure(modelBuilder.Entity<Order>());
         }
     }
 }

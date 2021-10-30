@@ -24,5 +24,9 @@ namespace Module.Shared.Entities.AuthModuleEntities
         public IEnumerable<UserToken> UserTokens { get; set; }
         [JsonIgnore]
         public IEnumerable<Store_UserAccount> Store_UserAccounts { get; set; }
+        [JsonIgnore]
+        public IEnumerable<Order> Order { get; set; }
+        [JsonIgnore]
+        public IEnumerable<UserAddress> UserAddress { get; set; }
     }
 }

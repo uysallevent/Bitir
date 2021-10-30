@@ -1,4 +1,4 @@
-﻿using Bitir.Data.Model.Dtos;
+﻿using Core.Wrappers;
 using Bitir.Mobile.Services.Interfaces;
 using RestSharp;
 using SalesModule.Dtos;

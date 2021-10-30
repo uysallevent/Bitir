@@ -62,7 +62,10 @@ namespace AuthModule
             services.AddScoped<IAuthBusinessBase<UserAccount>, AuthBusinessBase>();
             services.AddHttpContextAccessor();
             services.AddScoped<IRepository<UserAccount>, EFRepository<UserAccount, BitirMainContext>>();
+            services.AddScoped<IRepository<UserAddress>, EFRepository<UserAddress, BitirMainContext>>();
             services.AddScoped<IRepository<UserToken>, EFRepository<UserToken, BitirMainContext>>();
+            services.AddScoped<IRepository<Province>, EFRepository<Province, BitirMainContext>>();
+            services.AddScoped<IRepository<District>, EFRepository<District, BitirMainContext>>();
 
         }
 

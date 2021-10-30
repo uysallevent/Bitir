@@ -1,4 +1,4 @@
-﻿using Bitir.Data.Model.Dtos;
+﻿using Core.Wrappers;
 using SalesModule.Dtos;
 using System.Threading.Tasks;
 

@@ -20,10 +20,12 @@ namespace SalesModule
         public void ConfigureServices(IServiceCollection services, IConfiguration configuration = null)
         {
             services.AddScoped<ICarrierBusinessBase<Carrier>, CarrierBusinessBase>();
+            services.AddScoped<IOrderBusinessBase<Order>, OrderBusinessBase>();
             services.AddScoped<IRepository<Carrier>, EFRepository<Carrier, BitirMainContext>>();
             services.AddScoped<IRepository<Carrier_Store>, EFRepository<Carrier_Store, BitirMainContext>>();
             services.AddScoped<IRepository<Store>, EFRepository<Store, BitirMainContext>>();
             services.AddScoped<IRepository<Store_UserAccount>, EFRepository<Store_UserAccount, BitirMainContext>>();
+            services.AddScoped<IRepository<Order>, EFRepository<Order, BitirMainContext>>();
         }
 
         public void Configure(IApplicationBuilder app, Microsoft.AspNetCore.Hosting.IWebHostEnvironment env)

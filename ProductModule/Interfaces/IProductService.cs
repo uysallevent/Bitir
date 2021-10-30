@@ -1,6 +1,6 @@
 ﻿using BaseModule.Interfaces;
-using Bitir.Data.Model.Dtos;
 using Core.Entities;
+using Core.Wrappers;
 using Module.Shared.Entities.ProductModuleEntities;
 using ProductModule.Dtos;
 using System.Threading.Tasks;

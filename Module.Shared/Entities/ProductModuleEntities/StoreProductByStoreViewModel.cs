@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Module.Shared.Entities.ProductModuleEntities
 {
-    public class StoreProductByStoreViewModel : IEntity
+    public class StoreProductByStoreViewModel : IProcedureEntity
     {
         [Key]
         public int ProductStockId { get; set; }

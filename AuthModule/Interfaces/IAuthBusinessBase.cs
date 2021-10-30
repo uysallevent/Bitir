@@ -1,8 +1,8 @@
 ﻿using AuthModule.Dto;
 using AuthModule.Security.JWT;
 using BaseModule.Interfaces;
-using Bitir.Data.Model.Dtos;
 using Core.Entities;
+using Core.Wrappers;
 using Module.Shared.Entities.AuthModuleEntities;
 using System.Threading.Tasks;
 

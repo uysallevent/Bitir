@@ -19,14 +19,14 @@
                 Size="16" />
         </local:Dashboard.IconImageSource>
     </local:Dashboard>
-    <local:Dashboard Title="Siparisler">
-        <local:Dashboard.IconImageSource>
+    <local:StoreOrderListPage Title="Siparisler">
+        <local:StoreOrderListPage.IconImageSource>
             <FontImageSource
                 FontFamily="FontIcons"
                 Glyph="{StaticResource AlbumsIcon}"
                 Size="16" />
-        </local:Dashboard.IconImageSource>
-    </local:Dashboard>
+        </local:StoreOrderListPage.IconImageSource>
+    </local:StoreOrderListPage>
     <local:SettingsPage Title="Settings">
         <local:SettingsPage.IconImageSource>
             <FontImageSource

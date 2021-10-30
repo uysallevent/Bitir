@@ -1,0 +1,59 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="Bitir.Mobile.Views.StoreOrderListPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:buttons="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms"
+    xmlns:controls="clr-namespace:Bitir.Mobile.Controls"
+    xmlns:converter="clr-namespace:Bitir.Mobile.Converters"
+    xmlns:template="clr-namespace:Bitir.Mobile.Views.Templates"
+    x:Name="bookmarksPage"
+    BackgroundColor="{DynamicResource Gray-Bg}"
+    NavigationPage.HasNavigationBar="False">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converter:BooleanToStringConverter x:Key="BoolToStringConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <ContentPage.ControlTemplate>
+        <ControlTemplate>
+            <StackLayout Spacing="0">
+                <!--  Title View  -->
+                <controls:TitleView Title="Bookmarks">
+                    <controls:TitleView.LeadingView>
+                        <buttons:SfButton
+                            x:Name="backButton"
+                            Command="{Binding BindingContext.BackButtonCommand, Source={x:Reference StackLayout}}"
+                            CommandParameter="{x:Reference backButton}"
+                            Style="{StaticResource IconButtonStyle}"
+                            Text="{StaticResource Back}" />
+                    </controls:TitleView.LeadingView>
+                </controls:TitleView>
+                <ContentPresenter />
+            </StackLayout>
+        </ControlTemplate>
+    </ContentPage.ControlTemplate>
+
+    <ContentPage.Content>
+        <ScrollView>
+            <!--  Featured blog list  -->
+            <StackLayout
+                x:Name="StackLayout"
+                Padding="0,16"
+                BindableLayout.ItemsSource="{Binding LatestStories}"
+                Spacing="16">
+                <BindableLayout.ItemTemplate>
+                    <DataTemplate>
+                        <template:ArticleListTemplate
+                            x:Name="template"
+                            ChildElement="{Binding Source={x:Reference template}}"
+                            ParentBindingContext="{Binding Path=BindingContext, Source={x:Reference bookmarksPage}}"
+                            ParentElement="{Binding Source={x:Reference StackLayout}}" />
+                    </DataTemplate>
+                </BindableLayout.ItemTemplate>
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

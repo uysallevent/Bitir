@@ -1,6 +1,6 @@
 ﻿using AuthModule.Dto;
 using AuthModule.Security.JWT;
-using Bitir.Data.Model.Dtos;
+using Core.Wrappers;
 using Bitir.Mobile.Models.Auth;
 using System.Threading.Tasks;
 

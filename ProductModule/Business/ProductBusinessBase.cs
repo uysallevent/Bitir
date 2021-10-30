@@ -1,14 +1,12 @@
 ﻿using BaseModule.Business;
-using Bitir.Data.Interfaces;
-using Bitir.Data.Model.Dtos;
 using Core.DataAccess;
 using Core.DataAccess.EntityFramework.Interfaces;
 using Core.Enums;
 using Core.Exceptions;
+using Core.Wrappers;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Module.Shared.Entities.ProductModuleEntities;
-using Module.Shared.Entities.SalesModuleEntities;
 using ProductModule.Dtos;
 using ProductModule.Interfaces;
 using System;
@@ -26,9 +24,9 @@ namespace ProductModule.Business
         private IRepository<ProductStock> _productStockRepository;
         private IUnitOfWork _uow;
         private readonly IHttpContextAccessor _httpContextAccessor;
-        private readonly IExecuteProcedure<StoreProductViewModel> _executeStoreProductProcedure;
-        private readonly IExecuteProcedure<StoreProductByCarrierViewModel> _executeStoreProdByCarrierProcedure;
-        private readonly IExecuteProcedure<StoreProductByStoreViewModel> _executeStoreProdByStoreProcedure;
+        private readonly IProcedureExecuter<StoreProductViewModel> _executeStoreProductProcedure;
+        private readonly IProcedureExecuter<StoreProductByCarrierViewModel> _executeStoreProdByCarrierProcedure;
+        private readonly IProcedureExecuter<StoreProductByStoreViewModel> _executeStoreProdByStoreProcedure;
         public ProductBusinessBase(
             IUnitOfWork uow,
             IRepository<Product> productRepository,
@@ -36,9 +34,9 @@ namespace ProductModule.Business
             IRepository<ProductQuantity> productQuantityRepository,
             IRepository<ProductStorePrice> productStorePriceRepository,
             IHttpContextAccessor httpContextAccessor,
-            IExecuteProcedure<StoreProductViewModel> executeStoreProductProcedure,
-            IExecuteProcedure<StoreProductByCarrierViewModel> executeStoreProdByCarrierProcedure,
-            IExecuteProcedure<StoreProductByStoreViewModel> executeStoreProdByStoreProcedure,
+            IProcedureExecuter<StoreProductViewModel> executeStoreProductProcedure,
+            IProcedureExecuter<StoreProductByCarrierViewModel> executeStoreProdByCarrierProcedure,
+            IProcedureExecuter<StoreProductByStoreViewModel> executeStoreProdByStoreProcedure,
             IRepository<ProductStock> productStockRepository) : base(productRepository, uow)
         {
             _productStoreRepository = productStoreRepository;

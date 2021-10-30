@@ -4,7 +4,7 @@ using System.Text.Json.Serialization;
 
 namespace Core.Entities
 {
-    public abstract class BaseEntity: IEntity
+    public abstract class BaseEntity : IEntity
     {
         public virtual int Id { get; set; }
 
@@ -14,6 +14,6 @@ namespace Core.Entities
         [JsonIgnore]
         public virtual DateTime? UpdateDate { get; set; }
 
-        public Status? Status { get; set; }
+        public virtual Status? Status { get; set; }
     }
 }

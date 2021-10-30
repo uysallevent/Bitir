@@ -4,7 +4,7 @@ using AuthModule.Interfaces;
 using AuthModule.Security.JWT;
 using AuthModule.Validations;
 using BaseModule.Business;
-using Bitir.Data.Model.Dtos;
+using Core.Wrappers;
 using Core.Aspects.Autofac.Validation;
 using Core.DataAccess;
 using Core.DataAccess.EntityFramework.Interfaces;

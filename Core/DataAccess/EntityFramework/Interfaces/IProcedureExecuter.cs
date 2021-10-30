@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace Bitir.Data.Interfaces
+namespace Core.DataAccess.EntityFramework.Interfaces
 {
-    public interface IExecuteProcedure<T> where T : class, IEntity
+    public interface IProcedureExecuter<T> where T : class, IProcedureEntity
     {
         Task<List<T>> ExecuteProc(string procDeclaration, params object[] param);
     }

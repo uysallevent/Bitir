@@ -1,8 +1,8 @@
 ﻿using AuthModule.Dto;
 using AuthModule.Security.JWT;
-using Bitir.Data.Model.Dtos;
 using Bitir.Mobile.Models.Auth;
 using Bitir.Mobile.Services.Interfaces;
+using Core.Wrappers;
 using Newtonsoft.Json;
 using RestSharp;
 using System.Threading.Tasks;

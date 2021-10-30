@@ -1,6 +1,7 @@
 ﻿using BaseModule.Interfaces;
-using Bitir.Data.Model.Dtos;
+
 using Core.Entities;
+using Core.Wrappers;
 using Module.Shared.Entities.SalesModuleEntities;
 using SalesModule.Dtos;
 using System.Threading.Tasks;
@@ -11,7 +12,7 @@ namespace AuthModule.Interfaces
     {
         Task<ResponseWrapper<bool>> AddCarrierToStore(AddCarrierToStoreRequest request);
         Task<ResponseWrapperListing<StoreCarrier>> GetStoreCarriers();
-
+        Task<ResponseWrapperListing<StoreOrderViewModel>> StoreOrders();
         Task<ResponseWrapper<bool>> UpdateStoreCarrier(UpdateCarrierToStoreRequest request);
     }
 }

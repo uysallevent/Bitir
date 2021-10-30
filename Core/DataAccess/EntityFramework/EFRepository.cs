@@ -118,6 +118,8 @@ namespace Core.DataAccess.EntityFramework
         {
             return await _dbContext.Set<TEntity>().FromSqlRaw(procDeclaration, param).ToListAsync();
         }
+
+
         #endregion
 
         #region Initializer

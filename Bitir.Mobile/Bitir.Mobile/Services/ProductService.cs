@@ -1,5 +1,5 @@
-﻿using Bitir.Data.Model.Dtos;
-using Bitir.Mobile.Services.Interfaces;
+﻿using Bitir.Mobile.Services.Interfaces;
+using Core.Wrappers;
 using Module.Shared.Entities.ProductModuleEntities;
 using ProductModule.Dtos;
 using RestSharp;

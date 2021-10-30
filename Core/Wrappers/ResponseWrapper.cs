@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Bitir.Data.Model.Dtos
+namespace Core.Wrappers
 {
     public class ResponseWrapper<T>
     {

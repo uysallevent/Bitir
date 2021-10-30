@@ -19,6 +19,7 @@ namespace Module.Shared.Entities.ProductModuleEntities
         public Store Store { get; set; }
 
         public IEnumerable<ProductStorePrice> ProductStorePrices { get; set; }
+        public IEnumerable<Order> Order { get; set; }
 
         [JsonIgnore]
         [NotMapped]

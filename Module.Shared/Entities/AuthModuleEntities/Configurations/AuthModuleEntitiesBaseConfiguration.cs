@@ -9,6 +9,7 @@ namespace Module.Shared.Entities.AuthModuleEntities.Configuration
         {
             new UserAccountConfiguration().Configure(modelBuilder.Entity<UserAccount>());
             new UserTokenConfiguration().Configure(modelBuilder.Entity<UserToken>());
+            new UserAddressConfiguration().Configure(modelBuilder.Entity<UserAddress>());
         }
     }
 }
