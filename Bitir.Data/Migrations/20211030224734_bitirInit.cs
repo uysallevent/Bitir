@@ -704,6 +704,7 @@ namespace Bitir.Data.Migrations
                 schema: "sales",
                 table: "Store_UserAccount",
                 column: "UserId");
+            ViewMigrationHelper.ViewMigrations(migrationBuilder);
             StoreProcedureMigrationHelper.ProductProcedures(migrationBuilder);
             ProvinceDistrictMigrationHelper.ProvinceDistrict(migrationBuilder);
 

@@ -20,7 +20,7 @@ namespace AuthModule.Controllers
         }
 
         [HttpPost("GetStoreOrders")]
-        public async Task<IActionResult> GetStoreOrders(PagingRequestEntity<StoreOrderViewModel> request)
+        public async Task<IActionResult> GetStoreOrders(PagingRequestEntity<StoreOrdersView> request)
         {
             var result = await _orderBusinessBase.StoreOrders(request);
             return Ok(result);

@@ -1,141 +1,97 @@
-﻿
+﻿using Bitir.Mobile.Exceptions;
+using Bitir.Mobile.Models.Common;
+using Module.Shared.Entities.SalesModuleEntities;
 using System.Collections.ObjectModel;
-using System.Reflection;
-using System.Runtime.Serialization;
-using System.Runtime.Serialization.Json;
+using System.Linq;
+using System.Threading.Tasks;
 using Xamarin.Forms;
-using Xamarin.Forms.Internals;
-using Model = Bitir.Mobile.Models.Story;
 
 namespace Bitir.Mobile.ViewModels
 {
-    /// <summary>
-    /// ViewModel for Article bookmark page 
-    /// </summary> 
-    [Preserve(AllMembers = true)]
     public class StoreOrderListViewModel : BaseViewModel
     {
-        #region Fields
-
-        private static StoreOrderListViewModel bookmarksViewModel;
-
-        private ObservableCollection<Model> latestStories;
-
-        private Command bookmarkCommand;
-
-        private Command itemSelectedCommand;
-
-        #endregion
-
         #region Constructor
-
-        /// <summary>
-        /// Initializes a new instance for the <see cref="StoreOrderListViewModel" /> class.
-        /// </summary>
-        static StoreOrderListViewModel()
+        public StoreOrderListViewModel()
         {
-        }
+            Task.Run(async () => await GetStoreOrders());
+            LoadMoreCommand = new Command(async () => await LoadMore());
 
+        }
         #endregion
 
-        #region Public Properties
+        #region Fields
+        private ObservableCollection<StoreOrderViewModel> storeOrders;
+        private Command<object> itemSelectedCommand;
+        #endregion
 
-        /// <summary>
-        /// Gets or sets the value of Bookmark page view model.
-        /// </summary>
-        public static StoreOrderListViewModel BindingContext =>
-            bookmarksViewModel = PopulateData<StoreOrderListViewModel>("bookmark.json");
-
-        /// <summary>
-        /// Gets or sets the property that has been bound with the list view, which displays the articles' latest stories items.
-        /// </summary>
-        [DataMember(Name = "latestStories")]
-        public ObservableCollection<Model> LatestStories
+        #region Properties
+        public ObservableCollection<StoreOrderViewModel> StoreOrders
         {
-            get { return this.latestStories; }
+            get
+            {
+                return this.storeOrders;
+            }
 
             set
             {
-                if (this.latestStories == value)
+                if (this.storeOrders == value)
                 {
                     return;
                 }
 
-                this.SetProperty(ref this.latestStories, value);
+                this.SetProperty(ref this.storeOrders, value);
+            }
+        }
+        public Command<object> ItemSelectedCommand
+        {
+            get
+            {
+                return this.itemSelectedCommand ?? (this.itemSelectedCommand = new Command<object>(this.NavigateToNextPage));
             }
         }
 
+        public Command LoadMoreCommand { get; set; }
         #endregion
 
-        #region Command
-
-        /// <summary>
-        /// Gets or sets the command that will be executed when the bookmark button is clicked.
-        /// </summary>
-        public Command BookmarkCommand
-        {
-            get
-            {
-                return this.bookmarkCommand ?? (this.bookmarkCommand = new Command(this.BookmarkButtonClicked));
-            }
-        }
-
-        /// <summary>
-        /// Gets or sets the command that will be executed when an item is selected.
-        /// </summary>
-        public Command ItemSelectedCommand
-        {
-            get
-            {
-                return this.itemSelectedCommand ?? (this.itemSelectedCommand = new Command(this.ItemSelected));
-            }
-        }
-
+        #region Commands
+        public Command GetStoreOrdersCommand { get; set; }
         #endregion
 
         #region Methods
-
-        /// <summary>
-        /// Populates the data for view model from json file.
-        /// </summary>
-        /// <typeparam name="T">Type of view model.</typeparam>
-        /// <param name="fileName">Json file to fetch data.</param>
-        /// <returns>Returns the view model object.</returns>
-        private static T PopulateData<T>(string fileName)
+        public async Task GetStoreOrders()
         {
-            var file = "Bitir.Mobile.Data." + fileName;
-
-            var assembly = typeof(App).GetTypeInfo().Assembly;
-
-            T data;
-
-            using (var stream = assembly.GetManifestResourceStream(file))
+            try
             {
-                var serializer = new DataContractJsonSerializer(typeof(T));
-                data = (T)serializer.ReadObject(stream);
+                IsBusy = true;
+                var result = await orderService.GetStoreOrders(new Core.Entities.PagingRequestEntity<StoreOrderViewModel> { Page = 1, PageSize = 10 });
+                StoreOrders = new ObservableCollection<StoreOrderViewModel>(result.List);
             }
-
-            return data;
-        }
-
-        /// <summary>
-        /// Invoked when the bookmark button is clicked.
-        /// </summary>
-        /// <param name="obj">The object</param>
-        private void BookmarkButtonClicked(object obj)
-        {
-            if (obj is Model article)
+            catch (BadRequestException ex)
             {
-                this.LatestStories.Remove(article);
+                SendNotification(new ExceptionTransfer { ex = ex, NotificationMessage = ex.Message });
+            }
+            catch (InternalServerErrorException ex)
+            {
+                SendNotification(new ExceptionTransfer { ex = ex, NotificationMessage = "Servis hatası !!" });
+            }
+            finally
+            {
+                IsBusy = false;
             }
         }
 
-        /// <summary>
-        /// Invoked when an item is selected.
-        /// </summary>
-        private void ItemSelected(object obj)
+        private async Task LoadMore()
         {
-            // Do something
+
+        }
+
+        private void NavigateToNextPage(object selectedItem)
+        {
+            var item = (selectedItem as Syncfusion.ListView.XForms.ItemTappedEventArgs).ItemData as StoreOrderViewModel;
+            if (item != null)
+            {
+
+            }
         }
 
         #endregion

@@ -20,6 +20,7 @@
     <Compile Include="..\..\Module.Shared\Entities\ProductModuleEntities\StoreProductViewModel.cs" Link="Models\Product\StoreProductViewModel.cs" />
     <Compile Include="..\..\Module.Shared\Entities\SalesModuleEntities\StoreOrderViewModel.cs" Link="Models\Order\StoreOrderViewModel.cs" />
     <Compile Include="..\..\Module.Shared\Enums\AccountTypeEnum.cs" Link="Enums\AccountTypeEnum.cs" />
+    <Compile Include="..\..\Module.Shared\Enums\OrderStatusEnum.cs" Link="Enums\OrderStatusEnum.cs" />
     <Compile Include="..\..\ProductModule\Dtos\AddProductToStoreRequest.cs" Link="Models\Product\AddProductToStoreRequest.cs" />
     <Compile Include="..\..\ProductModule\Dtos\StoreProdByCarrierRequest.cs" Link="Models\Product\StoreProdByCarrierRequest.cs" />
     <Compile Include="..\..\ProductModule\Dtos\StoreProdByCarrierResponse.cs" Link="Models\Product\StoreProdByCarrierResponse.cs" />
@@ -84,6 +85,9 @@
     </Compile>
     <Compile Update="Views\PopupPages\ProfilePopupView.xaml.cs">
       <DependentUpon>ProfilePopupView.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\StoreOrderPages\StoreOrderListPage.xaml.cs">
+      <DependentUpon>StoreOrderListPage.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
 
@@ -203,9 +207,6 @@
       <Generator>MSBuild:Compile</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Views\StoreProductPages\StoreProductListPage.xaml">
-      <Generator>MSBuild:Compile</Generator>
-    </EmbeddedResource>
-    <EmbeddedResource Update="Views\Templates\ArticleListTemplate.xaml">
       <Generator>MSBuild:Compile</Generator>
     </EmbeddedResource>
   </ItemGroup>

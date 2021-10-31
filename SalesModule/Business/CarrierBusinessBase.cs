@@ -142,11 +142,6 @@ namespace AuthModule.Business
 
             var result = await _carrierRepository.GetAll().Join(_carrierStoreRepository.GetAll().Where(x => x.StoreId == storeId && x.Status == Core.Enums.Status.Active), x => x.Id, y => y.CarrierId, (x, y) => new { carrierId = x.Id, x.Plate, x.Capacity, carrierStoreId = y.Id, y.Status }).Select(x => new StoreCarrier { CarrierId = x.carrierId, CarrierStoreId = x.carrierStoreId, Plate = x.Plate, Capacity = x.Capacity, Status = x.Status }).ToListAsync();
 
-            if (result == null || !result.Any())
-            {
-                throw new BadRequestException("Araç bilgileri bulunamadı");
-            }
-
             return new ResponseWrapperListing<StoreCarrier>(result);
         }
 

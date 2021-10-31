@@ -4,11 +4,10 @@ using Core.DataAccess;
 using Core.DataAccess.EntityFramework.Interfaces;
 using Core.Entities;
 using Core.Exceptions;
+using Core.Utilities.ExpressionGenerator;
 using Core.Wrappers;
 using Microsoft.AspNetCore.Http;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
-using Module.Shared.Entities.AuthModuleEntities;
 using Module.Shared.Entities.SalesModuleEntities;
 using System.Linq;
 using System.Threading.Tasks;
@@ -17,46 +16,27 @@ namespace AuthModule.Business
 {
     public class OrderBusinessBase : BusinessBase<Order>, IOrderBusinessBase<Order>
     {
-        private readonly IRepository<Carrier> _carrierRepository;
-        private readonly IRepository<Carrier_Store> _carrierStoreRepository;
-        private readonly IRepository<Order> _orderRepository;
-        private readonly IRepository<UserAccount> _userAccountRepository;
-        private readonly IRepository<UserAddress> _userAddressRepository;
-        private readonly IRepository<District> _districtRepository;
-        private readonly IRepository<Province> _provinceRepository;
-        private readonly IProcedureExecuter<StoreOrderViewModel> _executeStoreOrderViewModel;
         private readonly IUnitOfWork _uow;
-        private readonly IConfiguration _configuration;
         private readonly ILogger _logger;
         private readonly IHttpContextAccessor _httpContextAccessor;
+        private readonly IRepository<StoreOrdersView> _storeOrderViewRepository;
+
 
         public OrderBusinessBase(
             IUnitOfWork uow,
-            IConfiguration configuration,
             ILoggerFactory logger,
-            IRepository<Carrier_Store> carrierStoreRepository,
             IRepository<Order> orderRepository,
-            IRepository<UserAccount> userAccountRepository,
-            IRepository<UserAddress> userAddressRepository,
-            IRepository<District> districtRepository,
-            IRepository<Province> provinceRepository,
-            IProcedureExecuter<StoreOrderViewModel> executeStoreOrderViewModel,
-            IHttpContextAccessor httpContextAccessor) : base(orderRepository, uow)
+            IHttpContextAccessor httpContextAccessor,
+            IRepository<StoreOrdersView> storeOrderViewModelRepository) : base(orderRepository, uow)
         {
             _uow = uow;
-            _configuration = configuration;
-            _logger = logger.CreateLogger<CarrierBusinessBase>();
-            _carrierStoreRepository = carrierStoreRepository;
-            _orderRepository = orderRepository;
-            _userAccountRepository = userAccountRepository;
-            _userAddressRepository = userAddressRepository;
+            _logger = logger.CreateLogger<OrderBusinessBase>();
             _httpContextAccessor = httpContextAccessor;
-            _districtRepository = districtRepository;
-            _provinceRepository = provinceRepository;
-            _executeStoreOrderViewModel = executeStoreOrderViewModel;
+            _storeOrderViewRepository = storeOrderViewModelRepository;
+
         }
 
-        public async Task<ResponseWrapperListing<StoreOrderViewModel>> StoreOrders(PagingRequestEntity<StoreOrderViewModel> request)
+        public async Task<ResponseWrapperListing<StoreOrdersView>> StoreOrders(PagingRequestEntity<StoreOrdersView> request)
         {
             var claims = _httpContextAccessor.HttpContext.User.Claims;
             int.TryParse(claims.FirstOrDefault(x => x.Type == "Store")?.Value, out int storeId);
@@ -64,10 +44,15 @@ namespace AuthModule.Business
             {
                 throw new ClaimExpection("Claims could not find");
             }
+            if (request.Entity == null)
+            {
+                request.Entity = new StoreOrdersView();
+            }
+            request.Entity.StoreId = storeId;
 
-            var pageOffset = (request.Page - 1) * request.PageSize;
-            var orders = await _executeStoreOrderViewModel.ExecuteProc("EXEC sales.GetStoreOrders {0},{1},{2}", new object[] { storeId, pageOffset, request.PageSize });
-            return new ResponseWrapperListing<StoreOrderViewModel>(orders, 0, request.Page);
+            var filter = request.Entity != null ? ExpressionGenerator<StoreOrdersView, StoreOrdersView>.Generate(request.Entity) : null;
+            var orders = _storeOrderViewRepository.GetAll(filter).Where(filter).Skip((request.Page - 1) * request.PageSize).Take(request.PageSize);
+            return new ResponseWrapperListing<StoreOrdersView>(orders, 0, request.Page);
         }
     }
 }

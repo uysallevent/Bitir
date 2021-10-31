@@ -3,57 +3,189 @@
     x:Class="Bitir.Mobile.Views.StoreOrderListPage"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:converter="clr-namespace:Bitir.Mobile.Converters"
+    xmlns:behaviors="clr-namespace:Bitir.Mobile.Behaviors"
+    xmlns:border="clr-namespace:Syncfusion.XForms.Border;assembly=Syncfusion.Core.XForms"
     xmlns:buttons="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms"
     xmlns:controls="clr-namespace:Bitir.Mobile.Controls"
-    xmlns:converter="clr-namespace:Bitir.Mobile.Converters"
-    xmlns:template="clr-namespace:Bitir.Mobile.Views.Templates"
-    x:Name="bookmarksPage"
+    xmlns:viewModel="clr-namespace:Bitir.Mobile.ViewModels"
+    xmlns:local="clr-namespace:Bitir.Mobile.Views"
+    x:Name="OrderList"
     BackgroundColor="{DynamicResource Gray-Bg}"
     NavigationPage.HasNavigationBar="False">
 
+
     <ContentPage.Resources>
         <ResourceDictionary>
-            <converter:BooleanToStringConverter x:Key="BoolToStringConverter" />
+            <converter:ColorConverter x:Key="ColorConverter" />
         </ResourceDictionary>
     </ContentPage.Resources>
 
-    <ContentPage.ControlTemplate>
-        <ControlTemplate>
-            <StackLayout Spacing="0">
-                <!--  Title View  -->
-                <controls:TitleView Title="Bookmarks">
-                    <controls:TitleView.LeadingView>
-                        <buttons:SfButton
-                            x:Name="backButton"
-                            Command="{Binding BindingContext.BackButtonCommand, Source={x:Reference StackLayout}}"
-                            CommandParameter="{x:Reference backButton}"
-                            Style="{StaticResource IconButtonStyle}"
-                            Text="{StaticResource Back}" />
-                    </controls:TitleView.LeadingView>
-                </controls:TitleView>
-                <ContentPresenter />
-            </StackLayout>
-        </ControlTemplate>
-    </ContentPage.ControlTemplate>
+    <ContentPage.BindingContext>
+        <viewModel:StoreOrderListViewModel />
+    </ContentPage.BindingContext>
 
     <ContentPage.Content>
-        <ScrollView>
-            <!--  Featured blog list  -->
-            <StackLayout
-                x:Name="StackLayout"
-                Padding="0,16"
-                BindableLayout.ItemsSource="{Binding LatestStories}"
-                Spacing="16">
-                <BindableLayout.ItemTemplate>
-                    <DataTemplate>
-                        <template:ArticleListTemplate
-                            x:Name="template"
-                            ChildElement="{Binding Source={x:Reference template}}"
-                            ParentBindingContext="{Binding Path=BindingContext, Source={x:Reference bookmarksPage}}"
-                            ParentElement="{Binding Source={x:Reference StackLayout}}" />
-                    </DataTemplate>
-                </BindableLayout.ItemTemplate>
-            </StackLayout>
-        </ScrollView>
+        <Grid>
+            <Grid
+                ColumnSpacing="0"
+                RowDefinitions="Auto, *"
+                RowSpacing="0">
+
+                <StackLayout
+                    x:Name="TitleView"
+                    Grid.Row="0"
+                    Padding="8"
+                    BackgroundColor="{DynamicResource Gray-Bg}"
+                    HorizontalOptions="FillAndExpand"
+                    Orientation="Horizontal"
+                    Spacing="0">
+
+                    <StackLayout
+                        x:Name="TitleLayout"
+                        HorizontalOptions="FillAndExpand"
+                        IsVisible="True"
+                        Orientation="Horizontal"
+                        Spacing="0"
+                        VerticalOptions="FillAndExpand">
+
+                        <!--  Page Title  -->
+                        <Label
+                            Margin="16,0"
+                            FontFamily="Montserrat-Medium"
+                            HorizontalOptions="FillAndExpand"
+                            Style="{StaticResource TitleLabelStyle}"
+                            Text="Siparişlerim"
+                            VerticalOptions="Center"
+                            VerticalTextAlignment="Center" />
+
+                    </StackLayout>
+
+                    <StackLayout
+                        x:Name="Search"
+                        HorizontalOptions="EndAndExpand"
+                        IsVisible="False"
+                        Orientation="Horizontal"
+                        Spacing="0">
+
+                        <!--  Back to title layout  -->
+                        <buttons:SfButton
+                            x:Name="BackToTitle"
+                            Style="{StaticResource IconButtonStyle}"
+                            Text="{StaticResource Back}">
+                            <buttons:SfButton.Behaviors>
+                                <behaviors:SearchBarAnimationBehavior AnimationType="shrink" />
+                            </buttons:SfButton.Behaviors>
+                        </buttons:SfButton>
+
+                        <!--  Rounded Search Entry  -->
+                        <border:SfBorder Style="{DynamicResource ThemeBorderStyle}">
+
+                            <controls:BorderlessEntry
+                                x:Name="SearchEntry"
+                                BindingContext="{x:Reference StoreProductList}"
+                                HorizontalOptions="FillAndExpand"
+                                Placeholder="Search here"
+                                Style="{StaticResource BorderlessEntryStyle}"
+                                Text="{Binding SearchText, Mode=TwoWay}" />
+                        </border:SfBorder>
+
+                    </StackLayout>
+
+                    <!--  Search Button  -->
+                    <buttons:SfButton
+                        x:Name="SearchButton"
+                        IsVisible="True"
+                        Style="{StaticResource IconButtonStyle}"
+                        Text="{StaticResource Search}">
+                        <buttons:SfButton.Behaviors>
+                            <behaviors:SearchBarAnimationBehavior AnimationType="expand" />
+                        </buttons:SfButton.Behaviors>
+                    </buttons:SfButton>
+
+                    <!--  Add Button  -->
+                    <buttons:SfButton
+                        x:Name="AddCarrierButton"
+                        IsVisible="True"
+                        Style="{StaticResource IconButtonStyle}"
+                        Command="{Binding GotoNewCarrierAddPageCommand}"
+                        Text="{StaticResource Add}">
+                    </buttons:SfButton>
+                </StackLayout>
+
+                <StackLayout Grid.Row="1" Spacing="0">
+                    <!--  Seperator  -->
+                    <BoxView Style="{StaticResource HorizontalSeparatorStyle}" />
+                    <controls:SearchableCarrierList x:Name="StoreProductList"
+                                                            AllowSwiping="True"
+                                                            AutoFitMode="Height"
+                                                            FocusBorderThickness="0"
+                                                            IsScrollBarVisible="false"
+                                                            ItemSpacing="0"
+                                                            ItemsSource="{Binding StoreOrders}"
+                                                            RowSpacing="0"
+                                                            SearchText="{Binding SearchText}"
+                                                            SelectionBackgroundColor="{DynamicResource Gray-200}"
+                                                            TapCommand="{Binding ItemSelectedCommand}"
+                                                            LoadMoreOption="Manual"
+                                                            LoadMoreCommand="{Binding LoadMoreCommand}"
+                                                            VerticalOptions="FillAndExpand">
+                        <controls:SearchableCarrierList.ItemTemplate>
+                            <DataTemplate>
+                                <ViewCell>
+                                    <StackLayout BackgroundColor="{Binding Status,Converter={StaticResource ColorConverter}}">
+                                        <Grid
+                                            ColumnDefinitions="Auto, *"
+                                            ColumnSpacing="0"
+                                            RowSpacing="0">
+                                            <border:SfBorder
+                                                BackgroundColor="Transparent"
+                                                BorderWidth="0"
+                                                CornerRadius="24"
+                                                Style="{StaticResource ProfileBorderStyle}">
+                                                <Image Margin="10,0,0,0" HeightRequest="48" WidthRequest="48" Source="courier.png" BackgroundColor="Transparent"/>
+                                            </border:SfBorder>
+                                            <StackLayout
+                                                Grid.Column="1"
+                                                HorizontalOptions="FillAndExpand"
+                                                Spacing="0"
+                                                VerticalOptions="FillAndExpand">
+                                                <!--  Carrier Plate -->
+                                                <Label
+                                                    Margin="16,13,0,12"
+                                                    FontFamily="Montserrat-Medium"
+                                                    FontSize="20"
+                                                    FontAttributes="Bold"
+                                                    HeightRequest="24"
+                                                    LineHeight="{OnPlatform Android=1.5,
+                                                                            Default=-1}"
+                                                    Text="{Binding CustomerName}"
+                                                    TextColor="{DynamicResource Gray-900}" />
+
+                                                <!--  Capacity  -->
+                                                <Label
+                                                    Margin="16,0,0,12"
+                                                    FontFamily="Montserrat-Medium"
+                                                    FontSize="14"
+                                                    HeightRequest="21"
+                                                    LineHeight="{OnPlatform Android=1.25,
+                                                                            Default=-1}"
+                                                    Text="{Binding Capacity,StringFormat='Araç Kapasitesi : {0} Kg'}"
+                                                    TextColor="{DynamicResource Gray-700}" />
+
+                                            </StackLayout>
+
+                                        </Grid>
+                                        <!--  Seperator  -->
+                                        <BoxView Style="{StaticResource HorizontalSeparatorStyle}" />
+                                    </StackLayout>
+                                </ViewCell>
+                            </DataTemplate>
+                        </controls:SearchableCarrierList.ItemTemplate>
+                    </controls:SearchableCarrierList>
+                </StackLayout>
+            </Grid>
+            <local:LoaderView/>
+        </Grid>
     </ContentPage.Content>
 </ContentPage>

@@ -34,6 +34,10 @@ namespace Core.DataAccess.EntityFramework
 
         public IQueryable<TEntity> GetAll(Expression<Func<TEntity, bool>> predicate)
         {
+            if (predicate == null)
+            {
+                return GetAll();
+            }
             return _dbSet.Where(predicate);
         }
 
