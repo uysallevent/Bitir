@@ -31,7 +31,7 @@ namespace Bitir.Mobile.Services
             if (restClient == null)
             {
                 restClient = new RestClient(uriBuilder.Uri);
-                restClient.Timeout = 30000;
+                restClient.Timeout = 60000;
             }
             if (Connectivity.NetworkAccess != Xamarin.Essentials.NetworkAccess.Internet)
                 throw new ServiceException("İnternet bağlantınızı kontrol edin");

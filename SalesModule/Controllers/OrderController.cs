@@ -1,5 +1,6 @@
 ﻿using AuthModule.Interfaces;
 using BaseModule.Controllers;
+using Core.Entities;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Module.Shared.Entities.SalesModuleEntities;
@@ -19,9 +20,9 @@ namespace AuthModule.Controllers
         }
 
         [HttpPost("GetStoreOrders")]
-        public async Task<IActionResult> GetStoreOrders()
+        public async Task<IActionResult> GetStoreOrders(PagingRequestEntity<StoreOrderViewModel> request)
         {
-            var result = await _orderBusinessBase.StoreOrders();
+            var result = await _orderBusinessBase.StoreOrders(request);
             return Ok(result);
         }
     }

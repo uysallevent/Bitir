@@ -8,6 +8,6 @@ namespace AuthModule.Interfaces
 {
     public interface IOrderBusinessBase<T> : IBusinessBase<T> where T : class, IEntity, new()
     {
-        Task<ResponseWrapperListing<StoreOrderViewModel>> StoreOrders();
+        Task<ResponseWrapperListing<StoreOrderViewModel>> StoreOrders(PagingRequestEntity<StoreOrderViewModel> request);
     }
 }

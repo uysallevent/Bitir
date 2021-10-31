@@ -2,6 +2,7 @@
 using BaseModule.Business;
 using Core.DataAccess;
 using Core.DataAccess.EntityFramework.Interfaces;
+using Core.Entities;
 using Core.Exceptions;
 using Core.Wrappers;
 using Microsoft.AspNetCore.Http;
@@ -55,7 +56,7 @@ namespace AuthModule.Business
             _executeStoreOrderViewModel = executeStoreOrderViewModel;
         }
 
-        public async Task<ResponseWrapperListing<StoreOrderViewModel>> StoreOrders()
+        public async Task<ResponseWrapperListing<StoreOrderViewModel>> StoreOrders(PagingRequestEntity<StoreOrderViewModel> request)
         {
             var claims = _httpContextAccessor.HttpContext.User.Claims;
             int.TryParse(claims.FirstOrDefault(x => x.Type == "Store")?.Value, out int storeId);
@@ -63,8 +64,10 @@ namespace AuthModule.Business
             {
                 throw new ClaimExpection("Claims could not find");
             }
-            var orders = await _executeStoreOrderViewModel.ExecuteProc("EXEC sales.GetStoreOrders {0}", new object[] { storeId });
-            return new ResponseWrapperListing<StoreOrderViewModel>(orders);
+
+            var pageOffset = (request.Page - 1) * request.PageSize;
+            var orders = await _executeStoreOrderViewModel.ExecuteProc("EXEC sales.GetStoreOrders {0},{1},{2}", new object[] { storeId, pageOffset, request.PageSize });
+            return new ResponseWrapperListing<StoreOrderViewModel>(orders, 0, request.Page);
         }
     }
 }

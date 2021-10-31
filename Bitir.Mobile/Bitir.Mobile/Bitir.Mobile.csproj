@@ -18,6 +18,7 @@
     <Compile Include="..\..\AuthModule\Dtos\LoginDto.cs" Link="Models\Auth\LoginDto.cs" />
     <Compile Include="..\..\AuthModule\Utility\JWT\AccessToken.cs" Link="Models\Auth\AccessToken.cs" />
     <Compile Include="..\..\Module.Shared\Entities\ProductModuleEntities\StoreProductViewModel.cs" Link="Models\Product\StoreProductViewModel.cs" />
+    <Compile Include="..\..\Module.Shared\Entities\SalesModuleEntities\StoreOrderViewModel.cs" Link="Models\Order\StoreOrderViewModel.cs" />
     <Compile Include="..\..\Module.Shared\Enums\AccountTypeEnum.cs" Link="Enums\AccountTypeEnum.cs" />
     <Compile Include="..\..\ProductModule\Dtos\AddProductToStoreRequest.cs" Link="Models\Product\AddProductToStoreRequest.cs" />
     <Compile Include="..\..\ProductModule\Dtos\StoreProdByCarrierRequest.cs" Link="Models\Product\StoreProdByCarrierRequest.cs" />
@@ -212,5 +213,6 @@
   <ItemGroup>
     <Folder Include="Enums\" />
     <Folder Include="Models\Carrier\" />
+    <Folder Include="Models\Order\" />
   </ItemGroup>
 </Project>
