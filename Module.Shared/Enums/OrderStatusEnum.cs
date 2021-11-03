@@ -3,7 +3,7 @@
     public enum OrderStatusEnum
     {
         completed=1,
-        delivered,
+        inCarrier,
         canceledByCustomer,
         canceledByStore
     }

@@ -31,6 +31,15 @@ namespace AuthModule.Controllers
         }
 
         [AllowAnonymous]
+        [HttpPost("RefreshTokenLogin")]
+        public async Task<IActionResult> LoginWithRefreshToken([FromBody] LoginDto loginDto)
+        {
+            var result = await _authBusinessBase.RefreshTokenLogin(loginDto.RefreshToken);
+            return Ok(result);
+
+        }
+
+        [AllowAnonymous]
         [HttpPost("Register")]
         public async Task<IActionResult> Register([FromBody] UserAccount userAccount)
         {

@@ -38,10 +38,10 @@ namespace Core.Utilities.ExpressionGenerator
 
                 if ((typeof(bool).IsAssignableFrom(item.PropertyType) || typeof(bool?).IsAssignableFrom(item.PropertyType)) && (item.GetValue(request, null) == null))
                     continue;
-                if (item.PropertyType.BaseType.Name=="Enum")
+                if (item.PropertyType.BaseType.Name == "Enum")
                     continue;
-                //if (item.GetType().GetTypeInfo().IsClass)
-                //    continue;
+                if (item.PropertyType.IsClass)
+                    continue;
 
                 //when model property was string, called object does getting lowercase
                 if (typeof(string).IsAssignableFrom(item.PropertyType))

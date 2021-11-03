@@ -9,6 +9,7 @@ using Core.DataAccess.EntityFramework;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
@@ -43,16 +44,16 @@ namespace AuthModule
                 {
                     OnTokenValidated = context =>
                     {
-                        //var serviceProvider = services.BuildServiceProvider();
-                        //var service = serviceProvider.GetService<IClaimAccessor>();
                         return Task.CompletedTask;
                     },
                     OnAuthenticationFailed = context =>
                     {
                         if (context.Exception.GetType() == typeof(SecurityTokenExpiredException))
                         {
-
-                            //_ = service.RefreshTokenLogin(1, "zvyZ8g8oa4beUzeJFRhJXKasw4WgZzFENWSiL1XohyA=");
+                            var refreshToken = context.Request.Headers["RefreshToken"];
+                            var serviceProvider = services.BuildServiceProvider();
+                            var service = serviceProvider.GetService<IAuthBusinessBase<UserAccount>>();
+                            _ = service.RefreshTokenLogin(refreshToken[0]);
                         }
                         return Task.CompletedTask;
                     }

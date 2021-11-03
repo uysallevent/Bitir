@@ -51,8 +51,10 @@ namespace AuthModule.Business
             request.Entity.StoreId = storeId;
 
             var filter = request.Entity != null ? ExpressionGenerator<StoreOrdersView, StoreOrdersView>.Generate(request.Entity) : null;
-            var orders = _storeOrderViewRepository.GetAll(filter).Where(filter).Skip((request.Page - 1) * request.PageSize).Take(request.PageSize);
-            return new ResponseWrapperListing<StoreOrdersView>(orders, 0, request.Page);
+            var orders = _storeOrderViewRepository.GetAll(filter).Skip((request.Page - 1) * request.PageSize).Take(request.PageSize);
+            var count = _storeOrderViewRepository.GetAll(filter).Count();
+            var hasNextPage = (request.Page * request.PageSize) < count;
+            return new ResponseWrapperListing<StoreOrdersView>(orders, count, request.Page, null, hasNextPage);
         }
     }
 }

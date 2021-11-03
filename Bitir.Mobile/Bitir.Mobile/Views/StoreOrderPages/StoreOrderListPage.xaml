@@ -18,6 +18,7 @@
     <ContentPage.Resources>
         <ResourceDictionary>
             <converter:ColorConverter x:Key="ColorConverter" />
+            <converter:ImageDeciderConverter x:Key="ImageDeciderConverter"/>
         </ResourceDictionary>
     </ContentPage.Resources>
 
@@ -111,12 +112,22 @@
                         Command="{Binding GotoNewCarrierAddPageCommand}"
                         Text="{StaticResource Add}">
                     </buttons:SfButton>
+
+                    <!--  Map Button  -->
+                    <buttons:SfButton
+                        x:Name="MapButton"
+                        IsVisible="True"
+                        Padding="70"
+                        BackgroundImage="map"
+                        Style="{StaticResource IconButtonStyle}"
+                        Command="{Binding CarrierLoadPageCommand}">
+                    </buttons:SfButton>
                 </StackLayout>
 
                 <StackLayout Grid.Row="1" Spacing="0">
                     <!--  Seperator  -->
                     <BoxView Style="{StaticResource HorizontalSeparatorStyle}" />
-                    <controls:SearchableCarrierList x:Name="StoreProductList"
+                    <controls:SearchableStoreOrderList x:Name="StoreProductList"
                                                             AllowSwiping="True"
                                                             AutoFitMode="Height"
                                                             FocusBorderThickness="0"
@@ -130,12 +141,12 @@
                                                             LoadMoreOption="Manual"
                                                             LoadMoreCommand="{Binding LoadMoreCommand}"
                                                             VerticalOptions="FillAndExpand">
-                        <controls:SearchableCarrierList.ItemTemplate>
+                        <controls:SearchableStoreOrderList.ItemTemplate>
                             <DataTemplate>
                                 <ViewCell>
                                     <StackLayout BackgroundColor="{Binding Status,Converter={StaticResource ColorConverter}}">
                                         <Grid
-                                            ColumnDefinitions="Auto, *"
+                                            ColumnDefinitions="Auto, *, Auto"
                                             ColumnSpacing="0"
                                             RowSpacing="0">
                                             <border:SfBorder
@@ -150,7 +161,7 @@
                                                 HorizontalOptions="FillAndExpand"
                                                 Spacing="0"
                                                 VerticalOptions="FillAndExpand">
-                                                <!--  Carrier Plate -->
+                                                <!--  Product -->
                                                 <Label
                                                     Margin="16,13,0,12"
                                                     FontFamily="Montserrat-Medium"
@@ -159,10 +170,10 @@
                                                     HeightRequest="24"
                                                     LineHeight="{OnPlatform Android=1.5,
                                                                             Default=-1}"
-                                                    Text="{Binding CustomerName}"
+                                                    Text="{Binding ProductFullName}"
                                                     TextColor="{DynamicResource Gray-900}" />
 
-                                                <!--  Capacity  -->
+                                                <!--  Order Quantity  -->
                                                 <Label
                                                     Margin="16,0,0,12"
                                                     FontFamily="Montserrat-Medium"
@@ -170,19 +181,48 @@
                                                     HeightRequest="21"
                                                     LineHeight="{OnPlatform Android=1.25,
                                                                             Default=-1}"
-                                                    Text="{Binding Capacity,StringFormat='Araç Kapasitesi : {0} Kg'}"
+                                                    Text="{Binding OrderQuantity,StringFormat='Sipariş Miktarı : {0} adet'}"
+                                                    TextColor="{DynamicResource Gray-700}" />
+
+                                                <!--  District-Province  -->
+                                                <Label
+                                                    Margin="16,0,0,12"
+                                                    FontFamily="Montserrat-Medium"
+                                                    FontSize="14"
+                                                    HeightRequest="21"
+                                                    LineHeight="{OnPlatform Android=1.25,
+                                                                            Default=-1}"
+                                                    Text="{Binding LocationFullName,StringFormat='İlçe-İl : {0}'}"
+                                                    TextColor="{DynamicResource Gray-700}" />
+
+                                                <!--  Customer Name  -->
+                                                <Label
+                                                    Margin="16,0,0,12"
+                                                    FontFamily="Montserrat-Medium"
+                                                    FontSize="14"
+                                                    HeightRequest="21"
+                                                    LineHeight="{OnPlatform Android=1.25,
+                                                                            Default=-1}"
+                                                    Text="{Binding CustomerName,StringFormat='Müşteri Adı : {0}'}"
                                                     TextColor="{DynamicResource Gray-700}" />
 
                                             </StackLayout>
-
+                                            <border:SfBorder
+                                                Grid.Column="2"
+                                                BackgroundColor="Transparent"
+                                                BorderWidth="0"
+                                                CornerRadius="24"
+                                                Style="{StaticResource ProfileBorderStyle}">
+                                                <Image Margin="10,0,30,0" HeightRequest="48" WidthRequest="48" Source="{Binding OrderStatus,Converter={StaticResource ImageDeciderConverter}}" BackgroundColor="Transparent"/>
+                                            </border:SfBorder>
                                         </Grid>
                                         <!--  Seperator  -->
                                         <BoxView Style="{StaticResource HorizontalSeparatorStyle}" />
                                     </StackLayout>
                                 </ViewCell>
                             </DataTemplate>
-                        </controls:SearchableCarrierList.ItemTemplate>
-                    </controls:SearchableCarrierList>
+                        </controls:SearchableStoreOrderList.ItemTemplate>
+                    </controls:SearchableStoreOrderList>
                 </StackLayout>
             </Grid>
             <local:LoaderView/>

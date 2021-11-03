@@ -1,10 +1,11 @@
 ﻿using Core.Entities;
 using Module.Shared.Enums;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Module.Shared.Entities.SalesModuleEntities
 {
-    public class StoreOrderViewModel: IProcedureEntity
+    public class StoreOrderViewModel : IProcedureEntity
     {
         [Key]
         public int OrderId { get; set; }
@@ -25,6 +26,13 @@ namespace Module.Shared.Entities.SalesModuleEntities
         public decimal ProductQuantity { get; set; }
         public string ProductUnit { get; set; }
         public string ProductUnitAbbreviation { get; set; }
+
+        [NotMapped]
+        public string ProductFullName { get { return $"{ProductName} {ProductQuantity} {ProductUnitAbbreviation}"; } }
+
+        [NotMapped]
+
+        public string LocationFullName { get { return $"{OrderDistrictName}-{OrderProvinceName}"; } }
 
     }
 }

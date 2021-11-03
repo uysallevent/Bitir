@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Module.Shared.Entities.SalesModuleEntities
 {
-    public class StoreOrdersView:IEntity
+    public class StoreOrdersView : IEntity
     {
         [Key]
         public int OrderId { get; set; }

@@ -139,11 +139,16 @@ namespace AuthModule.Business
                     StoreId=userStore?.StoreId
                 } });
             var sqlServerDatetime = DateTime.Now;
-            int.TryParse(_configuration.GetSection("TokenOptions.RefreshTokenExpiration").Value, out int expirationDate);
+            int.TryParse(_configuration.GetSection("TokenOptions:RefreshTokenExpiration").Value, out int expirationDate);
 
-            var userToken = await _userTokenRepository.GetAsync(x => x.Id == entity.Id && x.Status != Core.Enums.Status.Active);
-            if (userToken != null)
+            var userToken = await _userTokenRepository.GetAsync(x => x.UserId == entity.Id && x.Status == Core.Enums.Status.Active && x.RefreshTokenExpirationDate > DateTime.Now);
+            if (userToken == null || userToken.RefreshTokenExpirationDate < DateTime.Now)
             {
+                if (userToken != null)
+                {
+                    userToken.Status = Core.Enums.Status.Deleted;
+                    _userTokenRepository.Update(userToken);
+                }
                 await _userTokenRepository.AddAsync(
                 new UserToken
                 {
@@ -153,22 +158,28 @@ namespace AuthModule.Business
                 });
                 await _uow.SaveChangesAsync();
             }
+            else
+            {
+                accessToken.RefreshToken = userToken.RefreshToken;
+            }
 
             return accessToken;
         }
 
-        public async Task<ResponseWrapper<AccessToken>> RefreshTokenLogin(int userId, string refreshToken)
+        public async Task<ResponseWrapper<AccessToken>> RefreshTokenLogin(string refreshToken)
         {
             AccessToken accessToken;
-            var userToken = await _userTokenRepository.GetAsync(x => x.Id == userId && x.RefreshToken == refreshToken);
+            var userToken = await _userTokenRepository.GetAsync(x => x.RefreshToken == refreshToken && x.Status == Core.Enums.Status.Active);
             var sqlServerDatetime = DateTime.Now;
-            if (userToken != null && userToken.RefreshTokenExpirationDate < sqlServerDatetime)
+            if (userToken != null && userToken.RefreshTokenExpirationDate > sqlServerDatetime)
             {
-                accessToken = CreateAccessToken(userToken.UserAccount, new List<OperationClaim> { new OperationClaim { Id = userToken.UserAccount.Id, Name = userToken.UserAccount.Username } });
+                var user = await _userAccountRepository.GetAsync(x => x.Id == userToken.UserId && x.Status == Core.Enums.Status.Active);
+                accessToken = await CreateToken(user);
+                accessToken.RefreshToken = userToken.RefreshToken;
             }
             else
             {
-                return new ResponseWrapper<AccessToken>(null);
+                throw new BadRequestException("Lütfen tekrar giriş yapın");
             }
 
             return new ResponseWrapper<AccessToken>(accessToken);
