@@ -84,6 +84,9 @@
     <Compile Update="Views\PopupPages\ProfilePopupView.xaml.cs">
       <DependentUpon>ProfilePopupView.xaml</DependentUpon>
     </Compile>
+    <Compile Update="Views\StoreOrderPages\StoreOrderDetailPage.xaml.cs">
+      <DependentUpon>StoreOrderDetailPage.xaml</DependentUpon>
+    </Compile>
     <Compile Update="Views\StoreOrderPages\StoreOrderListPage.xaml.cs">
       <DependentUpon>StoreOrderListPage.xaml</DependentUpon>
     </Compile>
@@ -181,6 +184,9 @@
       <Generator>MSBuild:Compile</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Views\MainNavPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\StoreOrderPages\StoreOrderDetailPage.xaml">
       <Generator>MSBuild:Compile</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Views\StoreOrderPages\StoreOrderListPage.xaml">

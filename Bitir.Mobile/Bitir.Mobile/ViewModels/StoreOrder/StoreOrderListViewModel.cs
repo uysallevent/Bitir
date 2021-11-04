@@ -1,5 +1,6 @@
 ﻿using Bitir.Mobile.Exceptions;
 using Bitir.Mobile.Models.Common;
+using Bitir.Mobile.Views;
 using Module.Shared.Entities.SalesModuleEntities;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -149,7 +150,7 @@ namespace Bitir.Mobile.ViewModels
             var item = (selectedItem as Syncfusion.ListView.XForms.ItemTappedEventArgs).ItemData as StoreOrderViewModel;
             if (item != null)
             {
-
+                App.Current.MainPage.Navigation.PushModalAsync(new StoreOrderDetailPage(item));
             }
         }
 

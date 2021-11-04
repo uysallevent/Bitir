@@ -82,7 +82,7 @@
     </ContentPage.ControlTemplate>
     <ContentPage.Content>
         <Grid>
-            <ScrollView>
+            <ScrollView VerticalOptions="StartAndExpand">
                 <StackLayout
                 Padding="16,24"
                 BackgroundColor="{DynamicResource Gray-100}"
@@ -217,7 +217,7 @@
 
                     <!--  Grid  -->
                     <StackLayout>
-                        <sfgrid:SfDataGrid x:Name="dataGrid"
+                        <sfgrid:SfDataGrid x:Name="productDataGrid"
                            AutoGenerateColumns="False"
                            ColumnSizer="Star"
                            ItemsSource="{Binding StoreProductsInCarrier}"
@@ -267,7 +267,7 @@
                                         <DataTemplate>
                                             <Frame WidthRequest="50" HeightRequest="40" CornerRadius="3" BackgroundColor="Transparent" Margin="0" Padding="0">
                                                 <buttons:SfButton
-                                                Command="{Binding Source={x:Reference dataGrid}, Path=BindingContext.RemoveProductFromCarrierCommand}"
+                                                Command="{Binding Source={x:Reference productDataGrid}, Path=BindingContext.RemoveProductFromCarrierCommand}"
                                                 CommandParameter="{Binding .}"
                                                 Style="{StaticResource GradientButtonStyle}"
                                                 Text="Sil"/>

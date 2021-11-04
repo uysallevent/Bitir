@@ -33,13 +33,18 @@ namespace Bitir.Data.Contexts
         public DbSet<Carrier_Store> Carrier_Store { get; set; }
         public DbSet<Carrier> Carrier { get; set; }
         public DbSet<Store> Store { get; set; }
+        [NotMapped]
         public DbSet<StoreOrdersView> StoreOrdersView { get; set; }
+        [NotMapped]
         public DbSet<StoreProductViewModel> StoreProductViewModel { get; set; }
+        [NotMapped]
         public DbSet<StoreProductByCarrierViewModel> StoreProductByCarrierViewModel { get; set; }
+        [NotMapped]
         public DbSet<StoreProductByStoreViewModel> StoreProductByStoreViewModel { get; set; }
+        [NotMapped]
         public DbSet<StoreOrderViewModel> StoreOrderViewModel { get; set; }
         public DbSet<Store_UserAccount> Store_UserAccount { get; set; }
-        public DbSet<Order> Order { get; set; }
+        public DbSet<OrderDetail> OrderDetail { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             new AuthModuleEntitiesBaseConfiguration().Configure(modelBuilder);

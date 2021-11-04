@@ -6,13 +6,7 @@ namespace Module.Shared.Migrations
     {
         public static void ProvinceDistrict(MigrationBuilder migrationBuilder)
         {
-            var sp1 = @"CREATE TABLE auth.Province
-                    (
-                      Id INT PRIMARY KEY IDENTITY(1, 1),
-                      Name NVARCHAR(255) NULL
-                    );
- 
-                    INSERT INTO auth.Province
+            var sp1 = @"INSERT INTO auth.Province
                     (
                       Name
                     )
@@ -100,14 +94,7 @@ namespace Module.Shared.Migrations
                     ('DÜZCE');";
             migrationBuilder.Sql(sp1);
 
-            var sp2 = @"CREATE TABLE auth.District
-                    (
-                        Id INT PRIMARY KEY IDENTITY(1, 1),
-                        Name [NVARCHAR](255) NOT NULL,
-                        ProvinceId INT NOT NULL
-                    );
- 
-                    INSERT INTO auth.District(Name, ProvinceId) VALUES 
+            var sp2 = @"INSERT INTO auth.District(Name, ProvinceId) VALUES 
                     ('ALADAĞ',1),
                     ('CEYHAN',1),
                     ('ÇUKUROVA',1),

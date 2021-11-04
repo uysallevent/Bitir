@@ -8,7 +8,7 @@ namespace Module.Shared.Migrations
         {
             var view1 = @"CREATE VIEW [sales].[StoreOrdersView]
 						AS	
-                        SELECT
+            SELECT
                         OrderId=o.Id,
 						StoreId=ps.StoreId,
                         UserId=uac.Id,
@@ -21,23 +21,24 @@ namespace Module.Shared.Migrations
                         OrderProvinceName=pro.Name,
                         OrderDistrictName=dis.Name,
                         OrderAddress=uad.Address,
-                        OrderQuantity=o.Quantity,
+                        OrderQuantity=od.Quantity,
                         OrderStatus=o.OrderStatus,
+						OrderDetailStatus=od.Status,
                         OrderNote=o.Note,
                         ProductName=p.Name,
                         ProductQuantity=pq.Quantity,
                         ProductUnit=un.Name,
                         ProductUnitAbbreviation=un.Abbreviation
                         FROM sales.[Order] o
+						LEFT JOIN sales.OrderDetail od on od.OrderId=o.Id
                         LEFT JOIN auth.UserAccount uac on uac.Id=o.UserId
                         LEFT JOIN auth.UserAddress uad on uad.Id=o.UserAddressId
                         LEFT JOIN auth.District dis on dis.Id=uad.DistrictId
                         LEFT JOIN auth.Province pro on pro.Id=dis.ProvinceId
-                        LEFT JOIN product.ProductStore ps on ps.Id=o.ProductStoreId
+                        LEFT JOIN product.ProductStore ps on ps.Id=od.ProductStoreId
                         LEFT JOIN product.ProductQuantity pq on pq.Id=ps.ProductQuantityId
                         LEFT JOIN product.Product p on p.Id=pq.ProductId
-                        LEFT JOIN product.Unit un on un.Id=pq.UnitId
-                        AND o.Status=1";
+                        LEFT JOIN product.Unit un on un.Id=pq.UnitId";
             migrationBuilder.Sql(view1);
         }
     }

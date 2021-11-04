@@ -4,7 +4,7 @@ using Module.Shared.Migrations;
 
 namespace Bitir.Data.Migrations
 {
-    public partial class bitirInit : Migration
+    public partial class bitirinit : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -16,19 +16,6 @@ namespace Bitir.Data.Migrations
 
             migrationBuilder.EnsureSchema(
                 name: "sales");
-
-            migrationBuilder.CreateTable(
-                name: "Province",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Province", x => x.Id);
-                });
 
             migrationBuilder.CreateTable(
                 name: "StoreOrderViewModel",
@@ -50,7 +37,7 @@ namespace Bitir.Data.Migrations
                     OrderStatus = table.Column<int>(nullable: false),
                     OrderNote = table.Column<string>(nullable: true),
                     ProductName = table.Column<string>(nullable: true),
-                    ProductQuantity = table.Column<int>(nullable: false),
+                    ProductQuantity = table.Column<decimal>(nullable: false),
                     ProductUnit = table.Column<string>(nullable: true),
                     ProductUnitAbbreviation = table.Column<string>(nullable: true)
                 },
@@ -120,6 +107,20 @@ namespace Bitir.Data.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_StoreProductViewModel", x => x.ProductStockId);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Province",
+                schema: "auth",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Province", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -218,12 +219,44 @@ namespace Bitir.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "StoreOrdersView",
+                schema: "sales",
+                columns: table => new
+                {
+                    OrderId = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    StoreId = table.Column<int>(nullable: false),
+                    UserId = table.Column<int>(nullable: false),
+                    UserAddressId = table.Column<int>(nullable: false),
+                    DistrictId = table.Column<int>(nullable: false),
+                    ProvinceId = table.Column<int>(nullable: false),
+                    ProductStoreId = table.Column<int>(nullable: false),
+                    ProductQuantityId = table.Column<int>(nullable: false),
+                    CustomerName = table.Column<string>(nullable: true),
+                    OrderProvinceName = table.Column<string>(nullable: true),
+                    OrderDistrictName = table.Column<string>(nullable: true),
+                    OrderAddress = table.Column<string>(nullable: true),
+                    OrderQuantity = table.Column<int>(nullable: false),
+                    OrderStatus = table.Column<int>(nullable: false),
+                    OrderNote = table.Column<string>(nullable: true),
+                    ProductName = table.Column<string>(nullable: true),
+                    ProductQuantity = table.Column<decimal>(nullable: false),
+                    ProductUnit = table.Column<string>(nullable: true),
+                    ProductUnitAbbreviation = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_StoreOrdersView", x => x.OrderId);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "District",
+                schema: "auth",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(nullable: true),
+                    Name = table.Column<string>(nullable: false),
                     ProvinceId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
@@ -232,6 +265,7 @@ namespace Bitir.Data.Migrations
                     table.ForeignKey(
                         name: "FK_District_Province_ProvinceId",
                         column: x => x.ProvinceId,
+                        principalSchema: "auth",
                         principalTable: "Province",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -519,23 +553,22 @@ namespace Bitir.Data.Migrations
                     Status = table.Column<int>(nullable: false),
                     UserId = table.Column<int>(nullable: false),
                     UserAddressId = table.Column<int>(nullable: false),
-                    ProductStoreId = table.Column<int>(nullable: false),
-                    Quantity = table.Column<int>(nullable: false),
                     Note = table.Column<string>(nullable: true),
                     OrderStatus = table.Column<int>(nullable: false),
                     Date = table.Column<DateTime>(nullable: false),
+                    Product_StoreId = table.Column<int>(nullable: true),
                     StoreId = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Order", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Order_ProductStore_ProductStoreId",
-                        column: x => x.ProductStoreId,
+                        name: "FK_Order_ProductStore_Product_StoreId",
+                        column: x => x.Product_StoreId,
                         principalSchema: "product",
                         principalTable: "ProductStore",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_Order_Store_StoreId",
                         column: x => x.StoreId,
@@ -552,48 +585,82 @@ namespace Bitir.Data.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "OrderDetail",
+                schema: "sales",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    InsertDate = table.Column<DateTime>(type: "datetime", nullable: false, defaultValueSql: "getdate()"),
+                    UpdateDate = table.Column<DateTime>(type: "datetime", nullable: false),
+                    Status = table.Column<int>(nullable: false),
+                    OrderId = table.Column<int>(nullable: false),
+                    ProductStoreId = table.Column<int>(nullable: false),
+                    Quantity = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_OrderDetail", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_OrderDetail_Order_OrderId",
+                        column: x => x.OrderId,
+                        principalSchema: "sales",
+                        principalTable: "Order",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_OrderDetail_ProductStore_ProductStoreId",
+                        column: x => x.ProductStoreId,
+                        principalSchema: "product",
+                        principalTable: "ProductStore",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
             migrationBuilder.InsertData(
                 schema: "auth",
                 table: "UserAccount",
                 columns: new[] { "Id", "AccountTypeId", "Email", "InsertDate", "Name", "PasswordHash", "PasswordSalt", "Phone", "Status", "Surname", "UpdateDate", "Username" },
                 values: new object[,]
                 {
-                    { 1, 1, "t@t.com", new DateTime(2021, 10, 31, 1, 47, 34, 466, DateTimeKind.Local).AddTicks(3001), "test", new byte[] { 1, 154, 200, 3, 222, 206, 114, 208, 177, 173, 154, 242, 230, 52, 187, 246, 23, 236, 212, 73, 106, 72, 171, 240, 1, 248, 204, 92, 137, 99, 9, 16, 126, 43, 204, 152, 38, 60, 147, 130, 199, 116, 218, 75, 177, 61, 184, 78, 103, 220, 200, 60, 151, 210, 161, 216, 25, 65, 245, 1, 115, 67, 195, 196 }, new byte[] { 156, 94, 85, 179, 227, 171, 205, 189, 83, 3, 121, 0, 100, 62, 95, 31, 135, 130, 122, 114, 6, 203, 227, 21, 133, 181, 98, 241, 120, 96, 199, 37, 39, 111, 192, 141, 1, 228, 120, 249, 142, 103, 236, 97, 80, 137, 204, 120, 28, 201, 116, 175, 36, 205, 123, 183, 78, 164, 31, 239, 110, 107, 169, 235, 176, 127, 81, 66, 154, 152, 10, 214, 146, 247, 39, 157, 12, 116, 150, 120, 172, 159, 111, 203, 104, 248, 177, 59, 72, 128, 98, 157, 39, 139, 33, 150, 119, 203, 176, 131, 239, 232, 197, 142, 218, 165, 122, 136, 64, 190, 198, 209, 42, 73, 220, 234, 49, 186, 1, 243, 11, 68, 193, 83, 52, 209, 36, 3 }, "505", 1, "test", new DateTime(2021, 10, 31, 1, 47, 34, 466, DateTimeKind.Local).AddTicks(8831), "admin" },
-                    { 2, 2, "q@q.com", new DateTime(2021, 10, 31, 1, 47, 34, 466, DateTimeKind.Local).AddTicks(9928), "Vendor", new byte[] { 1, 154, 200, 3, 222, 206, 114, 208, 177, 173, 154, 242, 230, 52, 187, 246, 23, 236, 212, 73, 106, 72, 171, 240, 1, 248, 204, 92, 137, 99, 9, 16, 126, 43, 204, 152, 38, 60, 147, 130, 199, 116, 218, 75, 177, 61, 184, 78, 103, 220, 200, 60, 151, 210, 161, 216, 25, 65, 245, 1, 115, 67, 195, 196 }, new byte[] { 156, 94, 85, 179, 227, 171, 205, 189, 83, 3, 121, 0, 100, 62, 95, 31, 135, 130, 122, 114, 6, 203, 227, 21, 133, 181, 98, 241, 120, 96, 199, 37, 39, 111, 192, 141, 1, 228, 120, 249, 142, 103, 236, 97, 80, 137, 204, 120, 28, 201, 116, 175, 36, 205, 123, 183, 78, 164, 31, 239, 110, 107, 169, 235, 176, 127, 81, 66, 154, 152, 10, 214, 146, 247, 39, 157, 12, 116, 150, 120, 172, 159, 111, 203, 104, 248, 177, 59, 72, 128, 98, 157, 39, 139, 33, 150, 119, 203, 176, 131, 239, 232, 197, 142, 218, 165, 122, 136, 64, 190, 198, 209, 42, 73, 220, 234, 49, 186, 1, 243, 11, 68, 193, 83, 52, 209, 36, 3 }, "505", 1, "test", new DateTime(2021, 10, 31, 1, 47, 34, 466, DateTimeKind.Local).AddTicks(9933), "vendor" }
+                    { 1, 1, "t@t.com", new DateTime(2021, 11, 4, 23, 58, 49, 350, DateTimeKind.Local).AddTicks(8767), "test", new byte[] { 85, 221, 178, 169, 244, 56, 228, 134, 154, 80, 172, 140, 29, 86, 36, 190, 209, 170, 84, 139, 6, 110, 175, 128, 70, 255, 131, 50, 35, 164, 87, 23, 43, 53, 218, 202, 183, 203, 195, 188, 6, 211, 0, 247, 248, 46, 139, 52, 172, 253, 8, 86, 180, 178, 153, 216, 232, 111, 172, 208, 8, 213, 140, 128 }, new byte[] { 76, 130, 118, 234, 237, 233, 135, 221, 164, 39, 200, 139, 53, 77, 141, 158, 8, 2, 151, 90, 79, 193, 93, 176, 62, 113, 254, 196, 26, 191, 177, 213, 45, 183, 129, 47, 217, 212, 210, 199, 229, 106, 192, 149, 34, 174, 59, 228, 31, 249, 39, 193, 53, 128, 43, 135, 212, 174, 60, 100, 31, 124, 234, 78, 177, 4, 100, 41, 133, 42, 244, 214, 63, 191, 224, 79, 239, 167, 148, 204, 33, 121, 241, 233, 245, 131, 83, 160, 136, 143, 252, 64, 188, 144, 199, 141, 5, 161, 14, 225, 225, 22, 42, 78, 233, 134, 66, 69, 104, 44, 96, 155, 129, 228, 234, 181, 14, 47, 192, 253, 135, 46, 232, 115, 73, 170, 5, 210 }, "505", 1, "test", new DateTime(2021, 11, 4, 23, 58, 49, 351, DateTimeKind.Local).AddTicks(4913), "admin" },
+                    { 2, 2, "q@q.com", new DateTime(2021, 11, 4, 23, 58, 49, 351, DateTimeKind.Local).AddTicks(6076), "Vendor", new byte[] { 85, 221, 178, 169, 244, 56, 228, 134, 154, 80, 172, 140, 29, 86, 36, 190, 209, 170, 84, 139, 6, 110, 175, 128, 70, 255, 131, 50, 35, 164, 87, 23, 43, 53, 218, 202, 183, 203, 195, 188, 6, 211, 0, 247, 248, 46, 139, 52, 172, 253, 8, 86, 180, 178, 153, 216, 232, 111, 172, 208, 8, 213, 140, 128 }, new byte[] { 76, 130, 118, 234, 237, 233, 135, 221, 164, 39, 200, 139, 53, 77, 141, 158, 8, 2, 151, 90, 79, 193, 93, 176, 62, 113, 254, 196, 26, 191, 177, 213, 45, 183, 129, 47, 217, 212, 210, 199, 229, 106, 192, 149, 34, 174, 59, 228, 31, 249, 39, 193, 53, 128, 43, 135, 212, 174, 60, 100, 31, 124, 234, 78, 177, 4, 100, 41, 133, 42, 244, 214, 63, 191, 224, 79, 239, 167, 148, 204, 33, 121, 241, 233, 245, 131, 83, 160, 136, 143, 252, 64, 188, 144, 199, 141, 5, 161, 14, 225, 225, 22, 42, 78, 233, 134, 66, 69, 104, 44, 96, 155, 129, 228, 234, 181, 14, 47, 192, 253, 135, 46, 232, 115, 73, 170, 5, 210 }, "505", 1, "test", new DateTime(2021, 11, 4, 23, 58, 49, 351, DateTimeKind.Local).AddTicks(6081), "vendor" }
                 });
 
             migrationBuilder.InsertData(
                 schema: "product",
                 table: "Category",
                 columns: new[] { "Id", "InsertDate", "Name", "Status", "SubCategoryId", "UpdateDate" },
-                values: new object[] { 1, new DateTime(2021, 10, 31, 1, 47, 34, 471, DateTimeKind.Local).AddTicks(6858), "Süt Ürünleri", 1, 0, new DateTime(2021, 10, 31, 1, 47, 34, 471, DateTimeKind.Local).AddTicks(6887) });
+                values: new object[] { 1, new DateTime(2021, 11, 4, 23, 58, 49, 357, DateTimeKind.Local).AddTicks(6359), "Süt Ürünleri", 1, 0, new DateTime(2021, 11, 4, 23, 58, 49, 357, DateTimeKind.Local).AddTicks(6383) });
 
             migrationBuilder.InsertData(
                 schema: "product",
                 table: "Unit",
                 columns: new[] { "Id", "Abbreviation", "InsertDate", "Name", "Status", "UpdateDate" },
-                values: new object[] { 1, "lt", new DateTime(2021, 10, 31, 1, 47, 34, 477, DateTimeKind.Local).AddTicks(9356), "Litre", 1, new DateTime(2021, 10, 31, 1, 47, 34, 477, DateTimeKind.Local).AddTicks(9364) });
+                values: new object[] { 1, "lt", new DateTime(2021, 11, 4, 23, 58, 49, 364, DateTimeKind.Local).AddTicks(3912), "Litre", 1, new DateTime(2021, 11, 4, 23, 58, 49, 364, DateTimeKind.Local).AddTicks(3921) });
 
             migrationBuilder.InsertData(
                 schema: "product",
                 table: "Product",
                 columns: new[] { "Id", "CategoryId", "Description", "Image", "InsertDate", "Name", "Status", "UpdateDate" },
-                values: new object[] { 1, 1, "Günlük İnek Sütü", null, new DateTime(2021, 10, 31, 1, 47, 34, 475, DateTimeKind.Local).AddTicks(2718), "Süt", 1, new DateTime(2021, 10, 31, 1, 47, 34, 475, DateTimeKind.Local).AddTicks(2726) });
+                values: new object[] { 1, 1, "Günlük İnek Sütü", null, new DateTime(2021, 11, 4, 23, 58, 49, 361, DateTimeKind.Local).AddTicks(3986), "Süt", 1, new DateTime(2021, 11, 4, 23, 58, 49, 361, DateTimeKind.Local).AddTicks(3995) });
 
             migrationBuilder.InsertData(
                 schema: "product",
                 table: "ProductQuantity",
                 columns: new[] { "Id", "InsertDate", "ProductId", "Quantity", "Status", "UnitId", "UpdateDate" },
-                values: new object[] { 1, new DateTime(2021, 10, 31, 1, 47, 34, 479, DateTimeKind.Local).AddTicks(1460), 1, 1m, 1, 1, new DateTime(2021, 10, 31, 1, 47, 34, 479, DateTimeKind.Local).AddTicks(1466) });
+                values: new object[] { 1, new DateTime(2021, 11, 4, 23, 58, 49, 365, DateTimeKind.Local).AddTicks(6643), 1, 1m, 1, 1, new DateTime(2021, 11, 4, 23, 58, 49, 365, DateTimeKind.Local).AddTicks(6651) });
 
             migrationBuilder.InsertData(
                 schema: "product",
                 table: "ProductQuantity",
                 columns: new[] { "Id", "InsertDate", "ProductId", "Quantity", "Status", "UnitId", "UpdateDate" },
-                values: new object[] { 2, new DateTime(2021, 10, 31, 1, 47, 34, 479, DateTimeKind.Local).AddTicks(1527), 1, 2m, 1, 1, new DateTime(2021, 10, 31, 1, 47, 34, 479, DateTimeKind.Local).AddTicks(1529) });
+                values: new object[] { 2, new DateTime(2021, 11, 4, 23, 58, 49, 365, DateTimeKind.Local).AddTicks(6713), 1, 2m, 1, 1, new DateTime(2021, 11, 4, 23, 58, 49, 365, DateTimeKind.Local).AddTicks(6714) });
 
             migrationBuilder.CreateIndex(
                 name: "IX_District_ProvinceId",
+                schema: "auth",
                 table: "District",
                 column: "ProvinceId");
 
@@ -676,10 +743,10 @@ namespace Bitir.Data.Migrations
                 column: "StoreId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Order_ProductStoreId",
+                name: "IX_Order_Product_StoreId",
                 schema: "sales",
                 table: "Order",
-                column: "ProductStoreId");
+                column: "Product_StoreId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Order_StoreId",
@@ -694,6 +761,18 @@ namespace Bitir.Data.Migrations
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_OrderDetail_OrderId",
+                schema: "sales",
+                table: "OrderDetail",
+                column: "OrderId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_OrderDetail_ProductStoreId",
+                schema: "sales",
+                table: "OrderDetail",
+                column: "ProductStoreId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Store_UserAccount_StoreId",
                 schema: "sales",
                 table: "Store_UserAccount",
@@ -704,17 +783,14 @@ namespace Bitir.Data.Migrations
                 schema: "sales",
                 table: "Store_UserAccount",
                 column: "UserId");
-            ViewMigrationHelper.ViewMigrations(migrationBuilder);
+
+            //ViewMigrationHelper.ViewMigrations(migrationBuilder);
             StoreProcedureMigrationHelper.ProductProcedures(migrationBuilder);
             ProvinceDistrictMigrationHelper.ProvinceDistrict(migrationBuilder);
-
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropTable(
-                name: "District");
-
             migrationBuilder.DropTable(
                 name: "StoreOrderViewModel");
 
@@ -726,6 +802,10 @@ namespace Bitir.Data.Migrations
 
             migrationBuilder.DropTable(
                 name: "StoreProductViewModel");
+
+            migrationBuilder.DropTable(
+                name: "District",
+                schema: "auth");
 
             migrationBuilder.DropTable(
                 name: "UserAddress",
@@ -748,7 +828,7 @@ namespace Bitir.Data.Migrations
                 schema: "sales");
 
             migrationBuilder.DropTable(
-                name: "Order",
+                name: "OrderDetail",
                 schema: "sales");
 
             migrationBuilder.DropTable(
@@ -756,10 +836,19 @@ namespace Bitir.Data.Migrations
                 schema: "sales");
 
             migrationBuilder.DropTable(
-                name: "Province");
+                name: "StoreOrdersView",
+                schema: "sales");
+
+            migrationBuilder.DropTable(
+                name: "Province",
+                schema: "auth");
 
             migrationBuilder.DropTable(
                 name: "Carrier",
+                schema: "sales");
+
+            migrationBuilder.DropTable(
+                name: "Order",
                 schema: "sales");
 
             migrationBuilder.DropTable(
