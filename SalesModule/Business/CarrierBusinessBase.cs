@@ -27,7 +27,6 @@ namespace AuthModule.Business
         private readonly IRepository<UserAddress> _userAddressRepository;
         private readonly IRepository<District> _districtRepository;
         private readonly IRepository<Province> _provinceRepository;
-        private readonly IProcedureExecuter<StoreOrderViewModel> _executeStoreOrderViewModel;
         private readonly IUnitOfWork _uow;
         private readonly IConfiguration _configuration;
         private readonly ILogger _logger;
@@ -44,7 +43,6 @@ namespace AuthModule.Business
             IRepository<UserAddress> userAddressRepository,
             IRepository<District> districtRepository,
             IRepository<Province> provinceRepository,
-            IProcedureExecuter<StoreOrderViewModel> executeStoreOrderViewModel,
             IHttpContextAccessor httpContextAccessor) : base(carrierRepository, uow)
         {
             _uow = uow;
@@ -58,7 +56,6 @@ namespace AuthModule.Business
             _httpContextAccessor = httpContextAccessor;
             _districtRepository = districtRepository;
             _provinceRepository = provinceRepository;
-            _executeStoreOrderViewModel = executeStoreOrderViewModel;
         }
 
 
@@ -145,16 +142,5 @@ namespace AuthModule.Business
             return new ResponseWrapperListing<StoreCarrier>(result);
         }
 
-        public async Task<ResponseWrapperListing<StoreOrderViewModel>> StoreOrders()
-        {
-            var claims = _httpContextAccessor.HttpContext.User.Claims;
-            int.TryParse(claims.FirstOrDefault(x => x.Type == "Store")?.Value, out int storeId);
-            if (storeId < 1)
-            {
-                throw new ClaimExpection("Claims could not find");
-            }
-            var orders = await _executeStoreOrderViewModel.ExecuteProc("EXEC sales.GetStoreOrders {0}", new object[] { storeId });
-            return new ResponseWrapperListing<StoreOrderViewModel>(orders);
-        }
     }
 }

@@ -161,7 +161,7 @@
                                                 HorizontalOptions="FillAndExpand"
                                                 Spacing="0"
                                                 VerticalOptions="FillAndExpand">
-                                                <!--  Product -->
+                                                <!--  Customer Name -->
                                                 <Label
                                                     Margin="16,13,0,12"
                                                     FontFamily="Montserrat-Medium"
@@ -170,19 +170,8 @@
                                                     HeightRequest="24"
                                                     LineHeight="{OnPlatform Android=1.5,
                                                                             Default=-1}"
-                                                    Text="{Binding ProductFullName}"
+                                                    Text="{Binding CustomerName}"
                                                     TextColor="{DynamicResource Gray-900}" />
-
-                                                <!--  Order Quantity  -->
-                                                <Label
-                                                    Margin="16,0,0,12"
-                                                    FontFamily="Montserrat-Medium"
-                                                    FontSize="14"
-                                                    HeightRequest="21"
-                                                    LineHeight="{OnPlatform Android=1.25,
-                                                                            Default=-1}"
-                                                    Text="{Binding OrderQuantity,StringFormat='Sipariş Miktarı : {0} adet'}"
-                                                    TextColor="{DynamicResource Gray-700}" />
 
                                                 <!--  District-Province  -->
                                                 <Label
@@ -192,18 +181,7 @@
                                                     HeightRequest="21"
                                                     LineHeight="{OnPlatform Android=1.25,
                                                                             Default=-1}"
-                                                    Text="{Binding LocationFullName,StringFormat='İlçe-İl : {0}'}"
-                                                    TextColor="{DynamicResource Gray-700}" />
-
-                                                <!--  Customer Name  -->
-                                                <Label
-                                                    Margin="16,0,0,12"
-                                                    FontFamily="Montserrat-Medium"
-                                                    FontSize="14"
-                                                    HeightRequest="21"
-                                                    LineHeight="{OnPlatform Android=1.25,
-                                                                            Default=-1}"
-                                                    Text="{Binding CustomerName,StringFormat='Müşteri Adı : {0}'}"
+                                                    Text="{Binding ProvinceDistrict,StringFormat='İlçe-İl : {0}'}"
                                                     TextColor="{DynamicResource Gray-700}" />
 
                                             </StackLayout>

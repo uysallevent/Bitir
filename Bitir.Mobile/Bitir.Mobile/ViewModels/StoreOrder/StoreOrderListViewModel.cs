@@ -1,6 +1,8 @@
 ﻿using Bitir.Mobile.Exceptions;
 using Bitir.Mobile.Models.Common;
+using Bitir.Mobile.Models.Order;
 using Bitir.Mobile.Views;
+using Core.Entities;
 using Module.Shared.Entities.SalesModuleEntities;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -22,14 +24,14 @@ namespace Bitir.Mobile.ViewModels
         #endregion
 
         #region Fields
-        private ObservableCollection<StoreOrderViewModel> storeOrders;
+        private ObservableCollection<StoreOrder> storeOrders;
         private Command<object> itemSelectedCommand;
         private int page;
         private bool hasNextPage;
         #endregion
 
         #region Properties
-        public ObservableCollection<StoreOrderViewModel> StoreOrders
+        public ObservableCollection<StoreOrder> StoreOrders
         {
             get
             {
@@ -109,18 +111,49 @@ namespace Bitir.Mobile.ViewModels
             try
             {
                 IsBusy = true;
-                var result = await orderService.GetStoreOrders(new Core.Entities.PagingRequestEntity<StoreOrderViewModel> { Page = Page, PageSize = 10 });
+                var result = await orderService.GetStoreOrders(new PagingRequestEntity<StoreOrdersView> { Page = Page, PageSize = 10 });
+                if (result == null || !result.List.Any())
+                {
+                    return;
+                }
+
+                var groupByOrderId = result
+                    .List
+                    .GroupBy(x => x.OrderId)
+                    .Select(x => new StoreOrder
+                    {
+                        OrderId = x.Key,
+                        AddressId = result.List.FirstOrDefault(y => y.OrderId == x.Key).UserAddressId,
+                        UserId = result.List.FirstOrDefault(y => y.OrderId == x.Key).UserId,
+                        CustomerName = result.List.FirstOrDefault(y => y.OrderId == x.Key).CustomerName,
+                        OrderAddress = result.List.FirstOrDefault(y => y.OrderId == x.Key).OrderAddress,
+                        OrderDistrictName = result.List.FirstOrDefault(y => y.OrderId == x.Key).OrderDistrictName,
+                        OrderNote = result.List.FirstOrDefault(y => y.OrderId == x.Key).OrderNote,
+                        OrderProvinceName = result.List.FirstOrDefault(y => y.OrderId == x.Key).OrderProvinceName,
+                        OrderStatus = result.List.FirstOrDefault(y => y.OrderId == x.Key).OrderStatus,
+                        OrderDate= result.List.FirstOrDefault(y => y.OrderId == x.Key).OrderDate,
+                        StoreOrderDetails = result.List.Where(y => y.OrderId == x.Key).Select(y => new StoreOrderDetail
+                        {
+                            OrderQuantity = y.OrderQuantity,
+                            ProductName = y.ProductName,
+                            ProductQuantity = y.ProductQuantity,
+                            ProductStoreId = y.ProductStoreId,
+                            ProductUnit = y.ProductUnit,
+                            ProductUnitAbbreviation = y.ProductUnitAbbreviation
+                        }).ToList()
+                    });
+
                 HasNextPage = result.HasNextpage;
                 if (StoreOrders != null && StoreOrders.Any())
                 {
-                    foreach (var item in result.List)
+                    foreach (var item in groupByOrderId)
                     {
                         StoreOrders.Add(item);
                     }
                 }
                 else
                 {
-                    StoreOrders = new ObservableCollection<StoreOrderViewModel>(result.List);
+                    StoreOrders = new ObservableCollection<StoreOrder>(groupByOrderId);
                 }
             }
             catch (BadRequestException ex)
@@ -147,7 +180,7 @@ namespace Bitir.Mobile.ViewModels
 
         private void NavigateToNextPage(object selectedItem)
         {
-            var item = (selectedItem as Syncfusion.ListView.XForms.ItemTappedEventArgs).ItemData as StoreOrderViewModel;
+            var item = (selectedItem as Syncfusion.ListView.XForms.ItemTappedEventArgs).ItemData as StoreOrder;
             if (item != null)
             {
                 App.Current.MainPage.Navigation.PushModalAsync(new StoreOrderDetailPage(item));

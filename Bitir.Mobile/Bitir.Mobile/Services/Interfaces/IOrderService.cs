@@ -7,6 +7,6 @@ namespace Bitir.Mobile.Services.Interfaces
 {
     public interface IOrderService
     {
-        Task<ResponseWrapperListing<StoreOrderViewModel>> GetStoreOrders(PagingRequestEntity<StoreOrderViewModel> request);
+        Task<ResponseWrapperListing<StoreOrdersView>> GetStoreOrders(PagingRequestEntity<StoreOrdersView> request);
     }
 }

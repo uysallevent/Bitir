@@ -11,12 +11,12 @@ namespace Bitir.Mobile.Services
     {
         private const string addCarrierToStorePath = "SalesModule/Order/GetStoreOrders";
 
-        public async Task<ResponseWrapperListing<StoreOrderViewModel>> GetStoreOrders(PagingRequestEntity<StoreOrderViewModel> request)
+        public async Task<ResponseWrapperListing<StoreOrdersView>> GetStoreOrders(PagingRequestEntity<StoreOrdersView> request)
         {
             var restClientRequest = await GetRestClient(Method.POST, addCarrierToStorePath);
             restClientRequest.Item2.AddParameter("accept", "application/json");
             restClientRequest.Item2.AddJsonBody(request);
-            var restResponse = await restClientRequest.Item1.ExecuteAsync<ResponseWrapperListing<StoreOrderViewModel>>(restClientRequest.Item2);
+            var restResponse = await restClientRequest.Item1.ExecuteAsync<ResponseWrapperListing<StoreOrdersView>>(restClientRequest.Item2);
             return ResponseHandler(restResponse);
         }
     }

@@ -281,6 +281,7 @@
                            HeaderRowHeight="52"
                            RowHeight="48"
                            SelectionMode="Single"
+                           MinimumHeightRequest="0" 
                            Opacity="{StaticResource opacity}"
                            VerticalOverScrollMode="None">
                         <sfgrid:SfDataGrid.Columns x:TypeArguments="sfgrid:Columns">

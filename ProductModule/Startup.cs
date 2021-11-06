@@ -27,10 +27,11 @@ namespace ProductModule
             services.AddScoped<IRepository<Product_Store>, EFRepository<Product_Store, BitirMainContext>>();
             services.AddScoped<IRepository<ProductQuantity>, EFRepository<ProductQuantity, BitirMainContext>>();
             services.AddScoped<IRepository<Unit>, EFRepository<Unit, BitirMainContext>>();
+            services.AddScoped<IRepository<StoreOrdersView>, EFRepository<StoreOrdersView, BitirMainContext>>();
             services.AddScoped<IProcedureExecuter<StoreProductViewModel>, ProcedureExecuter<StoreProductViewModel, BitirMainContext>>();
             services.AddScoped<IProcedureExecuter<StoreProductByCarrierViewModel>, ProcedureExecuter<StoreProductByCarrierViewModel, BitirMainContext>>();
             services.AddScoped<IProcedureExecuter<StoreProductByStoreViewModel>, ProcedureExecuter<StoreProductByStoreViewModel, BitirMainContext>>();
-            services.AddScoped<IProcedureExecuter<StoreOrderViewModel>, ProcedureExecuter<StoreOrderViewModel, BitirMainContext>>();
+
         }
 
         public void Configure(IApplicationBuilder app, Microsoft.AspNetCore.Hosting.IWebHostEnvironment env)

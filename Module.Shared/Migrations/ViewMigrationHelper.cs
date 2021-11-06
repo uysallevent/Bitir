@@ -25,6 +25,7 @@ namespace Module.Shared.Migrations
                         OrderStatus=o.OrderStatus,
 						OrderDetailStatus=od.Status,
                         OrderNote=o.Note,
+						OrderDate=o.Date,
                         ProductName=p.Name,
                         ProductQuantity=pq.Quantity,
                         ProductUnit=un.Name,

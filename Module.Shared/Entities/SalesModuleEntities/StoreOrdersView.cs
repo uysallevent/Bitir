@@ -1,5 +1,6 @@
 ﻿using Core.Entities;
 using Module.Shared.Enums;
+using System;
 using System.ComponentModel.DataAnnotations;
 
 namespace Module.Shared.Entities.SalesModuleEntities
@@ -22,6 +23,7 @@ namespace Module.Shared.Entities.SalesModuleEntities
         public int OrderQuantity { get; set; }
         public OrderStatusEnum OrderStatus { get; set; }
         public string OrderNote { get; set; }
+        public DateTime? OrderDate { get; set; }
         public string ProductName { get; set; }
         public decimal ProductQuantity { get; set; }
         public string ProductUnit { get; set; }

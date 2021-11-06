@@ -12,7 +12,7 @@ namespace Bitir.Mobile.Controls
         {
             if (base.FilterContacts(obj))
             {
-                var taskInfo = obj as StoreOrderViewModel;
+                var taskInfo = obj as StoreOrdersView;
 
                 if (taskInfo == null || string.IsNullOrEmpty(taskInfo.ProductName) || string.IsNullOrEmpty(taskInfo.CustomerName))
                 {
