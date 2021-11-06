@@ -156,6 +156,108 @@
                 <Grid
                     Margin="0,16,0,0"
                     Padding="16,8"
+                    BackgroundColor="{DynamicResource Gray-Bg}"
+                    ColumnDefinitions="Auto, *, Auto"
+                    ColumnSpacing="8"
+                    HeightRequest="48">
+
+                    <border:SfBorder
+                        Grid.RowSpan="2"
+                        BackgroundColor="{DynamicResource Gray-Bg}"
+                        BorderWidth="0"
+                        Style="{StaticResource ProfileBorderStyle}">
+                        <Label FontFamily="Montserrat-Bold" 
+                               FontSize="14"                         
+                               LineHeight="{OnPlatform Default=-1,Android=1.25}"
+                               TextColor="{DynamicResource Gray-900}"
+                               Margin="5"
+                               Text="Araç"/>
+                    </border:SfBorder>
+
+                    <!--  Carrier  -->
+                    <StackLayout Margin="16,0,10,0" Grid.Column="1">
+                        <inputLayout:SfTextInputLayout Style="{DynamicResource TextInputLayoutStyle}">
+                            <combobox:SfComboBox
+                        x:Name="StoreCarrierPicker"
+                        DataSource="{Binding SystemProducts}"
+                        DisplayMemberPath="Name"
+                        SelectedValuePath="Id"
+                        SelectedItem="{Binding SelectedProduct.Value,Mode=TwoWay}"
+                        Style="{StaticResource TextInputLayoutComboBoxStyle}"
+                        VerticalOptions="CenterAndExpand"
+                        Watermark="Araç Seçin">
+                                <combobox:SfComboBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <Label Text="{Binding Name}" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
+                                    </DataTemplate>
+                                </combobox:SfComboBox.ItemTemplate>
+                            </combobox:SfComboBox>
+                        </inputLayout:SfTextInputLayout>
+                        <!--  Label to display error message  -->
+                        <Label
+                                x:Name="StoreCarrierPickerValidationLabel"
+                                Margin="15,-3,0,0"
+                                IsVisible="{Binding SelectedProduct.IsValid, Converter={StaticResource InverseBoolConverter}}"
+                                Style="{StaticResource SimpleLabelStyle}"
+                                Text="{Binding SelectedProduct.Errors, Converter={StaticResource FirstValidationErrorConverter}}"
+                                TextColor="{DynamicResource Red}"
+                                VerticalOptions="FillAndExpand" />
+                    </StackLayout>
+                </Grid>
+                <Grid
+                    Margin="0,16,0,0"
+                    Padding="16,8"
+                    BackgroundColor="{DynamicResource Gray-Bg}"
+                    ColumnDefinitions="Auto, *, Auto"
+                    ColumnSpacing="8"
+                    HeightRequest="48">
+
+                    <border:SfBorder
+                        Grid.RowSpan="2"
+                        BackgroundColor="{DynamicResource Gray-Bg}"
+                        BorderWidth="0"
+                        Style="{StaticResource ProfileBorderStyle}">
+                        <Label FontFamily="Montserrat-Bold" 
+                               FontSize="14"                         
+                               LineHeight="{OnPlatform Default=-1,Android=1.25}"
+                               TextColor="{DynamicResource Gray-900}"
+                               Margin="5"
+                               Text="Durum"/>
+                    </border:SfBorder>
+
+                    <!--  Order Status  -->
+                    <StackLayout Margin="0,0,10,0" Grid.Column="1">
+                        <inputLayout:SfTextInputLayout Style="{DynamicResource TextInputLayoutStyle}">
+                            <combobox:SfComboBox
+                        x:Name="OrderStatusPicker"
+                        DataSource="{Binding SystemProducts}"
+                        DisplayMemberPath="Name"
+                        SelectedValuePath="Id"
+                        SelectedItem="{Binding SelectedProduct.Value,Mode=TwoWay}"
+                        Style="{StaticResource TextInputLayoutComboBoxStyle}"
+                        VerticalOptions="CenterAndExpand"
+                        Watermark="Sipariş Durumu">
+                                <combobox:SfComboBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <Label Text="{Binding Name}" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
+                                    </DataTemplate>
+                                </combobox:SfComboBox.ItemTemplate>
+                            </combobox:SfComboBox>
+                        </inputLayout:SfTextInputLayout>
+                        <!--  Label to display error message  -->
+                        <Label
+                                x:Name="OrderStatusPickerValidationLabel"
+                                Margin="15,-3,0,0"
+                                IsVisible="{Binding SelectedProduct.IsValid, Converter={StaticResource InverseBoolConverter}}"
+                                Style="{StaticResource SimpleLabelStyle}"
+                                Text="{Binding SelectedProduct.Errors, Converter={StaticResource FirstValidationErrorConverter}}"
+                                TextColor="{DynamicResource Red}"
+                                VerticalOptions="FillAndExpand" />
+                    </StackLayout>
+                </Grid>
+                <Grid
+                    Margin="0,16,0,0"
+                    Padding="16,8"
                     BackgroundColor="#fffdbc"
                     ColumnDefinitions="Auto, *, Auto"
                     ColumnSpacing="8"
@@ -234,7 +336,7 @@
                                                 Command="{Binding Source={x:Reference productDataGrid}, Path=BindingContext.RemoveProductFromCarrierCommand}"
                                                 CommandParameter="{Binding .}"
                                                 Style="{StaticResource GradientButtonStyle}"
-                                                Text="İptal"/>
+                                                Text="-"/>
                                         </Frame>
                                     </DataTemplate>
                                 </sfgrid:GridTemplateColumn.CellTemplate>
@@ -242,34 +344,7 @@
                         </sfgrid:SfDataGrid.Columns>
                     </sfgrid:SfDataGrid>
                 </StackLayout>
-                <StackLayout Margin="10,16,10,0">
-                    <inputLayout:SfTextInputLayout Style="{DynamicResource TextInputLayoutStyle}">
-                        <combobox:SfComboBox
-                        x:Name="OrderStatusPicker"
-                        DataSource="{Binding SystemProducts}"
-                        DisplayMemberPath="Name"
-                        SelectedValuePath="Id"
-                        SelectedItem="{Binding SelectedProduct.Value,Mode=TwoWay}"
-                        Style="{StaticResource TextInputLayoutComboBoxStyle}"
-                        VerticalOptions="CenterAndExpand"
-                        Watermark="Sipariş Durum Değiştir">
-                            <combobox:SfComboBox.ItemTemplate>
-                                <DataTemplate>
-                                    <Label Text="{Binding Name}" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
-                                </DataTemplate>
-                            </combobox:SfComboBox.ItemTemplate>
-                        </combobox:SfComboBox>
-                    </inputLayout:SfTextInputLayout>
-                    <!--  Label to display error message  -->
-                    <Label
-                                x:Name="ProductPickerValidationLabel"
-                                Margin="15,-3,0,0"
-                                IsVisible="{Binding SelectedProduct.IsValid, Converter={StaticResource InverseBoolConverter}}"
-                                Style="{StaticResource SimpleLabelStyle}"
-                                Text="{Binding SelectedProduct.Errors, Converter={StaticResource FirstValidationErrorConverter}}"
-                                TextColor="{DynamicResource Red}"
-                                VerticalOptions="FillAndExpand" />
-                </StackLayout>
+
 
                 <BoxView Style="{StaticResource HorizontalSeparatorStyle}" />
                 <!--  Submit Button  -->
@@ -279,6 +354,7 @@
                     Style="{StaticResource GradientButtonStyle}"
                     Text="KAYDET"
                     WidthRequest="200" />
+                <BoxView Style="{StaticResource HorizontalSeparatorStyle}" />
 
             </StackLayout>
 
