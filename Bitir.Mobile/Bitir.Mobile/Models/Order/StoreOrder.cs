@@ -11,6 +11,7 @@ namespace Bitir.Mobile.Models.Order
         public int OrderId { get; set; }
         public int UserId { get; set; }
         public int AddressId { get; set; }
+        public int? CarrierId { get; set; }
         public string CustomerName { get; set; }
         public string OrderProvinceName { get; set; }
         public string OrderDistrictName { get; set; }

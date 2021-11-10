@@ -15,13 +15,13 @@ namespace Bitir.Mobile.Converters
             var status = (OrderStatusEnum)value;
             switch (status)
             {
-                case OrderStatusEnum.completed:
+                case OrderStatusEnum.Completed:
                     return "order_completed";
-                case OrderStatusEnum.inCarrier:
+                case OrderStatusEnum.InCarrier:
                     return "order_in_progress";
-                case OrderStatusEnum.canceledByCustomer:
+                case OrderStatusEnum.CanceledByCustomer:
                     return "order_cancelled";
-                case OrderStatusEnum.canceledByStore:
+                case OrderStatusEnum.CanceledByStore:
                     return "order_cancelled";
                 default:
                     return Color.Default;

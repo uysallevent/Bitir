@@ -37,7 +37,7 @@
                         HeightRequest="48"
                         HorizontalOptions="Start"
                         Style="{StaticResource TitleLabelStyle}"
-                        Text="Empty Switch Control"
+                        Text="Store Kapat"
                         VerticalOptions="Center"
                         VerticalTextAlignment="Center" />
 

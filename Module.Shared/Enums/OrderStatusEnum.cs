@@ -2,9 +2,9 @@
 {
     public enum OrderStatusEnum
     {
-        completed=1,
-        inCarrier,
-        canceledByCustomer,
-        canceledByStore
+        Completed=1,
+        InCarrier,
+        CanceledByCustomer,
+        CanceledByStore
     }
 }

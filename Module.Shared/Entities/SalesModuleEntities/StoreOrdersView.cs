@@ -16,6 +16,7 @@ namespace Module.Shared.Entities.SalesModuleEntities
         public int ProvinceId { get; set; }
         public int ProductStoreId { get; set; }
         public int ProductQuantityId { get; set; }
+        public int? CarrierId { get; set; }
         public string CustomerName { get; set; }
         public string OrderProvinceName { get; set; }
         public string OrderDistrictName { get; set; }

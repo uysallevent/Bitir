@@ -178,28 +178,28 @@
                     <StackLayout Margin="16,0,10,0" Grid.Column="1">
                         <inputLayout:SfTextInputLayout Style="{DynamicResource TextInputLayoutStyle}">
                             <combobox:SfComboBox
-                        x:Name="StoreCarrierPicker"
-                        DataSource="{Binding SystemProducts}"
-                        DisplayMemberPath="Name"
+                        x:Name="CarrierPicker"
+                        DataSource="{Binding Carriers}"
+                        DisplayMemberPath="Plate"
                         SelectedValuePath="Id"
-                        SelectedItem="{Binding SelectedProduct.Value,Mode=TwoWay}"
+                        SelectedItem="{Binding SelectedCarrier.Value,Mode=TwoWay}"
                         Style="{StaticResource TextInputLayoutComboBoxStyle}"
                         VerticalOptions="CenterAndExpand"
                         Watermark="Araç Seçin">
                                 <combobox:SfComboBox.ItemTemplate>
                                     <DataTemplate>
-                                        <Label Text="{Binding Name}" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
+                                        <Label Text="{Binding Plate}" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
                                     </DataTemplate>
                                 </combobox:SfComboBox.ItemTemplate>
                             </combobox:SfComboBox>
                         </inputLayout:SfTextInputLayout>
                         <!--  Label to display error message  -->
                         <Label
-                                x:Name="StoreCarrierPickerValidationLabel"
+                                x:Name="CarrierPickerValidationLabel"
                                 Margin="15,-3,0,0"
-                                IsVisible="{Binding SelectedProduct.IsValid, Converter={StaticResource InverseBoolConverter}}"
+                                IsVisible="{Binding SelectedCarrier.IsValid, Converter={StaticResource InverseBoolConverter}}"
                                 Style="{StaticResource SimpleLabelStyle}"
-                                Text="{Binding SelectedProduct.Errors, Converter={StaticResource FirstValidationErrorConverter}}"
+                                Text="{Binding SelectedCarrier.Errors, Converter={StaticResource FirstValidationErrorConverter}}"
                                 TextColor="{DynamicResource Red}"
                                 VerticalOptions="FillAndExpand" />
                     </StackLayout>
@@ -230,16 +230,15 @@
                         <inputLayout:SfTextInputLayout Style="{DynamicResource TextInputLayoutStyle}">
                             <combobox:SfComboBox
                         x:Name="OrderStatusPicker"
-                        DataSource="{Binding SystemProducts}"
-                        DisplayMemberPath="Name"
-                        SelectedValuePath="Id"
-                        SelectedItem="{Binding SelectedProduct.Value,Mode=TwoWay}"
+                        DataSource="{Binding OrderStatusList}"
+                        DisplayMemberPath="{Binding .}"
+                        SelectedItem="{Binding SelectedOrderStatus.Value,Mode=TwoWay}"
                         Style="{StaticResource TextInputLayoutComboBoxStyle}"
                         VerticalOptions="CenterAndExpand"
                         Watermark="Sipariş Durumu">
                                 <combobox:SfComboBox.ItemTemplate>
                                     <DataTemplate>
-                                        <Label Text="{Binding Name}" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
+                                        <Label Text="{Binding .}" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
                                     </DataTemplate>
                                 </combobox:SfComboBox.ItemTemplate>
                             </combobox:SfComboBox>

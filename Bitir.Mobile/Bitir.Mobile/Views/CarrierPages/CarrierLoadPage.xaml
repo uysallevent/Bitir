@@ -82,7 +82,7 @@
     </ContentPage.ControlTemplate>
     <ContentPage.Content>
         <Grid>
-            <ScrollView VerticalOptions="StartAndExpand">
+            <ScrollView>
                 <StackLayout
                 Padding="16,24"
                 BackgroundColor="{DynamicResource Gray-100}"
@@ -225,7 +225,6 @@
                            RowHeight="48"
                            SelectionMode="None"
                            Opacity="{StaticResource opacity}"
-                           MinimumHeightRequest="0" 
                            VerticalOverScrollMode="None">
                             <sfgrid:SfDataGrid.Columns x:TypeArguments="sfgrid:Columns">
                                 <sfgrid:GridTextColumn HeaderFontAttribute="Bold"

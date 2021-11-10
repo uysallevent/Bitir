@@ -125,6 +125,7 @@ namespace Bitir.Mobile.ViewModels
                         OrderId = x.Key,
                         AddressId = result.List.FirstOrDefault(y => y.OrderId == x.Key).UserAddressId,
                         UserId = result.List.FirstOrDefault(y => y.OrderId == x.Key).UserId,
+                        CarrierId= result.List.FirstOrDefault(y => y.OrderId == x.Key).CarrierId,
                         CustomerName = result.List.FirstOrDefault(y => y.OrderId == x.Key).CustomerName,
                         OrderAddress = result.List.FirstOrDefault(y => y.OrderId == x.Key).OrderAddress,
                         OrderDistrictName = result.List.FirstOrDefault(y => y.OrderId == x.Key).OrderDistrictName,

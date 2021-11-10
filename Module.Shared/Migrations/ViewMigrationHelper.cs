@@ -17,6 +17,7 @@ namespace Module.Shared.Migrations
                         ProvinceId=pro.Id,
                         ProductStoreId=ps.Id,
                         ProductQuantityId=pq.Id,
+						CarrierId=o.CarrierId,
                         CustomerName=CONCAT(uac.Name,' ',uac.Surname),
                         OrderProvinceName=pro.Name,
                         OrderDistrictName=dis.Name,

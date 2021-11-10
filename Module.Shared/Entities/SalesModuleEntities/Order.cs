@@ -12,11 +12,14 @@ namespace Module.Shared.Entities.SalesModuleEntities
     {
         public int UserId { get; set; }
         public int UserAddressId { get; set; }
+        public int? CarrierId { get; set; }
         public string Note { get; set; }
         public OrderStatusEnum OrderStatus { get; set; }
         public DateTime Date { get; set; }
         [ForeignKey("UserId")]
         public UserAccount UserAccount { get; set; }
+        [ForeignKey("CarrierId")]
+        public Carrier Carrier { get; set; }
         public IEnumerable<OrderDetail> OrderDetails { get; set; }
     }
 }

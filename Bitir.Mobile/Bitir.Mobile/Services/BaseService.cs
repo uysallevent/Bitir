@@ -15,7 +15,7 @@ namespace Bitir.Mobile.Services
     public abstract class BaseService : RestClient
     {
         private const string refreshLoginPath = "AuthModule/AuthBase/RefreshTokenLogin";
-        private const string rootUrl = "192.168.1.17";
+        private const string rootUrl = "192.168.1.8";
         private const int port = 45455;
         protected UriBuilder uriBuilder;
 
