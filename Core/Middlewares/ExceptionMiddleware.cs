@@ -78,10 +78,10 @@ namespace Core.Middlewares
             await executor.ExecuteAsync(actionContext, result);
         }
 
-        [DataContract(Name = "ErrorResponse")]
+
         public class ErrorResponse
         {
-            [DataMember(Name = "Message")]
+
             public string Message { get; set; }
 
             public ErrorResponse(string message)
