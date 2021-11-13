@@ -19,6 +19,8 @@
             <converter:BooleanToColorConverter x:Key="ColorConverter" />
             <converter:InverseBoolConverter x:Key="InverseBoolConverter" />
             <converter:NameValidationConverter x:Key="FirstValidationErrorConverter" />
+            <converter:OrderStatusColorConverter x:Key="OrderStatusColorConverter" />
+            <converter:OrderStatusMessageConverter x:Key="OrderStatusMessageConverter" />
         </ResourceDictionary>
         <ResourceDictionary>
             <OnPlatform x:Key="opacity"
@@ -257,7 +259,7 @@
                 <Grid
                     Margin="0,16,0,0"
                     Padding="16,8"
-                    BackgroundColor="#fffdbc"
+                    BackgroundColor="{Binding StoreOrder.OrderStatus, Converter={StaticResource OrderStatusColorConverter}}"
                     ColumnDefinitions="Auto, *, Auto"
                     ColumnSpacing="8"
                     HeightRequest="48">
@@ -273,7 +275,7 @@
                         LineHeight="{OnPlatform Default=-1,
                                                 Android=1.25}"
                         MaxLines="2"
-                        Text="Sipariş Dağıtımda"
+                        Text="{Binding StoreOrder.OrderStatus, Converter={StaticResource OrderStatusMessageConverter}}"
                         TextColor="{DynamicResource Gray-900}"
                         VerticalTextAlignment="Center" />
                 </Grid>
