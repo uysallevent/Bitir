@@ -20,6 +20,9 @@ namespace Bitir.Mobile.ViewModels
         public IProductService productService => DependencyService.Get<IProductService>();
         public ICarrierService carrierService => DependencyService.Get<ICarrierService>();
         public IOrderService orderService => DependencyService.Get<IOrderService>();
+        public IProvinceService provinceService => DependencyService.Get<IProvinceService>();
+        public IDistrictService districtService => DependencyService.Get<IDistrictService>();
+        public INeighbourhoodService neighbourhoodService => DependencyService.Get<INeighbourhoodService>();
 
         bool isBusy = false;
         public bool IsBusy

@@ -59,15 +59,19 @@ namespace AuthModule
                     }
                 };
             });
-            services.AddSingleton<ITokenHelper, JwtHelper>();
-            services.AddScoped<IAuthBusinessBase<UserAccount>, AuthBusinessBase>();
+
             services.AddHttpContextAccessor();
             services.AddScoped<IRepository<UserAccount>, EFRepository<UserAccount, BitirMainContext>>();
             services.AddScoped<IRepository<UserAddress>, EFRepository<UserAddress, BitirMainContext>>();
             services.AddScoped<IRepository<UserToken>, EFRepository<UserToken, BitirMainContext>>();
             services.AddScoped<IRepository<Province>, EFRepository<Province, BitirMainContext>>();
             services.AddScoped<IRepository<District>, EFRepository<District, BitirMainContext>>();
-
+            services.AddScoped<IRepository<Neighbourhood>, EFRepository<Neighbourhood, BitirMainContext>>();
+            services.AddScoped<ITokenHelper, JwtHelper>();
+            services.AddScoped<IBusinessBase<Province>, BusinessBase<Province>>();
+            services.AddScoped<IBusinessBase<District>, BusinessBase<District>>();
+            services.AddScoped<IBusinessBase<Neighbourhood>, BusinessBase<Neighbourhood>>();
+            services.AddScoped<IAuthBusinessBase<UserAccount>, AuthBusinessBase>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

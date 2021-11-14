@@ -2,6 +2,7 @@
 using Bitir.Mobile.Models.Common;
 using Bitir.Mobile.Models.Order;
 using Bitir.Mobile.Validators;
+using Module.Shared.Entities.SalesModuleEntities;
 using Module.Shared.Enums;
 using SalesModule.Dtos;
 using System;
@@ -19,10 +20,11 @@ namespace Bitir.Mobile.ViewModels
         {
             Initialize();
             Task.Run(async () => await GetStoreCarriers());
+            SubmitButtonCommand = new Command(async () => await SubmitButtonClicked());
             BackButtonCommand = new Command(async () => await BackButtonClicked());
             this.StoreOrder = storeOrder;
             SelectedOrderStatus.Value = storeOrder.OrderStatus.ToString();
-
+            SelectedCarrier = new ValidatableObject<StoreCarrier> { Value = new StoreCarrier { CarrierId = storeOrder.CarrierId ?? 0 } };
         }
         #endregion
 
@@ -143,6 +145,7 @@ namespace Bitir.Mobile.ViewModels
 
         #region Commands
         public Command BackButtonCommand { get; set; }
+        public Command SubmitButtonCommand { get; set; }
         #endregion
 
         #region Methods
@@ -169,6 +172,42 @@ namespace Bitir.Mobile.ViewModels
             {
                 SendNotification(new ExceptionTransfer { ex = ex, NotificationMessage = ex.Message });
 
+            }
+            catch (InternalServerErrorException ex)
+            {
+                SendNotification(new ExceptionTransfer { ex = ex, NotificationMessage = "Servis hatası !!" });
+            }
+            finally
+            {
+                IsBusy = false;
+            }
+        }
+
+        public async Task SubmitButtonClicked()
+        {
+            try
+            {
+                IsBusy = true;
+                Enum.TryParse(SelectedOrderStatus.Value, out OrderStatusEnum orderStatus);
+                var result = await orderService.StoreOrderUpdate(new Order
+                {
+                    Id = StoreOrder.OrderId,
+                    CarrierId = SelectedCarrier.Value.CarrierId,
+                    OrderStatus = orderStatus,
+                    UserAddressId = StoreOrder.AddressId,
+                    UserId = StoreOrder.UserId
+                });
+
+                if (result.Result != null)
+                {
+                    SendNotification(new ExceptionTransfer { NotificationMessage = "Sipariş başarı ile güncellendi" });
+                    await App.Current.MainPage.Navigation.PopModalAsync(true);
+                    MessagingCenter.Send(this, "UpdateStoreOrderList", true);
+                }
+            }
+            catch (BadRequestException ex)
+            {
+                SendNotification(new ExceptionTransfer { ex = ex, NotificationMessage = ex.Message });
             }
             catch (InternalServerErrorException ex)
             {

@@ -24,6 +24,7 @@ namespace Bitir.Data.Contexts
         public DbSet<UserToken> UserToken { get; set; }
         public DbSet<Province> Province { get; set; }
         public DbSet<District> District { get; set; }
+        public DbSet<Neighbourhood> Neighbourhood { get; set; }
         public DbSet<Product> Product { get; set; }
         public DbSet<Category> Category { get; set; }
         public DbSet<Unit> Unit { get; set; }
@@ -35,14 +36,16 @@ namespace Bitir.Data.Contexts
         public DbSet<Store> Store { get; set; }
         public DbSet<Store_UserAccount> Store_UserAccount { get; set; }
         public DbSet<OrderDetail> OrderDetail { get; set; }
-        [NotMapped]
-        public DbSet<StoreOrdersView> StoreOrdersView { get; set; }
-        [NotMapped]
-        public DbSet<StoreProductViewModel> StoreProductViewModel { get; set; }
-        [NotMapped]
-        public DbSet<StoreProductByCarrierViewModel> StoreProductByCarrierViewModel { get; set; }
-        [NotMapped]
-        public DbSet<StoreProductByStoreViewModel> StoreProductByStoreViewModel { get; set; }
+
+        //[NotMapped]
+        //public DbSet<StoreOrdersView> StoreOrdersView { get; set; }
+        //[NotMapped]
+        //public DbSet<StoreProductViewModel> StoreProductViewModel { get; set; }
+        //[NotMapped]
+        //public DbSet<StoreProductByCarrierViewModel> StoreProductByCarrierViewModel { get; set; }
+        //[NotMapped]
+        //public DbSet<StoreProductByStoreViewModel> StoreProductByStoreViewModel { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             new AuthModuleEntitiesBaseConfiguration().Configure(modelBuilder);

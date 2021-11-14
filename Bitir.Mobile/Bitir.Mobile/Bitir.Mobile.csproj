@@ -16,8 +16,26 @@
   <ItemGroup>
     <Compile Include="..\..\AuthModule\Dtos\LoginDto.cs" Link="Models\Auth\LoginDto.cs" />
     <Compile Include="..\..\AuthModule\Utility\JWT\AccessToken.cs" Link="Models\Auth\AccessToken.cs" />
+    <Compile Include="..\..\Module.Shared\Entities\AuthModuleEntities\District.cs" Link="Models\Auth\District.cs" />
+    <Compile Include="..\..\Module.Shared\Entities\AuthModuleEntities\Neighbourhood.cs" Link="Models\Auth\Neighbourhood.cs" />
+    <Compile Include="..\..\Module.Shared\Entities\AuthModuleEntities\Province.cs" Link="Models\Auth\Province.cs" />
+    <Compile Include="..\..\Module.Shared\Entities\AuthModuleEntities\UserAccount.cs" Link="Models\Auth\UserAccount.cs" />
+    <Compile Include="..\..\Module.Shared\Entities\AuthModuleEntities\UserAddress.cs" Link="Models\Auth\UserAddress.cs" />
+    <Compile Include="..\..\Module.Shared\Entities\AuthModuleEntities\UserToken.cs" Link="Models\Auth\UserToken.cs" />
+    <Compile Include="..\..\Module.Shared\Entities\ProductModuleEntities\Category.cs" Link="Models\Product\Category.cs" />
+    <Compile Include="..\..\Module.Shared\Entities\ProductModuleEntities\Product.cs" Link="Models\Product\Product.cs" />
+    <Compile Include="..\..\Module.Shared\Entities\ProductModuleEntities\ProductQuantity.cs" Link="Models\Product\ProductQuantity.cs" />
+    <Compile Include="..\..\Module.Shared\Entities\ProductModuleEntities\ProductStorePrice.cs" Link="Models\Order\ProductStorePrice.cs" />
+    <Compile Include="..\..\Module.Shared\Entities\ProductModuleEntities\Product_Store.cs" Link="Models\Product\Product_Store.cs" />
     <Compile Include="..\..\Module.Shared\Entities\ProductModuleEntities\StoreProductViewModel.cs" Link="Models\Product\StoreProductViewModel.cs" />
+    <Compile Include="..\..\Module.Shared\Entities\ProductModuleEntities\Unit.cs" Link="Models\Product\Unit.cs" />
+    <Compile Include="..\..\Module.Shared\Entities\SalesModuleEntities\Carrier.cs" Link="Models\Carrier\Carrier.cs" />
+    <Compile Include="..\..\Module.Shared\Entities\SalesModuleEntities\Carrier_Store.cs" Link="Models\Carrier\Carrier_Store.cs" />
+    <Compile Include="..\..\Module.Shared\Entities\SalesModuleEntities\Order.cs" Link="Models\Order\Order.cs" />
+    <Compile Include="..\..\Module.Shared\Entities\SalesModuleEntities\OrderDetail.cs" Link="Models\Order\OrderDetail.cs" />
+    <Compile Include="..\..\Module.Shared\Entities\SalesModuleEntities\Store.cs" Link="Models\Order\Store.cs" />
     <Compile Include="..\..\Module.Shared\Entities\SalesModuleEntities\StoreOrdersView.cs" Link="Models\Order\StoreOrdersView.cs" />
+    <Compile Include="..\..\Module.Shared\Entities\SalesModuleEntities\Store_UserAccount.cs" Link="Models\Order\Store_UserAccount.cs" />
     <Compile Include="..\..\Module.Shared\Enums\AccountTypeEnum.cs" Link="Enums\AccountTypeEnum.cs" />
     <Compile Include="..\..\Module.Shared\Enums\OrderStatusEnum.cs" Link="Enums\OrderStatusEnum.cs" />
     <Compile Include="..\..\ProductModule\Dtos\AddProductToStoreRequest.cs" Link="Models\Product\AddProductToStoreRequest.cs" />

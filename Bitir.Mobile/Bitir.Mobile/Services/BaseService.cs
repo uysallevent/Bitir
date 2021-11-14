@@ -54,7 +54,7 @@ namespace Bitir.Mobile.Services
 
         public async Task CheckTokenExpiration(string path = null)
         {
-            if (path != "AuthModule/AuthBase/Login" && App.authResponse.Expiration < DateTime.Now)
+            if (path != "AuthModule/AuthBase/Login" && App.authResponse?.Expiration < DateTime.Now)
             {
                 var restClientRequest = RestClient(Method.POST, refreshLoginPath);
                 restClientRequest.Item2.AddJsonBody(new LoginDto

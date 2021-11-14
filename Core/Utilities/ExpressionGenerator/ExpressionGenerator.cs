@@ -38,8 +38,13 @@ namespace Core.Utilities.ExpressionGenerator
 
                 if ((typeof(bool).IsAssignableFrom(item.PropertyType) || typeof(bool?).IsAssignableFrom(item.PropertyType)) && (item.GetValue(request, null) == null))
                     continue;
+
+                if ((item.GetValue(request, null) == null))
+                    continue;
+
                 if (item.PropertyType.BaseType.Name == "Enum")
                     continue;
+
                 if (item.PropertyType.IsClass)
                     continue;
 

@@ -19,6 +19,13 @@ namespace Bitir.Mobile.ViewModels
             Initialize();
             Task.Run(async () => await GetStoreOrders());
             LoadMoreCommand = new Command(async () => await LoadMore());
+            MessagingCenter.Subscribe<StoreOrderDetailViewModel, bool>(this, "UpdateStoreOrderList", async (s, b) =>
+            {
+                if (b)
+                {
+                    await GetStoreOrders();
+                }
+            });
 
         }
         #endregion
@@ -125,14 +132,14 @@ namespace Bitir.Mobile.ViewModels
                         OrderId = x.Key,
                         AddressId = result.List.FirstOrDefault(y => y.OrderId == x.Key).UserAddressId,
                         UserId = result.List.FirstOrDefault(y => y.OrderId == x.Key).UserId,
-                        CarrierId= result.List.FirstOrDefault(y => y.OrderId == x.Key).CarrierId,
+                        CarrierId = result.List.FirstOrDefault(y => y.OrderId == x.Key).CarrierId,
                         CustomerName = result.List.FirstOrDefault(y => y.OrderId == x.Key).CustomerName,
                         OrderAddress = result.List.FirstOrDefault(y => y.OrderId == x.Key).OrderAddress,
                         OrderDistrictName = result.List.FirstOrDefault(y => y.OrderId == x.Key).OrderDistrictName,
                         OrderNote = result.List.FirstOrDefault(y => y.OrderId == x.Key).OrderNote,
                         OrderProvinceName = result.List.FirstOrDefault(y => y.OrderId == x.Key).OrderProvinceName,
                         OrderStatus = result.List.FirstOrDefault(y => y.OrderId == x.Key).OrderStatus,
-                        OrderDate= result.List.FirstOrDefault(y => y.OrderId == x.Key).OrderDate,
+                        OrderDate = result.List.FirstOrDefault(y => y.OrderId == x.Key).OrderDate,
                         StoreOrderDetails = result.List.Where(y => y.OrderId == x.Key).Select(y => new StoreOrderDetail
                         {
                             OrderQuantity = y.OrderQuantity,
@@ -145,7 +152,7 @@ namespace Bitir.Mobile.ViewModels
                     });
 
                 HasNextPage = result.HasNextpage;
-                if (StoreOrders != null && StoreOrders.Any())
+                if (page != null && StoreOrders != null && StoreOrders.Any())
                 {
                     foreach (var item in groupByOrderId)
                     {

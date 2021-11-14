@@ -116,9 +116,20 @@
                     <!--  Map Button  -->
                     <buttons:SfButton
                         x:Name="MapButton"
+                        Margin="0,0,10,0"
                         IsVisible="True"
                         Padding="70"
                         BackgroundImage="map"
+                        Style="{StaticResource IconButtonStyle}"
+                        Command="{Binding CarrierLoadPageCommand}">
+                    </buttons:SfButton>
+
+                    <!--  Order Content Button  -->
+                    <buttons:SfButton
+                        x:Name="OrderContentButton"
+                        IsVisible="True"
+                        Padding="70"
+                        BackgroundImage="order_content"
                         Style="{StaticResource IconButtonStyle}"
                         Command="{Binding CarrierLoadPageCommand}">
                     </buttons:SfButton>

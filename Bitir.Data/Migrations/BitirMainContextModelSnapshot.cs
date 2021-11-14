@@ -40,6 +40,31 @@ namespace Bitir.Data.Migrations
                     b.ToTable("District","auth");
                 });
 
+            modelBuilder.Entity("Module.Shared.Entities.AuthModuleEntities.Neighbourhood", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("DistrictId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("LocalityName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("DistrictId");
+
+                    b.ToTable("Neighbourhood","auth");
+                });
+
             modelBuilder.Entity("Module.Shared.Entities.AuthModuleEntities.Province", b =>
                 {
                     b.Property<int>("Id")
@@ -113,14 +138,14 @@ namespace Bitir.Data.Migrations
                             Id = 1,
                             AccountTypeId = 1,
                             Email = "t@t.com",
-                            InsertDate = new DateTime(2021, 11, 4, 23, 58, 49, 350, DateTimeKind.Local).AddTicks(8767),
+                            InsertDate = new DateTime(2021, 11, 14, 23, 5, 53, 62, DateTimeKind.Local).AddTicks(907),
                             Name = "test",
-                            PasswordHash = new byte[] { 85, 221, 178, 169, 244, 56, 228, 134, 154, 80, 172, 140, 29, 86, 36, 190, 209, 170, 84, 139, 6, 110, 175, 128, 70, 255, 131, 50, 35, 164, 87, 23, 43, 53, 218, 202, 183, 203, 195, 188, 6, 211, 0, 247, 248, 46, 139, 52, 172, 253, 8, 86, 180, 178, 153, 216, 232, 111, 172, 208, 8, 213, 140, 128 },
-                            PasswordSalt = new byte[] { 76, 130, 118, 234, 237, 233, 135, 221, 164, 39, 200, 139, 53, 77, 141, 158, 8, 2, 151, 90, 79, 193, 93, 176, 62, 113, 254, 196, 26, 191, 177, 213, 45, 183, 129, 47, 217, 212, 210, 199, 229, 106, 192, 149, 34, 174, 59, 228, 31, 249, 39, 193, 53, 128, 43, 135, 212, 174, 60, 100, 31, 124, 234, 78, 177, 4, 100, 41, 133, 42, 244, 214, 63, 191, 224, 79, 239, 167, 148, 204, 33, 121, 241, 233, 245, 131, 83, 160, 136, 143, 252, 64, 188, 144, 199, 141, 5, 161, 14, 225, 225, 22, 42, 78, 233, 134, 66, 69, 104, 44, 96, 155, 129, 228, 234, 181, 14, 47, 192, 253, 135, 46, 232, 115, 73, 170, 5, 210 },
+                            PasswordHash = new byte[] { 68, 109, 248, 197, 240, 224, 22, 90, 24, 136, 67, 243, 154, 70, 111, 93, 148, 222, 61, 183, 100, 227, 247, 83, 176, 27, 211, 154, 132, 190, 32, 210, 140, 207, 100, 178, 220, 3, 37, 101, 227, 121, 214, 206, 107, 241, 235, 4, 126, 62, 222, 89, 245, 211, 152, 249, 39, 89, 18, 193, 134, 7, 160, 146 },
+                            PasswordSalt = new byte[] { 250, 82, 152, 81, 97, 102, 44, 187, 135, 2, 213, 186, 7, 77, 21, 214, 165, 156, 34, 35, 178, 19, 65, 6, 10, 230, 30, 137, 35, 208, 128, 181, 230, 95, 129, 91, 247, 95, 121, 12, 96, 70, 79, 134, 240, 150, 207, 140, 220, 142, 128, 131, 14, 33, 62, 82, 250, 91, 193, 172, 89, 178, 92, 214, 222, 149, 117, 54, 225, 250, 187, 190, 217, 114, 249, 202, 11, 143, 128, 138, 25, 154, 17, 129, 22, 47, 54, 146, 75, 167, 17, 50, 132, 92, 157, 239, 158, 195, 126, 247, 177, 197, 138, 52, 92, 195, 218, 32, 172, 36, 236, 156, 33, 13, 160, 203, 78, 181, 79, 86, 192, 8, 127, 252, 217, 109, 34, 162 },
                             Phone = "505",
                             Status = 1,
                             Surname = "test",
-                            UpdateDate = new DateTime(2021, 11, 4, 23, 58, 49, 351, DateTimeKind.Local).AddTicks(4913),
+                            UpdateDate = new DateTime(2021, 11, 14, 23, 5, 53, 62, DateTimeKind.Local).AddTicks(8458),
                             Username = "admin"
                         },
                         new
@@ -128,14 +153,14 @@ namespace Bitir.Data.Migrations
                             Id = 2,
                             AccountTypeId = 2,
                             Email = "q@q.com",
-                            InsertDate = new DateTime(2021, 11, 4, 23, 58, 49, 351, DateTimeKind.Local).AddTicks(6076),
+                            InsertDate = new DateTime(2021, 11, 14, 23, 5, 53, 62, DateTimeKind.Local).AddTicks(9829),
                             Name = "Vendor",
-                            PasswordHash = new byte[] { 85, 221, 178, 169, 244, 56, 228, 134, 154, 80, 172, 140, 29, 86, 36, 190, 209, 170, 84, 139, 6, 110, 175, 128, 70, 255, 131, 50, 35, 164, 87, 23, 43, 53, 218, 202, 183, 203, 195, 188, 6, 211, 0, 247, 248, 46, 139, 52, 172, 253, 8, 86, 180, 178, 153, 216, 232, 111, 172, 208, 8, 213, 140, 128 },
-                            PasswordSalt = new byte[] { 76, 130, 118, 234, 237, 233, 135, 221, 164, 39, 200, 139, 53, 77, 141, 158, 8, 2, 151, 90, 79, 193, 93, 176, 62, 113, 254, 196, 26, 191, 177, 213, 45, 183, 129, 47, 217, 212, 210, 199, 229, 106, 192, 149, 34, 174, 59, 228, 31, 249, 39, 193, 53, 128, 43, 135, 212, 174, 60, 100, 31, 124, 234, 78, 177, 4, 100, 41, 133, 42, 244, 214, 63, 191, 224, 79, 239, 167, 148, 204, 33, 121, 241, 233, 245, 131, 83, 160, 136, 143, 252, 64, 188, 144, 199, 141, 5, 161, 14, 225, 225, 22, 42, 78, 233, 134, 66, 69, 104, 44, 96, 155, 129, 228, 234, 181, 14, 47, 192, 253, 135, 46, 232, 115, 73, 170, 5, 210 },
+                            PasswordHash = new byte[] { 68, 109, 248, 197, 240, 224, 22, 90, 24, 136, 67, 243, 154, 70, 111, 93, 148, 222, 61, 183, 100, 227, 247, 83, 176, 27, 211, 154, 132, 190, 32, 210, 140, 207, 100, 178, 220, 3, 37, 101, 227, 121, 214, 206, 107, 241, 235, 4, 126, 62, 222, 89, 245, 211, 152, 249, 39, 89, 18, 193, 134, 7, 160, 146 },
+                            PasswordSalt = new byte[] { 250, 82, 152, 81, 97, 102, 44, 187, 135, 2, 213, 186, 7, 77, 21, 214, 165, 156, 34, 35, 178, 19, 65, 6, 10, 230, 30, 137, 35, 208, 128, 181, 230, 95, 129, 91, 247, 95, 121, 12, 96, 70, 79, 134, 240, 150, 207, 140, 220, 142, 128, 131, 14, 33, 62, 82, 250, 91, 193, 172, 89, 178, 92, 214, 222, 149, 117, 54, 225, 250, 187, 190, 217, 114, 249, 202, 11, 143, 128, 138, 25, 154, 17, 129, 22, 47, 54, 146, 75, 167, 17, 50, 132, 92, 157, 239, 158, 195, 126, 247, 177, 197, 138, 52, 92, 195, 218, 32, 172, 36, 236, 156, 33, 13, 160, 203, 78, 181, 79, 86, 192, 8, 127, 252, 217, 109, 34, 162 },
                             Phone = "505",
                             Status = 1,
                             Surname = "test",
-                            UpdateDate = new DateTime(2021, 11, 4, 23, 58, 49, 351, DateTimeKind.Local).AddTicks(6081),
+                            UpdateDate = new DateTime(2021, 11, 14, 23, 5, 53, 62, DateTimeKind.Local).AddTicks(9836),
                             Username = "vendor"
                         });
                 });
@@ -256,11 +281,11 @@ namespace Bitir.Data.Migrations
                         new
                         {
                             Id = 1,
-                            InsertDate = new DateTime(2021, 11, 4, 23, 58, 49, 357, DateTimeKind.Local).AddTicks(6359),
+                            InsertDate = new DateTime(2021, 11, 14, 23, 5, 53, 70, DateTimeKind.Local).AddTicks(6291),
                             Name = "Süt Ürünleri",
                             Status = 1,
                             SubCategoryId = 0,
-                            UpdateDate = new DateTime(2021, 11, 4, 23, 58, 49, 357, DateTimeKind.Local).AddTicks(6383)
+                            UpdateDate = new DateTime(2021, 11, 14, 23, 5, 53, 70, DateTimeKind.Local).AddTicks(6348)
                         });
                 });
 
@@ -310,10 +335,10 @@ namespace Bitir.Data.Migrations
                             Id = 1,
                             CategoryId = 1,
                             Description = "Günlük İnek Sütü",
-                            InsertDate = new DateTime(2021, 11, 4, 23, 58, 49, 361, DateTimeKind.Local).AddTicks(3986),
+                            InsertDate = new DateTime(2021, 11, 14, 23, 5, 53, 74, DateTimeKind.Local).AddTicks(7597),
                             Name = "Süt",
                             Status = 1,
-                            UpdateDate = new DateTime(2021, 11, 4, 23, 58, 49, 361, DateTimeKind.Local).AddTicks(3995)
+                            UpdateDate = new DateTime(2021, 11, 14, 23, 5, 53, 74, DateTimeKind.Local).AddTicks(7613)
                         });
                 });
 
@@ -358,22 +383,22 @@ namespace Bitir.Data.Migrations
                         new
                         {
                             Id = 1,
-                            InsertDate = new DateTime(2021, 11, 4, 23, 58, 49, 365, DateTimeKind.Local).AddTicks(6643),
+                            InsertDate = new DateTime(2021, 11, 14, 23, 5, 53, 79, DateTimeKind.Local).AddTicks(967),
                             ProductId = 1,
                             Quantity = 1m,
                             Status = 1,
                             UnitId = 1,
-                            UpdateDate = new DateTime(2021, 11, 4, 23, 58, 49, 365, DateTimeKind.Local).AddTicks(6651)
+                            UpdateDate = new DateTime(2021, 11, 14, 23, 5, 53, 79, DateTimeKind.Local).AddTicks(976)
                         },
                         new
                         {
                             Id = 2,
-                            InsertDate = new DateTime(2021, 11, 4, 23, 58, 49, 365, DateTimeKind.Local).AddTicks(6713),
+                            InsertDate = new DateTime(2021, 11, 14, 23, 5, 53, 79, DateTimeKind.Local).AddTicks(1067),
                             ProductId = 1,
                             Quantity = 2m,
                             Status = 1,
                             UnitId = 1,
-                            UpdateDate = new DateTime(2021, 11, 4, 23, 58, 49, 365, DateTimeKind.Local).AddTicks(6714)
+                            UpdateDate = new DateTime(2021, 11, 14, 23, 5, 53, 79, DateTimeKind.Local).AddTicks(1068)
                         });
                 });
 
@@ -474,123 +499,6 @@ namespace Bitir.Data.Migrations
                     b.ToTable("ProductStore","product");
                 });
 
-            modelBuilder.Entity("Module.Shared.Entities.ProductModuleEntities.StoreProductByCarrierViewModel", b =>
-                {
-                    b.Property<int>("ProductStockId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Abbreviation")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("Capacity")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Plate")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ProductName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("ProductStock")
-                        .HasColumnType("int");
-
-                    b.Property<int>("ProductStoreId")
-                        .HasColumnType("int");
-
-                    b.Property<decimal>("Quantity")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<string>("UnitName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("ProductStockId");
-
-                    b.ToTable("StoreProductByCarrierViewModel");
-                });
-
-            modelBuilder.Entity("Module.Shared.Entities.ProductModuleEntities.StoreProductByStoreViewModel", b =>
-                {
-                    b.Property<int>("ProductStockId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Abbreviation")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("Capacity")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Plate")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ProductName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("ProductStock")
-                        .HasColumnType("int");
-
-                    b.Property<int>("ProductStoreId")
-                        .HasColumnType("int");
-
-                    b.Property<decimal>("Quantity")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<string>("UnitName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("ProductStockId");
-
-                    b.ToTable("StoreProductByStoreViewModel");
-                });
-
-            modelBuilder.Entity("Module.Shared.Entities.ProductModuleEntities.StoreProductViewModel", b =>
-                {
-                    b.Property<int>("ProductStockId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Abbreviation")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("Id")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Position")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<decimal>("Price")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<int>("ProductPriceId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("ProductStoreId")
-                        .HasColumnType("int");
-
-                    b.Property<decimal>("Quantity")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<int>("Status")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Stock")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Unit")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("ProductStockId");
-
-                    b.ToTable("StoreProductViewModel");
-                });
-
             modelBuilder.Entity("Module.Shared.Entities.ProductModuleEntities.Unit", b =>
                 {
                     b.Property<int>("Id")
@@ -627,10 +535,10 @@ namespace Bitir.Data.Migrations
                         {
                             Id = 1,
                             Abbreviation = "lt",
-                            InsertDate = new DateTime(2021, 11, 4, 23, 58, 49, 364, DateTimeKind.Local).AddTicks(3912),
+                            InsertDate = new DateTime(2021, 11, 14, 23, 5, 53, 77, DateTimeKind.Local).AddTicks(7487),
                             Name = "Litre",
                             Status = 1,
-                            UpdateDate = new DateTime(2021, 11, 4, 23, 58, 49, 364, DateTimeKind.Local).AddTicks(3921)
+                            UpdateDate = new DateTime(2021, 11, 14, 23, 5, 53, 77, DateTimeKind.Local).AddTicks(7498)
                         });
                 });
 
@@ -698,6 +606,9 @@ namespace Bitir.Data.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<int?>("CarrierId")
+                        .HasColumnType("int");
+
                     b.Property<DateTime>("Date")
                         .HasColumnType("datetime2");
 
@@ -733,6 +644,8 @@ namespace Bitir.Data.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("CarrierId");
 
                     b.HasIndex("Product_StoreId");
 
@@ -810,135 +723,6 @@ namespace Bitir.Data.Migrations
                     b.ToTable("Store","sales");
                 });
 
-            modelBuilder.Entity("Module.Shared.Entities.SalesModuleEntities.StoreOrderViewModel", b =>
-                {
-                    b.Property<int>("OrderId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("CustomerName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("DistrictId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("OrderAddress")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("OrderDistrictName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("OrderNote")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("OrderProvinceName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("OrderQuantity")
-                        .HasColumnType("int");
-
-                    b.Property<int>("OrderStatus")
-                        .HasColumnType("int");
-
-                    b.Property<string>("ProductName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<decimal>("ProductQuantity")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<int>("ProductQuantityId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("ProductStoreId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("ProductUnit")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ProductUnitAbbreviation")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("ProvinceId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("UserAddressId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
-
-                    b.HasKey("OrderId");
-
-                    b.ToTable("StoreOrderViewModel");
-                });
-
-            modelBuilder.Entity("Module.Shared.Entities.SalesModuleEntities.StoreOrdersView", b =>
-                {
-                    b.Property<int>("OrderId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("CustomerName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("DistrictId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("OrderAddress")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("OrderDistrictName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("OrderNote")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("OrderProvinceName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("OrderQuantity")
-                        .HasColumnType("int");
-
-                    b.Property<int>("OrderStatus")
-                        .HasColumnType("int");
-
-                    b.Property<string>("ProductName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<decimal>("ProductQuantity")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<int>("ProductQuantityId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("ProductStoreId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("ProductUnit")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ProductUnitAbbreviation")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("ProvinceId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("StoreId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("UserAddressId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
-
-                    b.HasKey("OrderId");
-
-                    b.ToTable("StoreOrdersView","sales");
-                });
-
             modelBuilder.Entity("Module.Shared.Entities.SalesModuleEntities.Store_UserAccount", b =>
                 {
                     b.Property<int>("Id")
@@ -969,6 +753,15 @@ namespace Bitir.Data.Migrations
                     b.HasOne("Module.Shared.Entities.AuthModuleEntities.Province", "Province")
                         .WithMany()
                         .HasForeignKey("ProvinceId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Module.Shared.Entities.AuthModuleEntities.Neighbourhood", b =>
+                {
+                    b.HasOne("Module.Shared.Entities.AuthModuleEntities.District", "District")
+                        .WithMany()
+                        .HasForeignKey("DistrictId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
@@ -1073,6 +866,10 @@ namespace Bitir.Data.Migrations
 
             modelBuilder.Entity("Module.Shared.Entities.SalesModuleEntities.Order", b =>
                 {
+                    b.HasOne("Module.Shared.Entities.SalesModuleEntities.Carrier", "Carrier")
+                        .WithMany("Orders")
+                        .HasForeignKey("CarrierId");
+
                     b.HasOne("Module.Shared.Entities.ProductModuleEntities.Product_Store", null)
                         .WithMany("Order")
                         .HasForeignKey("Product_StoreId");

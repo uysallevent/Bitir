@@ -31,6 +31,9 @@ namespace Bitir.Mobile
             DependencyService.Register<ProductService>();
             DependencyService.Register<CarrierService>();
             DependencyService.Register<OrderService>();
+            DependencyService.Register<ProvinceService>();
+            DependencyService.Register<DistrictService>();
+            DependencyService.Register<NeighbourhoodService>();
             MessagingCenter.Subscribe<BaseViewModel, ExceptionTransfer>(this, "infomessage", (s, e) =>
                {
                    if (!string.IsNullOrEmpty(e.NotificationMessage))

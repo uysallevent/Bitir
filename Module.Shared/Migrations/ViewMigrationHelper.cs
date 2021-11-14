@@ -7,8 +7,7 @@ namespace Module.Shared.Migrations
         public static void ViewMigrations(MigrationBuilder migrationBuilder)
         {
             var view1 = @"CREATE VIEW [sales].[StoreOrdersView]
-						AS	
-            SELECT
+						AS	SELECT
                         OrderId=o.Id,
 						StoreId=ps.StoreId,
                         UserId=uac.Id,

@@ -12,6 +12,7 @@ namespace Module.Shared.Entities.AuthModuleEntities.Configuration
             new UserAddressConfiguration().Configure(modelBuilder.Entity<UserAddress>());
             new ProvinceConfiguration().Configure(modelBuilder.Entity<Province>());
             new DistrictConfiguration().Configure(modelBuilder.Entity<District>());
+            new NeighbourhoodConfiguration().Configure(modelBuilder.Entity<Neighbourhood>());
         }
     }
 }

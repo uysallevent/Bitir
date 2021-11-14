@@ -12,7 +12,7 @@ namespace Module.Shared.Entities.SalesModuleEntities.Configuration
             new Store_UserAccountConfiguration().Configure(modelBuilder.Entity<Store_UserAccount>());
             new StoreConfiguration().Configure(modelBuilder.Entity<Store>());
             new OrderConfiguration().Configure(modelBuilder.Entity<Order>());
-            new StoreOrdersViewConfiguration().Configure(modelBuilder.Entity<StoreOrdersView>());
+            //new StoreOrdersViewConfiguration().Configure(modelBuilder.Entity<StoreOrdersView>());
             new OrderDetailConfiguration().Configure(modelBuilder.Entity<OrderDetail>());
         }
     }
