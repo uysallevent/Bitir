@@ -9,6 +9,6 @@ namespace Bitir.Mobile.Services.Interfaces
 {
     public interface IDistrictService
     {
-        Task<ResponseWrapper<District>> GetProvince(District request);
+        Task<ResponseWrapperListing<District>> GetDistrict(District request);
     }
 }

@@ -30,6 +30,7 @@
     <Compile Include="..\..\Module.Shared\Entities\ProductModuleEntities\StoreProductViewModel.cs" Link="Models\Product\StoreProductViewModel.cs" />
     <Compile Include="..\..\Module.Shared\Entities\ProductModuleEntities\Unit.cs" Link="Models\Product\Unit.cs" />
     <Compile Include="..\..\Module.Shared\Entities\SalesModuleEntities\Carrier.cs" Link="Models\Carrier\Carrier.cs" />
+    <Compile Include="..\..\Module.Shared\Entities\SalesModuleEntities\CarrierDistributionZone.cs" Link="Models\Carrier\CarrierDistributionZone.cs" />
     <Compile Include="..\..\Module.Shared\Entities\SalesModuleEntities\Carrier_Store.cs" Link="Models\Carrier\Carrier_Store.cs" />
     <Compile Include="..\..\Module.Shared\Entities\SalesModuleEntities\Order.cs" Link="Models\Order\Order.cs" />
     <Compile Include="..\..\Module.Shared\Entities\SalesModuleEntities\OrderDetail.cs" Link="Models\Order\OrderDetail.cs" />
@@ -95,6 +96,12 @@
     </Compile>
     <Compile Update="Views\CarrierPages\CarrierLoadPage.xaml.cs">
       <DependentUpon>CarrierLoadPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\CommonViews\DistrictPickerView.xaml.cs">
+      <DependentUpon>DistrictPickerView.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\CommonViews\NeighbourhoodPickerView.xaml.cs">
+      <DependentUpon>NeighbourhoodPickerView.xaml</DependentUpon>
     </Compile>
     <Compile Update="Views\PopupPages\StoreProductListPopupView.xaml.cs">
       <DependentUpon>StoreProductListPopupView.xaml</DependentUpon>
@@ -182,6 +189,9 @@
     </EmbeddedResource>
     <EmbeddedResource Update="Views\CarrierPages\CarrierLoadPage.xaml">
       <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\CommonViews\ProvincePickerView.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Views\ContactEmailEntry.xaml">
       <Generator>MSBuild:Compile</Generator>

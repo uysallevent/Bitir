@@ -6,6 +6,6 @@ namespace Bitir.Mobile.Services.Interfaces
 {
     public interface IProvinceService
     {
-        Task<ResponseWrapper<Province>> GetProvince(Province request);
+        Task<ResponseWrapperListing<Province>> GetProvince(Province request);
     }
 }

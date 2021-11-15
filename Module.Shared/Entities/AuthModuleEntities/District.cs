@@ -1,5 +1,6 @@
 ﻿using Core.Entities;
 using Core.Enums;
+using Module.Shared.Entities.SalesModuleEntities;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -13,6 +14,8 @@ namespace Module.Shared.Entities.AuthModuleEntities
         public int ProvinceId { get; set; }
         [ForeignKey("ProvinceId")]
         public Province Province { get; set; }
+        public IEnumerable<CarrierDistributionZone> CarrierDistributionZones { get; set; }
+
         [NotMapped]
         public override Status? Status { get => base.Status; set => base.Status = value; }
         [NotMapped]

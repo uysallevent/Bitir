@@ -18,6 +18,7 @@ namespace AuthModule.Controllers
         {
         }
 
+
         #region NonAction
         [NonAction]
         public override Task<IActionResult> Add([FromBody] Province entity)

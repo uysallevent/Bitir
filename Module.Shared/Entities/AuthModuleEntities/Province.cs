@@ -1,6 +1,8 @@
 ﻿using Core.Entities;
 using Core.Enums;
+using Module.Shared.Entities.SalesModuleEntities;
 using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Text.Json.Serialization;
 
@@ -9,6 +11,7 @@ namespace Module.Shared.Entities.AuthModuleEntities
     public class Province:BaseEntity
     {
         public string Name { get; set; }
+        public IEnumerable<CarrierDistributionZone> CarrierDistributionZones { get; set; }
 
         [JsonIgnore]
         [NotMapped]

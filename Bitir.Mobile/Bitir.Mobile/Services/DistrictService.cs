@@ -10,12 +10,12 @@ namespace Bitir.Mobile.Services
     {
         private const string getDistrictPath = "AuthModule/District/GetAll";
 
-        public async Task<ResponseWrapper<District>> GetProvince(District request)
+        public async Task<ResponseWrapperListing<District>> GetDistrict(District request)
         {
             var restClientRequest = await GetRestClient(Method.POST, getDistrictPath);
             restClientRequest.Item2.AddParameter("accept", "application/json");
             restClientRequest.Item2.AddJsonBody(request);
-            var restResponse = await restClientRequest.Item1.ExecuteAsync<ResponseWrapper<District>>(restClientRequest.Item2);
+            var restResponse = await restClientRequest.Item1.ExecuteAsync<ResponseWrapperListing<District>>(restClientRequest.Item2);
             return ResponseHandler(restResponse);
         }
     }

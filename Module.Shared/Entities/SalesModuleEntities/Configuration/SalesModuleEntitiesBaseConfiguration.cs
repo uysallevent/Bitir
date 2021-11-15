@@ -14,6 +14,7 @@ namespace Module.Shared.Entities.SalesModuleEntities.Configuration
             new OrderConfiguration().Configure(modelBuilder.Entity<Order>());
             //new StoreOrdersViewConfiguration().Configure(modelBuilder.Entity<StoreOrdersView>());
             new OrderDetailConfiguration().Configure(modelBuilder.Entity<OrderDetail>());
+            new CarrierDistributionZoneConfiguration().Configure(modelBuilder.Entity<CarrierDistributionZone>());
         }
     }
 }

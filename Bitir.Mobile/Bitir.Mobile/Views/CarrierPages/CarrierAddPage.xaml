@@ -9,6 +9,7 @@
     xmlns:converter="clr-namespace:Bitir.Mobile.Converters"
     xmlns:behaviour="clr-namespace:Bitir.Mobile.Behaviors"
     xmlns:viewModel="clr-namespace:Bitir.Mobile.ViewModels"
+    xmlns:commonViews="clr-namespace:Bitir.Mobile.Views.CommonViews"
     xmlns:local="clr-namespace:Bitir.Mobile.Views"
     Title="Taşıyıcı Ekle"
     BackgroundColor="{DynamicResource Gray-100}"
@@ -120,6 +121,36 @@
                         </Grid>
                     </border:SfBorder>
                 </StackLayout>
+                <!--  Vehicle Driver  -->
+                <StackLayout>
+                    <Label
+                    Margin="0,10,0,4"
+                    FontFamily="Montserrat-Medium"
+                    FontSize="12"
+                    HeightRequest="18"
+                    Text="Sürücü Adı"
+                    TextColor="{DynamicResource Gray-800}" />
+                    <border:SfBorder 
+                    BorderColor="{Binding Source={x:Reference CarrierDriverEntry}, Path=IsFocused, Converter={StaticResource ColorConverter}, ConverterParameter=0}" Style="{StaticResource DataFormBorderlessEntryBorderStyle}">
+                        <Grid ColumnDefinitions="*, Auto">
+                            <controls:BorderlessEntry
+                        x:Name="CarrierDriverEntry"
+                        Margin="12,0"
+                        HeightRequest="40"
+                        Keyboard="Default"
+                        Placeholder="Sürücü Adı"
+                        Text="{Binding DriverName}"
+                        Style="{StaticResource BorderlessEntryStyle}">
+                            </controls:BorderlessEntry>
+                        </Grid>
+                    </border:SfBorder>
+                </StackLayout>
+                <!--  Vehicle Province  -->
+                <commonViews:ProvincePickerView Margin="0,10" />
+                <!--  Vehicle District  -->
+                <commonViews:DistrictPickerView Margin="0,10" />
+                <!--  Vehicle Locality  -->
+                <commonViews:NeighbourhoodPickerView Margin="0,10" />
                 <!--  Submit Button  -->
                 <buttons:SfButton
                     Margin="0,24,0,0"
