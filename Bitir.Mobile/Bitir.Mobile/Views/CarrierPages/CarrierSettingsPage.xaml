@@ -7,6 +7,7 @@
     xmlns:buttons="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms"
     xmlns:controls="clr-namespace:Bitir.Mobile.Controls"
     xmlns:viewModel="clr-namespace:Bitir.Mobile.ViewModels"
+    xmlns:commonViews="clr-namespace:Bitir.Mobile.Views.CommonViews"
     xmlns:behaviour="clr-namespace:Bitir.Mobile.Behaviors"
     xmlns:converter="clr-namespace:Bitir.Mobile.Converters"
     x:Name="ProductSetting"
@@ -82,6 +83,7 @@
 
                 <BoxView Style="{StaticResource HorizontalSeparatorStyle}" />
 
+                <!--  Carrier Plate  -->
                 <Grid
                     BackgroundColor="{DynamicResource Gray-Bg}"
                     ColumnDefinitions="*, Auto">
@@ -128,6 +130,7 @@
 
                 <BoxView Style="{StaticResource HorizontalSeparatorStyle}" />
 
+                <!--  Carrier Capacity  -->
                 <Grid
                     BackgroundColor="{DynamicResource Gray-Bg}"
                     ColumnDefinitions="*, Auto">
@@ -156,6 +159,38 @@
 
                 <BoxView Style="{StaticResource HorizontalSeparatorStyle}" />
 
+                <!--  Vehicle Province  -->
+                <StackLayout BackgroundColor="{DynamicResource Gray-Bg}">
+                    <Label Margin="16,12"
+                               FontFamily="Montserrat-Medium" 
+                               HorizontalOptions="Start"
+                               Style="{StaticResource TitleLabelStyle}"
+                               Text="Dağıtım İl Seçin"/>
+                    <commonViews:ProvincePickerView Margin="16,10" />
+                </StackLayout>
+
+                <!--  Vehicle District  -->
+                <StackLayout BackgroundColor="{DynamicResource Gray-Bg}">
+                    <Label Margin="16,12"
+                               FontFamily="Montserrat-Medium" 
+                               HorizontalOptions="Start"
+                               Style="{StaticResource TitleLabelStyle}"
+                               Text="Dağıtım İlçe Seçin"/>
+                    <commonViews:DistrictPickerView Margin="16,10" />
+                </StackLayout>
+                <!--  Vehicle Locality  -->
+                <StackLayout BackgroundColor="{DynamicResource Gray-Bg}">
+                    <Label Margin="16,12"
+                               FontFamily="Montserrat-Medium" 
+                               HorizontalOptions="Start"
+                               Style="{StaticResource TitleLabelStyle}"
+                               Text="Dağıtım Semt Seçin"/>
+                    <commonViews:NeighbourhoodPickerView Margin="16,10" />
+                </StackLayout>
+                
+                <BoxView Style="{StaticResource HorizontalSeparatorStyle}" />
+
+                <!--  Remove Button  -->
                 <Grid
                     BackgroundColor="{DynamicResource Gray-Bg}"
                     ColumnDefinitions="*, Auto">

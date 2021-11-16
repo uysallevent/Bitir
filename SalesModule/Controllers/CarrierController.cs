@@ -23,21 +23,21 @@ namespace AuthModule.Controllers
         [HttpPost("AddCarrierToStore")]
         public async Task<IActionResult> AddCarrierToStore([FromBody] AddCarrierToStoreRequest request)
         {
-            var result = await _carrierBusinessBase.AddCarrierToStore(request);
+            var result = await _carrierBusinessBase.AddCarrierToStoreAsync(request);
             return Ok(result);
         }
 
         [HttpPost("UpdateStoreCarrier")]
         public async Task<IActionResult> UpdateStoreCarrier([FromBody] UpdateCarrierToStoreRequest request)
         {
-            var result = await _carrierBusinessBase.UpdateStoreCarrier(request);
+            var result = await _carrierBusinessBase.UpdateStoreCarrierAsync(request);
             return Ok(result);
         }
 
         [HttpPost("GetStoreCarriers")]
         public async Task<IActionResult> GetStoreCarriers()
         {
-            var result = await _carrierBusinessBase.GetStoreCarriers();
+            var result = await _carrierBusinessBase.GetStoreCarriersAsync();
             return Ok(result);
         }
     }

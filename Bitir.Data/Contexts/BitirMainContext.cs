@@ -33,6 +33,7 @@ namespace Bitir.Data.Contexts
         public DbSet<ProductStock> ProductStock { get; set; }
         public DbSet<Carrier_Store> Carrier_Store { get; set; }
         public DbSet<Carrier> Carrier { get; set; }
+        public DbSet<CarrierDistributionZone> CarrierDistributionZone { get; set; }
         public DbSet<Store> Store { get; set; }
         public DbSet<Store_UserAccount> Store_UserAccount { get; set; }
         public DbSet<OrderDetail> OrderDetail { get; set; }

@@ -27,6 +27,7 @@ namespace AuthModule.Business
         private readonly IRepository<UserAddress> _userAddressRepository;
         private readonly IRepository<District> _districtRepository;
         private readonly IRepository<Province> _provinceRepository;
+        private readonly IRepository<CarrierDistributionZone> _carrierDistributionZoneRepository;
         private readonly IUnitOfWork _uow;
         private readonly IConfiguration _configuration;
         private readonly ILogger _logger;
@@ -43,6 +44,7 @@ namespace AuthModule.Business
             IRepository<UserAddress> userAddressRepository,
             IRepository<District> districtRepository,
             IRepository<Province> provinceRepository,
+            IRepository<CarrierDistributionZone> carrierDistributionZoneRepository,
             IHttpContextAccessor httpContextAccessor) : base(carrierRepository, uow)
         {
             _uow = uow;
@@ -56,10 +58,11 @@ namespace AuthModule.Business
             _httpContextAccessor = httpContextAccessor;
             _districtRepository = districtRepository;
             _provinceRepository = provinceRepository;
+            _carrierDistributionZoneRepository = carrierDistributionZoneRepository;
         }
 
 
-        public async Task<ResponseWrapper<bool>> AddCarrierToStore(AddCarrierToStoreRequest request)
+        public async Task<ResponseWrapper<bool>> AddCarrierToStoreAsync(AddCarrierToStoreRequest request)
         {
             var claims = _httpContextAccessor.HttpContext.User.Claims;
             int.TryParse(claims.FirstOrDefault(x => x.Type == "Store")?.Value, out int storeId);
@@ -94,7 +97,7 @@ namespace AuthModule.Business
             return new ResponseWrapper<bool>(true);
         }
 
-        public async Task<ResponseWrapper<bool>> UpdateStoreCarrier(UpdateCarrierToStoreRequest request)
+        public async Task<ResponseWrapper<bool>> UpdateStoreCarrierAsync(UpdateCarrierToStoreRequest request)
         {
             var claims = _httpContextAccessor.HttpContext.User.Claims;
             int.TryParse(claims.FirstOrDefault(x => x.Type == "Store")?.Value, out int storeId);
@@ -128,7 +131,7 @@ namespace AuthModule.Business
             return new ResponseWrapper<bool>(true);
         }
 
-        public async Task<ResponseWrapperListing<StoreCarrier>> GetStoreCarriers()
+        public async Task<ResponseWrapperListing<StoreCarrier>> GetStoreCarriersAsync()
         {
             var claims = _httpContextAccessor.HttpContext.User.Claims;
             int.TryParse(claims.FirstOrDefault(x => x.Type == "Store")?.Value, out int storeId);
@@ -148,6 +151,43 @@ namespace AuthModule.Business
             }).ToListAsync();
 
             return new ResponseWrapperListing<StoreCarrier>(result);
+        }
+
+        public async Task<ResponseWrapper<bool>> AddDistributionZoneToCarrier(CarrierZoneRequest request)
+        {
+            var check = await _carrierDistributionZoneRepository.GetAll(x => (
+                (x.CarrierId == request.CarrierId && x.ProvinceId == request.ProvinceId)
+             || (x.CarrierId == request.CarrierId && x.DistrictId == request.DistrictId)
+             || (x.CarrierId == request.CarrierId && request.NeighborhoodIds.Contains(x.NeighbourhoodId)))
+             && x.Status == Core.Enums.Status.Active).ToListAsync();
+
+            if (check != null)
+            {
+                throw new BadRequestException("Bu bölge taşıyıcı için önceden eklenmiş");
+            }
+
+            if (request.NeighborhoodIds != null && request.NeighborhoodIds.Any())
+            {
+                await _carrierDistributionZoneRepository.AddRangeAsync(request.NeighborhoodIds.Select(x => new CarrierDistributionZone
+                {
+                    CarrierId = request.CarrierId,
+                    ProvinceId = request.ProvinceId,
+                    DistrictId = request.DistrictId,
+                    NeighbourhoodId = x
+                }));
+            }
+            else
+            {
+                await _carrierDistributionZoneRepository.AddAsync(new CarrierDistributionZone
+                {
+                    CarrierId = request.CarrierId,
+                    ProvinceId = request.ProvinceId,
+                    DistrictId = request.DistrictId,
+                });
+            }
+
+            await _uow.SaveChangesAsync();
+            return new ResponseWrapper<bool>(true);
         }
 
     }

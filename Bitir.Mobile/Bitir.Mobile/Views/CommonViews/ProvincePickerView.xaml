@@ -14,13 +14,6 @@
     </ContentView.Resources>
     <ContentView.Content>
         <StackLayout>
-            <Label
-                    Margin="0,0,0,4"
-                    FontFamily="Montserrat-Medium"
-                    FontSize="12"
-                    HeightRequest="18"
-                    Text="Dağıtım İl"
-                    TextColor="{DynamicResource Gray-800}" />
             <inputLayout:SfTextInputLayout Style="{DynamicResource TextInputLayoutStyle}">
                 <combobox:SfComboBox
                         x:Name="ProvincePicker"
