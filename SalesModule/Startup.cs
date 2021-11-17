@@ -29,6 +29,7 @@ namespace SalesModule
             services.AddScoped<IRepository<Order>, EFRepository<Order, BitirMainContext>>();
             services.AddScoped<IRepository<OrderDetail>, EFRepository<OrderDetail, BitirMainContext>>();
             services.AddScoped<IRepository<StoreOrdersView>, EFRepository<StoreOrdersView, BitirMainContext>>();
+            services.AddScoped<IRepository<StoreCarriersView>, EFRepository<StoreCarriersView, BitirMainContext>>();
         }
 
         public void Configure(IApplicationBuilder app, Microsoft.AspNetCore.Hosting.IWebHostEnvironment env)

@@ -28,6 +28,7 @@ namespace AuthModule.Business
         private readonly IRepository<District> _districtRepository;
         private readonly IRepository<Province> _provinceRepository;
         private readonly IRepository<CarrierDistributionZone> _carrierDistributionZoneRepository;
+        private readonly IRepository<StoreCarriersView> _storeCarriersViewRepository;
         private readonly IUnitOfWork _uow;
         private readonly IConfiguration _configuration;
         private readonly ILogger _logger;
@@ -45,6 +46,7 @@ namespace AuthModule.Business
             IRepository<District> districtRepository,
             IRepository<Province> provinceRepository,
             IRepository<CarrierDistributionZone> carrierDistributionZoneRepository,
+            IRepository<StoreCarriersView> storeCarriersViewRepository,
             IHttpContextAccessor httpContextAccessor) : base(carrierRepository, uow)
         {
             _uow = uow;
@@ -59,6 +61,7 @@ namespace AuthModule.Business
             _districtRepository = districtRepository;
             _provinceRepository = provinceRepository;
             _carrierDistributionZoneRepository = carrierDistributionZoneRepository;
+            _storeCarriersViewRepository = storeCarriersViewRepository;
         }
 
 
@@ -75,6 +78,7 @@ namespace AuthModule.Business
             {
                 Capacity = request.Capacity,
                 Plate = request.Plate,
+                DriverName = request.DriverName,
                 Carrier_Stores = new List<Carrier_Store>
                 {
                     new Carrier_Store
@@ -119,6 +123,7 @@ namespace AuthModule.Business
                 Id = request.CarrierId,
                 Plate = request.Plate,
                 Capacity = request.Capacity,
+                DriverName = request.DriverName,
                 Status = request.Status
             });
 
@@ -131,7 +136,7 @@ namespace AuthModule.Business
             return new ResponseWrapper<bool>(true);
         }
 
-        public async Task<ResponseWrapperListing<StoreCarrier>> GetStoreCarriersAsync()
+        public async Task<ResponseWrapperListing<StoreCarriersView>> GetStoreCarriersAsync()
         {
             var claims = _httpContextAccessor.HttpContext.User.Claims;
             int.TryParse(claims.FirstOrDefault(x => x.Type == "Store")?.Value, out int storeId);
@@ -140,17 +145,9 @@ namespace AuthModule.Business
                 throw new ClaimExpection("Claims could not find");
             }
 
-            var result = await _carrierRepository.GetAll().Join(_carrierStoreRepository.GetAll().Where(x => x.StoreId == storeId && x.Status == Core.Enums.Status.Active), x => x.Id, y => y.CarrierId, (x, y) => new { carrierId = x.Id, x.Plate, x.Capacity, carrierStoreId = y.Id, y.Status }).Select(x =>
-            new StoreCarrier
-            {
-                CarrierId = x.carrierId,
-                CarrierStoreId = x.carrierStoreId,
-                Plate = x.Plate,
-                Capacity = x.Capacity,
-                Status = x.Status
-            }).ToListAsync();
+            var result = await _storeCarriersViewRepository.GetAll(x => x.StoreId == storeId && x.CarrierStatus == Core.Enums.Status.Active).ToListAsync();
 
-            return new ResponseWrapperListing<StoreCarrier>(result);
+            return new ResponseWrapperListing<StoreCarriersView>(result);
         }
 
         public async Task<ResponseWrapper<bool>> AddDistributionZoneToCarrier(CarrierZoneRequest request)

@@ -11,7 +11,7 @@ namespace AuthModule.Interfaces
     public interface ICarrierBusinessBase<T> : IBusinessBase<T> where T : class, IEntity, new()
     {
         Task<ResponseWrapper<bool>> AddCarrierToStoreAsync(AddCarrierToStoreRequest request);
-        Task<ResponseWrapperListing<StoreCarrier>> GetStoreCarriersAsync();
+        Task<ResponseWrapperListing<StoreCarriersView>> GetStoreCarriersAsync();
         Task<ResponseWrapper<bool>> UpdateStoreCarrierAsync(UpdateCarrierToStoreRequest request);
     }
 }

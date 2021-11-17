@@ -41,6 +41,29 @@ namespace Module.Shared.Migrations
                         LEFT JOIN product.Product p on p.Id=pq.ProductId
                         LEFT JOIN product.Unit un on un.Id=pq.UnitId";
             migrationBuilder.Sql(view1);
+
+            var view2 = @"CREATE VIEW [sales].[StoreCarriersView]
+                        AS
+                        SELECT 
+                        CarrierId=C.Id,
+                        StoreId=cs.StoreId,
+                        ProvinceId=p.Id,
+                        DistrictId=d.Id,
+                        NeighbourhoodId=n.Id,
+                        Plate=c.Plate,
+                        Capacity=c.Capacity,
+                        ProvinceName=p.Name,
+                        DistrictName=d.Name,
+                        NeighbourhoodName=n.Name,
+                        CarrierStatus=c.Status
+                        FROM sales.Carrier c
+                        LEFT JOIN sales.Carrier_Store cs ON cs.CarrierId=c.Id
+                        LEFT JOIN sales.CarrierDistributionZone cz ON cz.CarrierId=c.Id
+                        LEFT JOIN auth.Province p ON p.Id=cz.ProvinceId
+                        LEFT JOIN auth.District d ON d.Id=cz.DistrictId
+                        LEFT JOIN auth.Neighbourhood n ON n.Id=cz.NeighbourhoodId";
+            migrationBuilder.Sql(view2);
+
         }
     }
 }

@@ -10,7 +10,8 @@
     xmlns:commonViews="clr-namespace:Bitir.Mobile.Views.CommonViews"
     xmlns:behaviour="clr-namespace:Bitir.Mobile.Behaviors"
     xmlns:converter="clr-namespace:Bitir.Mobile.Converters"
-    x:Name="ProductSetting"
+    xmlns:local="clr-namespace:Bitir.Mobile.Views"
+    x:Name="CarrierSettings"
     BackgroundColor="{DynamicResource Gray-100}"
     NavigationPage.HasNavigationBar="False">
 
@@ -24,20 +25,24 @@
 
     <ContentPage.ControlTemplate>
         <ControlTemplate>
-            <StackLayout Spacing="0">
-                <!--  Title View  -->
-                <controls:TitleView Title="Ürün Detay">
-                    <controls:TitleView.LeadingView>
-                        <buttons:SfButton
+            <Grid>
+
+                <StackLayout Spacing="0">
+                    <!--  Title View  -->
+                    <controls:TitleView Title="Ürün Detay">
+                        <controls:TitleView.LeadingView>
+                            <buttons:SfButton
                             x:Name="backButton"
-                            Command="{Binding BindingContext.BackButtonCommand, Source={x:Reference ProductSetting}}"
+                            Command="{Binding BindingContext.BackButtonCommand, Source={x:Reference CarrierSettings}}"
                             CommandParameter="{x:Reference backButton}"
                             Style="{StaticResource IconButtonStyle}"
                             Text="{StaticResource Back}" />
-                    </controls:TitleView.LeadingView>
-                </controls:TitleView>
-                <ContentPresenter />
-            </StackLayout>
+                        </controls:TitleView.LeadingView>
+                    </controls:TitleView>
+                    <ContentPresenter />
+                </StackLayout>
+                <local:LoaderView IsVisible="{Binding BindingContext.IsBusy, Source={x:Reference CarrierSettings}}"/>
+            </Grid>
         </ControlTemplate>
     </ContentPage.ControlTemplate>
 
@@ -131,31 +136,52 @@
                 <BoxView Style="{StaticResource HorizontalSeparatorStyle}" />
 
                 <!--  Carrier Capacity  -->
-                <Grid
-                    BackgroundColor="{DynamicResource Gray-Bg}"
-                    ColumnDefinitions="*, Auto">
-
-                    <StackLayout>
-                        <Label Margin="16,12"
+                <StackLayout BackgroundColor="{DynamicResource Gray-Bg}">
+                    <Label Margin="16,12"
                                FontFamily="Montserrat-Medium" 
                                HorizontalOptions="Start"
                                Style="{StaticResource TitleLabelStyle}"
                                Text="Araç Kapasite"/>
-                        <border:SfBorder 
+                    <border:SfBorder 
                     BorderColor="{Binding Source={x:Reference VehicleCapacityEntry}, Path=IsFocused, Converter={StaticResource ColorConverter}, ConverterParameter=0}" Style="{StaticResource DataFormBorderlessEntryBorderStyle}">
-                            <Grid ColumnDefinitions="*, Auto">
-                                <controls:BorderlessEntry  x:Name="VehicleCapacityEntry"
+                        <Grid ColumnDefinitions="*, Auto">
+                            <controls:BorderlessEntry  x:Name="VehicleCapacityEntry"
                                                            Margin="12,0"
                                                            HeightRequest="40"
                                                            Keyboard="Numeric"
                                                            Placeholder="Kapasite (Kg)"
                                                            Text="{Binding Capacity}"
                                                            Style="{StaticResource BorderlessEntryStyle}">
-                                </controls:BorderlessEntry>
-                            </Grid>
-                        </border:SfBorder>
-                    </StackLayout>
-                </Grid>
+                            </controls:BorderlessEntry>
+                        </Grid>
+                    </border:SfBorder>
+                </StackLayout>
+
+                <BoxView Style="{StaticResource HorizontalSeparatorStyle}" />
+
+                <!--  Vehicle Driver  -->
+                <StackLayout BackgroundColor="{DynamicResource Gray-Bg}">
+                    <Label
+                    Margin="16,12"
+                    FontFamily="Montserrat-Medium" 
+                    HorizontalOptions="Start"
+                    Style="{StaticResource TitleLabelStyle}"
+                    Text="Sürücü Adı"/>
+                    <border:SfBorder 
+                    BorderColor="{Binding Source={x:Reference CarrierDriverEntry}, Path=IsFocused, Converter={StaticResource ColorConverter}, ConverterParameter=0}" Style="{StaticResource DataFormBorderlessEntryBorderStyle}">
+                        <Grid ColumnDefinitions="*, Auto">
+                            <controls:BorderlessEntry
+                        x:Name="CarrierDriverEntry"
+                        Margin="12,0"
+                        HeightRequest="40"
+                        Keyboard="Default"
+                        Placeholder="Sürücü Adı"
+                        Text="{Binding DriverName}"
+                        Style="{StaticResource BorderlessEntryStyle}">
+                            </controls:BorderlessEntry>
+                        </Grid>
+                    </border:SfBorder>
+                </StackLayout>
 
                 <BoxView Style="{StaticResource HorizontalSeparatorStyle}" />
 
@@ -187,7 +213,7 @@
                                Text="Dağıtım Semt Seçin"/>
                     <commonViews:NeighbourhoodPickerView Margin="16,10" />
                 </StackLayout>
-                
+
                 <BoxView Style="{StaticResource HorizontalSeparatorStyle}" />
 
                 <!--  Remove Button  -->
@@ -223,7 +249,6 @@
                     Style="{StaticResource GradientButtonStyle}"
                     Text="KAYDET"
                     WidthRequest="200" />
-
             </StackLayout>
 
         </ScrollView>

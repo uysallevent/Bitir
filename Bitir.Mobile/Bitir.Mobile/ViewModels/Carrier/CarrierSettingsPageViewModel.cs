@@ -2,9 +2,13 @@
 using Bitir.Mobile.Models.Common;
 using Bitir.Mobile.Validators;
 using Bitir.Mobile.Validators.Rules;
+using Module.Shared.Entities.AuthModuleEntities;
 using Module.Shared.Entities.ProductModuleEntities;
+using Module.Shared.Entities.SalesModuleEntities;
 using ProductModule.Dtos;
 using SalesModule.Dtos;
+using System.Collections.ObjectModel;
+using System.Linq;
 using System.Runtime.Serialization;
 using System.Threading.Tasks;
 using Xamarin.Forms;
@@ -19,35 +23,9 @@ namespace Bitir.Mobile.ViewModels
     [DataContract]
     public class CarrierSettingsPageViewModel : BaseViewModel
     {
-        #region Fields
-        private StoreCarrier storeCarrier;
+        #region Properties
 
-        private ValidatableObject<string> plate;
-
-        private object capacity;
-
-        private bool status;
-        #endregion
-
-        #region Constructor
-
-        public CarrierSettingsPageViewModel(StoreCarrier storeCarrier)
-        {
-            InitializeProperties();
-            this.AddValidationRules();
-            SubmitButtonCommand = new Command(async () => await SubmitButtonClicked());
-            RemoveButtonCommand = new Command(async () => await RemoveButtonClicked());
-            BackButtonCommand = new Command(async () => await BackButtonClicked());
-            this.StoreCarrier = storeCarrier;
-            this.Plate.Value = storeCarrier.Plate;
-            this.capacity = storeCarrier.Capacity;
-        }
-
-        #endregion
-
-        #region Public properties
-
-        public StoreCarrier StoreCarrier
+        public StoreCarriersView StoreCarrier
         {
             get
             {
@@ -76,6 +54,125 @@ namespace Bitir.Mobile.ViewModels
                 {
                     this.SetProperty(ref this.plate, value);
                 }
+            }
+        }
+
+        public ObservableCollection<Province> Provinces
+        {
+            get
+            {
+                return this.provinces;
+            }
+
+            set
+            {
+                if (this.provinces == value)
+                {
+                    return;
+                }
+
+                this.SetProperty(ref this.provinces, value);
+            }
+        }
+
+        public ObservableCollection<District> Districts
+        {
+            get
+            {
+                return this.districts;
+            }
+
+            set
+            {
+                if (this.districts == value)
+                {
+                    return;
+                }
+
+                this.SetProperty(ref this.districts, value);
+            }
+        }
+
+        public ObservableCollection<Neighbourhood> Neighbourhoods
+        {
+            get
+            {
+                return this.neighbourhoods;
+            }
+
+            set
+            {
+                if (this.neighbourhoods == value)
+                {
+                    return;
+                }
+
+                this.SetProperty(ref this.neighbourhoods, value);
+            }
+        }
+
+        public Province SelectedProvince
+        {
+            get
+            {
+                if (selectedProvince != null && ProvinceId != selectedProvince.Id)
+                {
+                    ProvinceId = selectedProvince.Id;
+                    Task.Run(async () => await GetDistrict(ProvinceId));
+                    Districts?.Clear();
+                    Neighbourhoods?.Clear();
+                }
+                return selectedProvince;
+            }
+            set
+            {
+                if (this.selectedProvince == value)
+                {
+                    return;
+                }
+                this.SetProperty(ref this.selectedProvince, value);
+            }
+        }
+
+        public District SelectedDistrict
+        {
+            get
+            {
+                if (selectedDistrict != null && DistrictId != selectedDistrict.Id)
+                {
+                    DistrictId = selectedDistrict.Id;
+                    Task.Run(async () => await GetNeighbourhood(DistrictId));
+                    Neighbourhoods?.Clear();
+                }
+                return selectedDistrict;
+            }
+            set
+            {
+                if (this.selectedDistrict == value)
+                {
+                    return;
+                }
+                this.SetProperty(ref this.selectedDistrict, value);
+            }
+        }
+
+        public Neighbourhood SelectedNeighbourhood
+        {
+            get
+            {
+                if (selectedNeighbourhood != null && neighbourhoodId != selectedNeighbourhood.Id)
+                {
+                    NeighbourhoodId = selectedNeighbourhood.Id;
+                }
+                return selectedNeighbourhood;
+            }
+            set
+            {
+                if (this.selectedNeighbourhood == value)
+                {
+                    return;
+                }
+                this.SetProperty(ref this.selectedNeighbourhood, value);
             }
         }
 
@@ -113,6 +210,106 @@ namespace Bitir.Mobile.ViewModels
             }
         }
 
+        public int ProvinceId
+        {
+            get
+            {
+                return provinceId;
+            }
+            set
+            {
+                if (this.provinceId == value)
+                {
+                    return;
+                }
+                this.SetProperty(ref this.provinceId, value);
+            }
+        }
+
+        public int DistrictId
+        {
+            get
+            {
+                return districtId;
+            }
+            set
+            {
+                if (this.districtId == value)
+                {
+                    return;
+                }
+                this.SetProperty(ref this.districtId, value);
+            }
+        }
+
+        public int NeighbourhoodId
+        {
+            get
+            {
+                return neighbourhoodId;
+            }
+            set
+            {
+                if (this.neighbourhoodId == value)
+                {
+                    return;
+                }
+                this.SetProperty(ref this.neighbourhoodId, value);
+            }
+        }
+
+        public string DriverName
+        {
+            get
+            {
+                return driverName;
+            }
+            set
+            {
+                if (this.driverName == value)
+                {
+                    return;
+                }
+                this.SetProperty(ref this.driverName, value);
+            }
+        }
+        #endregion
+
+        #region Fields
+        private StoreCarriersView storeCarrier;
+        private ValidatableObject<string> plate;
+        private ObservableCollection<Province> provinces;
+        private ObservableCollection<District> districts;
+        private ObservableCollection<Neighbourhood> neighbourhoods;
+        private Province selectedProvince;
+        private District selectedDistrict;
+        private Neighbourhood selectedNeighbourhood;
+        private int provinceId;
+        private int districtId;
+        private int neighbourhoodId;
+        private object capacity;
+        private bool status;
+        private string driverName;
+        #endregion
+
+        #region Constructor
+
+        public CarrierSettingsPageViewModel(StoreCarriersView storeCarriersView)
+        {
+            InitializeProperties();
+            this.AddValidationRules();
+            Task.Run(async () => await GetProvince());
+            SubmitButtonCommand = new Command(async () => await SubmitButtonClicked());
+            RemoveButtonCommand = new Command(async () => await RemoveButtonClicked());
+            BackButtonCommand = new Command(async () => await BackButtonClicked());
+            this.StoreCarrier = storeCarrier;
+            this.Plate.Value = storeCarrier.Plate;
+            this.capacity = storeCarrier.Capacity;
+            this.ProvinceId = storeCarriersView.ProvinceId ?? -1;
+            this.DistrictId = storeCarriersView.DistrictId ?? -1;
+            this.DistrictId = storeCarriersView.DistrictId ?? -1;
+        }
+
         #endregion
 
         #region Command
@@ -127,6 +324,8 @@ namespace Bitir.Mobile.ViewModels
         private void InitializeProperties()
         {
             this.plate = new ValidatableObject<string>();
+            this.SelectedProvince = new Province();
+            this.SelectedDistrict = new District();
         }
 
         private void AddValidationRules()
@@ -158,6 +357,7 @@ namespace Bitir.Mobile.ViewModels
                         CarrierStoreId = StoreCarrier.CarrierStoreId,
                         Capacity = int.Parse(this.Capacity.ToString()),
                         Plate = this.Plate.Value,
+                        DriverName = this.DriverName,
                         Status = StoreCarrier.Status
                     });
 
@@ -193,7 +393,7 @@ namespace Bitir.Mobile.ViewModels
                 IsBusy = true;
                 try
                 {
-                    var question =await App.Current.MainPage.DisplayAlert("Uyarı","Aracı silmek istediğinize eminmisiniz ?","Evet","Hayır");
+                    var question = await App.Current.MainPage.DisplayAlert("Uyarı", "Aracı silmek istediğinize eminmisiniz ?", "Evet", "Hayır");
                     if (!question)
                     {
                         return;
@@ -227,6 +427,77 @@ namespace Bitir.Mobile.ViewModels
                 {
                     IsBusy = false;
                 }
+            }
+        }
+
+        public async Task GetProvince()
+        {
+            try
+            {
+                IsBusy = true;
+                var result = await provinceService.GetProvince(new Province { });
+                Provinces = new ObservableCollection<Province>(result.List.OrderBy(x => x.Name));
+            }
+            catch (BadRequestException ex)
+            {
+                SendNotification(new ExceptionTransfer { ex = ex, NotificationMessage = ex.Message });
+
+            }
+            catch (InternalServerErrorException ex)
+            {
+                SendNotification(new ExceptionTransfer { ex = ex, NotificationMessage = "Servis hatası !!" });
+            }
+            finally
+            {
+                IsBusy = false;
+            }
+        }
+
+        public async Task GetDistrict(int provinceId)
+        {
+            try
+            {
+                IsBusy = true;
+                var result = await districtService.GetDistrict(new District { ProvinceId = provinceId });
+                Districts = new ObservableCollection<District>(result.List.OrderBy(x => x.Name));
+
+            }
+            catch (BadRequestException ex)
+            {
+                SendNotification(new ExceptionTransfer { ex = ex, NotificationMessage = ex.Message });
+
+            }
+            catch (InternalServerErrorException ex)
+            {
+                SendNotification(new ExceptionTransfer { ex = ex, NotificationMessage = "Servis hatası !!" });
+            }
+            finally
+            {
+                IsBusy = false;
+            }
+        }
+
+        public async Task GetNeighbourhood(int districtId)
+        {
+            try
+            {
+                IsBusy = true;
+                var result = await neighbourhoodService.GetNeighbourhood(new Neighbourhood { DistrictId = districtId });
+                Neighbourhoods = new ObservableCollection<Neighbourhood>(result.List.GroupBy(x => x.LocalityName).OrderBy(x => x.Key).Select(x => new Neighbourhood { LocalityName = x.Key }));
+
+            }
+            catch (BadRequestException ex)
+            {
+                SendNotification(new ExceptionTransfer { ex = ex, NotificationMessage = ex.Message });
+
+            }
+            catch (InternalServerErrorException ex)
+            {
+                SendNotification(new ExceptionTransfer { ex = ex, NotificationMessage = "Servis hatası !!" });
+            }
+            finally
+            {
+                IsBusy = false;
             }
         }
         #endregion

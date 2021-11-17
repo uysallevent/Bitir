@@ -1,6 +1,7 @@
 ﻿using Bitir.Mobile.Exceptions;
 using Bitir.Mobile.Models.Common;
 using Bitir.Mobile.Views;
+using Module.Shared.Entities.SalesModuleEntities;
 using SalesModule.Dtos;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
@@ -55,14 +56,14 @@ namespace Bitir.Mobile.ViewModels
 
         #region Fields
 
-        private ObservableCollection<StoreCarrier> carriers;
+        private ObservableCollection<StoreCarriersView> carriers;
         private Command<object> itemSelectedCommand;
 
         #endregion
 
         #region Properties
 
-        public ObservableCollection<StoreCarrier> Carriers
+        public ObservableCollection<StoreCarriersView> Carriers
         {
             get
             {
@@ -95,7 +96,7 @@ namespace Bitir.Mobile.ViewModels
             {
                 IsBusy = true;
                 var result = await carrierService.GetStoreCarriers();
-                Carriers = new ObservableCollection<StoreCarrier>(result.List);
+                Carriers = new ObservableCollection<StoreCarriersView>(result.List);
             }
             catch (BadRequestException ex)
             {

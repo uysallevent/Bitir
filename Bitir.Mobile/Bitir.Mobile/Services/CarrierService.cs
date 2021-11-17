@@ -3,6 +3,7 @@ using Bitir.Mobile.Services.Interfaces;
 using RestSharp;
 using SalesModule.Dtos;
 using System.Threading.Tasks;
+using Module.Shared.Entities.SalesModuleEntities;
 
 namespace Bitir.Mobile.Services
 {
@@ -30,10 +31,10 @@ namespace Bitir.Mobile.Services
             return ResponseHandler(restResponse);
         }
 
-        public async Task<ResponseWrapperListing<StoreCarrier>> GetStoreCarriers()
+        public async Task<ResponseWrapperListing<StoreCarriersView>> GetStoreCarriers()
         {
             var restClientRequest = await GetRestClient(Method.POST, storeCarriersPath);
-            var restResponse = await restClientRequest.Item1.ExecuteAsync<ResponseWrapperListing<StoreCarrier>>(restClientRequest.Item2);
+            var restResponse = await restClientRequest.Item1.ExecuteAsync<ResponseWrapperListing<StoreCarriersView>>(restClientRequest.Item2);
             return ResponseHandler(restResponse);
         }
     }

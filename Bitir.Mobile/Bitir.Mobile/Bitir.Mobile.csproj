@@ -35,6 +35,7 @@
     <Compile Include="..\..\Module.Shared\Entities\SalesModuleEntities\Order.cs" Link="Models\Order\Order.cs" />
     <Compile Include="..\..\Module.Shared\Entities\SalesModuleEntities\OrderDetail.cs" Link="Models\Order\OrderDetail.cs" />
     <Compile Include="..\..\Module.Shared\Entities\SalesModuleEntities\Store.cs" Link="Models\Order\Store.cs" />
+    <Compile Include="..\..\Module.Shared\Entities\SalesModuleEntities\StoreCarriersView.cs" Link="Models\Carrier\StoreCarriersView.cs" />
     <Compile Include="..\..\Module.Shared\Entities\SalesModuleEntities\StoreOrdersView.cs" Link="Models\Order\StoreOrdersView.cs" />
     <Compile Include="..\..\Module.Shared\Entities\SalesModuleEntities\Store_UserAccount.cs" Link="Models\Order\Store_UserAccount.cs" />
     <Compile Include="..\..\Module.Shared\Enums\AccountTypeEnum.cs" Link="Enums\AccountTypeEnum.cs" />

@@ -8,6 +8,7 @@ namespace Module.Shared.Entities.SalesModuleEntities
     public class Carrier_Store : BaseEntity
     {
         public int CarrierId { get; set; }
+
         public int StoreId { get; set; }
 
         [ForeignKey("CarrierId")]

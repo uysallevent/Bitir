@@ -37,9 +37,8 @@ namespace Bitir.Data.Contexts
         public DbSet<Store> Store { get; set; }
         public DbSet<Store_UserAccount> Store_UserAccount { get; set; }
         public DbSet<OrderDetail> OrderDetail { get; set; }
-
-        //[NotMapped]
-        //public DbSet<StoreOrdersView> StoreOrdersView { get; set; }
+        public DbSet<StoreOrdersView> StoreOrdersView { get; set; }
+        public DbSet<StoreCarriersView> StoreCarriersView { get; set; }
         //[NotMapped]
         //public DbSet<StoreProductViewModel> StoreProductViewModel { get; set; }
         //[NotMapped]
