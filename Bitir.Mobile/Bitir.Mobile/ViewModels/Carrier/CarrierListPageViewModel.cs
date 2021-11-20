@@ -87,7 +87,7 @@ namespace Bitir.Mobile.ViewModels
 
         private  void Initialize()
         {
-            Carriers = new ObservableCollection<StoreCarrier>();
+            Carriers = new ObservableCollection<StoreCarriersView>();
         }
 
         public async Task GetStoreCarriers()
@@ -115,7 +115,7 @@ namespace Bitir.Mobile.ViewModels
 
         private async Task NavigateToNextPage(object selectedItem)
         {
-            var item = (selectedItem as Syncfusion.ListView.XForms.ItemTappedEventArgs).ItemData as StoreCarrier;
+            var item = (selectedItem as Syncfusion.ListView.XForms.ItemTappedEventArgs).ItemData as StoreCarriersView;
             if (item != null)
             {
                 await App.Current.MainPage.Navigation.PushModalAsync(new CarrierSettingsPage(item));

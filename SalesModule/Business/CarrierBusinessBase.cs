@@ -127,6 +127,28 @@ namespace AuthModule.Business
                 Status = request.Status
             });
 
+            if (request.NeighborhoodId != null && request.NeighborhoodId.Any())
+            {
+                await _carrierDistributionZoneRepository.AddRangeAsync(request.NeighborhoodId.Select(x => new CarrierDistributionZone
+                {
+                    CarrierId = request.CarrierId,
+                    ProvinceId = request.ProvinceId,
+                    DistrictId = request.DistrictId,
+                    NeighbourhoodId = x
+                }));
+            }
+            else
+            {
+                _carrierDistributionZoneRepository.Update(new CarrierDistributionZone
+                {
+                    Id = request.CarrierDistributionZoneId??0,
+                    CarrierId = request.CarrierId,
+                    ProvinceId = request.ProvinceId,
+                    DistrictId = request.DistrictId == 0 ? null : request.DistrictId,
+                });
+            }
+
+
             var result = await _uow.SaveChangesAsync();
             if (result < 1)
             {

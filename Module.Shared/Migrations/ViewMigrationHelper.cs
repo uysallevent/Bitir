@@ -50,6 +50,7 @@ namespace Module.Shared.Migrations
                         ProvinceId=p.Id,
                         DistrictId=d.Id,
                         NeighbourhoodId=n.Id,
+                        Driver=c.DriverName,
                         Plate=c.Plate,
                         Capacity=c.Capacity,
                         ProvinceName=p.Name,

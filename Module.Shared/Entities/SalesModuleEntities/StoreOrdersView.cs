@@ -2,9 +2,11 @@
 using Module.Shared.Enums;
 using System;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Module.Shared.Entities.SalesModuleEntities
 {
+    [Table("StoreOrdersView", Schema = "sales")]
     public class StoreOrdersView : IEntity
     {
         [Key]

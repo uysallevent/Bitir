@@ -25,7 +25,7 @@ namespace Bitir.Mobile.ViewModels
     {
         #region Properties
 
-        public StoreCarriersView StoreCarrier
+        public StoreCarriersView StoreCarriersView
         {
             get
             {
@@ -210,7 +210,7 @@ namespace Bitir.Mobile.ViewModels
             }
         }
 
-        public int ProvinceId
+        public int? ProvinceId
         {
             get
             {
@@ -226,7 +226,7 @@ namespace Bitir.Mobile.ViewModels
             }
         }
 
-        public int DistrictId
+        public int? DistrictId
         {
             get
             {
@@ -242,7 +242,7 @@ namespace Bitir.Mobile.ViewModels
             }
         }
 
-        public int NeighbourhoodId
+        public int? NeighbourhoodId
         {
             get
             {
@@ -284,9 +284,9 @@ namespace Bitir.Mobile.ViewModels
         private Province selectedProvince;
         private District selectedDistrict;
         private Neighbourhood selectedNeighbourhood;
-        private int provinceId;
-        private int districtId;
-        private int neighbourhoodId;
+        private int? provinceId;
+        private int? districtId;
+        private int? neighbourhoodId;
         private object capacity;
         private bool status;
         private string driverName;
@@ -302,12 +302,12 @@ namespace Bitir.Mobile.ViewModels
             SubmitButtonCommand = new Command(async () => await SubmitButtonClicked());
             RemoveButtonCommand = new Command(async () => await RemoveButtonClicked());
             BackButtonCommand = new Command(async () => await BackButtonClicked());
-            this.StoreCarrier = storeCarrier;
-            this.Plate.Value = storeCarrier.Plate;
-            this.capacity = storeCarrier.Capacity;
-            this.ProvinceId = storeCarriersView.ProvinceId ?? -1;
-            this.DistrictId = storeCarriersView.DistrictId ?? -1;
-            this.DistrictId = storeCarriersView.DistrictId ?? -1;
+            this.StoreCarriersView = storeCarriersView;
+            this.Plate.Value = storeCarriersView.Plate;
+            this.DriverName = storeCarriersView.DriverName;
+            this.capacity = storeCarriersView.Capacity;
+            this.ProvinceId = storeCarriersView.ProvinceId;
+            this.DistrictId = storeCarriersView.DistrictId;
         }
 
         #endregion
@@ -353,12 +353,15 @@ namespace Bitir.Mobile.ViewModels
                 {
                     var result = await carrierService.UpdateStoreCarrier(new UpdateCarrierToStoreRequest
                     {
-                        CarrierId = StoreCarrier.CarrierId,
-                        CarrierStoreId = StoreCarrier.CarrierStoreId,
+                        CarrierDistributionZoneId = StoreCarriersView.CarrierDistributionZoneId,
+                        CarrierId = StoreCarriersView.CarrierId,
+                        CarrierStoreId = StoreCarriersView.StoreId ?? 0,
+                        ProvinceId = this.SelectedProvince.Id,
+                        DistrictId = this.SelectedDistrict.Id,
                         Capacity = int.Parse(this.Capacity.ToString()),
                         Plate = this.Plate.Value,
                         DriverName = this.DriverName,
-                        Status = StoreCarrier.Status
+                        Status = StoreCarriersView.CarrierStatus
                     });
 
                     if (result != null && result.Result)
@@ -401,8 +404,8 @@ namespace Bitir.Mobile.ViewModels
 
                     var result = await carrierService.UpdateStoreCarrier(new UpdateCarrierToStoreRequest
                     {
-                        CarrierId = StoreCarrier.CarrierId,
-                        CarrierStoreId = StoreCarrier.CarrierStoreId,
+                        CarrierId = StoreCarriersView.CarrierId,
+                        //CarrierStoreId = StoreCarrier.CarrierStoreId,
                         Status = Core.Enums.Status.Deleted
                     });
 
@@ -453,12 +456,12 @@ namespace Bitir.Mobile.ViewModels
             }
         }
 
-        public async Task GetDistrict(int provinceId)
+        public async Task GetDistrict(int? provinceId)
         {
             try
             {
                 IsBusy = true;
-                var result = await districtService.GetDistrict(new District { ProvinceId = provinceId });
+                var result = await districtService.GetDistrict(new District { ProvinceId = provinceId ?? 0 });
                 Districts = new ObservableCollection<District>(result.List.OrderBy(x => x.Name));
 
             }
@@ -477,12 +480,12 @@ namespace Bitir.Mobile.ViewModels
             }
         }
 
-        public async Task GetNeighbourhood(int districtId)
+        public async Task GetNeighbourhood(int? districtId)
         {
             try
             {
                 IsBusy = true;
-                var result = await neighbourhoodService.GetNeighbourhood(new Neighbourhood { DistrictId = districtId });
+                var result = await neighbourhoodService.GetNeighbourhood(new Neighbourhood { DistrictId = districtId ?? 0 });
                 Neighbourhoods = new ObservableCollection<Neighbourhood>(result.List.GroupBy(x => x.LocalityName).OrderBy(x => x.Key).Select(x => new Neighbourhood { LocalityName = x.Key }));
 
             }

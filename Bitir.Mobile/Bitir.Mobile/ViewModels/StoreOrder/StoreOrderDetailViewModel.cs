@@ -24,15 +24,15 @@ namespace Bitir.Mobile.ViewModels
             BackButtonCommand = new Command(async () => await BackButtonClicked());
             this.StoreOrder = storeOrder;
             SelectedOrderStatus.Value = storeOrder.OrderStatus.ToString();
-            SelectedCarrier = new ValidatableObject<StoreCarrier> { Value = new StoreCarrier { CarrierId = storeOrder.CarrierId ?? 0 } };
+            SelectedCarrier = new ValidatableObject<StoreCarriersView> { Value = new StoreCarriersView { CarrierId = storeOrder.CarrierId ?? 0 } };
         }
         #endregion
 
         #region Fields
         private StoreOrder storeOrder;
-        private ObservableCollection<StoreCarrier> carriers;
+        private ObservableCollection<StoreCarriersView> carriers;
         private ObservableCollection<string> orderStatusList;
-        private ValidatableObject<StoreCarrier> _selectedCarrier;
+        private ValidatableObject<StoreCarriersView> _selectedCarrier;
         private ValidatableObject<string> selectedOrderStatus;
         private int carrierId;
 
@@ -57,7 +57,7 @@ namespace Bitir.Mobile.ViewModels
             }
         }
 
-        public ObservableCollection<StoreCarrier> Carriers
+        public ObservableCollection<StoreCarriersView> Carriers
         {
             get
             {
@@ -93,7 +93,7 @@ namespace Bitir.Mobile.ViewModels
             }
         }
 
-        public ValidatableObject<StoreCarrier> SelectedCarrier
+        public ValidatableObject<StoreCarriersView> SelectedCarrier
         {
             get
             {
@@ -151,8 +151,8 @@ namespace Bitir.Mobile.ViewModels
         #region Methods
         private void Initialize()
         {
-            SelectedCarrier = new ValidatableObject<StoreCarrier>();
-            Carriers = new ObservableCollection<StoreCarrier>();
+            SelectedCarrier = new ValidatableObject<StoreCarriersView>();
+            Carriers = new ObservableCollection<StoreCarriersView>();
             SelectedOrderStatus = new ValidatableObject<string>();
             OrderStatusList = new ObservableCollection<string>(Enum.GetNames(typeof(OrderStatusEnum)).Where(x => x != "CanceledByCustomer").Select(b => b.ToString()).ToList());
         }
@@ -163,8 +163,8 @@ namespace Bitir.Mobile.ViewModels
             {
                 IsBusy = true;
                 var result = await carrierService.GetStoreCarriers();
-                Carriers = new ObservableCollection<StoreCarrier>(result.List);
-                SelectedCarrier = new ValidatableObject<StoreCarrier>();
+                Carriers = new ObservableCollection<StoreCarriersView>(result.List);
+                SelectedCarrier = new ValidatableObject<StoreCarriersView>();
                 SelectedCarrier.Value = Carriers.FirstOrDefault(x => x.CarrierId == this.StoreOrder.CarrierId);
 
             }
