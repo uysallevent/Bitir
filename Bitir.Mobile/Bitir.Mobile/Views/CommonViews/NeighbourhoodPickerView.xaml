@@ -17,10 +17,13 @@
             <inputLayout:SfTextInputLayout Style="{DynamicResource TextInputLayoutStyle}">
                 <combobox:SfComboBox
                         x:Name="NeighbourhoodPicker"
+                        MultiSelectMode="Token"
+                        TokensWrapMode="Wrap"
+                        IsSelectedItemsVisibleInDropDown="False"
                         DataSource="{Binding Neighbourhoods}"
                         DisplayMemberPath="LocalityName"
                         SelectedValuePath="Id"
-                        SelectedItem="{Binding SelectedNeighbourhood,Mode=TwoWay}"
+                        SelectedItem="{Binding SelectedNeighbourhoods,Mode=TwoWay}"
                         Style="{StaticResource TextInputLayoutComboBoxStyle}"
                         VerticalOptions="CenterAndExpand"
                         Watermark="Semt Seçin">

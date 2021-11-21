@@ -7,6 +7,7 @@ using Module.Shared.Entities.ProductModuleEntities;
 using Module.Shared.Entities.SalesModuleEntities;
 using ProductModule.Dtos;
 using SalesModule.Dtos;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Runtime.Serialization;
@@ -176,6 +177,22 @@ namespace Bitir.Mobile.ViewModels
             }
         }
 
+        public IList<object> SelectedNeighbourhoods
+        {
+            get
+            {
+                return selectedNeighbourhoods;
+            }
+            set
+            {
+                if (this.selectedNeighbourhoods == value)
+                {
+                    return;
+                }
+                this.SetProperty(ref this.selectedNeighbourhoods, value);
+            }
+        }
+
         public bool Status
         {
             get
@@ -284,6 +301,7 @@ namespace Bitir.Mobile.ViewModels
         private Province selectedProvince;
         private District selectedDistrict;
         private Neighbourhood selectedNeighbourhood;
+        private IList<object> selectedNeighbourhoods;
         private int? provinceId;
         private int? districtId;
         private int? neighbourhoodId;
@@ -326,6 +344,7 @@ namespace Bitir.Mobile.ViewModels
             this.plate = new ValidatableObject<string>();
             this.SelectedProvince = new Province();
             this.SelectedDistrict = new District();
+            this.SelectedNeighbourhoods = new ObservableCollection<object>();
         }
 
         private void AddValidationRules()
@@ -351,6 +370,12 @@ namespace Bitir.Mobile.ViewModels
                 IsBusy = true;
                 try
                 {
+                    var localityNames = new List<string>();
+                    foreach (var item in SelectedNeighbourhoods)
+                    {
+                        localityNames.Add((item as Neighbourhood).LocalityName);
+                    }
+
                     var result = await carrierService.UpdateStoreCarrier(new UpdateCarrierToStoreRequest
                     {
                         CarrierDistributionZoneId = StoreCarriersView.CarrierDistributionZoneId,
@@ -361,7 +386,9 @@ namespace Bitir.Mobile.ViewModels
                         Capacity = int.Parse(this.Capacity.ToString()),
                         Plate = this.Plate.Value,
                         DriverName = this.DriverName,
-                        Status = StoreCarriersView.CarrierStatus
+                        Status = StoreCarriersView.CarrierStatus,
+                        LocalityNames = localityNames
+
                     });
 
                     if (result != null && result.Result)
@@ -440,6 +467,8 @@ namespace Bitir.Mobile.ViewModels
                 IsBusy = true;
                 var result = await provinceService.GetProvince(new Province { });
                 Provinces = new ObservableCollection<Province>(result.List.OrderBy(x => x.Name));
+                SelectedProvince = Provinces.FirstOrDefault(x => x.Id == this.StoreCarriersView.ProvinceId);
+
             }
             catch (BadRequestException ex)
             {
@@ -458,12 +487,14 @@ namespace Bitir.Mobile.ViewModels
 
         public async Task GetDistrict(int? provinceId)
         {
+            if (provinceId == null || provinceId == 0)
+                return;
             try
             {
                 IsBusy = true;
                 var result = await districtService.GetDistrict(new District { ProvinceId = provinceId ?? 0 });
                 Districts = new ObservableCollection<District>(result.List.OrderBy(x => x.Name));
-
+                SelectedDistrict = Districts.FirstOrDefault(x => x.Id == this.StoreCarriersView.DistrictId);
             }
             catch (BadRequestException ex)
             {
@@ -486,7 +517,12 @@ namespace Bitir.Mobile.ViewModels
             {
                 IsBusy = true;
                 var result = await neighbourhoodService.GetNeighbourhood(new Neighbourhood { DistrictId = districtId ?? 0 });
-                Neighbourhoods = new ObservableCollection<Neighbourhood>(result.List.GroupBy(x => x.LocalityName).OrderBy(x => x.Key).Select(x => new Neighbourhood { LocalityName = x.Key }));
+                Neighbourhoods = new ObservableCollection<Neighbourhood>(
+                    result
+                    .List
+                    .GroupBy(x => x.LocalityName)
+                    .OrderBy(x => x.Key)
+                    .Select(x => new Neighbourhood { LocalityName = x.Key }));
 
             }
             catch (BadRequestException ex)

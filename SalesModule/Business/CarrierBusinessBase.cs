@@ -27,6 +27,7 @@ namespace AuthModule.Business
         private readonly IRepository<UserAddress> _userAddressRepository;
         private readonly IRepository<District> _districtRepository;
         private readonly IRepository<Province> _provinceRepository;
+        private readonly IRepository<Neighbourhood> _neighbourhoodRepository;
         private readonly IRepository<CarrierDistributionZone> _carrierDistributionZoneRepository;
         private readonly IRepository<StoreCarriersView> _storeCarriersViewRepository;
         private readonly IUnitOfWork _uow;
@@ -45,7 +46,8 @@ namespace AuthModule.Business
             IRepository<UserAddress> userAddressRepository,
             IRepository<District> districtRepository,
             IRepository<Province> provinceRepository,
-            IRepository<CarrierDistributionZone> carrierDistributionZoneRepository,
+            IRepository<Neighbourhood> neighbourhoodRepository,
+        IRepository<CarrierDistributionZone> carrierDistributionZoneRepository,
             IRepository<StoreCarriersView> storeCarriersViewRepository,
             IHttpContextAccessor httpContextAccessor) : base(carrierRepository, uow)
         {
@@ -60,10 +62,10 @@ namespace AuthModule.Business
             _httpContextAccessor = httpContextAccessor;
             _districtRepository = districtRepository;
             _provinceRepository = provinceRepository;
+            _neighbourhoodRepository = neighbourhoodRepository;
             _carrierDistributionZoneRepository = carrierDistributionZoneRepository;
             _storeCarriersViewRepository = storeCarriersViewRepository;
         }
-
 
         public async Task<ResponseWrapper<bool>> AddCarrierToStoreAsync(AddCarrierToStoreRequest request)
         {
@@ -127,25 +129,39 @@ namespace AuthModule.Business
                 Status = request.Status
             });
 
-            if (request.NeighborhoodId != null && request.NeighborhoodId.Any())
+            if (request.LocalityNames != null && request.LocalityNames.Any())
             {
-                await _carrierDistributionZoneRepository.AddRangeAsync(request.NeighborhoodId.Select(x => new CarrierDistributionZone
+                var neigborhoodIds = _neighbourhoodRepository.GetAll(x => x.DistrictId == request.DistrictId && request.LocalityNames.Contains(x.LocalityName));
+                await _carrierDistributionZoneRepository.AddRangeAsync(neigborhoodIds.Select(x => new CarrierDistributionZone
                 {
                     CarrierId = request.CarrierId,
                     ProvinceId = request.ProvinceId,
                     DistrictId = request.DistrictId,
-                    NeighbourhoodId = x
+                    NeighbourhoodId = x.Id,
+                    UpdateDate = DateTime.UtcNow,
                 }));
             }
             else
             {
-                _carrierDistributionZoneRepository.Update(new CarrierDistributionZone
+                if (request.CarrierDistributionZoneId == null)
                 {
-                    Id = request.CarrierDistributionZoneId??0,
-                    CarrierId = request.CarrierId,
-                    ProvinceId = request.ProvinceId,
-                    DistrictId = request.DistrictId == 0 ? null : request.DistrictId,
-                });
+                    await _carrierDistributionZoneRepository.AddAsync(new CarrierDistributionZone
+                    {
+                        CarrierId = request.CarrierId,
+                        ProvinceId = request.ProvinceId,
+                        DistrictId = request.DistrictId == 0 ? null : request.DistrictId,
+                    });
+                }
+                else
+                {
+                    _carrierDistributionZoneRepository.Update(new CarrierDistributionZone
+                    {
+                        Id = request.CarrierDistributionZoneId ?? 0,
+                        CarrierId = request.CarrierId,
+                        ProvinceId = request.ProvinceId,
+                        DistrictId = request.DistrictId == 0 ? null : request.DistrictId,
+                    });
+                }
             }
 
 

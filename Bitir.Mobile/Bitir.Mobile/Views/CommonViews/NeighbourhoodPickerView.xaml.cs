@@ -1,4 +1,7 @@
-﻿using System;
+﻿using Bitir.Mobile.ViewModels;
+using Module.Shared.Entities.AuthModuleEntities;
+using Syncfusion.XForms.ComboBox;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
