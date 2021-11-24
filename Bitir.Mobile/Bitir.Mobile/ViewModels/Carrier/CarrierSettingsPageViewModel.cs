@@ -12,6 +12,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Runtime.Serialization;
 using System.Threading.Tasks;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.Internals;
 
@@ -109,6 +110,24 @@ namespace Bitir.Mobile.ViewModels
                 }
 
                 this.SetProperty(ref this.neighbourhoods, value);
+            }
+        }
+
+        public ObservableCollection<StoreCarriersView> StoreCarrierDistZones
+        {
+            get
+            {
+                return this.storeCarrierDistZones;
+            }
+
+            set
+            {
+                if (this.storeCarrierDistZones == value)
+                {
+                    return;
+                }
+
+                this.SetProperty(ref this.storeCarrierDistZones, value);
             }
         }
 
@@ -298,6 +317,7 @@ namespace Bitir.Mobile.ViewModels
         private ObservableCollection<Province> provinces;
         private ObservableCollection<District> districts;
         private ObservableCollection<Neighbourhood> neighbourhoods;
+        private ObservableCollection<StoreCarriersView> storeCarrierDistZones;
         private Province selectedProvince;
         private District selectedDistrict;
         private Neighbourhood selectedNeighbourhood;
@@ -308,6 +328,7 @@ namespace Bitir.Mobile.ViewModels
         private object capacity;
         private bool status;
         private string driverName;
+        private Command<object> removeCarrierZoneButtonCommand;
         #endregion
 
         #region Constructor
@@ -316,9 +337,10 @@ namespace Bitir.Mobile.ViewModels
         {
             InitializeProperties();
             this.AddValidationRules();
+            Task.Run(async () => await GetStoreCarrier(storeCarriersView.CarrierId));
             Task.Run(async () => await GetProvince());
             SubmitButtonCommand = new Command(async () => await SubmitButtonClicked());
-            RemoveButtonCommand = new Command(async () => await RemoveButtonClicked());
+            RemoveCarrierButtonCommand = new Command(async () => await RemoveButtonClicked());
             BackButtonCommand = new Command(async () => await BackButtonClicked());
             this.StoreCarriersView = storeCarriersView;
             this.Plate.Value = storeCarriersView.Plate;
@@ -333,7 +355,14 @@ namespace Bitir.Mobile.ViewModels
         #region Command
 
         public Command SubmitButtonCommand { get; set; }
-        public Command RemoveButtonCommand { get; set; }
+        public Command RemoveCarrierButtonCommand { get; set; }
+        public Command<object> RemoveCarrierZoneButtonCommand
+        {
+            get
+            {
+                return this.removeCarrierZoneButtonCommand ?? (this.removeCarrierZoneButtonCommand = new Command<object>(async (s) => await this.RemoveCarrierZoneClicked(s)));
+            }
+        }
         public Command BackButtonCommand { get; set; }
         #endregion
 
@@ -345,6 +374,7 @@ namespace Bitir.Mobile.ViewModels
             this.SelectedProvince = new Province();
             this.SelectedDistrict = new District();
             this.SelectedNeighbourhoods = new ObservableCollection<object>();
+            this.StoreCarrierDistZones = new ObservableCollection<StoreCarriersView>();
         }
 
         private void AddValidationRules()
@@ -388,7 +418,6 @@ namespace Bitir.Mobile.ViewModels
                         DriverName = this.DriverName,
                         Status = StoreCarriersView.CarrierStatus,
                         LocalityNames = localityNames
-
                     });
 
                     if (result != null && result.Result)
@@ -460,6 +489,12 @@ namespace Bitir.Mobile.ViewModels
             }
         }
 
+        private async Task RemoveCarrierZoneClicked(object zone)
+        {
+            var item = zone as StoreCarriersView;
+            StoreCarrierDistZones.Remove(item);
+        }
+
         public async Task GetProvince()
         {
             try
@@ -524,6 +559,29 @@ namespace Bitir.Mobile.ViewModels
                     .OrderBy(x => x.Key)
                     .Select(x => new Neighbourhood { LocalityName = x.Key }));
 
+            }
+            catch (BadRequestException ex)
+            {
+                SendNotification(new ExceptionTransfer { ex = ex, NotificationMessage = ex.Message });
+
+            }
+            catch (InternalServerErrorException ex)
+            {
+                SendNotification(new ExceptionTransfer { ex = ex, NotificationMessage = "Servis hatası !!" });
+            }
+            finally
+            {
+                IsBusy = false;
+            }
+        }
+
+        public async Task GetStoreCarrier(int carrierId)
+        {
+            try
+            {
+                IsBusy = true;
+                var result = await carrierService.GetStoreCarrierById(carrierId);
+                StoreCarrierDistZones = new ObservableCollection<StoreCarriersView>(result.List);
             }
             catch (BadRequestException ex)
             {

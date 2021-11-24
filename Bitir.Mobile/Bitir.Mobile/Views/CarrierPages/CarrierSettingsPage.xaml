@@ -11,12 +11,37 @@
     xmlns:behaviour="clr-namespace:Bitir.Mobile.Behaviors"
     xmlns:converter="clr-namespace:Bitir.Mobile.Converters"
     xmlns:local="clr-namespace:Bitir.Mobile.Views"
+    xmlns:sfgrid="clr-namespace:Syncfusion.SfDataGrid.XForms;assembly=Syncfusion.SfDataGrid.XForms"
     x:Name="CarrierSettings"
     BackgroundColor="{DynamicResource Gray-100}"
     NavigationPage.HasNavigationBar="False">
 
     <ContentPage.Resources>
         <ResourceDictionary>
+            <OnPlatform x:Key="opacity"
+                      x:TypeArguments="x:Double">
+                <On Platform="iOS,Android,macOS" Value="87" />
+                <On Platform="UWP,WPF" Value="80" />
+            </OnPlatform>
+            <OnPlatform x:Key="padding"
+                   x:TypeArguments="Thickness">
+                <On Platform="iOS" Value="8, 12, 8, 12" />
+                <On Platform="Android" Value="8,10,8,10"/>
+                <On Platform="UWP,macOS,WPF" Value="8" />
+            </OnPlatform>
+
+            <OnPlatform x:Key="textSize"
+                  x:TypeArguments="x:Double">
+                <On Platform="iOS,UWP,WPF" Value="14" />
+                <On Platform="Android,macOS" Value="13" />
+            </OnPlatform>
+
+            <OnPlatform x:Key="font"
+                  x:TypeArguments="x:String">
+                <On Platform="Android" Value="Roboto-Regular" />
+                <On Platform="iOS" Value="SFProText-Regular" />
+                <On Platform="UWP,WPF" Value="SegoeUI" />
+            </OnPlatform>
             <converter:BooleanToColorConverter x:Key="ColorConverter" />
             <converter:InverseBoolConverter x:Key="InverseBoolConverter" />
             <converter:NameValidationConverter x:Key="FirstValidationErrorConverter" />
@@ -194,7 +219,6 @@
                                Text="Dağıtım İl Seçin"/>
                     <commonViews:ProvincePickerView Margin="16,10" />
                 </StackLayout>
-
                 <!--  Vehicle District  -->
                 <StackLayout BackgroundColor="{DynamicResource Gray-Bg}">
                     <Label Margin="16,12"
@@ -212,6 +236,85 @@
                                Style="{StaticResource TitleLabelStyle}"
                                Text="Dağıtım Semt Seçin"/>
                     <commonViews:NeighbourhoodPickerView Margin="16,10" />
+                </StackLayout>
+                <!--  Locality Grid  -->
+                <StackLayout>
+                    <sfgrid:SfDataGrid x:Name="carrierZoneDataGrid"
+                           AutoGenerateColumns="False"
+                           ColumnSizer="Star"
+                           ItemsSource="{Binding StoreCarrierDistZones}"
+                           Margin="16,12,16,0"
+                           HeaderRowHeight="52"
+                           RowHeight="48"
+                           SelectionMode="Single"
+                           Opacity="{StaticResource opacity}"
+                           VerticalOverScrollMode="None">
+                        <sfgrid:SfDataGrid.Columns x:TypeArguments="sfgrid:Columns">
+                            <sfgrid:GridTemplateColumn HeaderCellTextSize="16"
+                                           ColumnSizer="None"
+                                           HeaderFontAttribute="Bold"
+                                           HeaderText="#"
+                                           MappingName="Id"
+                                           HeaderFont="{StaticResource font}">
+                                <sfgrid:GridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Frame WidthRequest="50" HeightRequest="40" CornerRadius="10" BackgroundColor="Transparent" Margin="0" Padding="0">
+                                            <buttons:SfButton
+                                                Command="{Binding Source={x:Reference carrierZoneDataGrid}, Path=BindingContext.RemoveCarrierZoneButtonCommand}"
+                                                CommandParameter="{Binding .}"
+                                                Style="{StaticResource GradientButtonStyle}"
+                                                Text="-"/>
+                                        </Frame>
+                                    </DataTemplate>
+                                </sfgrid:GridTemplateColumn.CellTemplate>
+                            </sfgrid:GridTemplateColumn>
+                            
+                            <sfgrid:GridTextColumn HeaderFontAttribute="Bold"
+                                       ColumnSizer="Star"
+                                       HeaderText="İl"
+                                       HeaderTextAlignment="Start"
+                                       LineBreakMode="WordWrap"
+                                       LoadUIView="False"
+                                       MappingName="ProvinceName"
+                                       TextAlignment="Start"
+                                       Padding="{StaticResource padding}"
+                                       HeaderCellTextSize="{StaticResource textSize}"
+                                       CellTextSize="{StaticResource textSize}"
+                                       HeaderFont="{StaticResource font}"
+                                       RecordFont="{StaticResource font}">
+                            </sfgrid:GridTextColumn>
+
+                            <sfgrid:GridTextColumn HeaderFontAttribute="Bold"
+                                       ColumnSizer="Star"
+                                       HeaderText="İlçe"
+                                       HeaderTextAlignment="Start"
+                                       LineBreakMode="WordWrap"
+                                       LoadUIView="False"
+                                       MappingName="DistrictName"
+                                       TextAlignment="Start"
+                                       Padding="{StaticResource padding}"
+                                       HeaderCellTextSize="{StaticResource textSize}"
+                                       CellTextSize="{StaticResource textSize}"
+                                       HeaderFont="{StaticResource font}"
+                                       RecordFont="{StaticResource font}">
+                            </sfgrid:GridTextColumn>
+
+                            <sfgrid:GridTextColumn HeaderFontAttribute="Bold"
+                                       ColumnSizer="Star"
+                                       HeaderText="Mah."
+                                       HeaderTextAlignment="Start"
+                                       LineBreakMode="WordWrap"
+                                       LoadUIView="False"
+                                       MappingName="NeighbourhoodName"
+                                       TextAlignment="Start"
+                                       Padding="{StaticResource padding}"
+                                       HeaderCellTextSize="{StaticResource textSize}"
+                                       CellTextSize="{StaticResource textSize}"
+                                       HeaderFont="{StaticResource font}"
+                                       RecordFont="{StaticResource font}">
+                            </sfgrid:GridTextColumn>
+                        </sfgrid:SfDataGrid.Columns>
+                    </sfgrid:SfDataGrid>
                 </StackLayout>
 
                 <BoxView Style="{StaticResource HorizontalSeparatorStyle}" />
@@ -232,7 +335,7 @@
                             <Grid ColumnDefinitions="*, Auto">
                                 <buttons:SfButton
                                     Margin="20,0,20,0"
-                                    Command="{Binding RemoveButtonCommand}"
+                                    Command="{Binding RemoveCarrierButtonCommand}"
                                     Style="{StaticResource DataFormBorderlessEntryBorderStyle}"
                                     BackgroundColor="Red"
                                     Text="Sil"

@@ -188,6 +188,22 @@ namespace AuthModule.Business
             return new ResponseWrapperListing<StoreCarriersView>(result);
         }
 
+        public async Task<ResponseWrapperListing<StoreCarriersView>> GetStoreCarriersAsync(int carrierId)
+        {
+            var claims = _httpContextAccessor.HttpContext.User.Claims;
+            int.TryParse(claims.FirstOrDefault(x => x.Type == "Store")?.Value, out int storeId);
+            if (storeId < 1)
+            {
+                throw new ClaimExpection("Claims could not find");
+            }
+
+            var result = await _storeCarriersViewRepository.GetAll(x => 
+            x.CarrierId == carrierId 
+            && x.StoreId == storeId 
+            && x.CarrierStatus == Core.Enums.Status.Active).AsNoTracking().ToListAsync();
+            return new ResponseWrapperListing<StoreCarriersView>(result);
+        }
+
         public async Task<ResponseWrapper<bool>> AddDistributionZoneToCarrier(CarrierZoneRequest request)
         {
             var check = await _carrierDistributionZoneRepository.GetAll(x => (

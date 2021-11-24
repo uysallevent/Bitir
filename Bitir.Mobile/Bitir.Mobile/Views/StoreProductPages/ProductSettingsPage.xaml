@@ -7,7 +7,6 @@
     xmlns:buttons="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms"
     xmlns:sfgrid="clr-namespace:Syncfusion.SfDataGrid.XForms;assembly=Syncfusion.SfDataGrid.XForms"
     xmlns:controls="clr-namespace:Bitir.Mobile.Controls"
-    xmlns:viewModel="clr-namespace:Bitir.Mobile.ViewModels"
     xmlns:behaviour="clr-namespace:Bitir.Mobile.Behaviors"
     xmlns:converter="clr-namespace:Bitir.Mobile.Converters"
     x:Name="ProductSetting"

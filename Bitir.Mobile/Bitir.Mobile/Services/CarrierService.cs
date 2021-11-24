@@ -12,6 +12,7 @@ namespace Bitir.Mobile.Services
         private const string addCarrierToStorePath = "SalesModule/Carrier/AddCarrierToStore";
         private const string UpdateStoreCarrierPath = "SalesModule/Carrier/UpdateStoreCarrier";
         private const string storeCarriersPath = "SalesModule/Carrier/GetStoreCarriers";
+        private const string storeCarrierByIdPath = "SalesModule/Carrier/GetStoreCarriersByCarrierId";
 
         public async Task<ResponseWrapper<bool>> AddCarrierToStore(AddCarrierToStoreRequest request)
         {
@@ -34,6 +35,14 @@ namespace Bitir.Mobile.Services
         public async Task<ResponseWrapperListing<StoreCarriersView>> GetStoreCarriers()
         {
             var restClientRequest = await GetRestClient(Method.POST, storeCarriersPath);
+            var restResponse = await restClientRequest.Item1.ExecuteAsync<ResponseWrapperListing<StoreCarriersView>>(restClientRequest.Item2);
+            return ResponseHandler(restResponse);
+        }
+
+        public async Task<ResponseWrapperListing<StoreCarriersView>> GetStoreCarrierById(int carrierId)
+        {
+            var restClientRequest = await GetRestClient(Method.POST, storeCarrierByIdPath);
+            restClientRequest.Item2.AddQueryParameter("carrierId", carrierId.ToString());
             var restResponse = await restClientRequest.Item1.ExecuteAsync<ResponseWrapperListing<StoreCarriersView>>(restClientRequest.Item2);
             return ResponseHandler(restResponse);
         }

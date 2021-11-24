@@ -247,6 +247,5 @@
   <ItemGroup>
     <Folder Include="Enums\" />
     <Folder Include="Helpers\" />
-    <Folder Include="Models\Carrier\" />
   </ItemGroup>
 </Project>

@@ -40,5 +40,12 @@ namespace AuthModule.Controllers
             var result = await _carrierBusinessBase.GetStoreCarriersAsync();
             return Ok(result);
         }
+
+        [HttpPost("GetStoreCarriersByCarrierId")]
+        public async Task<IActionResult> GetStoreCarriersByCarrierId(int carrierId)
+        {
+            var result = await _carrierBusinessBase.GetStoreCarriersAsync(carrierId);
+            return Ok(result);
+        }
     }
 }

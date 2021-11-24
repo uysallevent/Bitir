@@ -1,9 +1,12 @@
 ﻿using Bitir.Mobile.Exceptions;
+using Bitir.Mobile.Models.Carrier;
 using Bitir.Mobile.Models.Common;
 using Bitir.Mobile.Views;
 using Module.Shared.Entities.SalesModuleEntities;
 using SalesModule.Dtos;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 
@@ -85,7 +88,7 @@ namespace Bitir.Mobile.ViewModels
 
         #region Methods
 
-        private  void Initialize()
+        private void Initialize()
         {
             Carriers = new ObservableCollection<StoreCarriersView>();
         }
@@ -96,7 +99,18 @@ namespace Bitir.Mobile.ViewModels
             {
                 IsBusy = true;
                 var result = await carrierService.GetStoreCarriers();
-                Carriers = new ObservableCollection<StoreCarriersView>(result.List);
+
+                var groupedListbyCarriers = result
+                    .List
+                    .GroupBy(x => new { x.CarrierId })
+                    .Select(x => new StoreCarriersView
+                    {
+                        CarrierId = x.Key.CarrierId,
+                        Capacity = x.FirstOrDefault(y => y.CarrierId == x.Key.CarrierId).Capacity,
+                        Plate = x.FirstOrDefault(y => y.CarrierId == x.Key.CarrierId).Plate,
+                        DriverName=x.FirstOrDefault(y => y.CarrierId == x.Key.CarrierId).DriverName
+                    });
+                Carriers = new ObservableCollection<StoreCarriersView>(groupedListbyCarriers);
             }
             catch (BadRequestException ex)
             {
