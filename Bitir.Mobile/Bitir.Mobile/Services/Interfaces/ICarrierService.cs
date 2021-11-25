@@ -11,5 +11,6 @@ namespace Bitir.Mobile.Services.Interfaces
         Task<ResponseWrapper<bool>> UpdateStoreCarrier(UpdateCarrierToStoreRequest request);
         Task<ResponseWrapperListing<StoreCarriersView>> GetStoreCarriers();
         Task<ResponseWrapperListing<StoreCarriersView>> GetStoreCarrierById(int carrierId);
+        Task<ResponseWrapper<bool>> RemoveZoneFromCarrierById(int carrierDistributionZoneId);
     }
 }

@@ -27,7 +27,7 @@ namespace AuthModule.Controllers
             return Ok(result);
         }
 
-        [HttpPost("UpdateStoreCarrier")]
+        [HttpPut("UpdateStoreCarrier")]
         public async Task<IActionResult> UpdateStoreCarrier([FromBody] UpdateCarrierToStoreRequest request)
         {
             var result = await _carrierBusinessBase.UpdateStoreCarrierAsync(request);
@@ -45,6 +45,13 @@ namespace AuthModule.Controllers
         public async Task<IActionResult> GetStoreCarriersByCarrierId(int carrierId)
         {
             var result = await _carrierBusinessBase.GetStoreCarriersAsync(carrierId);
+            return Ok(result);
+        }
+
+        [HttpDelete("RemoveZoneFromCarrierById")]
+        public async Task<IActionResult> RemoveZoneFromCarrierById(int carrierDistributionZoneId)
+        {
+            var result = await _carrierBusinessBase.RemoveZoneFromCarrier(carrierDistributionZoneId);
             return Ok(result);
         }
     }

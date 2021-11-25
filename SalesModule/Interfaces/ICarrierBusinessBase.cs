@@ -14,5 +14,6 @@ namespace AuthModule.Interfaces
         Task<ResponseWrapperListing<StoreCarriersView>> GetStoreCarriersAsync();
         Task<ResponseWrapperListing<StoreCarriersView>> GetStoreCarriersAsync(int carrierId);
         Task<ResponseWrapper<bool>> UpdateStoreCarrierAsync(UpdateCarrierToStoreRequest request);
+        Task<ResponseWrapper<bool>> RemoveZoneFromCarrier(int carrierDistributionZoneId);
     }
 }

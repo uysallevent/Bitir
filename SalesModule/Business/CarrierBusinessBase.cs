@@ -197,9 +197,9 @@ namespace AuthModule.Business
                 throw new ClaimExpection("Claims could not find");
             }
 
-            var result = await _storeCarriersViewRepository.GetAll(x => 
-            x.CarrierId == carrierId 
-            && x.StoreId == storeId 
+            var result = await _storeCarriersViewRepository.GetAll(x =>
+            x.CarrierId == carrierId
+            && x.StoreId == storeId
             && x.CarrierStatus == Core.Enums.Status.Active).AsNoTracking().ToListAsync();
             return new ResponseWrapperListing<StoreCarriersView>(result);
         }
@@ -240,6 +240,29 @@ namespace AuthModule.Business
             await _uow.SaveChangesAsync();
             return new ResponseWrapper<bool>(true);
         }
+
+        public async Task<ResponseWrapper<bool>> RemoveZoneFromCarrier(int carrierDistributionZoneId)
+        {
+            var claims = _httpContextAccessor.HttpContext.User.Claims;
+            int.TryParse(claims.FirstOrDefault(x => x.Type == "Store")?.Value, out int storeId);
+            if (storeId < 1)
+            {
+                throw new ClaimExpection("Claims could not find");
+            }
+
+            var check = await _carrierDistributionZoneRepository.GetAsync(x => x.Id == carrierDistributionZoneId && x.Status == Core.Enums.Status.Active);
+            if (check == null)
+            {
+                throw new BadRequestException("Taşıyıcı kaydı bulunamadı");
+            }
+
+            check.Status = Core.Enums.Status.Deleted;
+            _carrierDistributionZoneRepository.Update(check);
+            await _uow.SaveChangesAsync();
+
+            return new ResponseWrapper<bool>(true);
+        }
+
 
     }
 }

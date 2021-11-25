@@ -13,6 +13,7 @@ namespace Bitir.Mobile.Services
         private const string UpdateStoreCarrierPath = "SalesModule/Carrier/UpdateStoreCarrier";
         private const string storeCarriersPath = "SalesModule/Carrier/GetStoreCarriers";
         private const string storeCarrierByIdPath = "SalesModule/Carrier/GetStoreCarriersByCarrierId";
+        private const string RemoveZoneFromCarrierByIdPath = "SalesModule/Carrier/RemoveZoneFromCarrierById";
 
         public async Task<ResponseWrapper<bool>> AddCarrierToStore(AddCarrierToStoreRequest request)
         {
@@ -25,7 +26,7 @@ namespace Bitir.Mobile.Services
 
         public async Task<ResponseWrapper<bool>> UpdateStoreCarrier(UpdateCarrierToStoreRequest request)
         {
-            var restClientRequest = await GetRestClient(Method.POST, UpdateStoreCarrierPath);
+            var restClientRequest = await GetRestClient(Method.PUT, UpdateStoreCarrierPath);
             restClientRequest.Item2.AddParameter("accept", "application/json");
             restClientRequest.Item2.AddJsonBody(request);
             var restResponse = await restClientRequest.Item1.ExecuteAsync<ResponseWrapper<bool>>(restClientRequest.Item2);
@@ -44,6 +45,14 @@ namespace Bitir.Mobile.Services
             var restClientRequest = await GetRestClient(Method.POST, storeCarrierByIdPath);
             restClientRequest.Item2.AddQueryParameter("carrierId", carrierId.ToString());
             var restResponse = await restClientRequest.Item1.ExecuteAsync<ResponseWrapperListing<StoreCarriersView>>(restClientRequest.Item2);
+            return ResponseHandler(restResponse);
+        }
+
+        public async Task<ResponseWrapper<bool>> RemoveZoneFromCarrierById(int carrierDistributionZoneId)
+        {
+            var restClientRequest = await GetRestClient(Method.DELETE, RemoveZoneFromCarrierByIdPath);
+            restClientRequest.Item2.AddQueryParameter("carrierDistributionZoneId", carrierDistributionZoneId.ToString());
+            var restResponse = await restClientRequest.Item1.ExecuteAsync<ResponseWrapper<bool>>(restClientRequest.Item2);
             return ResponseHandler(restResponse);
         }
     }

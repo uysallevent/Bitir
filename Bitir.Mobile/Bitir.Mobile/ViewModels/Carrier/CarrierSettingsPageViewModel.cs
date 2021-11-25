@@ -491,8 +491,38 @@ namespace Bitir.Mobile.ViewModels
 
         private async Task RemoveCarrierZoneClicked(object zone)
         {
-            var item = zone as StoreCarriersView;
-            StoreCarrierDistZones.Remove(item);
+            try
+            {
+                IsBusy = true;
+
+                var question = await App.Current.MainPage.DisplayAlert("Uyarı", "Bölgeyi silmek istediğinize eminmisiniz ?", "Evet", "Hayır");
+                if (!question)
+                {
+                    return;
+                }
+
+                var item = zone as StoreCarriersView;
+                var result = await carrierService.RemoveZoneFromCarrierById(item.CarrierDistributionZoneId);
+                if (result != null && result.Result)
+                {
+                    StoreCarrierDistZones.Remove(item);
+                    SendNotification(new ExceptionTransfer { NotificationMessage = "Bölge başarı ile silindi" });
+                }
+            }
+            catch (BadRequestException ex)
+            {
+                SendNotification(new ExceptionTransfer { ex = ex, NotificationMessage = ex.Message });
+
+            }
+            catch (InternalServerErrorException ex)
+            {
+                SendNotification(new ExceptionTransfer { ex = ex, NotificationMessage = "Servis hatası !!" });
+            }
+            finally
+            {
+                IsBusy = false;
+            }
+
         }
 
         public async Task GetProvince()

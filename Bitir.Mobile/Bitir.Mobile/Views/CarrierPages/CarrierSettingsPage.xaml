@@ -238,6 +238,15 @@
                     <commonViews:NeighbourhoodPickerView Margin="16,10" />
                 </StackLayout>
                 <!--  Locality Grid  -->
+
+
+                <!--  Add Zone Button  -->
+                <buttons:SfButton
+                    Margin="0,10,0,10"
+                    Command="{Binding SubmitButtonCommand}"
+                    Style="{StaticResource GradientButtonStyle}"
+                    Text="Ekle"
+                    WidthRequest="200" />
                 <StackLayout>
                     <sfgrid:SfDataGrid x:Name="carrierZoneDataGrid"
                            AutoGenerateColumns="False"
@@ -301,6 +310,21 @@
 
                             <sfgrid:GridTextColumn HeaderFontAttribute="Bold"
                                        ColumnSizer="Star"
+                                       HeaderText="Semt"
+                                       HeaderTextAlignment="Start"
+                                       LineBreakMode="WordWrap"
+                                       LoadUIView="False"
+                                       MappingName="LocalityName"
+                                       TextAlignment="Start"
+                                       Padding="{StaticResource padding}"
+                                       HeaderCellTextSize="{StaticResource textSize}"
+                                       CellTextSize="{StaticResource textSize}"
+                                       HeaderFont="{StaticResource font}"
+                                       RecordFont="{StaticResource font}">
+                            </sfgrid:GridTextColumn>
+
+                            <sfgrid:GridTextColumn HeaderFontAttribute="Bold"
+                                       ColumnSizer="Star"
                                        HeaderText="Mah."
                                        HeaderTextAlignment="Start"
                                        LineBreakMode="WordWrap"
@@ -347,7 +371,7 @@
 
                 <!--  Submit Button  -->
                 <buttons:SfButton
-                    Margin="0,24,0,0"
+                    Margin="0,24,0,24"
                     Command="{Binding SubmitButtonCommand}"
                     Style="{StaticResource GradientButtonStyle}"
                     Text="KAYDET"
