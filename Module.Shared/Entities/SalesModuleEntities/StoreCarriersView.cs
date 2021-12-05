@@ -9,10 +9,11 @@ namespace Module.Shared.Entities.SalesModuleEntities
     [Table("StoreCarriersView", Schema = "sales")]
     public class StoreCarriersView : IEntity
     {
+        public int? CarrierDistributionZoneId { get; set; }
         [Key]
-        public int CarrierDistributionZoneId { get; set; }
         public int CarrierId { get; set; }
         public int? StoreId { get; set; }
+        public int? CarrierStoreId { get; set; }
         public int? ProvinceId { get; set; }
         public int? DistrictId { get; set; }
         public int? NeighbourhoodId { get; set; }

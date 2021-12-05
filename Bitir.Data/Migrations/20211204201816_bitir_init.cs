@@ -102,6 +102,7 @@ namespace Bitir.Data.Migrations
                     UpdateDate = table.Column<DateTime>(type: "datetime", nullable: false),
                     Status = table.Column<int>(nullable: false),
                     Plate = table.Column<string>(nullable: false),
+                    DriverName = table.Column<string>(nullable: true),
                     Capacity = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
@@ -346,6 +347,54 @@ namespace Bitir.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "CarrierDistributionZone",
+                schema: "sales",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    InsertDate = table.Column<DateTime>(type: "datetime", nullable: false, defaultValueSql: "getdate()"),
+                    UpdateDate = table.Column<DateTime>(type: "datetime", nullable: false),
+                    Status = table.Column<int>(nullable: true),
+                    CarrierId = table.Column<int>(nullable: false),
+                    ProvinceId = table.Column<int>(nullable: false),
+                    DistrictId = table.Column<int>(nullable: true),
+                    NeighbourhoodId = table.Column<int>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_CarrierDistributionZone", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_CarrierDistributionZone_Carrier_CarrierId",
+                        column: x => x.CarrierId,
+                        principalSchema: "sales",
+                        principalTable: "Carrier",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_CarrierDistributionZone_District_DistrictId",
+                        column: x => x.DistrictId,
+                        principalSchema: "auth",
+                        principalTable: "District",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_CarrierDistributionZone_Neighbourhood_NeighbourhoodId",
+                        column: x => x.NeighbourhoodId,
+                        principalSchema: "auth",
+                        principalTable: "Neighbourhood",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_CarrierDistributionZone_Province_ProvinceId",
+                        column: x => x.ProvinceId,
+                        principalSchema: "auth",
+                        principalTable: "Province",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "ProductStore",
                 schema: "product",
                 columns: table => new
@@ -532,39 +581,39 @@ namespace Bitir.Data.Migrations
                 columns: new[] { "Id", "AccountTypeId", "Email", "InsertDate", "Name", "PasswordHash", "PasswordSalt", "Phone", "Status", "Surname", "UpdateDate", "Username" },
                 values: new object[,]
                 {
-                    { 1, 1, "t@t.com", new DateTime(2021, 11, 14, 23, 5, 53, 62, DateTimeKind.Local).AddTicks(907), "test", new byte[] { 68, 109, 248, 197, 240, 224, 22, 90, 24, 136, 67, 243, 154, 70, 111, 93, 148, 222, 61, 183, 100, 227, 247, 83, 176, 27, 211, 154, 132, 190, 32, 210, 140, 207, 100, 178, 220, 3, 37, 101, 227, 121, 214, 206, 107, 241, 235, 4, 126, 62, 222, 89, 245, 211, 152, 249, 39, 89, 18, 193, 134, 7, 160, 146 }, new byte[] { 250, 82, 152, 81, 97, 102, 44, 187, 135, 2, 213, 186, 7, 77, 21, 214, 165, 156, 34, 35, 178, 19, 65, 6, 10, 230, 30, 137, 35, 208, 128, 181, 230, 95, 129, 91, 247, 95, 121, 12, 96, 70, 79, 134, 240, 150, 207, 140, 220, 142, 128, 131, 14, 33, 62, 82, 250, 91, 193, 172, 89, 178, 92, 214, 222, 149, 117, 54, 225, 250, 187, 190, 217, 114, 249, 202, 11, 143, 128, 138, 25, 154, 17, 129, 22, 47, 54, 146, 75, 167, 17, 50, 132, 92, 157, 239, 158, 195, 126, 247, 177, 197, 138, 52, 92, 195, 218, 32, 172, 36, 236, 156, 33, 13, 160, 203, 78, 181, 79, 86, 192, 8, 127, 252, 217, 109, 34, 162 }, "505", 1, "test", new DateTime(2021, 11, 14, 23, 5, 53, 62, DateTimeKind.Local).AddTicks(8458), "admin" },
-                    { 2, 2, "q@q.com", new DateTime(2021, 11, 14, 23, 5, 53, 62, DateTimeKind.Local).AddTicks(9829), "Vendor", new byte[] { 68, 109, 248, 197, 240, 224, 22, 90, 24, 136, 67, 243, 154, 70, 111, 93, 148, 222, 61, 183, 100, 227, 247, 83, 176, 27, 211, 154, 132, 190, 32, 210, 140, 207, 100, 178, 220, 3, 37, 101, 227, 121, 214, 206, 107, 241, 235, 4, 126, 62, 222, 89, 245, 211, 152, 249, 39, 89, 18, 193, 134, 7, 160, 146 }, new byte[] { 250, 82, 152, 81, 97, 102, 44, 187, 135, 2, 213, 186, 7, 77, 21, 214, 165, 156, 34, 35, 178, 19, 65, 6, 10, 230, 30, 137, 35, 208, 128, 181, 230, 95, 129, 91, 247, 95, 121, 12, 96, 70, 79, 134, 240, 150, 207, 140, 220, 142, 128, 131, 14, 33, 62, 82, 250, 91, 193, 172, 89, 178, 92, 214, 222, 149, 117, 54, 225, 250, 187, 190, 217, 114, 249, 202, 11, 143, 128, 138, 25, 154, 17, 129, 22, 47, 54, 146, 75, 167, 17, 50, 132, 92, 157, 239, 158, 195, 126, 247, 177, 197, 138, 52, 92, 195, 218, 32, 172, 36, 236, 156, 33, 13, 160, 203, 78, 181, 79, 86, 192, 8, 127, 252, 217, 109, 34, 162 }, "505", 1, "test", new DateTime(2021, 11, 14, 23, 5, 53, 62, DateTimeKind.Local).AddTicks(9836), "vendor" }
+                    { 1, 1, "t@t.com", new DateTime(2021, 12, 4, 23, 18, 16, 232, DateTimeKind.Local).AddTicks(6498), "test", new byte[] { 165, 105, 91, 230, 158, 9, 199, 44, 121, 149, 119, 17, 92, 61, 184, 231, 155, 126, 174, 190, 253, 45, 59, 227, 122, 239, 79, 6, 66, 145, 151, 192, 251, 208, 128, 217, 248, 97, 78, 165, 165, 198, 86, 244, 110, 232, 200, 5, 115, 70, 79, 211, 41, 195, 56, 252, 62, 99, 140, 24, 115, 143, 74, 223 }, new byte[] { 35, 186, 96, 29, 128, 135, 5, 197, 160, 75, 200, 44, 93, 166, 254, 228, 66, 73, 209, 29, 222, 70, 194, 135, 87, 21, 237, 98, 61, 211, 56, 111, 14, 143, 21, 65, 12, 47, 178, 135, 15, 203, 194, 39, 105, 190, 172, 185, 114, 12, 235, 225, 146, 82, 200, 180, 228, 184, 44, 137, 12, 131, 174, 105, 178, 187, 252, 243, 63, 249, 187, 203, 43, 217, 52, 246, 147, 146, 97, 93, 160, 78, 229, 45, 243, 159, 215, 165, 193, 126, 12, 203, 194, 37, 171, 112, 94, 117, 17, 83, 44, 132, 41, 124, 202, 130, 199, 193, 59, 192, 28, 91, 125, 102, 216, 186, 158, 148, 181, 1, 3, 57, 217, 34, 149, 115, 34, 6 }, "505", 1, "test", new DateTime(2021, 12, 4, 23, 18, 16, 233, DateTimeKind.Local).AddTicks(2618), "admin" },
+                    { 2, 2, "q@q.com", new DateTime(2021, 12, 4, 23, 18, 16, 233, DateTimeKind.Local).AddTicks(3795), "Vendor", new byte[] { 165, 105, 91, 230, 158, 9, 199, 44, 121, 149, 119, 17, 92, 61, 184, 231, 155, 126, 174, 190, 253, 45, 59, 227, 122, 239, 79, 6, 66, 145, 151, 192, 251, 208, 128, 217, 248, 97, 78, 165, 165, 198, 86, 244, 110, 232, 200, 5, 115, 70, 79, 211, 41, 195, 56, 252, 62, 99, 140, 24, 115, 143, 74, 223 }, new byte[] { 35, 186, 96, 29, 128, 135, 5, 197, 160, 75, 200, 44, 93, 166, 254, 228, 66, 73, 209, 29, 222, 70, 194, 135, 87, 21, 237, 98, 61, 211, 56, 111, 14, 143, 21, 65, 12, 47, 178, 135, 15, 203, 194, 39, 105, 190, 172, 185, 114, 12, 235, 225, 146, 82, 200, 180, 228, 184, 44, 137, 12, 131, 174, 105, 178, 187, 252, 243, 63, 249, 187, 203, 43, 217, 52, 246, 147, 146, 97, 93, 160, 78, 229, 45, 243, 159, 215, 165, 193, 126, 12, 203, 194, 37, 171, 112, 94, 117, 17, 83, 44, 132, 41, 124, 202, 130, 199, 193, 59, 192, 28, 91, 125, 102, 216, 186, 158, 148, 181, 1, 3, 57, 217, 34, 149, 115, 34, 6 }, "505", 1, "test", new DateTime(2021, 12, 4, 23, 18, 16, 233, DateTimeKind.Local).AddTicks(3801), "vendor" }
                 });
 
             migrationBuilder.InsertData(
                 schema: "product",
                 table: "Category",
                 columns: new[] { "Id", "InsertDate", "Name", "Status", "SubCategoryId", "UpdateDate" },
-                values: new object[] { 1, new DateTime(2021, 11, 14, 23, 5, 53, 70, DateTimeKind.Local).AddTicks(6291), "Süt Ürünleri", 1, 0, new DateTime(2021, 11, 14, 23, 5, 53, 70, DateTimeKind.Local).AddTicks(6348) });
+                values: new object[] { 1, new DateTime(2021, 12, 4, 23, 18, 16, 240, DateTimeKind.Local).AddTicks(1420), "Süt Ürünleri", 1, 0, new DateTime(2021, 12, 4, 23, 18, 16, 240, DateTimeKind.Local).AddTicks(1449) });
 
             migrationBuilder.InsertData(
                 schema: "product",
                 table: "Unit",
                 columns: new[] { "Id", "Abbreviation", "InsertDate", "Name", "Status", "UpdateDate" },
-                values: new object[] { 1, "lt", new DateTime(2021, 11, 14, 23, 5, 53, 77, DateTimeKind.Local).AddTicks(7487), "Litre", 1, new DateTime(2021, 11, 14, 23, 5, 53, 77, DateTimeKind.Local).AddTicks(7498) });
+                values: new object[] { 1, "lt", new DateTime(2021, 12, 4, 23, 18, 16, 246, DateTimeKind.Local).AddTicks(8910), "Litre", 1, new DateTime(2021, 12, 4, 23, 18, 16, 246, DateTimeKind.Local).AddTicks(8924) });
 
             migrationBuilder.InsertData(
                 schema: "product",
                 table: "Product",
                 columns: new[] { "Id", "CategoryId", "Description", "Image", "InsertDate", "Name", "Status", "UpdateDate" },
-                values: new object[] { 1, 1, "Günlük İnek Sütü", null, new DateTime(2021, 11, 14, 23, 5, 53, 74, DateTimeKind.Local).AddTicks(7597), "Süt", 1, new DateTime(2021, 11, 14, 23, 5, 53, 74, DateTimeKind.Local).AddTicks(7613) });
+                values: new object[] { 1, 1, "Günlük İnek Sütü", null, new DateTime(2021, 12, 4, 23, 18, 16, 244, DateTimeKind.Local).AddTicks(501), "Süt", 1, new DateTime(2021, 12, 4, 23, 18, 16, 244, DateTimeKind.Local).AddTicks(519) });
 
             migrationBuilder.InsertData(
                 schema: "product",
                 table: "ProductQuantity",
                 columns: new[] { "Id", "InsertDate", "ProductId", "Quantity", "Status", "UnitId", "UpdateDate" },
-                values: new object[] { 1, new DateTime(2021, 11, 14, 23, 5, 53, 79, DateTimeKind.Local).AddTicks(967), 1, 1m, 1, 1, new DateTime(2021, 11, 14, 23, 5, 53, 79, DateTimeKind.Local).AddTicks(976) });
+                values: new object[] { 1, new DateTime(2021, 12, 4, 23, 18, 16, 248, DateTimeKind.Local).AddTicks(1417), 1, 1m, 1, 1, new DateTime(2021, 12, 4, 23, 18, 16, 248, DateTimeKind.Local).AddTicks(1427) });
 
             migrationBuilder.InsertData(
                 schema: "product",
                 table: "ProductQuantity",
                 columns: new[] { "Id", "InsertDate", "ProductId", "Quantity", "Status", "UnitId", "UpdateDate" },
-                values: new object[] { 2, new DateTime(2021, 11, 14, 23, 5, 53, 79, DateTimeKind.Local).AddTicks(1067), 1, 2m, 1, 1, new DateTime(2021, 11, 14, 23, 5, 53, 79, DateTimeKind.Local).AddTicks(1068) });
+                values: new object[] { 2, new DateTime(2021, 12, 4, 23, 18, 16, 248, DateTimeKind.Local).AddTicks(1492), 1, 2m, 1, 1, new DateTime(2021, 12, 4, 23, 18, 16, 248, DateTimeKind.Local).AddTicks(1494) });
 
             migrationBuilder.CreateIndex(
                 name: "IX_District_ProvinceId",
@@ -657,6 +706,30 @@ namespace Bitir.Data.Migrations
                 column: "StoreId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_CarrierDistributionZone_CarrierId",
+                schema: "sales",
+                table: "CarrierDistributionZone",
+                column: "CarrierId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_CarrierDistributionZone_DistrictId",
+                schema: "sales",
+                table: "CarrierDistributionZone",
+                column: "DistrictId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_CarrierDistributionZone_NeighbourhoodId",
+                schema: "sales",
+                table: "CarrierDistributionZone",
+                column: "NeighbourhoodId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_CarrierDistributionZone_ProvinceId",
+                schema: "sales",
+                table: "CarrierDistributionZone",
+                column: "ProvinceId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Order_CarrierId",
                 schema: "sales",
                 table: "Order",
@@ -712,10 +785,6 @@ namespace Bitir.Data.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Neighbourhood",
-                schema: "auth");
-
-            migrationBuilder.DropTable(
                 name: "UserAddress",
                 schema: "auth");
 
@@ -736,6 +805,10 @@ namespace Bitir.Data.Migrations
                 schema: "sales");
 
             migrationBuilder.DropTable(
+                name: "CarrierDistributionZone",
+                schema: "sales");
+
+            migrationBuilder.DropTable(
                 name: "OrderDetail",
                 schema: "sales");
 
@@ -744,7 +817,7 @@ namespace Bitir.Data.Migrations
                 schema: "sales");
 
             migrationBuilder.DropTable(
-                name: "District",
+                name: "Neighbourhood",
                 schema: "auth");
 
             migrationBuilder.DropTable(
@@ -752,7 +825,7 @@ namespace Bitir.Data.Migrations
                 schema: "sales");
 
             migrationBuilder.DropTable(
-                name: "Province",
+                name: "District",
                 schema: "auth");
 
             migrationBuilder.DropTable(
@@ -765,6 +838,10 @@ namespace Bitir.Data.Migrations
 
             migrationBuilder.DropTable(
                 name: "UserAccount",
+                schema: "auth");
+
+            migrationBuilder.DropTable(
+                name: "Province",
                 schema: "auth");
 
             migrationBuilder.DropTable(

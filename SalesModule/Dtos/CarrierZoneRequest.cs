@@ -8,9 +8,10 @@ namespace SalesModule.Dtos
     public class CarrierZoneRequest
     {
         public int CarrierId { get; set; }
-        public int ProvinceId { get; set; }
+        public int? ProvinceId { get; set; }
         public int? DistrictId { get; set; }
-        public List<int?> NeighborhoodIds { get; set; }
+        public List<int> NeighborhoodIds { get; set; }
+        public List<string> LocalityNames { get; set; }
         public Status? Status { get; set; }
     }
 }

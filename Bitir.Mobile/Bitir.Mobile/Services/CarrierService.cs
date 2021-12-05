@@ -10,6 +10,7 @@ namespace Bitir.Mobile.Services
     public class CarrierService : BaseService, ICarrierService
     {
         private const string addCarrierToStorePath = "SalesModule/Carrier/AddCarrierToStore";
+        private const string AddDistributionZoneToCarrierPath = "SalesModule/Carrier/AddDistributionZoneToCarrier";
         private const string UpdateStoreCarrierPath = "SalesModule/Carrier/UpdateStoreCarrier";
         private const string storeCarriersPath = "SalesModule/Carrier/GetStoreCarriers";
         private const string storeCarrierByIdPath = "SalesModule/Carrier/GetStoreCarriersByCarrierId";
@@ -18,6 +19,15 @@ namespace Bitir.Mobile.Services
         public async Task<ResponseWrapper<bool>> AddCarrierToStore(AddCarrierToStoreRequest request)
         {
             var restClientRequest = await GetRestClient(Method.POST, addCarrierToStorePath);
+            restClientRequest.Item2.AddParameter("accept", "application/json");
+            restClientRequest.Item2.AddJsonBody(request);
+            var restResponse = await restClientRequest.Item1.ExecuteAsync<ResponseWrapper<bool>>(restClientRequest.Item2);
+            return ResponseHandler(restResponse);
+        }
+
+        public async Task<ResponseWrapper<bool>> AddDistributionZoneToCarrier(CarrierZoneRequest request)
+        {
+            var restClientRequest = await GetRestClient(Method.POST, AddDistributionZoneToCarrierPath);
             restClientRequest.Item2.AddParameter("accept", "application/json");
             restClientRequest.Item2.AddJsonBody(request);
             var restResponse = await restClientRequest.Item1.ExecuteAsync<ResponseWrapper<bool>>(restClientRequest.Item2);

@@ -46,23 +46,29 @@ namespace Module.Shared.Migrations
                         AS
                         SELECT 
                         CarrierId=C.Id,
+                        CarrierDistributionZoneId=cz.Id,
                         StoreId=cs.StoreId,
+                        CarrierStoreId=cs.Id,
                         ProvinceId=p.Id,
                         DistrictId=d.Id,
                         NeighbourhoodId=n.Id,
-                        Driver=c.DriverName,
+                        DriverName=c.DriverName,
                         Plate=c.Plate,
                         Capacity=c.Capacity,
                         ProvinceName=p.Name,
                         DistrictName=d.Name,
                         NeighbourhoodName=n.Name,
+                        LocalityName=n.LocalityName,
                         CarrierStatus=c.Status
                         FROM sales.Carrier c
                         LEFT JOIN sales.Carrier_Store cs ON cs.CarrierId=c.Id
                         LEFT JOIN sales.CarrierDistributionZone cz ON cz.CarrierId=c.Id
                         LEFT JOIN auth.Province p ON p.Id=cz.ProvinceId
                         LEFT JOIN auth.District d ON d.Id=cz.DistrictId
-                        LEFT JOIN auth.Neighbourhood n ON n.Id=cz.NeighbourhoodId";
+                        LEFT JOIN auth.Neighbourhood n ON n.Id=cz.NeighbourhoodId
+                        WHERE 
+                        CS.Status=1 AND
+						CZ.Status=1";
             migrationBuilder.Sql(view2);
 
         }

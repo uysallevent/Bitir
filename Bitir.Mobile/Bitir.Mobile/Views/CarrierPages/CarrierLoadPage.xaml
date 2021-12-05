@@ -96,13 +96,12 @@
                     HeightRequest="18"
                     Text="Araç"
                     TextColor="{DynamicResource Gray-800}" />
-
                         <inputLayout:SfTextInputLayout Style="{DynamicResource TextInputLayoutStyle}">
                             <combobox:SfComboBox
                         x:Name="CarrierPicker"
                         DataSource="{Binding Carriers}"
                         DisplayMemberPath="Plate"
-                        SelectedValuePath="Id"
+                        SelectedValuePath="CarrierId"
                         SelectedItem="{Binding SelectedCarrier.Value,Mode=TwoWay}"
                         Style="{StaticResource TextInputLayoutComboBoxStyle}"
                         VerticalOptions="CenterAndExpand"

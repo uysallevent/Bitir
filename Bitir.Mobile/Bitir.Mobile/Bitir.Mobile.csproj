@@ -46,6 +46,7 @@
     <Compile Include="..\..\ProductModule\Dtos\SystemProductResponse.cs" Link="Models\Product\SystemProductResponse.cs" />
     <Compile Include="..\..\ProductModule\Dtos\UpdateProductStoreRequest.cs" Link="Models\Product\UpdateProductStoreRequest.cs" />
     <Compile Include="..\..\SalesModule\Dtos\AddCarrierToStoreRequest.cs" Link="Models\Carrier\AddCarrierToStoreRequest.cs" />
+    <Compile Include="..\..\SalesModule\Dtos\CarrierZoneRequest.cs" Link="Models\Carrier\CarrierZoneRequest.cs" />
     <Compile Include="..\..\SalesModule\Dtos\StoreCarrier.cs" Link="Models\Carrier\StoreCarrier.cs" />
     <Compile Include="..\..\SalesModule\Dtos\UpdateCarrierToStoreRequest.cs" Link="Models\Carrier\UpdateCarrierToStoreRequest.cs" />
   </ItemGroup>

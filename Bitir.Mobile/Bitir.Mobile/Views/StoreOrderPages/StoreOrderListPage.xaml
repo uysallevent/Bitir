@@ -33,7 +33,8 @@
                 RowDefinitions="Auto, *"
                 RowSpacing="0">
 
-                <StackLayout
+                <StackLayout Orientation="Vertical">
+                    <StackLayout
                     x:Name="TitleView"
                     Grid.Row="0"
                     Padding="8"
@@ -42,7 +43,7 @@
                     Orientation="Horizontal"
                     Spacing="0">
 
-                    <StackLayout
+                        <StackLayout
                         x:Name="TitleLayout"
                         HorizontalOptions="FillAndExpand"
                         IsVisible="True"
@@ -50,8 +51,8 @@
                         Spacing="0"
                         VerticalOptions="FillAndExpand">
 
-                        <!--  Page Title  -->
-                        <Label
+                            <!--  Page Title  -->
+                            <Label
                             Margin="16,0"
                             FontFamily="Montserrat-Medium"
                             HorizontalOptions="FillAndExpand"
@@ -60,61 +61,69 @@
                             VerticalOptions="Center"
                             VerticalTextAlignment="Center" />
 
-                    </StackLayout>
+                        </StackLayout>
 
-                    <StackLayout
+                        <StackLayout
                         x:Name="Search"
                         HorizontalOptions="EndAndExpand"
                         IsVisible="False"
                         Orientation="Horizontal"
                         Spacing="0">
 
-                        <!--  Back to title layout  -->
-                        <buttons:SfButton
+                            <!--  Back to title layout  -->
+                            <buttons:SfButton
                             x:Name="BackToTitle"
                             Style="{StaticResource IconButtonStyle}"
                             Text="{StaticResource Back}">
-                            <buttons:SfButton.Behaviors>
-                                <behaviors:SearchBarAnimationBehavior AnimationType="shrink" />
-                            </buttons:SfButton.Behaviors>
-                        </buttons:SfButton>
+                                <buttons:SfButton.Behaviors>
+                                    <behaviors:SearchBarAnimationBehavior AnimationType="shrink" />
+                                </buttons:SfButton.Behaviors>
+                            </buttons:SfButton>
 
-                        <!--  Rounded Search Entry  -->
-                        <border:SfBorder Style="{DynamicResource ThemeBorderStyle}">
+                            <!--  Rounded Search Entry  -->
+                            <border:SfBorder Style="{DynamicResource ThemeBorderStyle}">
 
-                            <controls:BorderlessEntry
+                                <controls:BorderlessEntry
                                 x:Name="SearchEntry"
                                 BindingContext="{x:Reference StoreProductList}"
                                 HorizontalOptions="FillAndExpand"
                                 Placeholder="Search here"
                                 Style="{StaticResource BorderlessEntryStyle}"
                                 Text="{Binding SearchText, Mode=TwoWay}" />
-                        </border:SfBorder>
+                            </border:SfBorder>
 
-                    </StackLayout>
+                        </StackLayout>
 
-                    <!--  Search Button  -->
-                    <buttons:SfButton
+                        <!--  Search Button  -->
+                        <buttons:SfButton
                         x:Name="SearchButton"
                         IsVisible="True"
                         Style="{StaticResource IconButtonStyle}"
                         Text="{StaticResource Search}">
-                        <buttons:SfButton.Behaviors>
-                            <behaviors:SearchBarAnimationBehavior AnimationType="expand" />
-                        </buttons:SfButton.Behaviors>
-                    </buttons:SfButton>
-
-                    <!--  Add Button  -->
-                    <buttons:SfButton
+                            <buttons:SfButton.Behaviors>
+                                <behaviors:SearchBarAnimationBehavior AnimationType="expand" />
+                            </buttons:SfButton.Behaviors>
+                        </buttons:SfButton>
+                    </StackLayout>
+                    <StackLayout
+                    x:Name="TitleViewLevel2"
+                    Grid.Row="0"
+                    Padding="8"
+                    BackgroundColor="{DynamicResource Gray-Bg}"
+                    HorizontalOptions="CenterAndExpand"
+                    Orientation="Horizontal"
+                    Spacing="0">
+                        <!--  Add Button  -->
+                        <buttons:SfButton
                         x:Name="AddCarrierButton"
                         IsVisible="True"
                         Style="{StaticResource IconButtonStyle}"
                         Command="{Binding GotoNewCarrierAddPageCommand}"
                         Text="{StaticResource Add}">
-                    </buttons:SfButton>
+                        </buttons:SfButton>
 
-                    <!--  Map Button  -->
-                    <buttons:SfButton
+                        <!--  Map Button  -->
+                        <buttons:SfButton
                         x:Name="MapButton"
                         Margin="0,0,10,0"
                         IsVisible="True"
@@ -122,18 +131,20 @@
                         BackgroundImage="map"
                         Style="{StaticResource IconButtonStyle}"
                         Command="{Binding CarrierLoadPageCommand}">
-                    </buttons:SfButton>
+                        </buttons:SfButton>
 
-                    <!--  Order Content Button  -->
-                    <buttons:SfButton
+                        <!--  Order Content Button  -->
+                        <buttons:SfButton
                         x:Name="OrderContentButton"
                         IsVisible="True"
                         Padding="70"
                         BackgroundImage="order_content"
                         Style="{StaticResource IconButtonStyle}"
                         Command="{Binding CarrierLoadPageCommand}">
-                    </buttons:SfButton>
+                        </buttons:SfButton>
+                    </StackLayout>
                 </StackLayout>
+
 
                 <StackLayout Grid.Row="1" Spacing="0">
                     <!--  Seperator  -->

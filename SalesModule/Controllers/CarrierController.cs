@@ -27,6 +27,13 @@ namespace AuthModule.Controllers
             return Ok(result);
         }
 
+        [HttpPost("AddDistributionZoneToCarrier")]
+        public async Task<IActionResult> AddDistributionZoneToCarrier([FromBody] CarrierZoneRequest request)
+        {
+            var result = await _carrierBusinessBase.AddDistributionZoneToCarrier(request);
+            return Ok(result);
+        }
+
         [HttpPut("UpdateStoreCarrier")]
         public async Task<IActionResult> UpdateStoreCarrier([FromBody] UpdateCarrierToStoreRequest request)
         {

@@ -340,14 +340,13 @@ namespace Bitir.Mobile.ViewModels
             Task.Run(async () => await GetStoreCarrier(storeCarriersView.CarrierId));
             Task.Run(async () => await GetProvince());
             SubmitButtonCommand = new Command(async () => await SubmitButtonClicked());
+            AddCarrierZoneButtonCommand = new Command(async () => await AddCarrierZoneClicked());
             RemoveCarrierButtonCommand = new Command(async () => await RemoveButtonClicked());
             BackButtonCommand = new Command(async () => await BackButtonClicked());
             this.StoreCarriersView = storeCarriersView;
             this.Plate.Value = storeCarriersView.Plate;
             this.DriverName = storeCarriersView.DriverName;
             this.capacity = storeCarriersView.Capacity;
-            this.ProvinceId = storeCarriersView.ProvinceId;
-            this.DistrictId = storeCarriersView.DistrictId;
         }
 
         #endregion
@@ -356,6 +355,7 @@ namespace Bitir.Mobile.ViewModels
 
         public Command SubmitButtonCommand { get; set; }
         public Command RemoveCarrierButtonCommand { get; set; }
+        public Command AddCarrierZoneButtonCommand { get; set; }
         public Command<object> RemoveCarrierZoneButtonCommand
         {
             get
@@ -400,24 +400,15 @@ namespace Bitir.Mobile.ViewModels
                 IsBusy = true;
                 try
                 {
-                    var localityNames = new List<string>();
-                    foreach (var item in SelectedNeighbourhoods)
-                    {
-                        localityNames.Add((item as Neighbourhood).LocalityName);
-                    }
-
                     var result = await carrierService.UpdateStoreCarrier(new UpdateCarrierToStoreRequest
                     {
                         CarrierDistributionZoneId = StoreCarriersView.CarrierDistributionZoneId,
                         CarrierId = StoreCarriersView.CarrierId,
-                        CarrierStoreId = StoreCarriersView.StoreId ?? 0,
-                        ProvinceId = this.SelectedProvince.Id,
-                        DistrictId = this.SelectedDistrict.Id,
-                        Capacity = int.Parse(this.Capacity.ToString()),
-                        Plate = this.Plate.Value,
-                        DriverName = this.DriverName,
-                        Status = StoreCarriersView.CarrierStatus,
-                        LocalityNames = localityNames
+                        CarrierStoreId = StoreCarriersView.CarrierStoreId ?? 0,
+                        Capacity = int.Parse(Capacity.ToString()),
+                        Plate = Plate.Value,
+                        DriverName = DriverName,
+                        Status = Core.Enums.Status.Active,
                     });
 
                     if (result != null && result.Result)
@@ -461,7 +452,7 @@ namespace Bitir.Mobile.ViewModels
                     var result = await carrierService.UpdateStoreCarrier(new UpdateCarrierToStoreRequest
                     {
                         CarrierId = StoreCarriersView.CarrierId,
-                        //CarrierStoreId = StoreCarrier.CarrierStoreId,
+                        CarrierStoreId = StoreCarriersView.CarrierStoreId ?? 0,
                         Status = Core.Enums.Status.Deleted
                     });
 
@@ -502,11 +493,48 @@ namespace Bitir.Mobile.ViewModels
                 }
 
                 var item = zone as StoreCarriersView;
-                var result = await carrierService.RemoveZoneFromCarrierById(item.CarrierDistributionZoneId);
+                var result = await carrierService.RemoveZoneFromCarrierById(item.CarrierDistributionZoneId ?? 0);
                 if (result != null && result.Result)
                 {
                     StoreCarrierDistZones.Remove(item);
                     SendNotification(new ExceptionTransfer { NotificationMessage = "Bölge başarı ile silindi" });
+                }
+            }
+            catch (BadRequestException ex)
+            {
+                SendNotification(new ExceptionTransfer { ex = ex, NotificationMessage = ex.Message });
+
+            }
+            catch (InternalServerErrorException ex)
+            {
+                SendNotification(new ExceptionTransfer { ex = ex, NotificationMessage = "Servis hatası !!" });
+            }
+            finally
+            {
+                IsBusy = false;
+            }
+
+        }
+
+        private async Task AddCarrierZoneClicked()
+        {
+            try
+            {
+                IsBusy = true;
+
+                var result = await carrierService.AddDistributionZoneToCarrier(new CarrierZoneRequest
+                {
+                    CarrierId = StoreCarriersView.CarrierId,
+                    ProvinceId = SelectedProvince.Id,
+                    DistrictId = SelectedDistrict.Id,
+                    LocalityNames = Neighbourhoods.Select(y => y.LocalityName).ToList(),
+                    Status = Core.Enums.Status.Active
+                });
+
+                if (result != null && result.Result)
+                {
+                    await GetStoreCarrier(StoreCarriersView.CarrierId);
+                    SendNotification(new ExceptionTransfer { NotificationMessage = "Bölge başarı ile eklendi" });
                 }
             }
             catch (BadRequestException ex)

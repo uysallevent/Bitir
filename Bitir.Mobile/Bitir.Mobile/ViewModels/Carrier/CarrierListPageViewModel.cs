@@ -108,7 +108,8 @@ namespace Bitir.Mobile.ViewModels
                         CarrierId = x.Key.CarrierId,
                         Capacity = x.FirstOrDefault(y => y.CarrierId == x.Key.CarrierId).Capacity,
                         Plate = x.FirstOrDefault(y => y.CarrierId == x.Key.CarrierId).Plate,
-                        DriverName=x.FirstOrDefault(y => y.CarrierId == x.Key.CarrierId).DriverName
+                        DriverName = x.FirstOrDefault(y => y.CarrierId == x.Key.CarrierId).DriverName,
+                        CarrierStoreId = x.FirstOrDefault(y => y.CarrierId == x.Key.CarrierId).CarrierStoreId,
                     });
                 Carriers = new ObservableCollection<StoreCarriersView>(groupedListbyCarriers);
             }

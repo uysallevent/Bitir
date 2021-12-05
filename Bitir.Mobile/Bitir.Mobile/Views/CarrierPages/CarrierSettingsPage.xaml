@@ -243,7 +243,7 @@
                 <!--  Add Zone Button  -->
                 <buttons:SfButton
                     Margin="0,10,0,10"
-                    Command="{Binding SubmitButtonCommand}"
+                    Command="{Binding AddCarrierZoneButtonCommand}"
                     Style="{StaticResource GradientButtonStyle}"
                     Text="Ekle"
                     WidthRequest="200" />

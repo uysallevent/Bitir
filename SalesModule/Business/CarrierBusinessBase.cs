@@ -129,42 +129,6 @@ namespace AuthModule.Business
                 Status = request.Status
             });
 
-            if (request.LocalityNames != null && request.LocalityNames.Any())
-            {
-                var neigborhoodIds = _neighbourhoodRepository.GetAll(x => x.DistrictId == request.DistrictId && request.LocalityNames.Contains(x.LocalityName));
-                await _carrierDistributionZoneRepository.AddRangeAsync(neigborhoodIds.Select(x => new CarrierDistributionZone
-                {
-                    CarrierId = request.CarrierId,
-                    ProvinceId = request.ProvinceId,
-                    DistrictId = request.DistrictId,
-                    NeighbourhoodId = x.Id,
-                    UpdateDate = DateTime.UtcNow,
-                }));
-            }
-            else
-            {
-                if (request.CarrierDistributionZoneId == null)
-                {
-                    await _carrierDistributionZoneRepository.AddAsync(new CarrierDistributionZone
-                    {
-                        CarrierId = request.CarrierId,
-                        ProvinceId = request.ProvinceId,
-                        DistrictId = request.DistrictId == 0 ? null : request.DistrictId,
-                    });
-                }
-                else
-                {
-                    _carrierDistributionZoneRepository.Update(new CarrierDistributionZone
-                    {
-                        Id = request.CarrierDistributionZoneId ?? 0,
-                        CarrierId = request.CarrierId,
-                        ProvinceId = request.ProvinceId,
-                        DistrictId = request.DistrictId == 0 ? null : request.DistrictId,
-                    });
-                }
-            }
-
-
             var result = await _uow.SaveChangesAsync();
             if (result < 1)
             {
@@ -183,7 +147,16 @@ namespace AuthModule.Business
                 throw new ClaimExpection("Claims could not find");
             }
 
-            var result = await _storeCarriersViewRepository.GetAll(x => x.StoreId == storeId && x.CarrierStatus == Core.Enums.Status.Active).ToListAsync();
+            var result = await _carrierStoreRepository
+                .GetAll(x => x.StoreId == storeId && x.Status == Core.Enums.Status.Active)
+                .Join(_carrierRepository.GetAll(x => x.Status == Core.Enums.Status.Active), x => x.CarrierId, y => y.Id, (x, y) => new StoreCarriersView
+                {
+                    CarrierId = x.CarrierId,
+                    DriverName = y.DriverName,
+                    Plate = y.Plate,
+                    Capacity = y.Capacity ?? 0,
+                    CarrierStoreId = x.Id
+                }).ToListAsync();
 
             return new ResponseWrapperListing<StoreCarriersView>(result);
         }
@@ -206,38 +179,36 @@ namespace AuthModule.Business
 
         public async Task<ResponseWrapper<bool>> AddDistributionZoneToCarrier(CarrierZoneRequest request)
         {
-            var check = await _carrierDistributionZoneRepository.GetAll(x => (
-                (x.CarrierId == request.CarrierId && x.ProvinceId == request.ProvinceId)
-             || (x.CarrierId == request.CarrierId && x.DistrictId == request.DistrictId)
-             || (x.CarrierId == request.CarrierId && request.NeighborhoodIds.Contains(x.NeighbourhoodId)))
-             && x.Status == Core.Enums.Status.Active).ToListAsync();
 
-            if (check != null)
+            if (request.LocalityNames == null || !request.LocalityNames.Any())
             {
-                throw new BadRequestException("Bu bölge taşıyıcı için önceden eklenmiş");
+                throw new BadRequestException("Mahalle bilgileri bulunamadı");
             }
 
-            if (request.NeighborhoodIds != null && request.NeighborhoodIds.Any())
-            {
-                await _carrierDistributionZoneRepository.AddRangeAsync(request.NeighborhoodIds.Select(x => new CarrierDistributionZone
-                {
-                    CarrierId = request.CarrierId,
-                    ProvinceId = request.ProvinceId,
-                    DistrictId = request.DistrictId,
-                    NeighbourhoodId = x
-                }));
-            }
-            else
-            {
-                await _carrierDistributionZoneRepository.AddAsync(new CarrierDistributionZone
-                {
-                    CarrierId = request.CarrierId,
-                    ProvinceId = request.ProvinceId,
-                    DistrictId = request.DistrictId,
-                });
-            }
+            //var check = await _carrierDistributionZoneRepository.GetAll(x =>
+            //x.CarrierId == request.CarrierId
+            //&& request.NeighborhoodIds.Contains(x.NeighbourhoodId ?? 0)
+            //&& x.Status == Core.Enums.Status.Active).ToListAsync();
 
-            await _uow.SaveChangesAsync();
+            //if (check != null && check.Any())
+            //{
+            //    throw new BadRequestException("Bu bölge taşıyıcı için önceden eklenmiş");
+            //}
+
+            var insertZones = await _neighbourhoodRepository.GetAll(x => x.DistrictId == request.DistrictId && request.LocalityNames.Contains(x.LocalityName)).ToListAsync();
+
+            await _carrierDistributionZoneRepository.AddRangeAsync(insertZones.Select(x => new CarrierDistributionZone
+            {
+                CarrierId = request.CarrierId,
+                ProvinceId = request.ProvinceId ?? 0,
+                DistrictId = request.DistrictId,
+                NeighbourhoodId = x.Id,
+                UpdateDate = DateTime.Now,
+                Status = Core.Enums.Status.Active
+            }));
+
+
+            var result = await _uow.SaveChangesAsync();
             return new ResponseWrapper<bool>(true);
         }
 
@@ -262,7 +233,5 @@ namespace AuthModule.Business
 
             return new ResponseWrapper<bool>(true);
         }
-
-
     }
 }

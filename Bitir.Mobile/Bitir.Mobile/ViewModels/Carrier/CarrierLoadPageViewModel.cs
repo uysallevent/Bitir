@@ -2,7 +2,7 @@
 using Bitir.Mobile.Models.Common;
 using Bitir.Mobile.Validators;
 using Bitir.Mobile.Validators.Rules;
-using Module.Shared.Entities.ProductModuleEntities;
+using Module.Shared.Entities.SalesModuleEntities;
 using ProductModule.Dtos;
 using SalesModule.Dtos;
 using System.Collections.ObjectModel;
@@ -26,7 +26,7 @@ namespace Bitir.Mobile.ViewModels
         #endregion
 
         #region Properties
-        public ValidatableObject<StoreCarrier> SelectedCarrier
+        public ValidatableObject<StoreCarriersView> SelectedCarrier
         {
             get
             {
@@ -130,7 +130,7 @@ namespace Bitir.Mobile.ViewModels
         #endregion
 
         #region Fields
-        private ValidatableObject<StoreCarrier> _selectedCarrier;
+        private ValidatableObject<StoreCarriersView> _selectedCarrier;
         private ValidatableObject<StoreProdByCarrierResponse> _selectedProduct;
         private ObservableCollection<StoreProdByCarrierResponse> _storeProductsInCarrier;
         private ObservableCollection<StoreProdByCarrierResponse> _storeProducts;
@@ -154,14 +154,14 @@ namespace Bitir.Mobile.ViewModels
         private void Initialize()
         {
             Quantity = new ValidatableObject<string>();
-            this.SelectedCarrier = new ValidatableObject<StoreCarrier>();
+            this.SelectedCarrier = new ValidatableObject<StoreCarriersView>();
             this.SelectedProduct = new ValidatableObject<StoreProdByCarrierResponse>();
             AddValidationRules();
         }
 
         private void AddValidationRules()
         {
-            this.SelectedCarrier.Validations.Add(new IsNotNullOrEmptyRule<StoreCarrier> { ValidationMessage = "Lütfen bir araç seçin" });
+            this.SelectedCarrier.Validations.Add(new IsNotNullOrEmptyRule<StoreCarriersView> { ValidationMessage = "Lütfen bir araç seçin" });
             this.SelectedProduct.Validations.Add(new IsNotNullOrEmptyRule<StoreProdByCarrierResponse> { ValidationMessage = "Lütfen bir ürün seçin" });
             this.Quantity.Validations.Add(new IsNotNullOrEmptyRule<string> { ValidationMessage = "Lütfen bir miktar bilgisi girin" });
             this.Quantity.Validations.Add(new ZeroCheck<string> { ValidationMessage = "Lütfen 0'dan farklı bir değer girin" });

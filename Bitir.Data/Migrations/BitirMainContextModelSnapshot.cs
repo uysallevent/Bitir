@@ -138,14 +138,14 @@ namespace Bitir.Data.Migrations
                             Id = 1,
                             AccountTypeId = 1,
                             Email = "t@t.com",
-                            InsertDate = new DateTime(2021, 11, 16, 1, 15, 14, 387, DateTimeKind.Local).AddTicks(1271),
+                            InsertDate = new DateTime(2021, 12, 4, 23, 18, 16, 232, DateTimeKind.Local).AddTicks(6498),
                             Name = "test",
-                            PasswordHash = new byte[] { 75, 38, 103, 93, 54, 164, 91, 214, 177, 69, 155, 54, 221, 0, 66, 114, 68, 131, 158, 134, 230, 85, 202, 71, 14, 100, 4, 1, 138, 47, 175, 246, 237, 137, 222, 148, 79, 223, 87, 85, 187, 97, 197, 91, 107, 215, 210, 40, 227, 177, 85, 202, 107, 238, 160, 102, 218, 98, 115, 6, 131, 72, 131, 172 },
-                            PasswordSalt = new byte[] { 195, 134, 211, 147, 227, 7, 20, 99, 45, 186, 45, 142, 186, 73, 236, 44, 231, 83, 80, 43, 49, 169, 80, 167, 244, 229, 246, 127, 168, 255, 139, 37, 156, 21, 140, 155, 52, 87, 139, 237, 84, 113, 200, 194, 6, 210, 206, 145, 150, 34, 153, 74, 89, 118, 81, 16, 156, 221, 220, 64, 185, 43, 247, 6, 135, 254, 195, 183, 92, 235, 112, 126, 122, 43, 167, 11, 210, 60, 38, 180, 24, 164, 161, 255, 159, 34, 147, 231, 71, 129, 208, 143, 187, 199, 66, 49, 77, 7, 136, 13, 18, 98, 200, 196, 60, 150, 63, 71, 118, 225, 14, 139, 92, 236, 7, 123, 73, 244, 107, 51, 88, 83, 210, 224, 67, 150, 176, 91 },
+                            PasswordHash = new byte[] { 165, 105, 91, 230, 158, 9, 199, 44, 121, 149, 119, 17, 92, 61, 184, 231, 155, 126, 174, 190, 253, 45, 59, 227, 122, 239, 79, 6, 66, 145, 151, 192, 251, 208, 128, 217, 248, 97, 78, 165, 165, 198, 86, 244, 110, 232, 200, 5, 115, 70, 79, 211, 41, 195, 56, 252, 62, 99, 140, 24, 115, 143, 74, 223 },
+                            PasswordSalt = new byte[] { 35, 186, 96, 29, 128, 135, 5, 197, 160, 75, 200, 44, 93, 166, 254, 228, 66, 73, 209, 29, 222, 70, 194, 135, 87, 21, 237, 98, 61, 211, 56, 111, 14, 143, 21, 65, 12, 47, 178, 135, 15, 203, 194, 39, 105, 190, 172, 185, 114, 12, 235, 225, 146, 82, 200, 180, 228, 184, 44, 137, 12, 131, 174, 105, 178, 187, 252, 243, 63, 249, 187, 203, 43, 217, 52, 246, 147, 146, 97, 93, 160, 78, 229, 45, 243, 159, 215, 165, 193, 126, 12, 203, 194, 37, 171, 112, 94, 117, 17, 83, 44, 132, 41, 124, 202, 130, 199, 193, 59, 192, 28, 91, 125, 102, 216, 186, 158, 148, 181, 1, 3, 57, 217, 34, 149, 115, 34, 6 },
                             Phone = "505",
                             Status = 1,
                             Surname = "test",
-                            UpdateDate = new DateTime(2021, 11, 16, 1, 15, 14, 387, DateTimeKind.Local).AddTicks(7599),
+                            UpdateDate = new DateTime(2021, 12, 4, 23, 18, 16, 233, DateTimeKind.Local).AddTicks(2618),
                             Username = "admin"
                         },
                         new
@@ -153,14 +153,14 @@ namespace Bitir.Data.Migrations
                             Id = 2,
                             AccountTypeId = 2,
                             Email = "q@q.com",
-                            InsertDate = new DateTime(2021, 11, 16, 1, 15, 14, 387, DateTimeKind.Local).AddTicks(8832),
+                            InsertDate = new DateTime(2021, 12, 4, 23, 18, 16, 233, DateTimeKind.Local).AddTicks(3795),
                             Name = "Vendor",
-                            PasswordHash = new byte[] { 75, 38, 103, 93, 54, 164, 91, 214, 177, 69, 155, 54, 221, 0, 66, 114, 68, 131, 158, 134, 230, 85, 202, 71, 14, 100, 4, 1, 138, 47, 175, 246, 237, 137, 222, 148, 79, 223, 87, 85, 187, 97, 197, 91, 107, 215, 210, 40, 227, 177, 85, 202, 107, 238, 160, 102, 218, 98, 115, 6, 131, 72, 131, 172 },
-                            PasswordSalt = new byte[] { 195, 134, 211, 147, 227, 7, 20, 99, 45, 186, 45, 142, 186, 73, 236, 44, 231, 83, 80, 43, 49, 169, 80, 167, 244, 229, 246, 127, 168, 255, 139, 37, 156, 21, 140, 155, 52, 87, 139, 237, 84, 113, 200, 194, 6, 210, 206, 145, 150, 34, 153, 74, 89, 118, 81, 16, 156, 221, 220, 64, 185, 43, 247, 6, 135, 254, 195, 183, 92, 235, 112, 126, 122, 43, 167, 11, 210, 60, 38, 180, 24, 164, 161, 255, 159, 34, 147, 231, 71, 129, 208, 143, 187, 199, 66, 49, 77, 7, 136, 13, 18, 98, 200, 196, 60, 150, 63, 71, 118, 225, 14, 139, 92, 236, 7, 123, 73, 244, 107, 51, 88, 83, 210, 224, 67, 150, 176, 91 },
+                            PasswordHash = new byte[] { 165, 105, 91, 230, 158, 9, 199, 44, 121, 149, 119, 17, 92, 61, 184, 231, 155, 126, 174, 190, 253, 45, 59, 227, 122, 239, 79, 6, 66, 145, 151, 192, 251, 208, 128, 217, 248, 97, 78, 165, 165, 198, 86, 244, 110, 232, 200, 5, 115, 70, 79, 211, 41, 195, 56, 252, 62, 99, 140, 24, 115, 143, 74, 223 },
+                            PasswordSalt = new byte[] { 35, 186, 96, 29, 128, 135, 5, 197, 160, 75, 200, 44, 93, 166, 254, 228, 66, 73, 209, 29, 222, 70, 194, 135, 87, 21, 237, 98, 61, 211, 56, 111, 14, 143, 21, 65, 12, 47, 178, 135, 15, 203, 194, 39, 105, 190, 172, 185, 114, 12, 235, 225, 146, 82, 200, 180, 228, 184, 44, 137, 12, 131, 174, 105, 178, 187, 252, 243, 63, 249, 187, 203, 43, 217, 52, 246, 147, 146, 97, 93, 160, 78, 229, 45, 243, 159, 215, 165, 193, 126, 12, 203, 194, 37, 171, 112, 94, 117, 17, 83, 44, 132, 41, 124, 202, 130, 199, 193, 59, 192, 28, 91, 125, 102, 216, 186, 158, 148, 181, 1, 3, 57, 217, 34, 149, 115, 34, 6 },
                             Phone = "505",
                             Status = 1,
                             Surname = "test",
-                            UpdateDate = new DateTime(2021, 11, 16, 1, 15, 14, 387, DateTimeKind.Local).AddTicks(8837),
+                            UpdateDate = new DateTime(2021, 12, 4, 23, 18, 16, 233, DateTimeKind.Local).AddTicks(3801),
                             Username = "vendor"
                         });
                 });
@@ -281,11 +281,11 @@ namespace Bitir.Data.Migrations
                         new
                         {
                             Id = 1,
-                            InsertDate = new DateTime(2021, 11, 16, 1, 15, 14, 394, DateTimeKind.Local).AddTicks(8824),
+                            InsertDate = new DateTime(2021, 12, 4, 23, 18, 16, 240, DateTimeKind.Local).AddTicks(1420),
                             Name = "Süt Ürünleri",
                             Status = 1,
                             SubCategoryId = 0,
-                            UpdateDate = new DateTime(2021, 11, 16, 1, 15, 14, 394, DateTimeKind.Local).AddTicks(8854)
+                            UpdateDate = new DateTime(2021, 12, 4, 23, 18, 16, 240, DateTimeKind.Local).AddTicks(1449)
                         });
                 });
 
@@ -335,10 +335,10 @@ namespace Bitir.Data.Migrations
                             Id = 1,
                             CategoryId = 1,
                             Description = "Günlük İnek Sütü",
-                            InsertDate = new DateTime(2021, 11, 16, 1, 15, 14, 398, DateTimeKind.Local).AddTicks(7890),
+                            InsertDate = new DateTime(2021, 12, 4, 23, 18, 16, 244, DateTimeKind.Local).AddTicks(501),
                             Name = "Süt",
                             Status = 1,
-                            UpdateDate = new DateTime(2021, 11, 16, 1, 15, 14, 398, DateTimeKind.Local).AddTicks(7902)
+                            UpdateDate = new DateTime(2021, 12, 4, 23, 18, 16, 244, DateTimeKind.Local).AddTicks(519)
                         });
                 });
 
@@ -383,22 +383,22 @@ namespace Bitir.Data.Migrations
                         new
                         {
                             Id = 1,
-                            InsertDate = new DateTime(2021, 11, 16, 1, 15, 14, 402, DateTimeKind.Local).AddTicks(8192),
+                            InsertDate = new DateTime(2021, 12, 4, 23, 18, 16, 248, DateTimeKind.Local).AddTicks(1417),
                             ProductId = 1,
                             Quantity = 1m,
                             Status = 1,
                             UnitId = 1,
-                            UpdateDate = new DateTime(2021, 11, 16, 1, 15, 14, 402, DateTimeKind.Local).AddTicks(8199)
+                            UpdateDate = new DateTime(2021, 12, 4, 23, 18, 16, 248, DateTimeKind.Local).AddTicks(1427)
                         },
                         new
                         {
                             Id = 2,
-                            InsertDate = new DateTime(2021, 11, 16, 1, 15, 14, 402, DateTimeKind.Local).AddTicks(8265),
+                            InsertDate = new DateTime(2021, 12, 4, 23, 18, 16, 248, DateTimeKind.Local).AddTicks(1492),
                             ProductId = 1,
                             Quantity = 2m,
                             Status = 1,
                             UnitId = 1,
-                            UpdateDate = new DateTime(2021, 11, 16, 1, 15, 14, 402, DateTimeKind.Local).AddTicks(8266)
+                            UpdateDate = new DateTime(2021, 12, 4, 23, 18, 16, 248, DateTimeKind.Local).AddTicks(1494)
                         });
                 });
 
@@ -535,10 +535,10 @@ namespace Bitir.Data.Migrations
                         {
                             Id = 1,
                             Abbreviation = "lt",
-                            InsertDate = new DateTime(2021, 11, 16, 1, 15, 14, 401, DateTimeKind.Local).AddTicks(5901),
+                            InsertDate = new DateTime(2021, 12, 4, 23, 18, 16, 246, DateTimeKind.Local).AddTicks(8910),
                             Name = "Litre",
                             Status = 1,
-                            UpdateDate = new DateTime(2021, 11, 16, 1, 15, 14, 401, DateTimeKind.Local).AddTicks(5909)
+                            UpdateDate = new DateTime(2021, 12, 4, 23, 18, 16, 246, DateTimeKind.Local).AddTicks(8924)
                         });
                 });
 
